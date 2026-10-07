@@ -1,3 +1,12 @@
+<!--
+Authoritative product specification for ATMS V1.
+Source: the "ATMS Product Development Document" (Claude Doc, revision 17, 6 Oct 2026),
+exported verbatim to Markdown on 7 Oct 2026. The two embedded diagrams (system architecture,
+workflow step lifecycle) are not in this export; see docs/ARCHITECTURE.md.
+Do not edit requirements here without the product owner's agreement: change the source
+document first, then re-export. Requirement IDs used across docs are defined in REQUIREMENTS.md.
+-->
+
 # ATMS Product Development Document
 
 Oct 6, 2026 · @Robert Kamunde
