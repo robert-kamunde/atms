@@ -1,0 +1,393 @@
+rules_version = '2';
+
+// ATMS Firestore Security Rules (Sprint 0 baseline).
+//
+// Principles (docs/ARCHITECTURE.md, "Security model"):
+// - The app is never trusted. Every read and write is checked here or done by Cloud Functions.
+// - Workflow state (status of workflow tasks, currentStep, stepDeadline, escalation, overdue,
+//   viewerIds), audit entries, counters, notifications and user records are written only by
+//   Cloud Functions (Admin SDK, which bypasses these rules).
+// - Confidential tasks are readable only by participants (server-maintained viewerIds) or by
+//   holders of confidential access for the task's department. Everyone else is denied, and the
+//   app shows the same "not found" message it shows for a missing task.
+// - Default deny: anything not matched below is refused.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- helpers ----------
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function userPath(org, uid) {
+      return /databases/$(database)/documents/orgs/$(org)/users/$(uid);
+    }
+
+    function me(org) {
+      return get(userPath(org, request.auth.uid)).data;
+    }
+
+    function nowSeconds() {
+      return request.time.toMillis() / 1000;
+    }
+
+    // Sessions: 30 days for staff and managers, 7 days for admins (PDD 4.1).
+    // auth_time is the time of the last real sign-in (not of a token refresh).
+    function sessionFresh(role) {
+      return request.auth.token.auth_time > nowSeconds() - (role == 'admin' ? 7 : 30) * 86400;
+    }
+
+    // An active member of this organisation with a fresh session.
+    // orgId is a custom claim set only by Cloud Functions when the admin adds the user.
+    function isMember(org) {
+      return signedIn()
+        && request.auth.token.orgId == org
+        && exists(userPath(org, request.auth.uid))
+        && me(org).active == true
+        && sessionFresh(me(org).role);
+    }
+
+    function hasRole(org, role) {
+      return isMember(org) && me(org).role == role;
+    }
+
+    // Admin powers also need the admin second factor: Cloud Functions set the
+    // adminVerifiedUntil claim (seconds since epoch) after the second factor succeeds.
+    function isVerifiedAdmin(org) {
+      return hasRole(org, 'admin')
+        && request.auth.token.adminVerifiedUntil is number
+        && request.auth.token.adminVerifiedUntil > nowSeconds();
+    }
+
+    function hasConfidentialAccess(org, deptId) {
+      return deptId in me(org).get('confidentialDepts', []);
+    }
+
+    function canReadTaskData(org, task) {
+      return isMember(org)
+        && task.get('deleted', false) == false
+        && (
+          request.auth.uid in task.viewerIds
+          || (task.confidential == false && isVerifiedAdmin(org))
+          || (task.confidential == true && hasConfidentialAccess(org, task.deptId))
+        );
+    }
+
+    function taskData(org, taskId) {
+      return get(/databases/$(database)/documents/orgs/$(org)/tasks/$(taskId)).data;
+    }
+
+    function changed() {
+      return request.resource.data.diff(resource.data).affectedKeys();
+    }
+
+    function nonEmptyString(v, max) {
+      return v is string && v.trim().size() > 0 && v.size() <= max;
+    }
+
+    // ---------- organisation ----------
+
+    match /orgs/{org} {
+      allow read: if isMember(org);
+      // Organisations are provisioned by a server script. Verified admins may change settings only.
+      allow update: if isVerifiedAdmin(org)
+        && changed().hasOnly(['name', 'timezone', 'workingHoursEnabled', 'workingHours',
+                              'reminderHours', 'escalationHours', 'escalationMaxLevel',
+                              'smsEnabled', 'smsMonthlyCap', 'auditRetentionYears', 'updatedAt'])
+        && request.resource.data.updatedAt == request.time
+        && (!('smsMonthlyCap' in changed()) || (request.resource.data.smsMonthlyCap is int && request.resource.data.smsMonthlyCap >= 0))
+        && (!('auditRetentionYears' in changed()) || (request.resource.data.auditRetentionYears is int && request.resource.data.auditRetentionYears >= 3));
+      allow create, delete: if false;
+
+      match /departments/{dept} {
+        allow read: if isMember(org);
+        // Departments are deactivated, never deleted, so old tasks keep their department.
+        allow create: if isVerifiedAdmin(org)
+          && request.resource.data.keys().hasOnly(['name', 'headUserId', 'active', 'createdAt', 'updatedAt'])
+          && nonEmptyString(request.resource.data.name, 100)
+          && request.resource.data.active == true
+          && request.resource.data.createdAt == request.time;
+        allow update: if isVerifiedAdmin(org)
+          && changed().hasOnly(['name', 'headUserId', 'active', 'updatedAt'])
+          && nonEmptyString(request.resource.data.name, 100)
+          && request.resource.data.updatedAt == request.time;
+        allow delete: if false;
+      }
+
+      // User records are created and changed through Cloud Functions (adminUpsertUser), which
+      // create the sign-in account, check for reporting loops and recompute managerChain.
+      match /users/{uid} {
+        allow read: if isMember(org);
+        allow update: if isMember(org)
+          && uid == request.auth.uid
+          && changed().hasOnly(['language', 'consentVersion', 'consentAcceptedAt', 'muteComments'])
+          && (!('language' in changed()) || request.resource.data.language in ['en', 'sw'])
+          && (!('consentAcceptedAt' in changed()) || request.resource.data.consentAcceptedAt == request.time)
+          && (!('muteComments' in changed()) || request.resource.data.muteComments is bool);
+        allow create, delete: if false;
+
+        // Contact details are personal data: only the person and verified admins can read them.
+        match /private/contact {
+          allow read: if isMember(org) && (uid == request.auth.uid || isVerifiedAdmin(org));
+          allow write: if false;
+        }
+        // Push tokens: only the person's own app reads and writes them.
+        match /private/devices {
+          allow read: if isMember(org) && uid == request.auth.uid;
+          allow create, update: if isMember(org) && uid == request.auth.uid
+            && request.resource.data.keys().hasOnly(['fcmTokens', 'updatedAt'])
+            && request.resource.data.fcmTokens is list
+            && request.resource.data.fcmTokens.size() <= 10;
+          allow delete: if false;
+        }
+      }
+
+      // Templates are saved through a Cloud Function that bumps the version and keeps
+      // every old version, so running tasks never change.
+      match /templates/{tpl} {
+        allow read: if isMember(org);
+        allow write: if false;
+        match /versions/{version} {
+          allow read: if isMember(org);
+          allow write: if false;
+        }
+      }
+
+      // ---------- tasks ----------
+
+      match /tasks/{taskId} {
+        allow read: if canReadTaskData(org, resource.data);
+
+        // Creating a task (works offline). The task starts as a pending request: a Cloud
+        // Function checks who may be assigned, fills viewerIds and, for workflow tasks,
+        // pins the template version and assigns step 1 ("assigned when online", PDD 4.9).
+        allow create: if isMember(org)
+          && request.resource.data.keys().hasOnly([
+               'title', 'description', 'priority', 'deadline', 'assigneeIds', 'deptId',
+               'confidential', 'participantIds', 'templateId', 'completionMode',
+               'creatorId', 'status', 'viewerIds', 'assignmentState', 'completedByIds',
+               'createdAt', 'updatedAt', 'updatedBy', 'clientUpdatedAt'])
+          && request.resource.data.creatorId == request.auth.uid
+          && request.resource.data.updatedBy == request.auth.uid
+          && request.resource.data.viewerIds == [request.auth.uid]
+          && request.resource.data.status == 'todo'
+          && request.resource.data.assignmentState == 'pending'
+          && request.resource.data.completedByIds == []
+          && request.resource.data.createdAt == request.time
+          && request.resource.data.updatedAt == request.time
+          && nonEmptyString(request.resource.data.title, 200)
+          && request.resource.data.get('description', '') is string
+          && request.resource.data.get('description', '').size() <= 5000
+          && request.resource.data.priority in ['low', 'medium', 'high', 'urgent']
+          && request.resource.data.deadline is timestamp
+          && request.resource.data.assigneeIds is list
+          && request.resource.data.assigneeIds.size() >= 1
+          && request.resource.data.assigneeIds.size() <= 50
+          && request.resource.data.deptId is string
+          && request.resource.data.completionMode in ['all', 'any']
+          && request.resource.data.confidential is bool
+          // Only people with confidential access for the department may mark a task confidential.
+          && (request.resource.data.confidential == false || hasConfidentialAccess(org, request.resource.data.deptId))
+          && request.resource.data.get('participantIds', []) is list
+          && request.resource.data.get('participantIds', []).size() <= 50
+          && (request.resource.data.get('templateId', null) == null || request.resource.data.templateId is string);
+
+        // Updates by people. Fields that drive workflows, visibility, escalation and assignment
+        // are never in these lists, so only Cloud Functions can change them.
+        allow update: if canReadTaskData(org, resource.data)
+          && resource.data.assignmentState == 'assigned'
+          && request.resource.data.updatedAt == request.time
+          && request.resource.data.updatedBy == request.auth.uid
+          && (
+            creatorEdit(org) || assigneeStatusChange(org) || assigneeCompletes(org)
+            || cancelSimpleTask(org) || softDelete(org)
+          );
+
+        allow delete: if false;
+
+        function isOpen() {
+          return resource.data.status in ['todo', 'in_progress', 'blocked'];
+        }
+        function isSimpleTask() {
+          return resource.data.get('templateId', null) == null;
+        }
+        function bookkeeping() {
+          return ['updatedAt', 'updatedBy', 'clientUpdatedAt'];
+        }
+
+        // The creator edits the plain fields of an open task. Deadline changes are logged and the
+        // assignees notified by a Cloud Function.
+        function creatorEdit(org) {
+          return resource.data.creatorId == request.auth.uid
+            && isOpen()
+            && changed().hasOnly(['title', 'description', 'priority', 'deadline'].concat(bookkeeping()))
+            && nonEmptyString(request.resource.data.title, 200)
+            && request.resource.data.get('description', '').size() <= 5000
+            && request.resource.data.priority in ['low', 'medium', 'high', 'urgent']
+            && request.resource.data.deadline is timestamp;
+        }
+
+        // An assignee moves a simple task through its statuses (PDD 4.3). Blocked needs a reason.
+        function assigneeStatusChange(org) {
+          let from = resource.data.status;
+          let to = request.resource.data.status;
+          return isSimpleTask()
+            && request.auth.uid in resource.data.assigneeIds
+            && changed().hasOnly(['status', 'blockedReason'].concat(bookkeeping()))
+            && (
+              (from == 'todo' && to == 'in_progress')
+              || (from == 'in_progress' && to == 'blocked' && nonEmptyString(request.resource.data.blockedReason, 1000))
+              || (from == 'blocked' && to == 'in_progress')
+              || (from in ['todo', 'in_progress'] && to == 'done'
+                  && (resource.data.assigneeIds.size() == 1 || resource.data.completionMode == 'any'))
+            );
+        }
+
+        // With several assignees who must all finish, each adds only themselves to completedByIds;
+        // a Cloud Function marks the task Done when everyone has.
+        function assigneeCompletes(org) {
+          return isSimpleTask()
+            && isOpen()
+            && request.auth.uid in resource.data.assigneeIds
+            && !(request.auth.uid in resource.data.completedByIds)
+            && changed().hasOnly(['completedByIds'].concat(bookkeeping()))
+            && request.resource.data.completedByIds.toSet().difference(resource.data.completedByIds.toSet()) == [request.auth.uid].toSet()
+            && request.resource.data.completedByIds.size() == resource.data.completedByIds.size() + 1;
+        }
+
+        // The creator, or a manager above the assignee, cancels a simple task with a reason.
+        // Workflow tasks are cancelled through a Cloud Function (starter or admin).
+        function cancelSimpleTask(org) {
+          return isSimpleTask()
+            && isOpen()
+            && (resource.data.creatorId == request.auth.uid || hasRole(org, 'manager'))
+            && changed().hasOnly(['status', 'cancelReason'].concat(bookkeeping()))
+            && request.resource.data.status == 'cancelled'
+            && nonEmptyString(request.resource.data.cancelReason, 1000);
+        }
+
+        // Soft delete (PDD permission matrix): a manager deletes their own task before work
+        // starts; a verified admin deletes any task they can read. Logged by a Cloud Function.
+        function softDelete(org) {
+          return changed().hasOnly(['deleted', 'deletedAt'].concat(bookkeeping()))
+            && request.resource.data.deleted == true
+            && request.resource.data.deletedAt == request.time
+            && (
+              isVerifiedAdmin(org)
+              || (hasRole(org, 'manager') && resource.data.creatorId == request.auth.uid && resource.data.status == 'todo')
+            );
+        }
+
+        match /comments/{commentId} {
+          allow read: if canReadTaskData(org, taskData(org, taskId));
+          allow create: if canReadTaskData(org, taskData(org, taskId))
+            && request.resource.data.keys().hasOnly(['authorId', 'text', 'mentions', 'createdAt', 'removed'])
+            && request.resource.data.authorId == request.auth.uid
+            && nonEmptyString(request.resource.data.text, 4000)
+            && request.resource.data.get('mentions', []) is list
+            && request.resource.data.get('mentions', []).size() <= 20
+            && request.resource.data.createdAt == request.time
+            && request.resource.data.removed == false;
+          // Edits are allowed for 15 minutes; removal leaves "Comment removed" and is logged.
+          allow update: if canReadTaskData(org, taskData(org, taskId))
+            && resource.data.authorId == request.auth.uid
+            && resource.data.removed == false
+            && (
+              (changed().hasOnly(['text', 'editedAt'])
+                && nonEmptyString(request.resource.data.text, 4000)
+                && request.resource.data.editedAt == request.time
+                && request.time < resource.data.createdAt + duration.value(15, 'm'))
+              || (changed().hasOnly(['removed', 'text', 'removedAt'])
+                && request.resource.data.removed == true
+                && request.resource.data.text == ''
+                && request.resource.data.removedAt == request.time)
+            );
+          allow delete: if false;
+        }
+
+        match /attachments/{attachmentId} {
+          allow read: if canReadTaskData(org, taskData(org, taskId));
+          allow create: if canReadTaskData(org, taskData(org, taskId))
+            && request.resource.data.keys().hasOnly(['fileName', 'storagePath', 'sizeBytes', 'contentType', 'uploadedBy', 'createdAt'])
+            && request.resource.data.uploadedBy == request.auth.uid
+            && nonEmptyString(request.resource.data.fileName, 200)
+            && request.resource.data.storagePath == 'orgs/' + org + '/tasks/' + taskId + '/' + attachmentId
+            && request.resource.data.sizeBytes is int
+            && request.resource.data.sizeBytes > 0
+            && request.resource.data.sizeBytes <= 10 * 1024 * 1024
+            && request.resource.data.createdAt == request.time;
+          allow update, delete: if false;
+        }
+      }
+
+      // ---------- workflow moves ----------
+
+      // The app only asks; a Cloud Function checks and applies each request in a transaction
+      // and writes the result. Reject and send back need a comment.
+      match /transitionRequests/{requestId} {
+        allow read: if isMember(org) && resource.data.requestedBy == request.auth.uid;
+        allow create: if isMember(org)
+          && request.resource.data.keys().hasOnly(['taskId', 'fromStep', 'action', 'toStep', 'comment', 'requestedBy', 'createdAt', 'clientCreatedAt'])
+          && request.resource.data.requestedBy == request.auth.uid
+          && request.resource.data.createdAt == request.time
+          && request.resource.data.taskId is string
+          && request.resource.data.fromStep is int
+          && request.resource.data.action in ['submit', 'approve', 'reject', 'sendBack']
+          && (!(request.resource.data.action in ['reject', 'sendBack']) || nonEmptyString(request.resource.data.get('comment', ''), 2000))
+          && (request.resource.data.action != 'sendBack' || request.resource.data.get('toStep', null) is int)
+          && canReadTaskData(org, taskData(org, request.resource.data.taskId));
+        allow update, delete: if false;
+      }
+
+      // ---------- server-only collections ----------
+
+      match /notifications/{notificationId} {
+        allow read: if isMember(org) && resource.data.userId == request.auth.uid;
+        // The owner may only mark a notification read or opened (opening a push cancels the SMS fallback).
+        allow update: if isMember(org)
+          && resource.data.userId == request.auth.uid
+          && changed().hasOnly(['read', 'openedAt'])
+          && request.resource.data.read is bool
+          && (!('openedAt' in changed()) || request.resource.data.openedAt == request.time);
+        allow create, delete: if false;
+      }
+
+      // Audit entries carry a copy of the task's viewerIds and confidential flag when written.
+      match /audit/{entryId} {
+        allow read: if isMember(org)
+          && (
+            request.auth.uid in resource.data.get('viewerIds', [])
+            || (isVerifiedAdmin(org) && resource.data.get('confidential', false) == false)
+          );
+        allow write: if false;
+      }
+
+      // Counters for dashboards: scope is user, team (a manager's reporting tree), dept or org.
+      match /stats/{statId} {
+        allow read: if isMember(org)
+          && (
+            ((resource.data.scope == 'user' || resource.data.scope == 'team') && resource.data.scopeId == request.auth.uid)
+            || (resource.data.scope == 'dept' && hasRole(org, 'manager') && me(org).deptId == resource.data.scopeId)
+            || isVerifiedAdmin(org)
+          );
+        allow write: if false;
+      }
+
+      match /smsUsage/{month} {
+        allow read: if isVerifiedAdmin(org);
+        allow write: if false;
+      }
+
+      match /reports/{reportId} {
+        allow read: if isMember(org) && request.auth.uid in resource.data.get('recipientIds', []);
+        allow write: if false;
+      }
+
+      // Admin second-factor codes and job bookkeeping: never readable by any app.
+      match /secure/{document=**} {
+        allow read, write: if false;
+      }
+    }
+  }
+}

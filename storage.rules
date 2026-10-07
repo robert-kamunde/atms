@@ -1,0 +1,61 @@
+rules_version = '2';
+
+// ATMS Cloud Storage rules. Attachments follow the same access rule as their task
+// (PDD 4.8 step 4): a file can be read or uploaded only by someone who can read the task.
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function userDoc(org) {
+      return firestore.get(/databases/(default)/documents/orgs/$(org)/users/$(request.auth.uid)).data;
+    }
+
+    // Sessions: 30 days for staff and managers, 7 days for admins (PDD 4.1).
+    function sessionDays(org) {
+      return userDoc(org).role == 'admin' ? 7 : 30;
+    }
+
+    function isMember(org) {
+      return request.auth != null
+        && request.auth.token.orgId == org
+        && firestore.exists(/databases/(default)/documents/orgs/$(org)/users/$(request.auth.uid))
+        && userDoc(org).active == true
+        && request.auth.token.auth_time > request.time.toMillis() / 1000 - sessionDays(org) * 86400;
+    }
+
+    function isVerifiedAdmin(org) {
+      return isMember(org)
+        && userDoc(org).role == 'admin'
+        && request.auth.token.adminVerifiedUntil is number
+        && request.auth.token.adminVerifiedUntil > request.time.toMillis() / 1000;
+    }
+
+    function canReadTask(org, taskId) {
+      let task = firestore.get(/databases/(default)/documents/orgs/$(org)/tasks/$(taskId)).data;
+      return isMember(org)
+        && task.get('deleted', false) == false
+        && (
+          request.auth.uid in task.viewerIds
+          || (task.confidential == false && isVerifiedAdmin(org))
+          || (task.confidential == true && task.deptId in userDoc(org).get('confidentialDepts', []))
+        );
+    }
+
+    // orgs/{org}/tasks/{taskId}/{attachmentId}: the attachment id matches the Firestore
+    // attachments document, so an upload cannot overwrite another file.
+    match /orgs/{org}/tasks/{taskId}/{attachmentId} {
+      allow read: if canReadTask(org, taskId);
+      allow create: if canReadTask(org, taskId)
+        && request.resource.size <= 10 * 1024 * 1024
+        && (request.resource.contentType.matches('image/.*')
+            || request.resource.contentType == 'application/pdf'
+            || request.resource.contentType.matches('application/vnd\\.openxmlformats-officedocument\\..*')
+            || request.resource.contentType in ['application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint']);
+      allow update, delete: if false;
+    }
+
+    // Generated reports are written by Cloud Functions and downloaded through signed URLs.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
