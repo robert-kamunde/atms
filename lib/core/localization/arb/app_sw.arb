@@ -1,0 +1,900 @@
+{
+  "@@locale": "sw",
+  "actionAddAttachment": "Ambatisha faili",
+  "@actionAddAttachment": {
+    "description": "Button: add a file to a task."
+  },
+  "actionAddDepartment": "Ongeza idara",
+  "@actionAddDepartment": {
+    "description": "Button: create a department."
+  },
+  "actionAddUser": "Ongeza mtu",
+  "@actionAddUser": {
+    "description": "Button: add a user."
+  },
+  "actionAgreeAndContinue": "Kubali na uendelee",
+  "@actionAgreeAndContinue": {
+    "description": "Consent screen button."
+  },
+  "actionAllowNotifications": "Ruhusu arifa",
+  "@actionAllowNotifications": {
+    "description": "Onboarding button."
+  },
+  "actionBackToPhone": "Weka namba ya simu tena",
+  "@actionBackToPhone": {
+    "description": "Button back to the phone entry screen."
+  },
+  "actionContinue": "Endelea",
+  "@actionContinue": {
+    "description": "Generic continue button."
+  },
+  "actionEdit": "Hariri",
+  "@actionEdit": {
+    "description": "Edit button / tooltip."
+  },
+  "actionGoToTasks": "Nenda kwenye kazi zangu",
+  "@actionGoToTasks": {
+    "description": "Button on not-found screen."
+  },
+  "actionHidePassword": "Ficha nenosiri",
+  "@actionHidePassword": {
+    "description": "Tooltip on password field."
+  },
+  "actionNewTask": "Kazi mpya",
+  "@actionNewTask": {
+    "description": "Button to create a task."
+  },
+  "actionNewTemplate": "Kiolezo kipya",
+  "@actionNewTemplate": {
+    "description": "SW_REVIEW: Button to create a workflow template."
+  },
+  "actionNotNow": "Si sasa",
+  "@actionNotNow": {
+    "description": "Skip button."
+  },
+  "actionResendCode": "Tuma msimbo tena",
+  "@actionResendCode": {
+    "description": "Resend SMS/email code."
+  },
+  "actionSave": "Hifadhi",
+  "@actionSave": {
+    "description": "Save button."
+  },
+  "actionSendCode": "Tuma msimbo",
+  "@actionSendCode": {
+    "description": "Phone sign-in: send SMS code."
+  },
+  "actionShowPassword": "Onyesha nenosiri",
+  "@actionShowPassword": {
+    "description": "Tooltip on password field."
+  },
+  "actionSignIn": "Ingia",
+  "@actionSignIn": {
+    "description": "Sign-in button."
+  },
+  "actionSignOut": "Ondoka",
+  "@actionSignOut": {
+    "description": "Sign-out button."
+  },
+  "actionUseAnotherNumber": "Tumia namba nyingine",
+  "@actionUseAnotherNumber": {
+    "description": "Not-invited screen: go back to sign-in."
+  },
+  "actionVerify": "Thibitisha",
+  "@actionVerify": {
+    "description": "Verify code button."
+  },
+  "adminAuditTitle": "Kumbukumbu za ukaguzi",
+  "@adminAuditTitle": {
+    "description": "SW_REVIEW: Admin: audit log screen title."
+  },
+  "adminDepartmentsTitle": "Idara",
+  "@adminDepartmentsTitle": {
+    "description": "Admin: departments screen title."
+  },
+  "adminReportingTreeTitle": "Mfumo wa uwajibikaji",
+  "@adminReportingTreeTitle": {
+    "description": "SW_REVIEW: Admin: reporting tree (who reports to whom)."
+  },
+  "adminSection": "Utawala",
+  "@adminSection": {
+    "description": "More screen: admin section header."
+  },
+  "adminSettingsTitle": "Mipangilio ya taasisi",
+  "@adminSettingsTitle": {
+    "description": "Admin: settings screen title."
+  },
+  "adminTemplatesTitle": "Violezo vya mtiririko wa kazi",
+  "@adminTemplatesTitle": {
+    "description": "SW_REVIEW: Admin: workflow templates title."
+  },
+  "adminUserDetailTitle": "Taarifa za mtu",
+  "@adminUserDetailTitle": {
+    "description": "Admin: user editor title."
+  },
+  "adminUsersTitle": "Watu",
+  "@adminUsersTitle": {
+    "description": "Admin: users list title."
+  },
+  "adminVerifyHelp": "Kwa usalama zaidi, wasimamizi wa mfumo lazima pia waweke msimbo wa tarakimu 6 uliotumwa kwenye barua pepe yao.",
+  "@adminVerifyHelp": {
+    "description": "Admin second factor explanation."
+  },
+  "adminVerifyTitle": "Uthibitisho wa msimamizi",
+  "@adminVerifyTitle": {
+    "description": "Admin second-factor screen title."
+  },
+  "appTitle": "ATMS",
+  "@appTitle": {
+    "description": "App name shown in the task switcher."
+  },
+  "approvalsEmptyMessage": "Hatua inayohitaji idhini yako itaonekana hapa.",
+  "@approvalsEmptyMessage": {
+    "description": "Approvals empty state message."
+  },
+  "approvalsEmptyTitle": "Hakuna kinachosubiri idhini yako",
+  "@approvalsEmptyTitle": {
+    "description": "Approvals empty state title."
+  },
+  "approvalsTitle": "Idhini zinazosubiri",
+  "@approvalsTitle": {
+    "description": "Approvals screen title."
+  },
+  "assigneeCount": "{count, plural, =1{Mtu 1 amechaguliwa} other{Watu {count} wamechaguliwa}}",
+  "@assigneeCount": {
+    "description": "Number of assignees picked.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "assigneePickerEmpty": "Bado hakuna watu wa kuchagua",
+  "@assigneePickerEmpty": {
+    "description": "Assignee picker empty state."
+  },
+  "attachmentsEmpty": "Bado hakuna viambatisho",
+  "@attachmentsEmpty": {
+    "description": "Attachments empty state."
+  },
+  "attachmentsTitle": "Viambatisho",
+  "@attachmentsTitle": {
+    "description": "Task detail: attachments section."
+  },
+  "auditEmptyMessage": "Kila badiliko la kazi, watu na violezo litarekodiwa hapa.",
+  "@auditEmptyMessage": {
+    "description": "SW_REVIEW: Audit empty message."
+  },
+  "auditEmptyTitle": "Bado hakuna kumbukumbu za ukaguzi",
+  "@auditEmptyTitle": {
+    "description": "SW_REVIEW: Audit empty title."
+  },
+  "codeEntryHelp": "Weka msimbo wa tarakimu 6 tuliokutumia kwa SMS kwenda {phone}.",
+  "@codeEntryHelp": {
+    "description": "Code entry instructions.",
+    "placeholders": {
+      "phone": {
+        "type": "String",
+        "example": "+255712345678"
+      }
+    }
+  },
+  "codeEntryNoPending": "Ombi lako la msimbo limeisha muda. Tafadhali weka namba yako ya simu tena.",
+  "@codeEntryNoPending": {
+    "description": "Shown when there is no pending SMS verification."
+  },
+  "codeEntryTitle": "Weka msimbo",
+  "@codeEntryTitle": {
+    "description": "Code entry screen title."
+  },
+  "codeLabel": "Msimbo wa tarakimu 6",
+  "@codeLabel": {
+    "description": "Code field label."
+  },
+  "commentInputHint": "Andika maoni",
+  "@commentInputHint": {
+    "description": "Comment field hint."
+  },
+  "commentsEmpty": "Bado hakuna maoni",
+  "@commentsEmpty": {
+    "description": "Comments empty state."
+  },
+  "commentsTitle": "Maoni",
+  "@commentsTitle": {
+    "description": "Task detail: comments section."
+  },
+  "consentCheckbox": "Nimesoma taarifa hii na ninakubali taarifa zangu zitumike kama ilivyoelezwa.",
+  "@consentCheckbox": {
+    "description": "Consent checkbox label."
+  },
+  "consentIntro": "Kabla ya kuanza, tafadhali soma jinsi ATMS inavyotumia taarifa zako binafsi. Taarifa hii inazingatia Sheria ya Ulinzi wa Taarifa Binafsi ya Tanzania, 2022.",
+  "@consentIntro": {
+    "description": "SW_REVIEW: Consent intro. Legal text: client must review."
+  },
+  "consentRetentionBody": "Kumbukumbu za kazi na za ukaguzi zinahifadhiwa kwa angalau miaka 3, au kama taasisi yako itakavyoamua, kwa ajili ya uwajibikaji.",
+  "@consentRetentionBody": {
+    "description": "SW_REVIEW: Consent: retention."
+  },
+  "consentRetentionTitle": "Tunazihifadhi kwa muda gani",
+  "@consentRetentionTitle": {
+    "description": "Consent section title."
+  },
+  "consentRightsBody": "Unaweza kumwomba msimamizi wa mfumo wa taasisi yako kuona au kusahihisha taarifa zako binafsi, au kuacha kuzitumia pale sheria inaporuhusu. Unaweza pia kuwasilisha malalamiko kwa Tume ya Ulinzi wa Taarifa Binafsi.",
+  "@consentRightsBody": {
+    "description": "SW_REVIEW: Consent: data subject rights."
+  },
+  "consentRightsTitle": "Haki zako",
+  "@consentRightsTitle": {
+    "description": "Consent section title."
+  },
+  "consentSecurityBody": "Taarifa zako zinasimbwa kwa njia fiche zinaposafiri kwenye intaneti na zinapohifadhiwa kwenye seva. Ruhusa inakaguliwa kwenye seva kwa kila ombi. Nakala pia inahifadhiwa kwenye simu yako ili uweze kufanya kazi bila intaneti.",
+  "@consentSecurityBody": {
+    "description": "SW_REVIEW: Consent: security. Must NOT claim end-to-end encryption."
+  },
+  "consentSecurityTitle": "Jinsi zinavyolindwa",
+  "@consentSecurityTitle": {
+    "description": "Consent section title."
+  },
+  "consentTitle": "Taarifa ya faragha",
+  "@consentTitle": {
+    "description": "Consent screen title."
+  },
+  "consentWhatWeCollectBody": "Jina lako, namba ya simu, barua pepe (ikiwa imetolewa), idara, cheo na msimamizi wako, vilivyoongezwa na msimamizi wa mfumo wa taasisi yako; kazi, maoni na mafaili unayoweka; na taarifa za msingi za matumizi ya programu na hitilafu.",
+  "@consentWhatWeCollectBody": {
+    "description": "SW_REVIEW: Consent: data collected."
+  },
+  "consentWhatWeCollectTitle": "Tunachokusanya",
+  "@consentWhatWeCollectTitle": {
+    "description": "Consent section title."
+  },
+  "consentWhoSeesBody": "Watu katika taasisi yako wanaona kazi kulingana na cheo chao na mfumo wa uwajibikaji. Kazi za siri zinaonekana kwa washiriki wake tu. Watoa huduma wetu (Google Firebase kwa kuhifadhi, na mtoa huduma wa SMS kwa ujumbe mfupi) wanashughulikia taarifa kwa niaba yetu.",
+  "@consentWhoSeesBody": {
+    "description": "SW_REVIEW: Consent: who sees data."
+  },
+  "consentWhoSeesTitle": "Nani anaweza kuziona",
+  "@consentWhoSeesTitle": {
+    "description": "Consent section title."
+  },
+  "consentWhyBody": "Kwa ajili ya kuendesha kazi za taasisi yako tu: kugawa kazi, kupitisha idhini, kutuma vikumbusho na kupandisha kazi zilizochelewa, na kutoa ripoti. Hatuuzi taarifa zako wala kuzitumia kwa matangazo.",
+  "@consentWhyBody": {
+    "description": "SW_REVIEW: Consent: purpose."
+  },
+  "consentWhyTitle": "Kwa nini tunaitumia",
+  "@consentWhyTitle": {
+    "description": "Consent section title."
+  },
+  "dashActiveUsers": "Watumiaji hai",
+  "@dashActiveUsers": {
+    "description": "SW_REVIEW: Admin dashboard card."
+  },
+  "dashApprovalsWaiting": "Idhini zinazonisubiri",
+  "@dashApprovalsWaiting": {
+    "description": "Manager dashboard card."
+  },
+  "dashAvgDaysPerStep": "Wastani wa siku kwa kila hatua",
+  "@dashAvgDaysPerStep": {
+    "description": "Manager dashboard card (bottleneck step)."
+  },
+  "dashCompletionRate": "Kiwango changu cha kukamilisha mwezi huu",
+  "@dashCompletionRate": {
+    "description": "Staff dashboard card."
+  },
+  "dashDueThisWeek": "Zinazotakiwa wiki hii",
+  "@dashDueThisWeek": {
+    "description": "Staff dashboard card."
+  },
+  "dashDueToday": "Zinazotakiwa leo",
+  "@dashDueToday": {
+    "description": "Staff dashboard card."
+  },
+  "dashMyOverdue": "Kazi zangu zilizochelewa",
+  "@dashMyOverdue": {
+    "description": "Staff dashboard card."
+  },
+  "dashNoDataYet": "Bado hakuna takwimu",
+  "@dashNoDataYet": {
+    "description": "Dashboard card with no data."
+  },
+  "dashOrgByDepartment": "Jumla ya taasisi kwa idara",
+  "@dashOrgByDepartment": {
+    "description": "Admin dashboard card."
+  },
+  "dashOverdueEscalated": "Kazi zilizochelewa na zilizopandishwa",
+  "@dashOverdueEscalated": {
+    "description": "SW_REVIEW: Manager dashboard card."
+  },
+  "dashSmsSpend": "Gharama ya SMS mwezi huu",
+  "@dashSmsSpend": {
+    "description": "Admin dashboard card."
+  },
+  "dashTeamByStatus": "Kazi za timu kwa hali",
+  "@dashTeamByStatus": {
+    "description": "Manager dashboard card."
+  },
+  "dashTemplatesInUse": "Violezo vinavyotumika",
+  "@dashTemplatesInUse": {
+    "description": "SW_REVIEW: Admin dashboard card."
+  },
+  "dashWorkloadPerPerson": "Mzigo wa kazi kwa kila mtu",
+  "@dashWorkloadPerPerson": {
+    "description": "Manager dashboard card."
+  },
+  "dashboardTitle": "Dashibodi",
+  "@dashboardTitle": {
+    "description": "SW_REVIEW: Dashboard screen title."
+  },
+  "departmentsEmptyMessage": "Ongeza idara kama Fedha, Rasilimali Watu au TEHAMA, na umtaje mkuu wa kila moja.",
+  "@departmentsEmptyMessage": {
+    "description": "Departments empty message."
+  },
+  "departmentsEmptyTitle": "Bado hakuna idara",
+  "@departmentsEmptyTitle": {
+    "description": "Departments empty title."
+  },
+  "devPreviewAsRole": "Fungua kama {role}",
+  "@devPreviewAsRole": {
+    "description": "Developer preview button. Development builds only.",
+    "placeholders": {
+      "role": {
+        "type": "String",
+        "example": "Manager"
+      }
+    }
+  },
+  "devPreviewMessage": "Kwa matoleo ya majaribio tu. Inafungua skrini bila takwimu na bila kuingia.",
+  "@devPreviewMessage": {
+    "description": "SW_REVIEW: Developer preview explanation. Development builds only."
+  },
+  "devPreviewTitle": "Onyesho la msanidi",
+  "@devPreviewTitle": {
+    "description": "SW_REVIEW: Developer preview card title. Development builds only."
+  },
+  "dueOverdue": "Zimechelewa",
+  "@dueOverdue": {
+    "description": "Due-date filter option."
+  },
+  "dueThisWeek": "Wiki hii",
+  "@dueThisWeek": {
+    "description": "Due-date filter option."
+  },
+  "dueToday": "Leo",
+  "@dueToday": {
+    "description": "Due-date filter option."
+  },
+  "emailLabel": "Barua pepe",
+  "@emailLabel": {
+    "description": "Email field label."
+  },
+  "emailSignInHelp": "Tumia njia hii kama huwezi kupokea SMS. Msimamizi wa mfumo atakupa barua pepe na nenosiri.",
+  "@emailSignInHelp": {
+    "description": "Email sign-in explanation."
+  },
+  "emailSignInTitle": "Ingia kwa barua pepe",
+  "@emailSignInTitle": {
+    "description": "Email sign-in title."
+  },
+  "errorConflict": "Mtu mwingine amebadilisha hiki kwanza. Tafadhali angalia toleo la sasa.",
+  "@errorConflict": {
+    "description": "Generic conflict error."
+  },
+  "errorConflictAlreadyApproved": "Hatua hii tayari imeidhinishwa na {name} saa {time}.",
+  "@errorConflictAlreadyApproved": {
+    "description": "Late workflow approval rejected by the server (spec 4.9).",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Asha"
+      },
+      "time": {
+        "type": "String",
+        "example": "10:42"
+      }
+    }
+  },
+  "errorInvalidCode": "Msimbo huo si sahihi. Angalia SMS na ujaribu tena.",
+  "@errorInvalidCode": {
+    "description": "Wrong verification code."
+  },
+  "errorInvalidEmail": "Weka anwani sahihi ya barua pepe.",
+  "@errorInvalidEmail": {
+    "description": "Invalid email."
+  },
+  "errorInvalidInput": "Baadhi ya taarifa si sahihi. Tafadhali angalia na ujaribu tena.",
+  "@errorInvalidInput": {
+    "description": "Generic validation error."
+  },
+  "errorInvalidPhone": "Weka namba sahihi ya simu ya mkononi ya Tanzania, kwa mfano 0712 345 678.",
+  "@errorInvalidPhone": {
+    "description": "Invalid phone number."
+  },
+  "errorNetwork": "Hakuna mtandao. Mabadiliko yako yamehifadhiwa kwenye simu hii; jaribu tena ukiwa mtandaoni.",
+  "@errorNetwork": {
+    "description": "Network error."
+  },
+  "errorNotFound": "Kipengele hiki hakijapatikana.",
+  "@errorNotFound": {
+    "description": "Shown for BOTH not-found and permission-denied so confidential items look missing."
+  },
+  "errorNotInvited": "Mwombe msimamizi wa mfumo akuongeze.",
+  "@errorNotInvited": {
+    "description": "User not invited."
+  },
+  "errorSessionExpired": "Kwa usalama wako, tafadhali ingia tena.",
+  "@errorSessionExpired": {
+    "description": "Session expired."
+  },
+  "errorTooManyAttempts": "Umejaribu mara nyingi mno. Tafadhali subiri dakika chache kisha ujaribu tena.",
+  "@errorTooManyAttempts": {
+    "description": "Rate limited."
+  },
+  "errorUnauthenticated": "Tafadhali ingia ili uendelee.",
+  "@errorUnauthenticated": {
+    "description": "Not signed in."
+  },
+  "errorUnknown": "Hitilafu imetokea. Tafadhali jaribu tena.",
+  "@errorUnknown": {
+    "description": "Unknown error."
+  },
+  "errorWrongCredentials": "Barua pepe au nenosiri si sahihi.",
+  "@errorWrongCredentials": {
+    "description": "Wrong email/password."
+  },
+  "featureNotAvailableYet": "Huduma hii bado haipatikani. Itakuja katika toleo lijalo.",
+  "@featureNotAvailableYet": {
+    "description": "Honest message for buttons whose feature is not built yet."
+  },
+  "filterAssignee": "Mhusika",
+  "@filterAssignee": {
+    "description": "SW_REVIEW: Task filter chip: person assigned."
+  },
+  "filterClear": "Ondoa kichujio",
+  "@filterClear": {
+    "description": "Clear a filter."
+  },
+  "filterDepartment": "Idara",
+  "@filterDepartment": {
+    "description": "Task filter chip."
+  },
+  "filterDueDate": "Tarehe ya mwisho",
+  "@filterDueDate": {
+    "description": "Task filter chip."
+  },
+  "filterNoOptionsYet": "Bado hakuna machaguo",
+  "@filterNoOptionsYet": {
+    "description": "Empty filter options."
+  },
+  "filterPriority": "Kipaumbele",
+  "@filterPriority": {
+    "description": "Task filter chip."
+  },
+  "filterStatus": "Hali",
+  "@filterStatus": {
+    "description": "Task filter chip."
+  },
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "Language option; always shown in English."
+  },
+  "languageSection": "Lugha",
+  "@languageSection": {
+    "description": "More screen: language section."
+  },
+  "languageSwahili": "Kiswahili",
+  "@languageSwahili": {
+    "description": "Language option; always shown in Kiswahili."
+  },
+  "loadingMessage": "Tunaandaa akaunti yako...",
+  "@loadingMessage": {
+    "description": "Loading screen text."
+  },
+  "managerSection": "Timu",
+  "@managerSection": {
+    "description": "More screen: manager section."
+  },
+  "moreTitle": "Zaidi",
+  "@moreTitle": {
+    "description": "More screen title."
+  },
+  "myTasksTitle": "Kazi zangu",
+  "@myTasksTitle": {
+    "description": "Task list title."
+  },
+  "navApprovals": "Idhini",
+  "@navApprovals": {
+    "description": "Bottom navigation: approvals waiting tab."
+  },
+  "navDashboard": "Dashibodi",
+  "@navDashboard": {
+    "description": "SW_REVIEW: Bottom navigation: dashboard tab."
+  },
+  "navMore": "Zaidi",
+  "@navMore": {
+    "description": "Bottom navigation: more/menu tab."
+  },
+  "navNotifications": "Arifa",
+  "@navNotifications": {
+    "description": "Bottom navigation: notifications tab (short label)."
+  },
+  "navTasks": "Kazi",
+  "@navTasks": {
+    "description": "Bottom navigation: task list tab."
+  },
+  "notInvitedHelp": "Ni namba za simu zilizoongezwa na taasisi yako pekee zinazoweza kutumia ATMS.",
+  "@notInvitedHelp": {
+    "description": "Not-invited explanation."
+  },
+  "notInvitedMessage": "Mwombe msimamizi wa mfumo akuongeze.",
+  "@notInvitedMessage": {
+    "description": "Not-invited main message (spec 4.1)."
+  },
+  "notInvitedTitle": "Hujasajiliwa",
+  "@notInvitedTitle": {
+    "description": "Not-invited screen title."
+  },
+  "notificationsEmptyMessage": "Vikumbusho, idhini na kazi zilizopandishwa vitaonekana hapa.",
+  "@notificationsEmptyMessage": {
+    "description": "SW_REVIEW: Notifications empty message."
+  },
+  "notificationsEmptyTitle": "Bado hakuna arifa",
+  "@notificationsEmptyTitle": {
+    "description": "Notifications empty title."
+  },
+  "notificationsTitle": "Arifa",
+  "@notificationsTitle": {
+    "description": "Notifications screen title."
+  },
+  "onboardingLanguageHelp": "Chagua lugha ya programu. Unaweza kuibadilisha baadaye kwenye Zaidi.",
+  "@onboardingLanguageHelp": {
+    "description": "Language step help."
+  },
+  "onboardingLanguageTitle": "Chagua lugha",
+  "@onboardingLanguageTitle": {
+    "description": "Language step title."
+  },
+  "onboardingNotificationsHelp": "ATMS inakujulisha unapopewa kazi, idhini inaposubiri na tarehe ya mwisho inapokaribia. Ruhusu arifa ili usizikose.",
+  "@onboardingNotificationsHelp": {
+    "description": "Notification permission explanation."
+  },
+  "onboardingNotificationsTitle": "Arifa",
+  "@onboardingNotificationsTitle": {
+    "description": "Notification step title."
+  },
+  "optionalFieldHint": "Si lazima",
+  "@optionalFieldHint": {
+    "description": "Helper text for optional fields."
+  },
+  "passwordLabel": "Nenosiri",
+  "@passwordLabel": {
+    "description": "Password field label."
+  },
+  "phoneNumberHint": "0712 345 678",
+  "@phoneNumberHint": {
+    "description": "Phone number example."
+  },
+  "phoneNumberLabel": "Namba ya simu",
+  "@phoneNumberLabel": {
+    "description": "Phone field label."
+  },
+  "phoneSignInHeading": "Karibu ATMS",
+  "@phoneSignInHeading": {
+    "description": "Phone sign-in heading."
+  },
+  "phoneSignInHelp": "Weka namba ya simu iliyosajiliwa na taasisi yako. Tutakutumia msimbo wa tarakimu 6 kwa SMS.",
+  "@phoneSignInHelp": {
+    "description": "Phone sign-in explanation."
+  },
+  "priorityHigh": "Juu",
+  "@priorityHigh": {
+    "description": "Priority value."
+  },
+  "priorityLow": "Chini",
+  "@priorityLow": {
+    "description": "Priority value."
+  },
+  "priorityMedium": "Wastani",
+  "@priorityMedium": {
+    "description": "Priority value."
+  },
+  "priorityUrgent": "Dharura",
+  "@priorityUrgent": {
+    "description": "Priority value."
+  },
+  "profileSection": "Wasifu",
+  "@profileSection": {
+    "description": "More screen: profile section."
+  },
+  "profileSignedInAs": "Umeingia kama {role}",
+  "@profileSignedInAs": {
+    "description": "Profile line with the user role.",
+    "placeholders": {
+      "role": {
+        "type": "String",
+        "example": "Staff"
+      }
+    }
+  },
+  "reportingTreeEmptyMessage": "Weka msimamizi wa kila mtu ili kujenga mfumo wa uwajibikaji unaotumika kupandisha kazi.",
+  "@reportingTreeEmptyMessage": {
+    "description": "SW_REVIEW: Reporting tree empty message."
+  },
+  "reportingTreeEmptyTitle": "Bado hakuna mfumo wa uwajibikaji",
+  "@reportingTreeEmptyTitle": {
+    "description": "SW_REVIEW: Reporting tree empty title."
+  },
+  "reportsEmptyMessage": "Muhtasari wa wiki hutolewa kila Jumatatu na wa mwezi tarehe 1.",
+  "@reportsEmptyMessage": {
+    "description": "Reports empty message."
+  },
+  "reportsEmptyTitle": "Bado hakuna ripoti",
+  "@reportsEmptyTitle": {
+    "description": "Reports empty title."
+  },
+  "reportsTitle": "Ripoti",
+  "@reportsTitle": {
+    "description": "Reports title."
+  },
+  "requiredFieldHint": "Lazima",
+  "@requiredFieldHint": {
+    "description": "Helper text for required fields."
+  },
+  "roleAdmin": "Msimamizi wa mfumo",
+  "@roleAdmin": {
+    "description": "Role name."
+  },
+  "roleManager": "Meneja",
+  "@roleManager": {
+    "description": "Role name."
+  },
+  "roleStaff": "Mtumishi",
+  "@roleStaff": {
+    "description": "SW_REVIEW: Role name."
+  },
+  "settingEscalationDelay": "Muda kabla ya kupandisha kazi",
+  "@settingEscalationDelay": {
+    "description": "SW_REVIEW: Org setting."
+  },
+  "settingReminderTimes": "Nyakati za vikumbusho",
+  "@settingReminderTimes": {
+    "description": "Org setting."
+  },
+  "settingSmsCap": "Kikomo cha SMS kwa mwezi",
+  "@settingSmsCap": {
+    "description": "Org setting."
+  },
+  "settingTimeZone": "Saa za eneo",
+  "@settingTimeZone": {
+    "description": "SW_REVIEW: Org setting."
+  },
+  "settingWorkingDays": "Siku za kazi",
+  "@settingWorkingDays": {
+    "description": "Org setting."
+  },
+  "settingWorkingHours": "Saa za kazi",
+  "@settingWorkingHours": {
+    "description": "Org setting."
+  },
+  "setupMissingMessage": "Nakala hii ya programu imetengenezwa bila mipangilio ya seva, kwa hiyo haiwezi kuunganishwa. Tafadhali sakinisha toleo lililotolewa na taasisi yako.",
+  "@setupMissingMessage": {
+    "description": "App not configured explanation."
+  },
+  "setupMissingTitle": "Programu haijasanidiwa",
+  "@setupMissingTitle": {
+    "description": "SW_REVIEW: App not configured title."
+  },
+  "signInTitle": "Ingia",
+  "@signInTitle": {
+    "description": "Sign-in screen title."
+  },
+  "startWorkflowEmptyMessage": "Msimamizi wa mfumo bado hajachapisha violezo vya mtiririko wa kazi.",
+  "@startWorkflowEmptyMessage": {
+    "description": "SW_REVIEW: Start workflow empty message."
+  },
+  "startWorkflowTitle": "Anzisha mtiririko wa kazi",
+  "@startWorkflowTitle": {
+    "description": "SW_REVIEW: Start workflow title."
+  },
+  "statusBlocked": "Imekwama",
+  "@statusBlocked": {
+    "description": "Task status."
+  },
+  "statusCancelled": "Imesitishwa",
+  "@statusCancelled": {
+    "description": "Task status."
+  },
+  "statusDone": "Imekamilika",
+  "@statusDone": {
+    "description": "Task status."
+  },
+  "statusInProgress": "Inaendelea",
+  "@statusInProgress": {
+    "description": "Task status."
+  },
+  "statusTodo": "Haijaanza",
+  "@statusTodo": {
+    "description": "Task status."
+  },
+  "stepTrackerEmpty": "Kazi hii haina hatua za mtiririko",
+  "@stepTrackerEmpty": {
+    "description": "SW_REVIEW: Step tracker empty state."
+  },
+  "stepTrackerTitle": "Hatua",
+  "@stepTrackerTitle": {
+    "description": "Task detail: step tracker section."
+  },
+  "syncAllSaved": "Mabadiliko yote yamehifadhiwa",
+  "@syncAllSaved": {
+    "description": "Sync banner: synced."
+  },
+  "syncOffline": "Nje ya mtandao: mabadiliko yamehifadhiwa kwenye simu hii",
+  "@syncOffline": {
+    "description": "Sync banner: offline."
+  },
+  "syncSyncing": "Inasawazisha...",
+  "@syncSyncing": {
+    "description": "SW_REVIEW: Sync banner: syncing."
+  },
+  "taskCreateTitle": "Kazi mpya",
+  "@taskCreateTitle": {
+    "description": "Create task title."
+  },
+  "taskDetailTitle": "Kazi",
+  "@taskDetailTitle": {
+    "description": "Task detail title."
+  },
+  "taskEditTitle": "Hariri kazi",
+  "@taskEditTitle": {
+    "description": "Edit task title."
+  },
+  "taskFieldAssignee": "Amepewa",
+  "@taskFieldAssignee": {
+    "description": "Assignee field label."
+  },
+  "taskFieldAssigneeHint": "Chagua watu",
+  "@taskFieldAssigneeHint": {
+    "description": "Assignee field placeholder."
+  },
+  "taskFieldDeadline": "Tarehe ya mwisho",
+  "@taskFieldDeadline": {
+    "description": "Deadline field label."
+  },
+  "taskFieldDeadlineHint": "Chagua tarehe na saa",
+  "@taskFieldDeadlineHint": {
+    "description": "Deadline placeholder."
+  },
+  "taskFieldDescription": "Maelezo",
+  "@taskFieldDescription": {
+    "description": "Description field label."
+  },
+  "taskFieldPriority": "Kipaumbele",
+  "@taskFieldPriority": {
+    "description": "Priority field label."
+  },
+  "taskFieldTitle": "Kichwa",
+  "@taskFieldTitle": {
+    "description": "Title field label."
+  },
+  "taskNotLoadedYet": "Taarifa za kazi zitaonekana hapa.",
+  "@taskNotLoadedYet": {
+    "description": "Task summary placeholder while loading is not built."
+  },
+  "taskSummaryTitle": "Taarifa",
+  "@taskSummaryTitle": {
+    "description": "Task detail summary section."
+  },
+  "tasksEmptyFilteredTitle": "Hakuna kazi zinazolingana na vichujio hivi",
+  "@tasksEmptyFilteredTitle": {
+    "description": "Empty list with filters."
+  },
+  "tasksEmptyMessage": "Kazi utakazopewa zitaonekana hapa, zikipangwa kwa tarehe ya mwisho.",
+  "@tasksEmptyMessage": {
+    "description": "My tasks empty message."
+  },
+  "tasksEmptyTitle": "Huna kazi yoyote",
+  "@tasksEmptyTitle": {
+    "description": "My tasks empty title."
+  },
+  "teamTasksEmptyTitle": "Timu yako haina kazi yoyote",
+  "@teamTasksEmptyTitle": {
+    "description": "Team tasks empty title."
+  },
+  "teamTasksTitle": "Kazi za timu",
+  "@teamTasksTitle": {
+    "description": "Team tasks title."
+  },
+  "templateDetailTitle": "Kiolezo cha mtiririko wa kazi",
+  "@templateDetailTitle": {
+    "description": "SW_REVIEW: Template detail title."
+  },
+  "templateStepsEmpty": "Bado hakuna hatua",
+  "@templateStepsEmpty": {
+    "description": "Template steps empty."
+  },
+  "templateStepsTitle": "Hatua",
+  "@templateStepsTitle": {
+    "description": "Template steps section."
+  },
+  "templatesEmptyMessage": "Tengeneza kiolezo, kama ombi la ununuzi, ili kazi zipite moja kwa moja kutoka kwa mtu mmoja hadi mwingine.",
+  "@templatesEmptyMessage": {
+    "description": "SW_REVIEW: Templates empty message."
+  },
+  "templatesEmptyTitle": "Bado hakuna violezo vya mtiririko wa kazi",
+  "@templatesEmptyTitle": {
+    "description": "SW_REVIEW: Templates empty title."
+  },
+  "useEmailInstead": "Hupati SMS? Ingia kwa barua pepe",
+  "@useEmailInstead": {
+    "description": "Link to email fallback."
+  },
+  "userDetailsSection": "Taarifa",
+  "@userDetailsSection": {
+    "description": "User editor section."
+  },
+  "userFieldConfidentialAccess": "Ruhusa ya kazi za siri",
+  "@userFieldConfidentialAccess": {
+    "description": "User field."
+  },
+  "userFieldDepartment": "Idara",
+  "@userFieldDepartment": {
+    "description": "User field."
+  },
+  "userFieldName": "Jina",
+  "@userFieldName": {
+    "description": "User field."
+  },
+  "userFieldRole": "Cheo",
+  "@userFieldRole": {
+    "description": "SW_REVIEW: User field."
+  },
+  "userFieldSupervisor": "Msimamizi",
+  "@userFieldSupervisor": {
+    "description": "User field."
+  },
+  "usersEmptyMessage": "Ongeza watu pamoja na namba zao za simu, idara, cheo na msimamizi.",
+  "@usersEmptyMessage": {
+    "description": "Users empty message."
+  },
+  "usersEmptyTitle": "Bado hakuna watu",
+  "@usersEmptyTitle": {
+    "description": "Users empty title."
+  },
+  "validationAssigneeRequired": "Chagua angalau mtu mmoja",
+  "@validationAssigneeRequired": {
+    "description": "Required assignee."
+  },
+  "validationCodeSixDigits": "Weka msimbo wa tarakimu 6",
+  "@validationCodeSixDigits": {
+    "description": "Code validation."
+  },
+  "validationDeadlineInPast": "Tarehe ya mwisho lazima iwe ya baadaye",
+  "@validationDeadlineInPast": {
+    "description": "Deadline validation."
+  },
+  "validationDeadlineRequired": "Chagua tarehe ya mwisho",
+  "@validationDeadlineRequired": {
+    "description": "Required deadline."
+  },
+  "validationEmailRequired": "Weka barua pepe yako",
+  "@validationEmailRequired": {
+    "description": "Required email."
+  },
+  "validationPasswordRequired": "Weka nenosiri lako",
+  "@validationPasswordRequired": {
+    "description": "Required password."
+  },
+  "validationPhoneRequired": "Weka namba yako ya simu",
+  "@validationPhoneRequired": {
+    "description": "Required phone."
+  },
+  "validationPriorityRequired": "Chagua kipaumbele",
+  "@validationPriorityRequired": {
+    "description": "Required priority."
+  },
+  "validationTitleRequired": "Weka kichwa cha kazi",
+  "@validationTitleRequired": {
+    "description": "Required title."
+  },
+  "valueNotLoaded": "Bado haijapakiwa",
+  "@valueNotLoaded": {
+    "description": "Value placeholder while data source is not built."
+  }
+}

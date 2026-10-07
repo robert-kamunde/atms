@@ -1,0 +1,900 @@
+{
+  "@@locale": "en",
+  "actionAddAttachment": "Add attachment",
+  "@actionAddAttachment": {
+    "description": "Button: add a file to a task."
+  },
+  "actionAddDepartment": "Add department",
+  "@actionAddDepartment": {
+    "description": "Button: create a department."
+  },
+  "actionAddUser": "Add person",
+  "@actionAddUser": {
+    "description": "Button: add a user."
+  },
+  "actionAgreeAndContinue": "Agree and continue",
+  "@actionAgreeAndContinue": {
+    "description": "Consent screen button."
+  },
+  "actionAllowNotifications": "Allow notifications",
+  "@actionAllowNotifications": {
+    "description": "Onboarding button."
+  },
+  "actionBackToPhone": "Enter phone number again",
+  "@actionBackToPhone": {
+    "description": "Button back to the phone entry screen."
+  },
+  "actionContinue": "Continue",
+  "@actionContinue": {
+    "description": "Generic continue button."
+  },
+  "actionEdit": "Edit",
+  "@actionEdit": {
+    "description": "Edit button / tooltip."
+  },
+  "actionGoToTasks": "Go to my tasks",
+  "@actionGoToTasks": {
+    "description": "Button on not-found screen."
+  },
+  "actionHidePassword": "Hide password",
+  "@actionHidePassword": {
+    "description": "Tooltip on password field."
+  },
+  "actionNewTask": "New task",
+  "@actionNewTask": {
+    "description": "Button to create a task."
+  },
+  "actionNewTemplate": "New template",
+  "@actionNewTemplate": {
+    "description": "Button to create a workflow template. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "actionNotNow": "Not now",
+  "@actionNotNow": {
+    "description": "Skip button."
+  },
+  "actionResendCode": "Send the code again",
+  "@actionResendCode": {
+    "description": "Resend SMS/email code."
+  },
+  "actionSave": "Save",
+  "@actionSave": {
+    "description": "Save button."
+  },
+  "actionSendCode": "Send code",
+  "@actionSendCode": {
+    "description": "Phone sign-in: send SMS code."
+  },
+  "actionShowPassword": "Show password",
+  "@actionShowPassword": {
+    "description": "Tooltip on password field."
+  },
+  "actionSignIn": "Sign in",
+  "@actionSignIn": {
+    "description": "Sign-in button."
+  },
+  "actionSignOut": "Sign out",
+  "@actionSignOut": {
+    "description": "Sign-out button."
+  },
+  "actionUseAnotherNumber": "Use another number",
+  "@actionUseAnotherNumber": {
+    "description": "Not-invited screen: go back to sign-in."
+  },
+  "actionVerify": "Verify",
+  "@actionVerify": {
+    "description": "Verify code button."
+  },
+  "adminAuditTitle": "Audit log",
+  "@adminAuditTitle": {
+    "description": "Admin: audit log screen title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "adminDepartmentsTitle": "Departments",
+  "@adminDepartmentsTitle": {
+    "description": "Admin: departments screen title."
+  },
+  "adminReportingTreeTitle": "Reporting lines",
+  "@adminReportingTreeTitle": {
+    "description": "Admin: reporting tree (who reports to whom). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "adminSection": "Administration",
+  "@adminSection": {
+    "description": "More screen: admin section header."
+  },
+  "adminSettingsTitle": "Organisation settings",
+  "@adminSettingsTitle": {
+    "description": "Admin: settings screen title."
+  },
+  "adminTemplatesTitle": "Workflow templates",
+  "@adminTemplatesTitle": {
+    "description": "Admin: workflow templates title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "adminUserDetailTitle": "Person details",
+  "@adminUserDetailTitle": {
+    "description": "Admin: user editor title."
+  },
+  "adminUsersTitle": "People",
+  "@adminUsersTitle": {
+    "description": "Admin: users list title."
+  },
+  "adminVerifyHelp": "For extra security, administrators must also enter the 6-digit code sent to their email.",
+  "@adminVerifyHelp": {
+    "description": "Admin second factor explanation."
+  },
+  "adminVerifyTitle": "Administrator check",
+  "@adminVerifyTitle": {
+    "description": "Admin second-factor screen title."
+  },
+  "appTitle": "ATMS",
+  "@appTitle": {
+    "description": "App name shown in the task switcher."
+  },
+  "approvalsEmptyMessage": "When a step needs your approval, it will appear here.",
+  "@approvalsEmptyMessage": {
+    "description": "Approvals empty state message."
+  },
+  "approvalsEmptyTitle": "Nothing is waiting for your approval",
+  "@approvalsEmptyTitle": {
+    "description": "Approvals empty state title."
+  },
+  "approvalsTitle": "Approvals waiting",
+  "@approvalsTitle": {
+    "description": "Approvals screen title."
+  },
+  "assigneeCount": "{count, plural, =1{1 person chosen} other{{count} people chosen}}",
+  "@assigneeCount": {
+    "description": "Number of assignees picked.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "assigneePickerEmpty": "No people to choose from yet",
+  "@assigneePickerEmpty": {
+    "description": "Assignee picker empty state."
+  },
+  "attachmentsEmpty": "No attachments yet",
+  "@attachmentsEmpty": {
+    "description": "Attachments empty state."
+  },
+  "attachmentsTitle": "Attachments",
+  "@attachmentsTitle": {
+    "description": "Task detail: attachments section."
+  },
+  "auditEmptyMessage": "Every change to tasks, people and templates will be recorded here.",
+  "@auditEmptyMessage": {
+    "description": "Audit empty message. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "auditEmptyTitle": "No audit entries yet",
+  "@auditEmptyTitle": {
+    "description": "Audit empty title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "codeEntryHelp": "Enter the 6-digit code we sent by SMS to {phone}.",
+  "@codeEntryHelp": {
+    "description": "Code entry instructions.",
+    "placeholders": {
+      "phone": {
+        "type": "String",
+        "example": "+255712345678"
+      }
+    }
+  },
+  "codeEntryNoPending": "Your code request has expired. Please enter your phone number again.",
+  "@codeEntryNoPending": {
+    "description": "Shown when there is no pending SMS verification."
+  },
+  "codeEntryTitle": "Enter code",
+  "@codeEntryTitle": {
+    "description": "Code entry screen title."
+  },
+  "codeLabel": "6-digit code",
+  "@codeLabel": {
+    "description": "Code field label."
+  },
+  "commentInputHint": "Write a comment",
+  "@commentInputHint": {
+    "description": "Comment field hint."
+  },
+  "commentsEmpty": "No comments yet",
+  "@commentsEmpty": {
+    "description": "Comments empty state."
+  },
+  "commentsTitle": "Comments",
+  "@commentsTitle": {
+    "description": "Task detail: comments section."
+  },
+  "consentCheckbox": "I have read this notice and agree to my data being used as described.",
+  "@consentCheckbox": {
+    "description": "Consent checkbox label."
+  },
+  "consentIntro": "Before you start, please read how ATMS uses your personal data. This notice follows the Tanzania Personal Data Protection Act, 2022.",
+  "@consentIntro": {
+    "description": "Consent intro. Legal text: client must review. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "consentRetentionBody": "Task records and the audit log are kept for at least 3 years, or as your organisation decides, for accountability.",
+  "@consentRetentionBody": {
+    "description": "Consent: retention. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "consentRetentionTitle": "How long we keep it",
+  "@consentRetentionTitle": {
+    "description": "Consent section title."
+  },
+  "consentRightsBody": "You can ask your organisation's administrator to see or correct your personal data, or to stop using it where the law allows. You can also complain to the Personal Data Protection Commission.",
+  "@consentRightsBody": {
+    "description": "Consent: data subject rights. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "consentRightsTitle": "Your rights",
+  "@consentRightsTitle": {
+    "description": "Consent section title."
+  },
+  "consentSecurityBody": "Your data is encrypted while it travels over the internet and while it is stored on the servers. Access is checked on the server for every request. A copy is also kept on your phone so you can work offline.",
+  "@consentSecurityBody": {
+    "description": "Consent: security. Must NOT claim end-to-end encryption. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "consentSecurityTitle": "How it is protected",
+  "@consentSecurityTitle": {
+    "description": "Consent section title."
+  },
+  "consentTitle": "Privacy notice",
+  "@consentTitle": {
+    "description": "Consent screen title."
+  },
+  "consentWhatWeCollectBody": "Your name, phone number, email (if given), department, role and supervisor, added by your organisation's administrator; the tasks, comments and files you create; and basic app usage and crash information.",
+  "@consentWhatWeCollectBody": {
+    "description": "Consent: data collected. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "consentWhatWeCollectTitle": "What we collect",
+  "@consentWhatWeCollectTitle": {
+    "description": "Consent section title."
+  },
+  "consentWhoSeesBody": "People in your organisation see tasks according to their role and reporting line. Confidential tasks are visible only to their participants. Our service providers (Google Firebase for storage, and an SMS provider for text messages) process data on our behalf.",
+  "@consentWhoSeesBody": {
+    "description": "Consent: who sees data. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "consentWhoSeesTitle": "Who can see it",
+  "@consentWhoSeesTitle": {
+    "description": "Consent section title."
+  },
+  "consentWhyBody": "Only to run your organisation's tasks: to assign work, route approvals, send reminders and escalations, and produce reports. We do not sell your data or use it for advertising.",
+  "@consentWhyBody": {
+    "description": "Consent: purpose. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "consentWhyTitle": "Why we use it",
+  "@consentWhyTitle": {
+    "description": "Consent section title."
+  },
+  "dashActiveUsers": "Active users",
+  "@dashActiveUsers": {
+    "description": "Admin dashboard card. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "dashApprovalsWaiting": "Approvals waiting for me",
+  "@dashApprovalsWaiting": {
+    "description": "Manager dashboard card."
+  },
+  "dashAvgDaysPerStep": "Average days per workflow step",
+  "@dashAvgDaysPerStep": {
+    "description": "Manager dashboard card (bottleneck step)."
+  },
+  "dashCompletionRate": "My completion rate this month",
+  "@dashCompletionRate": {
+    "description": "Staff dashboard card."
+  },
+  "dashDueThisWeek": "Due this week",
+  "@dashDueThisWeek": {
+    "description": "Staff dashboard card."
+  },
+  "dashDueToday": "Due today",
+  "@dashDueToday": {
+    "description": "Staff dashboard card."
+  },
+  "dashMyOverdue": "My overdue tasks",
+  "@dashMyOverdue": {
+    "description": "Staff dashboard card."
+  },
+  "dashNoDataYet": "No data yet",
+  "@dashNoDataYet": {
+    "description": "Dashboard card with no data."
+  },
+  "dashOrgByDepartment": "Organisation totals by department",
+  "@dashOrgByDepartment": {
+    "description": "Admin dashboard card."
+  },
+  "dashOverdueEscalated": "Overdue and escalated tasks",
+  "@dashOverdueEscalated": {
+    "description": "Manager dashboard card. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "dashSmsSpend": "SMS spend this month",
+  "@dashSmsSpend": {
+    "description": "Admin dashboard card."
+  },
+  "dashTeamByStatus": "Team tasks by status",
+  "@dashTeamByStatus": {
+    "description": "Manager dashboard card."
+  },
+  "dashTemplatesInUse": "Templates in use",
+  "@dashTemplatesInUse": {
+    "description": "Admin dashboard card. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "dashWorkloadPerPerson": "Workload per person",
+  "@dashWorkloadPerPerson": {
+    "description": "Manager dashboard card."
+  },
+  "dashboardTitle": "Dashboard",
+  "@dashboardTitle": {
+    "description": "Dashboard screen title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "departmentsEmptyMessage": "Add departments such as Finance, HR or ICT, and name a head for each.",
+  "@departmentsEmptyMessage": {
+    "description": "Departments empty message."
+  },
+  "departmentsEmptyTitle": "No departments yet",
+  "@departmentsEmptyTitle": {
+    "description": "Departments empty title."
+  },
+  "devPreviewAsRole": "Open as {role}",
+  "@devPreviewAsRole": {
+    "description": "Developer preview button. Development builds only.",
+    "placeholders": {
+      "role": {
+        "type": "String",
+        "example": "Manager"
+      }
+    }
+  },
+  "devPreviewMessage": "Development builds only. Opens the screens with no data and no sign-in.",
+  "@devPreviewMessage": {
+    "description": "Developer preview explanation. Development builds only. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "devPreviewTitle": "Developer preview",
+  "@devPreviewTitle": {
+    "description": "Developer preview card title. Development builds only. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "dueOverdue": "Overdue",
+  "@dueOverdue": {
+    "description": "Due-date filter option."
+  },
+  "dueThisWeek": "This week",
+  "@dueThisWeek": {
+    "description": "Due-date filter option."
+  },
+  "dueToday": "Today",
+  "@dueToday": {
+    "description": "Due-date filter option."
+  },
+  "emailLabel": "Email",
+  "@emailLabel": {
+    "description": "Email field label."
+  },
+  "emailSignInHelp": "Use this if you cannot receive SMS. Your administrator gives you the email and password.",
+  "@emailSignInHelp": {
+    "description": "Email sign-in explanation."
+  },
+  "emailSignInTitle": "Sign in with email",
+  "@emailSignInTitle": {
+    "description": "Email sign-in title."
+  },
+  "errorConflict": "Someone else changed this first. Please check the latest version.",
+  "@errorConflict": {
+    "description": "Generic conflict error."
+  },
+  "errorConflictAlreadyApproved": "This step was already approved by {name} at {time}.",
+  "@errorConflictAlreadyApproved": {
+    "description": "Late workflow approval rejected by the server (spec 4.9).",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Asha"
+      },
+      "time": {
+        "type": "String",
+        "example": "10:42"
+      }
+    }
+  },
+  "errorInvalidCode": "That code is not correct. Check the SMS and try again.",
+  "@errorInvalidCode": {
+    "description": "Wrong verification code."
+  },
+  "errorInvalidEmail": "Enter a valid email address.",
+  "@errorInvalidEmail": {
+    "description": "Invalid email."
+  },
+  "errorInvalidInput": "Some information is not valid. Please check and try again.",
+  "@errorInvalidInput": {
+    "description": "Generic validation error."
+  },
+  "errorInvalidPhone": "Enter a valid Tanzanian mobile number, for example 0712 345 678.",
+  "@errorInvalidPhone": {
+    "description": "Invalid phone number."
+  },
+  "errorNetwork": "No internet connection. Your changes are kept on this phone; try again when you are online.",
+  "@errorNetwork": {
+    "description": "Network error."
+  },
+  "errorNotFound": "This item was not found.",
+  "@errorNotFound": {
+    "description": "Shown for BOTH not-found and permission-denied so confidential items look missing."
+  },
+  "errorNotInvited": "Ask your administrator to add you.",
+  "@errorNotInvited": {
+    "description": "User not invited."
+  },
+  "errorSessionExpired": "For your security, please sign in again.",
+  "@errorSessionExpired": {
+    "description": "Session expired."
+  },
+  "errorTooManyAttempts": "Too many attempts. Please wait a few minutes and try again.",
+  "@errorTooManyAttempts": {
+    "description": "Rate limited."
+  },
+  "errorUnauthenticated": "Please sign in to continue.",
+  "@errorUnauthenticated": {
+    "description": "Not signed in."
+  },
+  "errorUnknown": "Something went wrong. Please try again.",
+  "@errorUnknown": {
+    "description": "Unknown error."
+  },
+  "errorWrongCredentials": "The email or password is not correct.",
+  "@errorWrongCredentials": {
+    "description": "Wrong email/password."
+  },
+  "featureNotAvailableYet": "This is not available yet. It is coming in a later version.",
+  "@featureNotAvailableYet": {
+    "description": "Honest message for buttons whose feature is not built yet."
+  },
+  "filterAssignee": "Assignee",
+  "@filterAssignee": {
+    "description": "Task filter chip: person assigned. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "filterClear": "Clear filter",
+  "@filterClear": {
+    "description": "Clear a filter."
+  },
+  "filterDepartment": "Department",
+  "@filterDepartment": {
+    "description": "Task filter chip."
+  },
+  "filterDueDate": "Due date",
+  "@filterDueDate": {
+    "description": "Task filter chip."
+  },
+  "filterNoOptionsYet": "No options available yet",
+  "@filterNoOptionsYet": {
+    "description": "Empty filter options."
+  },
+  "filterPriority": "Priority",
+  "@filterPriority": {
+    "description": "Task filter chip."
+  },
+  "filterStatus": "Status",
+  "@filterStatus": {
+    "description": "Task filter chip."
+  },
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "Language option; always shown in English."
+  },
+  "languageSection": "Language",
+  "@languageSection": {
+    "description": "More screen: language section."
+  },
+  "languageSwahili": "Kiswahili",
+  "@languageSwahili": {
+    "description": "Language option; always shown in Kiswahili."
+  },
+  "loadingMessage": "Getting your account ready...",
+  "@loadingMessage": {
+    "description": "Loading screen text."
+  },
+  "managerSection": "Team",
+  "@managerSection": {
+    "description": "More screen: manager section."
+  },
+  "moreTitle": "More",
+  "@moreTitle": {
+    "description": "More screen title."
+  },
+  "myTasksTitle": "My tasks",
+  "@myTasksTitle": {
+    "description": "Task list title."
+  },
+  "navApprovals": "Approvals",
+  "@navApprovals": {
+    "description": "Bottom navigation: approvals waiting tab."
+  },
+  "navDashboard": "Dashboard",
+  "@navDashboard": {
+    "description": "Bottom navigation: dashboard tab. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "navMore": "More",
+  "@navMore": {
+    "description": "Bottom navigation: more/menu tab."
+  },
+  "navNotifications": "Alerts",
+  "@navNotifications": {
+    "description": "Bottom navigation: notifications tab (short label)."
+  },
+  "navTasks": "Tasks",
+  "@navTasks": {
+    "description": "Bottom navigation: task list tab."
+  },
+  "notInvitedHelp": "Only phone numbers added by your organisation can use ATMS.",
+  "@notInvitedHelp": {
+    "description": "Not-invited explanation."
+  },
+  "notInvitedMessage": "Ask your administrator to add you.",
+  "@notInvitedMessage": {
+    "description": "Not-invited main message (spec 4.1)."
+  },
+  "notInvitedTitle": "Not registered",
+  "@notInvitedTitle": {
+    "description": "Not-invited screen title."
+  },
+  "notificationsEmptyMessage": "Reminders, approvals and escalations will appear here.",
+  "@notificationsEmptyMessage": {
+    "description": "Notifications empty message. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "notificationsEmptyTitle": "No notifications yet",
+  "@notificationsEmptyTitle": {
+    "description": "Notifications empty title."
+  },
+  "notificationsTitle": "Notifications",
+  "@notificationsTitle": {
+    "description": "Notifications screen title."
+  },
+  "onboardingLanguageHelp": "Choose the language for the app. You can change it later under More.",
+  "@onboardingLanguageHelp": {
+    "description": "Language step help."
+  },
+  "onboardingLanguageTitle": "Choose language",
+  "@onboardingLanguageTitle": {
+    "description": "Language step title."
+  },
+  "onboardingNotificationsHelp": "ATMS tells you when a task is assigned to you, when an approval is waiting and when a deadline is near. Allow notifications so you do not miss them.",
+  "@onboardingNotificationsHelp": {
+    "description": "Notification permission explanation."
+  },
+  "onboardingNotificationsTitle": "Notifications",
+  "@onboardingNotificationsTitle": {
+    "description": "Notification step title."
+  },
+  "optionalFieldHint": "Optional",
+  "@optionalFieldHint": {
+    "description": "Helper text for optional fields."
+  },
+  "passwordLabel": "Password",
+  "@passwordLabel": {
+    "description": "Password field label."
+  },
+  "phoneNumberHint": "0712 345 678",
+  "@phoneNumberHint": {
+    "description": "Phone number example."
+  },
+  "phoneNumberLabel": "Phone number",
+  "@phoneNumberLabel": {
+    "description": "Phone field label."
+  },
+  "phoneSignInHeading": "Welcome to ATMS",
+  "@phoneSignInHeading": {
+    "description": "Phone sign-in heading."
+  },
+  "phoneSignInHelp": "Enter the phone number your organisation registered. We will send you a 6-digit code by SMS.",
+  "@phoneSignInHelp": {
+    "description": "Phone sign-in explanation."
+  },
+  "priorityHigh": "High",
+  "@priorityHigh": {
+    "description": "Priority value."
+  },
+  "priorityLow": "Low",
+  "@priorityLow": {
+    "description": "Priority value."
+  },
+  "priorityMedium": "Medium",
+  "@priorityMedium": {
+    "description": "Priority value."
+  },
+  "priorityUrgent": "Urgent",
+  "@priorityUrgent": {
+    "description": "Priority value."
+  },
+  "profileSection": "Profile",
+  "@profileSection": {
+    "description": "More screen: profile section."
+  },
+  "profileSignedInAs": "Signed in as {role}",
+  "@profileSignedInAs": {
+    "description": "Profile line with the user role.",
+    "placeholders": {
+      "role": {
+        "type": "String",
+        "example": "Staff"
+      }
+    }
+  },
+  "reportingTreeEmptyMessage": "Set each person's supervisor to build the reporting lines used for escalation.",
+  "@reportingTreeEmptyMessage": {
+    "description": "Reporting tree empty message. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "reportingTreeEmptyTitle": "No reporting lines yet",
+  "@reportingTreeEmptyTitle": {
+    "description": "Reporting tree empty title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "reportsEmptyMessage": "Weekly summaries are made every Monday and monthly summaries on the 1st.",
+  "@reportsEmptyMessage": {
+    "description": "Reports empty message."
+  },
+  "reportsEmptyTitle": "No reports yet",
+  "@reportsEmptyTitle": {
+    "description": "Reports empty title."
+  },
+  "reportsTitle": "Reports",
+  "@reportsTitle": {
+    "description": "Reports title."
+  },
+  "requiredFieldHint": "Required",
+  "@requiredFieldHint": {
+    "description": "Helper text for required fields."
+  },
+  "roleAdmin": "Administrator",
+  "@roleAdmin": {
+    "description": "Role name."
+  },
+  "roleManager": "Manager",
+  "@roleManager": {
+    "description": "Role name."
+  },
+  "roleStaff": "Staff",
+  "@roleStaff": {
+    "description": "Role name. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "settingEscalationDelay": "Escalation delay",
+  "@settingEscalationDelay": {
+    "description": "Org setting. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "settingReminderTimes": "Reminder times",
+  "@settingReminderTimes": {
+    "description": "Org setting."
+  },
+  "settingSmsCap": "Monthly SMS limit",
+  "@settingSmsCap": {
+    "description": "Org setting."
+  },
+  "settingTimeZone": "Time zone",
+  "@settingTimeZone": {
+    "description": "Org setting. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "settingWorkingDays": "Working days",
+  "@settingWorkingDays": {
+    "description": "Org setting."
+  },
+  "settingWorkingHours": "Working hours",
+  "@settingWorkingHours": {
+    "description": "Org setting."
+  },
+  "setupMissingMessage": "This copy of the app was built without its server settings, so it cannot connect. Please install the version provided by your organisation.",
+  "@setupMissingMessage": {
+    "description": "App not configured explanation."
+  },
+  "setupMissingTitle": "App not configured",
+  "@setupMissingTitle": {
+    "description": "App not configured title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "signInTitle": "Sign in",
+  "@signInTitle": {
+    "description": "Sign-in screen title."
+  },
+  "startWorkflowEmptyMessage": "Your administrator has not published any workflow templates yet.",
+  "@startWorkflowEmptyMessage": {
+    "description": "Start workflow empty message. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "startWorkflowTitle": "Start a workflow",
+  "@startWorkflowTitle": {
+    "description": "Start workflow title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "statusBlocked": "Blocked",
+  "@statusBlocked": {
+    "description": "Task status."
+  },
+  "statusCancelled": "Cancelled",
+  "@statusCancelled": {
+    "description": "Task status."
+  },
+  "statusDone": "Done",
+  "@statusDone": {
+    "description": "Task status."
+  },
+  "statusInProgress": "In progress",
+  "@statusInProgress": {
+    "description": "Task status."
+  },
+  "statusTodo": "To do",
+  "@statusTodo": {
+    "description": "Task status."
+  },
+  "stepTrackerEmpty": "This task has no workflow steps",
+  "@stepTrackerEmpty": {
+    "description": "Step tracker empty state. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "stepTrackerTitle": "Steps",
+  "@stepTrackerTitle": {
+    "description": "Task detail: step tracker section."
+  },
+  "syncAllSaved": "All changes saved",
+  "@syncAllSaved": {
+    "description": "Sync banner: synced."
+  },
+  "syncOffline": "Offline: changes saved on this phone",
+  "@syncOffline": {
+    "description": "Sync banner: offline."
+  },
+  "syncSyncing": "Syncing...",
+  "@syncSyncing": {
+    "description": "Sync banner: syncing. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "taskCreateTitle": "New task",
+  "@taskCreateTitle": {
+    "description": "Create task title."
+  },
+  "taskDetailTitle": "Task",
+  "@taskDetailTitle": {
+    "description": "Task detail title."
+  },
+  "taskEditTitle": "Edit task",
+  "@taskEditTitle": {
+    "description": "Edit task title."
+  },
+  "taskFieldAssignee": "Assigned to",
+  "@taskFieldAssignee": {
+    "description": "Assignee field label."
+  },
+  "taskFieldAssigneeHint": "Choose people",
+  "@taskFieldAssigneeHint": {
+    "description": "Assignee field placeholder."
+  },
+  "taskFieldDeadline": "Deadline",
+  "@taskFieldDeadline": {
+    "description": "Deadline field label."
+  },
+  "taskFieldDeadlineHint": "Choose date and time",
+  "@taskFieldDeadlineHint": {
+    "description": "Deadline placeholder."
+  },
+  "taskFieldDescription": "Description",
+  "@taskFieldDescription": {
+    "description": "Description field label."
+  },
+  "taskFieldPriority": "Priority",
+  "@taskFieldPriority": {
+    "description": "Priority field label."
+  },
+  "taskFieldTitle": "Title",
+  "@taskFieldTitle": {
+    "description": "Title field label."
+  },
+  "taskNotLoadedYet": "Task details will appear here.",
+  "@taskNotLoadedYet": {
+    "description": "Task summary placeholder while loading is not built."
+  },
+  "taskSummaryTitle": "Details",
+  "@taskSummaryTitle": {
+    "description": "Task detail summary section."
+  },
+  "tasksEmptyFilteredTitle": "No tasks match these filters",
+  "@tasksEmptyFilteredTitle": {
+    "description": "Empty list with filters."
+  },
+  "tasksEmptyMessage": "Tasks assigned to you will appear here, sorted by deadline.",
+  "@tasksEmptyMessage": {
+    "description": "My tasks empty message."
+  },
+  "tasksEmptyTitle": "You have no tasks",
+  "@tasksEmptyTitle": {
+    "description": "My tasks empty title."
+  },
+  "teamTasksEmptyTitle": "Your team has no tasks",
+  "@teamTasksEmptyTitle": {
+    "description": "Team tasks empty title."
+  },
+  "teamTasksTitle": "Team tasks",
+  "@teamTasksTitle": {
+    "description": "Team tasks title."
+  },
+  "templateDetailTitle": "Workflow template",
+  "@templateDetailTitle": {
+    "description": "Template detail title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "templateStepsEmpty": "No steps yet",
+  "@templateStepsEmpty": {
+    "description": "Template steps empty."
+  },
+  "templateStepsTitle": "Steps",
+  "@templateStepsTitle": {
+    "description": "Template steps section."
+  },
+  "templatesEmptyMessage": "Create a template, such as a purchase request, to route tasks automatically from one person to the next.",
+  "@templatesEmptyMessage": {
+    "description": "Templates empty message. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "templatesEmptyTitle": "No workflow templates yet",
+  "@templatesEmptyTitle": {
+    "description": "Templates empty title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "useEmailInstead": "No SMS? Sign in with email",
+  "@useEmailInstead": {
+    "description": "Link to email fallback."
+  },
+  "userDetailsSection": "Details",
+  "@userDetailsSection": {
+    "description": "User editor section."
+  },
+  "userFieldConfidentialAccess": "Confidential access",
+  "@userFieldConfidentialAccess": {
+    "description": "User field."
+  },
+  "userFieldDepartment": "Department",
+  "@userFieldDepartment": {
+    "description": "User field."
+  },
+  "userFieldName": "Name",
+  "@userFieldName": {
+    "description": "User field."
+  },
+  "userFieldRole": "Role",
+  "@userFieldRole": {
+    "description": "User field. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "userFieldSupervisor": "Supervisor",
+  "@userFieldSupervisor": {
+    "description": "User field."
+  },
+  "usersEmptyMessage": "Add people with their phone number, department, role and supervisor.",
+  "@usersEmptyMessage": {
+    "description": "Users empty message."
+  },
+  "usersEmptyTitle": "No people yet",
+  "@usersEmptyTitle": {
+    "description": "Users empty title."
+  },
+  "validationAssigneeRequired": "Choose at least one person",
+  "@validationAssigneeRequired": {
+    "description": "Required assignee."
+  },
+  "validationCodeSixDigits": "Enter the 6-digit code",
+  "@validationCodeSixDigits": {
+    "description": "Code validation."
+  },
+  "validationDeadlineInPast": "The deadline must be in the future",
+  "@validationDeadlineInPast": {
+    "description": "Deadline validation."
+  },
+  "validationDeadlineRequired": "Choose a deadline",
+  "@validationDeadlineRequired": {
+    "description": "Required deadline."
+  },
+  "validationEmailRequired": "Enter your email",
+  "@validationEmailRequired": {
+    "description": "Required email."
+  },
+  "validationPasswordRequired": "Enter your password",
+  "@validationPasswordRequired": {
+    "description": "Required password."
+  },
+  "validationPhoneRequired": "Enter your phone number",
+  "@validationPhoneRequired": {
+    "description": "Required phone."
+  },
+  "validationPriorityRequired": "Choose a priority",
+  "@validationPriorityRequired": {
+    "description": "Required priority."
+  },
+  "validationTitleRequired": "Enter a title",
+  "@validationTitleRequired": {
+    "description": "Required title."
+  },
+  "valueNotLoaded": "Not loaded yet",
+  "@valueNotLoaded": {
+    "description": "Value placeholder while data source is not built."
+  }
+}

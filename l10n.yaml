@@ -1,0 +1,11 @@
+# Localisation config for `flutter gen-l10n` (runs automatically because
+# pubspec.yaml has `flutter: generate: true`).
+# Flutter 3.47 removed the synthetic `package:flutter_gen` output, so the
+# generated code is written into the source tree under output-dir.
+arb-dir: lib/core/localization/arb
+template-arb-file: app_en.arb
+output-dir: lib/core/localization/generated
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+nullable-getter: false
+required-resource-attributes: false
