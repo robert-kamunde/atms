@@ -22,7 +22,7 @@ class DeveloperPreviewPanel extends ConsumerWidget {
     final l10n = context.l10n;
     final theme = Theme.of(context);
     return Card(
-      color: theme.colorScheme.tertiaryContainer,
+      color: theme.colorScheme.surfaceContainerHigh,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
