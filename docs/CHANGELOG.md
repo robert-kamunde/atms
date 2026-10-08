@@ -4,6 +4,10 @@ All notable changes. Versions follow `pubspec.yaml`.
 
 ## [Unreleased] - Sprint 0 (foundation)
 
+### Changed
+- Product owner decisions D-01 to D-09 recorded as accepted (8 Oct 2026); Cloud Functions
+  default region is now `africa-south1` (D-03).
+
 ### Added
 - Product specification (`docs/PRODUCT_SPEC.md`) exported from the ATMS Product Development Document.
 - Requirements with IDs, acceptance checklist, backlog with module dependencies, decisions and
