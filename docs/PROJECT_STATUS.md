@@ -1,8 +1,8 @@
 # Project status
 
 **Current sprint:** Sprint 0 (foundation), finishing
-**Current milestone:** Sprint 0 delivered for review; Sprint 1 waits for the product owner's answers to the open decisions
-**Last updated:** 7 Oct 2026
+**Current milestone:** Sprint 0 on GitHub (robert-kamunde/atms); decisions D-01 to D-09 accepted on 8 Oct 2026; Sprint 1 next
+**Last updated:** 8 Oct 2026
 
 ## Completed
 - PDD read and exported as `docs/PRODUCT_SPEC.md`.
@@ -30,9 +30,9 @@
 - Screenshots of the initial screens: `atms-app-screens/atms-sprint0-screens.png` in project files.
 
 ## In progress
-- Nothing; waiting for the product owner.
+- First CI run on GitHub.
 
-## Next (Sprint 1, after the decisions)
+## Next (Sprint 1)
 - `adminUpsertUser` with loop detection and managerChain; deactivation; unknown-number handling;
   admin second factor; invitation SMS; sign-in, onboarding and admin organisation screens.
 
@@ -40,9 +40,10 @@
 - None found. Limitations are in `KNOWN_ISSUES.md`.
 
 ## Blocked
-- GitHub repository: CI cannot run and no APK can be built until Robert creates an empty
-  repository and connects it (the sandbox cannot download the Android SDK).
-- Firebase projects (staging, production): need Robert's Google account and decision D-03 (region).
+- Connecting the app to Robert's Firebase project (created 8 Oct 2026, Blaze plan): needs the
+  project id, the Android app registration, the Firestore location confirmed as `africa-south1`
+  and Identity Platform enabled.
+- Email service account for admin codes and reports (D-01, D-08).
 - SMS provider account and sender ID (D-09).
 - Two Storage rules tests need CI (KNOWN_ISSUES KI-1).
 

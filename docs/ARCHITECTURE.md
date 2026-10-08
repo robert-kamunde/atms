@@ -227,7 +227,7 @@ convenience: the rules and functions are the real protection.
 | Environment | Firebase project | Purpose |
 | --- | --- | --- |
 | Local | `demo-atms` (emulators only) | Development and all automated tests |
-| Staging | to be created (D-03 region) | Load test, pilot rehearsal |
+| Staging | to be created in `africa-south1` (D-03) | Load test, pilot rehearsal |
 | Production | to be created | Pilot |
 
 The app reads Firebase options from `--dart-define` values, so no keys are committed; without
