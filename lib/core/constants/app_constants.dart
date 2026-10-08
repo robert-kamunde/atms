@@ -20,4 +20,28 @@ abstract final class AppConstants {
 
   /// Default country calling code for phone sign-in (Tanzania).
   static const String defaultDialCode = '+255';
+
+  /// Region of the callable Cloud Functions (D-03; must match
+  /// `functions/src/shared/config.ts` REGION).
+  static const String functionsRegion = 'africa-south1';
+
+  /// How long a callable may take before the app reports that it needs a
+  /// connection. Callables are online-only (ARCHITECTURE section 1), so the
+  /// app must not hang while offline.
+  static const Duration callableTimeout = Duration(seconds: 20);
+
+  /// How long an offline-capable Firestore write is awaited before the app
+  /// tells the user it is saved on the phone and will sync later.
+  static const Duration offlineWriteWait = Duration(seconds: 3);
+
+  /// Seconds before the user may ask for another SMS or email code.
+  static const Duration resendCodeDelay = Duration(seconds: 60);
+
+  /// Version of the privacy notice in the ARB files. Bump it when the
+  /// consent text changes so every user is asked to accept it again.
+  static const String consentVersion = '2026-10';
+
+  /// How often a signed-in session is re-checked against the session
+  /// policy while the app stays open (it is also checked on resume).
+  static const Duration sessionCheckInterval = Duration(minutes: 15);
 }
