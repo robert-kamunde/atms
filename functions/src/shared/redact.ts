@@ -1,5 +1,5 @@
 /** Removes titles, text and contact details from anything written to logs. */
-const REDACTED_KEYS = new Set(['title', 'description', 'text', 'comment', 'phone', 'email', 'body', 'fileName']);
+const REDACTED_KEYS = new Set(['title', 'description', 'text', 'comment', 'phone', 'email', 'body', 'fileName', 'subject']);
 
 export function redact(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(redact);
@@ -11,4 +11,14 @@ export function redact(value: unknown): unknown {
     return out;
   }
   return value;
+}
+
+/**
+ * Scrubs free text (for example an unexpected error message) before it is logged: e-mail
+ * addresses and anything that looks like a phone number or a 6-digit code are replaced.
+ */
+export function scrubText(text: string): string {
+  return text
+    .replace(/[^\s@"'<>()]+@[^\s@"'<>()]+/g, '[email]')
+    .replace(/\+?\d[\d\s-]{5,}\d/g, '[number]');
 }
