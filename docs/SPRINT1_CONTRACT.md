@@ -44,6 +44,11 @@ and at most 5 codes per hour per admin. Sent by email through an `EmailProvider`
 `{ orgId, adminVerifiedUntil: <epoch seconds> }` with verification valid for 12 hours, never past
 the 7-day admin session.
 
+> Backend note: `orgs/{org}/secure/adminCodes/{uid}` is a collection path (five segments), so
+> it cannot hold a document. The code is stored at `orgs/{org}/secure/adminCodes/codes/{uid}`
+> instead. Server-only, covered by the existing `secure/{document=**}` deny rule; the app never
+> reads it.
+
 ## Blocking functions (D-02, Identity Platform)
 
 - `beforeUserCreated`: refuse every account creation from the app. All accounts are created by
