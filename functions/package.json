@@ -11,6 +11,7 @@
     "test:unit": "jest --selectProjects unit",
     "test:rules": "firebase emulators:exec --only firestore,storage --project demo-atms \"jest --selectProjects rules --runInBand\"",
     "test:integration": "firebase emulators:exec --only auth,firestore --project demo-atms \"jest --selectProjects integration --runInBand\"",
+    "bootstrap-org": "npm run build && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/bootstrap-org.ts",
     "test": "npm run test:unit && npm run test:rules && npm run test:integration"
   },
   "dependencies": {
