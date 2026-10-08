@@ -194,7 +194,8 @@ service cloud.firestore {
           && (request.resource.data.get('templateId', null) == null || request.resource.data.templateId is string);
 
         // Updates by people. Fields that drive workflows, visibility, escalation and assignment
-        // are never in these lists, so only Cloud Functions can change them.
+        // are never in these lists, so only Cloud Functions can change them. That includes
+        // reassignmentNeeded and reassignmentReason, set by deactivateUser (Sprint 1).
         allow update: if canReadTaskData(org, resource.data)
           && resource.data.assignmentState == 'assigned'
           && request.resource.data.updatedAt == request.time
