@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import 'server_error_code.dart';
+
 /// Why a [ValidationFailure] happened. Each reason has its own friendly
 /// message in the ARB files.
 enum ValidationReason {
@@ -36,6 +38,13 @@ final class NetworkFailure extends AppFailure {
   const NetworkFailure({super.code});
 }
 
+/// An online-only action (a callable Cloud Function, sign-in) could not
+/// reach the server. Unlike [NetworkFailure], nothing was kept on the phone:
+/// the user must connect and try again.
+final class ConnectionRequiredFailure extends AppFailure {
+  const ConnectionRequiredFailure({super.code});
+}
+
 /// Security rules refused the request. Shown as "not found".
 final class PermissionDeniedFailure extends AppFailure {
   const PermissionDeniedFailure({super.code});
@@ -55,6 +64,34 @@ final class UnauthenticatedFailure extends AppFailure {
 /// account was deactivated.
 final class NotInvitedFailure extends AppFailure {
   const NotInvitedFailure({super.code});
+}
+
+/// The account exists but an administrator deactivated it (refused by the
+/// `beforeUserSignedIn` blocking function, or the user document is no
+/// longer readable because `active` is false).
+final class AccountDeactivatedFailure extends AppFailure {
+  const AccountDeactivatedFailure({super.code});
+}
+
+/// A Cloud Function refused the request for a business reason it named
+/// with a [ServerErrorCode] (for example a reporting loop).
+final class ServerFailure extends AppFailure {
+  ServerFailure(this.serverCode, {this.attemptsLeft, this.field})
+    : super(code: serverCode.wireValue);
+
+  final ServerErrorCode serverCode;
+
+  /// For `code-invalid`: wrong admin codes still allowed (details).
+  final int? attemptsLeft;
+
+  /// For validation errors: the input field the server refused (details).
+  final String? field;
+
+  /// The server says trying again shortly can succeed.
+  bool get retryable => serverCode == ServerErrorCode.treeBusy;
+
+  @override
+  String toString() => 'ServerFailure(${serverCode.wireValue}, field: $field)';
 }
 
 /// The session is older than the session policy allows, or the code expired.

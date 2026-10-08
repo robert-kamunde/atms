@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -6,6 +7,7 @@ import '../constants/app_constants.dart';
 import '../errors/app_failure.dart';
 import '../errors/failure_mapper.dart';
 import '../utils/logger.dart';
+import 'app_check.dart';
 import 'app_config.dart';
 import 'emulator_config.dart';
 
@@ -57,12 +59,14 @@ Future<BootstrapResult> bootstrap(AppConfig config) async {
       final host = resolveEmulatorHost(override: config.emulatorHostOverride);
       firestore.useFirestoreEmulator(host, EmulatorPorts.firestore);
       await FirebaseAuth.instance.useAuthEmulator(host, EmulatorPorts.auth);
-      // NOT IMPLEMENTED (Sprint 3 / Sprint 5): connect the Functions
-      // (EmulatorPorts.functions) and Storage (EmulatorPorts.storage)
-      // emulators once `cloud_functions` and `firebase_storage` are added.
-      // They are not dependencies in Sprint 0.
+      FirebaseFunctions.instanceFor(region: AppConstants.functionsRegion)
+          .useFunctionsEmulator(host, EmulatorPorts.functions);
+      // NOT IMPLEMENTED (Sprint 5): connect the Storage emulator
+      // (EmulatorPorts.storage) once `firebase_storage` is added.
       AppLogger.info('Using Firebase emulators', context: {'host': host});
     }
+    // D-04 monitor mode: never blocks start-up, never throws.
+    await activateAppCheck();
     AppLogger.info(
       'Firebase initialised',
       context: {'env': config.environment.name},

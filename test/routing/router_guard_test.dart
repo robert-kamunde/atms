@@ -49,8 +49,8 @@ void main() {
       expect(redirect(manager, RoutePaths.adminUsers), RoutePaths.tasks);
     });
 
-    test('admin can open everything', () {
-      const admin = AuthSignedIn(UserRole.admin);
+    test('verified admin can open everything', () {
+      final admin = AuthSignedIn(UserRole.admin, adminVerifiedUntil: farFuture);
       for (final path in [
         RoutePaths.adminUsers,
         '/admin/users/u1',
@@ -62,6 +62,84 @@ void main() {
       ]) {
         expect(redirect(admin, path), isNull, reason: path);
       }
+    });
+
+    group('admin second factor', () {
+      final now = DateTime.utc(2026, 10, 8, 12);
+      String? at(AuthState auth, String path) =>
+          guardRedirect(auth, Uri.parse(path), now: now);
+
+      test('unverified admin is sent to verify before admin screens', () {
+        const admin = AuthSignedIn(UserRole.admin);
+        expect(
+          at(admin, RoutePaths.adminUsers),
+          RoutePaths.adminVerifyFor(RoutePaths.adminUsers),
+        );
+        expect(
+          at(admin, '/admin/users/u1'),
+          RoutePaths.adminVerifyFor('/admin/users/u1'),
+        );
+        expect(at(admin, RoutePaths.adminVerify), isNull);
+      });
+
+      test('expired verification counts as unverified', () {
+        final admin = AuthSignedIn(
+          UserRole.admin,
+          adminVerifiedUntil: now.subtract(const Duration(seconds: 1)),
+        );
+        expect(
+          at(admin, RoutePaths.adminSettings),
+          RoutePaths.adminVerifyFor(RoutePaths.adminSettings),
+        );
+      });
+
+      test('unverified admin keeps staff-level access', () {
+        const admin = AuthSignedIn(UserRole.admin);
+        for (final path in [
+          RoutePaths.tasks,
+          '/tasks/t1',
+          RoutePaths.approvals,
+          RoutePaths.more,
+          RoutePaths.teamTasks,
+        ]) {
+          expect(at(admin, path), isNull, reason: path);
+        }
+      });
+
+      test('a manager is never sent to the admin check', () {
+        final manager = AuthSignedIn(
+          UserRole.manager,
+          adminVerifiedUntil: farFuture,
+        );
+        expect(at(manager, RoutePaths.adminUsers), RoutePaths.tasks);
+        expect(at(manager, RoutePaths.adminVerify), RoutePaths.tasks);
+      });
+
+      test('return path only accepts admin screens', () {
+        expect(
+          adminVerifyReturnPath(RoutePaths.adminUsers),
+          RoutePaths.adminUsers,
+        );
+        expect(adminVerifyReturnPath('/tasks/t1'), RoutePaths.more);
+        expect(adminVerifyReturnPath(null), RoutePaths.more);
+      });
+    });
+
+    test('expired session lands on sign-in from anywhere', () {
+      const expired = AuthSignedOut(reason: SignOutReason.sessionExpired);
+      expect(redirect(expired, RoutePaths.tasks), RoutePaths.signInPhone);
+      expect(redirect(expired, RoutePaths.adminUsers), RoutePaths.signInPhone);
+      expect(redirect(expired, RoutePaths.signInEmail), isNull);
+    });
+
+    test('deactivated and refused users see the not-invited screen', () {
+      expect(
+        redirect(
+          const AuthNotInvited(reason: NotAllowedReason.deactivated),
+          RoutePaths.signInPhone,
+        ),
+        RoutePaths.notInvited,
+      );
     });
 
     test('pre-sign-in states go to their own screen', () {
@@ -164,6 +242,30 @@ void main() {
         find.text(l10nFor(testLocales.first).teamTasksTitle),
         findsWidgets,
       );
+    });
+
+    testWidgets('unverified admin opening /admin/users sees the check', (
+      tester,
+    ) async {
+      final router = await pumpApp(tester, [
+        signedInAs(UserRole.admin, adminVerified: false),
+      ]);
+      await go(tester, router, RoutePaths.adminUsers);
+      expect(location(router), RoutePaths.adminVerify);
+      expect(
+        router
+            .routerDelegate
+            .currentConfiguration
+            .uri
+            .queryParameters[RoutePaths.returnToParam],
+        RoutePaths.adminUsers,
+      );
+      expect(
+        find.text(l10nFor(testLocales.first).actionSendAdminCode),
+        findsOneWidget,
+      );
+      await go(tester, router, RoutePaths.tasks);
+      expect(location(router), RoutePaths.tasks);
     });
 
     testWidgets('admin can open /admin/users and a user detail', (

@@ -1,5 +1,6 @@
 import '../localization/generated/app_localizations.dart';
 import 'app_failure.dart';
+import 'server_error_code.dart';
 
 /// Turns an [AppFailure] into a short, friendly, localized sentence.
 ///
@@ -8,6 +9,9 @@ import 'app_failure.dart';
 String failureMessage(AppFailure failure, AppLocalizations l10n) {
   return switch (failure) {
     NetworkFailure() => l10n.errorNetwork,
+    ConnectionRequiredFailure() => l10n.errorConnectionRequired,
+    AccountDeactivatedFailure() => l10n.errorAccountDeactivated,
+    ServerFailure() => serverErrorMessage(failure, l10n),
     PermissionDeniedFailure() || NotFoundFailure() => l10n.errorNotFound,
     UnauthenticatedFailure() => l10n.errorUnauthenticated,
     NotInvitedFailure() => l10n.errorNotInvited,
@@ -30,6 +34,44 @@ String failureMessage(AppFailure failure, AppLocalizations l10n) {
     UnknownFailure() => l10n.errorUnknown,
   };
 }
+
+/// Message for a business error named by a Cloud Function.
+String serverErrorMessage(ServerFailure failure, AppLocalizations l10n) =>
+    switch (failure.serverCode) {
+      ServerErrorCode.notInvited => l10n.errorNotInvited,
+      ServerErrorCode.accountDeactivated => l10n.errorAccountDeactivated,
+      ServerErrorCode.sessionExpired => l10n.errorSessionExpired,
+      ServerErrorCode.unauthenticated => l10n.errorUnauthenticated,
+      ServerErrorCode.permissionDenied => l10n.errorPermissionDenied,
+      ServerErrorCode.adminVerificationRequired =>
+        l10n.errorAdminVerificationRequired,
+      ServerErrorCode.notFound => l10n.errorNotFound,
+      ServerErrorCode.validation => l10n.errorInvalidInput,
+      ServerErrorCode.internal => l10n.errorUnknown,
+      ServerErrorCode.reportingLoop => l10n.errorReportingLoop,
+      ServerErrorCode.supervisorInvalid => l10n.errorSupervisorInvalid,
+      ServerErrorCode.topPersonRequiresSupervisor =>
+        l10n.errorTopPersonRequiresSupervisor,
+      ServerErrorCode.departmentInvalid => l10n.errorDepartmentInvalid,
+      ServerErrorCode.phoneInUse => l10n.errorPhoneInUse,
+      ServerErrorCode.emailInUse => l10n.errorEmailInUse,
+      ServerErrorCode.emailCannotBeRemoved => l10n.errorEmailCannotBeRemoved,
+      ServerErrorCode.selfDemotion => l10n.errorSelfDemotion,
+      ServerErrorCode.selfDeactivation => l10n.errorSelfDeactivation,
+      ServerErrorCode.lastAdmin => l10n.errorLastAdmin,
+      ServerErrorCode.treeBusy => l10n.errorTreeBusy,
+      ServerErrorCode.adminEmailMissing => l10n.errorAdminEmailMissing,
+      ServerErrorCode.codeInvalid => switch (failure.attemptsLeft) {
+        final int left => l10n.errorAdminCodeWrongAttempts(left),
+        null => l10n.errorAdminCodeWrong,
+      },
+      ServerErrorCode.codeExpired => l10n.errorAdminCodeExpired,
+      ServerErrorCode.codeAttemptsExceeded =>
+        l10n.errorAdminCodeTooManyAttempts,
+      ServerErrorCode.codeRateLimited => l10n.errorRateLimited,
+      ServerErrorCode.providerUnavailable => l10n.errorProviderUnavailable,
+      ServerErrorCode.smsCapReached => l10n.errorSmsCapReached,
+    };
 
 /// 24-hour clock time (e.g. `10:42`), the format used in Tanzania in both
 /// languages. Does not depend on intl date data being loaded.

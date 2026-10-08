@@ -1,15 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/errors/failure_mapper.dart';
+import '../../../core/config/firebase_providers.dart';
+import '../../../core/constants/app_constants.dart';
+import '../../../core/errors/app_failure.dart';
 import '../../../core/localization/l10n.dart';
 import '../../../core/routing/route_names.dart';
 import '../../../shared/widgets/failure_snackbar.dart';
 import 'auth_providers.dart';
+import 'widgets/resend_countdown.dart';
 
-/// Code entry (spec 4.1 step 3): the 6-digit SMS code.
+/// Code entry (spec 4.1 step 3): the 6-digit SMS code, with a resend
+/// button that unlocks after [AppConstants.resendCodeDelay]. On Android the
+/// code may be read automatically; the user is then signed in and the
+/// router leaves this screen by itself.
 class CodeEntryScreen extends ConsumerStatefulWidget {
   const CodeEntryScreen({super.key});
 
@@ -20,7 +28,7 @@ class CodeEntryScreen extends ConsumerStatefulWidget {
 class _CodeEntryScreenState extends ConsumerState<CodeEntryScreen> {
   final _formKey = GlobalKey<FormState>();
   final _codeController = TextEditingController();
-  bool _verifying = false;
+  bool _busy = false;
 
   @override
   void dispose() {
@@ -28,30 +36,46 @@ class _CodeEntryScreenState extends ConsumerState<CodeEntryScreen> {
     super.dispose();
   }
 
-  Future<void> _submit(PendingPhoneVerification pending) async {
-    if (!(_formKey.currentState?.validate() ?? false)) return;
-    setState(() => _verifying = true);
+  Future<void> _run(Future<void> Function() action) async {
+    setState(() => _busy = true);
     try {
-      await ref
-          .read(authRepositoryProvider)
-          .confirmSmsCode(
-            verificationId: pending.verificationId,
-            smsCode: _codeController.text.trim(),
-          );
-      ref.read(pendingPhoneVerificationProvider.notifier).set(null);
-      ref.read(authControllerProvider.notifier).onFirebaseSignedIn();
-    } catch (error, stackTrace) {
-      if (mounted) showFailureSnackBar(context, mapError(error, stackTrace));
+      await action();
+    } on AppFailure catch (failure) {
+      if (mounted && !isSignInRefusal(failure)) {
+        showFailureSnackBar(context, failure);
+      }
     } finally {
-      if (mounted) setState(() => _verifying = false);
+      if (mounted) setState(() => _busy = false);
     }
+  }
+
+  Future<void> _submit() async {
+    if (!(_formKey.currentState?.validate() ?? false)) return;
+    await _run(
+      () => ref
+          .read(phoneSignInControllerProvider.notifier)
+          .confirmCode(_codeController.text.trim()),
+    );
+  }
+
+  Future<void> _resend() async {
+    await _run(() async {
+      await ref.read(phoneSignInControllerProvider.notifier).resendCode();
+      if (mounted) showMessageSnackBar(context, context.l10n.codeResent);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
-    final pending = ref.watch(pendingPhoneVerificationProvider);
+    ref.listen(
+      phoneSignInControllerProvider.select((p) => p?.autoSignInFailure),
+      (_, failure) {
+        if (failure != null) showFailureSnackBar(context, failure);
+      },
+    );
+    final pending = ref.watch(phoneSignInControllerProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.codeEntryTitle),
@@ -87,18 +111,21 @@ class _CodeEntryScreenState extends ConsumerState<CodeEntryScreen> {
                           RegExp(r'^\d{6}$').hasMatch(value?.trim() ?? '')
                           ? null
                           : l10n.validationCodeSixDigits,
+                      onFieldSubmitted: (_) => _submit(),
                     ),
                     const SizedBox(height: 16),
                     FilledButton(
-                      onPressed: _verifying ? null : () => _submit(pending),
+                      key: const Key('verifyCodeButton'),
+                      onPressed: _busy ? null : _submit,
                       child: Text(l10n.actionVerify),
                     ),
                     const SizedBox(height: 8),
-                    TextButton(
-                      // NOT IMPLEMENTED (Sprint 1): resend with
-                      // pending.resendToken and a countdown timer.
-                      onPressed: null,
-                      child: Text(l10n.actionResendCode),
+                    ResendCountdown(
+                      key: ValueKey(pending.sentAt),
+                      sentAt: pending.sentAt,
+                      now: ref.read(clockProvider),
+                      enabled: !_busy,
+                      onResend: _resend,
                     ),
                   ],
                 ),

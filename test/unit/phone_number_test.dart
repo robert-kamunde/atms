@@ -28,4 +28,35 @@ void main() {
       expect(normaliseTanzanianPhone(input), isNull, reason: input);
     }
   });
+
+  test('normalises every accepted format to the same E.164 number', () {
+    for (final input in [
+      '0754 123 456',
+      '754123456',
+      '255754123456',
+      '+255754123456',
+      ' +255 (754) 123-456 ',
+      '0754-123-456',
+    ]) {
+      expect(normaliseTanzanianPhone(input), '+255754123456', reason: input);
+    }
+  });
+
+  test('accepts 06x and 07x mobile prefixes only', () {
+    expect(normaliseTanzanianPhone('0612345678'), '+255612345678');
+    expect(normaliseTanzanianPhone('0222123456'), isNull); // landline
+    expect(normaliseTanzanianPhone('0512345678'), isNull);
+  });
+
+  test('rejects numbers with the wrong length or extra characters', () {
+    for (final input in [
+      '+2557123456789',
+      '+25571234567',
+      '00255712345678',
+      '0712 345 67a',
+      '+',
+    ]) {
+      expect(normaliseTanzanianPhone(input), isNull, reason: input);
+    }
+  });
 }
