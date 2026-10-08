@@ -8,6 +8,11 @@ All notable changes. Versions follow `pubspec.yaml`.
 - Product owner decisions D-01 to D-09 recorded as accepted (8 Oct 2026); Cloud Functions
   default region is now `africa-south1` (D-03).
 
+### Fixed
+- Storage rules: an upload over an existing attachment was allowed, because the Storage emulator
+  evaluates it as a create. Create now requires that no file exists at that path. Found by the
+  first CI run.
+
 ### Added
 - Product specification (`docs/PRODUCT_SPEC.md`) exported from the ATMS Product Development Document.
 - Requirements with IDs, acceptance checklist, backlog with module dependencies, decisions and
