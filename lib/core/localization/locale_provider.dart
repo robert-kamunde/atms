@@ -13,12 +13,11 @@ abstract final class AppLocales {
       code == swahili.languageCode ? swahili : english;
 }
 
-/// The app's current language. English by default.
+/// The app's current language. English until the user picks one (A-18).
 ///
-/// NOT IMPLEMENTED (Sprint 1): after sign-in the value comes from the
-/// user's document (`AppUser.language`), and changing it writes
-/// `toSelfUpdateMap()` to that document. In Sprint 0 the choice lives only
-/// in memory.
+/// After sign-in `AuthController` sets it from the user's document
+/// (`AppUser.language`), and `AuthController.changeLanguage` writes the
+/// user's choice back to that document.
 class LocaleController extends Notifier<Locale> {
   @override
   Locale build() => AppLocales.english;
