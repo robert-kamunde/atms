@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:atms/core/errors/app_failure.dart';
 import 'package:atms/core/errors/failure_mapper.dart';
 import 'package:atms/core/errors/failure_messages.dart';
+import 'package:atms/core/errors/server_error_code.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -13,6 +15,15 @@ FirebaseException fs(String code) =>
     FirebaseException(plugin: 'cloud_firestore', code: code);
 
 FirebaseAuthException auth(String code) => FirebaseAuthException(code: code);
+
+/// FirebaseFunctionsException's constructor is protected; tests subclass it.
+class _FunctionsException extends FirebaseFunctionsException {
+  _FunctionsException(String code, {super.details})
+    : super(code: code, message: 'raw server text');
+}
+
+FirebaseFunctionsException fn(String code, [Object? details]) =>
+    _FunctionsException(code, details: details);
 
 void main() {
   group('Firestore codes', () {
@@ -52,10 +63,10 @@ void main() {
 
   group('Auth codes', () {
     const expected = <String, Type>{
-      'network-request-failed': NetworkFailure,
-      'timeout': NetworkFailure,
+      'network-request-failed': ConnectionRequiredFailure,
+      'timeout': ConnectionRequiredFailure,
       'user-not-found': NotInvitedFailure,
-      'user-disabled': NotInvitedFailure,
+      'user-disabled': AccountDeactivatedFailure,
       'invalid-phone-number': ValidationFailure,
       'missing-phone-number': ValidationFailure,
       'invalid-verification-code': ValidationFailure,
@@ -102,6 +113,113 @@ void main() {
     });
   });
 
+  group('blocking functions (D-02)', () {
+    FirebaseAuthException blocked(
+      String message, {
+      String code = 'internal-error',
+    }) => FirebaseAuthException(code: code, message: message);
+
+    test('not-invited refusal shows the not-invited screen', () {
+      expect(
+        mapFirebaseAuthException(
+          blocked(
+            'An internal error has occurred. [ BLOCKING_FUNCTION_ERROR_RESPONSE'
+            ' : {"error":{"message":"not-invited"}} ]',
+          ),
+        ),
+        isA<NotInvitedFailure>(),
+      );
+    });
+
+    test('account-deactivated refusal shows the deactivated message', () {
+      expect(
+        mapFirebaseAuthException(
+          blocked(
+            'BLOCKING_FUNCTION_ERROR_RESPONSE : account-deactivated',
+            code: 'unknown',
+          ),
+        ),
+        isA<AccountDeactivatedFailure>(),
+      );
+    });
+
+    test('any other blocking refusal still asks for the administrator', () {
+      expect(
+        mapFirebaseAuthException(blocked('BLOCKING_FUNCTION_ERROR_RESPONSE')),
+        isA<NotInvitedFailure>(),
+      );
+    });
+  });
+
+  group('callable errors', () {
+    test('every server code is mapped and has a message', () {
+      for (final code in ServerErrorCode.values) {
+        final failure = mapFirebaseException(
+          fn('failed-precondition', {'code': code.wireValue}),
+        );
+        expect(failure, isNot(isA<ConflictFailure>()), reason: code.name);
+        for (final locale in testLocales) {
+          final message = failureMessage(failure, l10nFor(locale));
+          expect(message, isNotEmpty, reason: code.name);
+          expect(message, isNot(contains(code.wireValue)), reason: code.name);
+          expect(message, isNot(contains('raw server text')));
+        }
+      }
+    });
+
+    test('identity codes map to their own failures', () {
+      Type typeOf(String code) =>
+          mapFirebaseException(fn('failed-precondition', {'code': code}))
+              .runtimeType;
+      expect(typeOf('not-invited'), NotInvitedFailure);
+      expect(typeOf('account-deactivated'), AccountDeactivatedFailure);
+      expect(typeOf('session-expired'), SessionExpiredFailure);
+      expect(typeOf('unauthenticated'), UnauthenticatedFailure);
+      expect(typeOf('validation'), ServerFailure);
+      expect(typeOf('reporting-loop'), ServerFailure);
+    });
+
+    test('details carry attemptsLeft and field', () {
+      final wrong = mapFirebaseException(
+        fn('invalid-argument', {'code': 'code-invalid', 'attemptsLeft': 3}),
+      ) as ServerFailure;
+      expect(wrong.serverCode, ServerErrorCode.codeInvalid);
+      expect(wrong.attemptsLeft, 3);
+      final l10n = l10nFor(testLocales.first);
+      expect(failureMessage(wrong, l10n), contains('3'));
+
+      final validation = mapFirebaseException(
+        fn('invalid-argument', {'code': 'validation', 'field': 'phone'}),
+      ) as ServerFailure;
+      expect(validation.field, 'phone');
+    });
+
+    test('tree-busy is retryable', () {
+      final busy = mapFirebaseException(
+        fn('aborted', {'code': 'tree-busy'}),
+      ) as ServerFailure;
+      expect(busy.retryable, isTrue);
+    });
+
+    test('timeout or no connection means "needs a connection"', () {
+      for (final code in ['unavailable', 'deadline-exceeded', 'cancelled']) {
+        expect(
+          mapFirebaseException(fn(code)),
+          isA<ConnectionRequiredFailure>(),
+          reason: code,
+        );
+      }
+    });
+
+    test('unknown details code falls back to the status', () {
+      expect(
+        mapFirebaseException(fn('permission-denied', {'code': 'new-thing'})),
+        isA<PermissionDeniedFailure>(),
+      );
+      expect(mapFirebaseException(fn('data-loss')), isA<UnknownFailure>());
+    });
+  });
+
   group('mapError', () {
     test('passes AppFailure through', () {
       const f = NetworkFailure();
@@ -138,6 +256,8 @@ void main() {
       test('[$locale] every failure has a non-empty message without codes', () {
         final failures = <AppFailure>[
           const NetworkFailure(code: 'unavailable'),
+          const ConnectionRequiredFailure(code: 'unavailable'),
+          const AccountDeactivatedFailure(code: 'user-disabled'),
           const PermissionDeniedFailure(code: 'permission-denied'),
           const NotFoundFailure(code: 'not-found'),
           const UnauthenticatedFailure(code: 'unauthenticated'),
