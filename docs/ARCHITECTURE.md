@@ -199,7 +199,7 @@ Notifications, More**.
 | `/sign-in/phone`, `/sign-in/code`, `/sign-in/email` | Signed out | 1 |
 | `/not-invited` | Signed in, not added by an admin | 1 |
 | `/onboarding/language`, `/onboarding/consent`, `/onboarding/notifications` | First sign-in | 1 |
-| `/admin-verify` | Admins without a current second factor | 1 |
+| `/admin-verify?from=<path>` | Admins without a current second factor; returns to `from` | 1 |
 | `/tasks`, `/tasks/new`, `/tasks/:id`, `/tasks/:id/edit` | All members | 2 |
 | `/workflows/start` | Members allowed by the template | 3 |
 | `/approvals` | All members (steps waiting for them) | 3 |
@@ -207,7 +207,7 @@ Notifications, More**.
 | `/dashboard` | All members; content by role | 6 |
 | `/team-tasks`, `/reports` | Managers, admins | 2, 6 |
 | `/more` | All members | 1 |
-| `/admin/departments`, `/admin/users`, `/admin/users/:id`, `/admin/reporting-tree`, `/admin/settings` | Verified admins | 1 |
+| `/admin/departments`, `/admin/users`, `/admin/users/new`, `/admin/users/:id`, `/admin/reporting-tree`, `/admin/settings` | Verified admins | 1 |
 | `/admin/templates`, `/admin/templates/:id` | Verified admins | 3 |
 | `/admin/audit` | Verified admins | 2 |
 

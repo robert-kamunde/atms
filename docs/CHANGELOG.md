@@ -2,6 +2,21 @@
 
 All notable changes. Versions follow `pubspec.yaml`.
 
+## [Unreleased] - Sprint 1 (sign-in, onboarding, organisation)
+
+### Added
+- Cloud Functions: `adminUpsertUser`, `deactivateUser`, `sendAdminCode`, `verifyAdminCode`,
+  `beforeUserCreated` and `beforeUserSignedIn` blocking functions, MOCK/TEMPORARY e-mail provider
+  for the emulators, `bootstrap-org` script, new error codes; unit and emulator integration tests
+  (run in CI).
+- App: phone and e-mail sign-in, not-invited and deactivated screens, session expiry, onboarding,
+  admin code check, departments, users, reporting tree and organisation settings screens, App
+  Check (monitor mode), error messages for every new server error; EN/SW widget tests.
+- `prod` Firebase alias for `atms-d7f64`.
+
+### Removed
+- MOCK developer preview panel.
+
 ## [Unreleased] - Sprint 0 (foundation)
 
 ### Changed

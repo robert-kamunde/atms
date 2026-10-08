@@ -1,56 +1,40 @@
 # Project status
 
-**Current sprint:** Sprint 0 (foundation), finishing
-**Current milestone:** Sprint 0 on GitHub (robert-kamunde/atms); decisions D-01 to D-09 accepted on 8 Oct 2026; Sprint 1 next
+**Current sprint:** Sprint 1 (sign-in, onboarding, organisation), built; in review
+**Current milestone:** Sprint 1 PR open on robert-kamunde/atms
 **Last updated:** 8 Oct 2026
 
 ## Completed
-- PDD read and exported as `docs/PRODUCT_SPEC.md`.
-- Requirements extracted with IDs (`REQUIREMENTS.md`): 11 modules, roles and permission matrix with
-  enforcement, security, offline, notification and performance requirements, out-of-scope list.
-- Acceptance checklist (`ACCEPTANCE.md`): all 29 PDD "Done when" items, the 5 prototype scenarios
-  and 8 quality targets, each with sprint, test and status.
-- Backlog by sprint with module dependencies (`BACKLOG.md`).
-- Contradictions, ambiguities, open decisions and defaults (`DECISIONS.md`).
-- Architecture, Firestore schema with documented deviations, security model, offline design,
-  navigation map, environments (`ARCHITECTURE.md`); testing strategy (`TESTING.md`); development,
-  release, known issues and changelog docs.
-- Firestore and Storage Security Rules (default deny) and indexes; emulator config.
-- Security Rules tests: 87 cases over every role and resource, allowed and denied.
-- Cloud Functions project (TypeScript, Jest): model types, error codes, session and admin
-  second-factor checks, log redaction, SMS provider interface with emulator-only mock.
-- Flutter app foundation: specified folder structure, Riverpod, go_router with role guards, theme,
-  216 English/Kiswahili strings, friendly error mapping, pagination helper (20 per page), sync banner
-  widget, initial screens for every V1 area, Firebase bootstrap with offline persistence and
-  emulator support, "not configured" screen.
-- Flutter tests: 137 (unit, widget in English and Kiswahili, router guards, ARB parity,
-  no-hardcoded-strings scan).
-- CI workflow (GitHub Actions): functions lint, build, unit and rules tests; Flutter format, analyze,
-  test and debug APK build.
-- Screenshots of the initial screens: `atms-app-screens/atms-sprint0-screens.png` in project files.
+- Sprint 0 foundation (see CHANGELOG): specs, rules, app and functions skeletons, CI.
+- Decisions D-01 to D-09 accepted (8 Oct 2026); Firebase project `atms-d7f64` created on Blaze in
+  `africa-south1` with Identity Platform, added as the `prod` alias.
+- Sprint 1 server: `adminUpsertUser` (reporting loops refused, `managerChain` recomputed for
+  everyone below, invitation SMS), `deactivateUser` (sign-in tokens revoked, open tasks flagged),
+  admin e-mail code (`sendAdminCode`, `verifyAdminCode`), blocking functions refusing unknown and
+  deactivated accounts, `bootstrap-org` script. Interface in `SPRINT1_CONTRACT.md`.
+- Sprint 1 app: phone sign-in with code, e-mail fallback with reset, not-invited and deactivated
+  screens, session expiry (30/7 days), onboarding (language, consent, notifications), admin code
+  check before admin screens, departments, users, reporting tree and organisation settings,
+  App Check in monitor mode. Developer preview panel removed.
 
 ## In progress
-- First CI run on GitHub.
+- Sprint 1 PR review and CI.
 
-## Next (Sprint 1)
-- `adminUpsertUser` with loop detection and managerChain; deactivation; unknown-number handling;
-  admin second factor; invitation SMS; sign-in, onboarding and admin organisation screens.
+## Next
+- Connected build against atms-d7f64 once `google-services.json` arrives (KI-5).
+- Sprint 2: tasks, offline, audit foundation.
 
 ## Known bugs
 - None found. Limitations are in `KNOWN_ISSUES.md`.
 
 ## Blocked
-- Connecting the app to Robert's Firebase project (created 8 Oct 2026, Blaze plan): needs the
-  project id, the Android app registration, the Firestore location confirmed as `africa-south1`
-  and Identity Platform enabled.
-- Email service account for admin codes and reports (D-01, D-08).
-- SMS provider account and sender ID (D-09).
-- Two Storage rules tests need CI (KNOWN_ISSUES KI-1).
+- Admin second factor and invitation SMS in the real project: need the email service (D-08) and
+  SMS provider (D-09) accounts (KI-6).
+- Connected Android build: needs `google-services.json` (KI-5).
+- Decision D-10 (changing the top of the reporting tree) awaits Robert's confirmation; built as recommended.
 
 ## Technical debt
-- Developer preview buttons (MOCK/TEMPORARY, debug only) to remove in Sprint 1.
-- `cloud_functions` and `firebase_storage` packages not yet added to the app (KI-8).
-- Kiswahili review pending (36 strings marked SW_REVIEW).
+- Kiswahili review (KI-4), FCM token registration (Sprint 4), `jose` test stub (KI-13).
 
 ## Architecture decisions
 - Server-authoritative design: the app writes only plain fields; workflow state, visibility,
@@ -63,20 +47,18 @@
 - Full list: `ARCHITECTURE.md` and `DECISIONS.md`.
 
 ## Acceptance criteria
-- Passed: 0
+- Passed: 1 module criterion (AC-4.2-2) plus 7 Sprint 1 checks (S1-1 to S1-7).
 - Failed: 0
 - Blocked: 0
-- Not tested: 42 (29 module criteria, 5 scenarios, 8 quality targets). The rules tests for
-  AC-4.8-1 (confidential reads) and AC-4.11-1/2 (audit immutability) exist and pass in the
-  emulator; the criteria are marked PASS only when their modules ship.
+- Not tested: the rest; AC-4.1-1/2/3 and AC-4.2-1 need a connected build on a phone (KI-5).
 
-## Test results (7 Oct 2026, this environment)
+## Test results (8 Oct 2026, this environment)
 | Suite | Result |
 | --- | --- |
-| Security Rules (Firestore emulator) | 80 of 80 pass |
-| Storage rules (Storage emulator) | 5 of 7 pass; 2 blocked by the sandbox proxy (KI-1) |
-| Functions unit (Jest) | 7 of 7 pass |
+| Functions unit (Jest) | 53 of 53 pass |
+| Functions integration (Auth + Firestore emulators) | 33 of 33 pass |
+| Security Rules (Firestore + Storage emulators) | 90 of 92 pass; the 2 Storage cases blocked here pass in CI (KI-1) |
 | Functions typecheck and build | Clean |
-| Flutter analyze | No issues |
-| Flutter tests | 137 of 137 pass |
-| Android build | Not run here (KI-2); runs in CI |
+| Flutter format / analyze | Clean / no issues |
+| Flutter tests | 286 of 286 pass |
+| Android build | CI |

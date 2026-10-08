@@ -5,7 +5,7 @@ integrity, workflow state or extensibility, stop and surface it; otherwise choos
 option and document it. This file holds both kinds.
 
 - **Product owner decisions** were surfaced for Robert; all nine were decided on 8 Oct 2026.
-- **Open** decisions (none at present) need the product owner. Work on the affected feature waits,
+- **Open** decisions need the product owner. Work on the affected feature waits,
   or continues on the stated default where that default is easy to change later.
 - **Defaults taken** are minor or reversible choices made to keep going.
 
@@ -25,6 +25,12 @@ Robert accepted every recommendation below ("answers on open decisions: agree", 
 | D-07 | With working hours on, how are 24 h and 48 h escalation delays counted? | PDD 4.2 says deadlines and escalation "count working hours only" when the setting is on; PDD 4.5 says reminders falling outside working hours are held until 08:00. These give different escalation times. | (a) Count elapsed working hours (24 working hours = 3 working days of 8 hours). (b) Count calendar hours and hold any send that falls outside working hours until 08:00. | (a) for escalation and step time limits, plus (b)'s holding rule for every send | Sprint 4 escalation |
 | D-08 | Which email service sends optional report emails (and admin codes)? | The master instructions exclude "external integrations" but require optional report email. An email service is the minimum needed. | SendGrid, Mailgun, Amazon SES, or the organisation's own SMTP | One transactional email service, shared with D-01 | Sprint 6 reports |
 | D-09 | Which SMS provider, and the sender ID? | Africa's Talking and Beem both work in Tanzania; sender ID registration with TCRA takes time. | Africa's Talking or Beem | Whichever the pilot organisation can contract; start sender ID registration now | Sprint 4 SMS |
+
+## Open decisions
+
+| ID | Question | Why it matters | Options | Recommendation | Affects |
+| --- | --- | --- | --- | --- | --- |
+| D-10 | How does an admin change who is at the top of the reporting tree? | Every user except one must have a supervisor, so the first admin (made by the bootstrap script) starts as the top person. Making the director the top would otherwise be impossible: the director must report to someone, and moving the admin under the director is a loop. | (a) Saving someone with no supervisor makes them the new top person and moves the previous top person under them, in one transaction, after a warning in the app. (b) A separate "change top person" screen. | (a), as built in Sprint 1 | Reporting tree, escalation |
 
 ## Defaults taken (documented, easy to revisit)
 
@@ -48,6 +54,14 @@ Robert accepted every recommendation below ("answers on open decisions: agree", 
 | A-16 | Escalation levels | `escalationMaxLevel` per organisation, default 2. | PDD 4.5 "times are configurable per organisation"; the prototype shows a 3-level setting as a possible change. |
 | A-17 | "Not found" for confidential tasks | Firestore returns "permission denied"; the app shows the same "not found" message for a denied read and a missing task. | CONF-2; Firestore cannot return "not found" for a denied read. |
 | A-18 | App languages before sign-in | English until the user picks a language; the phone's language is offered first if it is Swahili. | AUTH-6. |
+| A-19 | First organisation | Created by `functions/scripts/bootstrap-org.ts` (Admin SDK) with one department and one admin; it refuses to run without `--project`, prints its plan, writes nothing without `--yes` and never overwrites an org. The first admin needs an e-mail address because the admin code is e-mailed. | PDD 4.2 starts with an admin who already exists. |
+| A-20 | "Last active admin" check | Counts active admins (the server cannot see other admins' claims). Admins also cannot demote or deactivate themselves. | Keeps an organisation from losing its last admin. |
+| A-21 | Removing an e-mail address | Refused (`email-cannot-be-removed`); Firebase Authentication cannot remove an e-mail from an account. The address can be changed. | Platform limit. |
+| A-22 | Sign-in refusals | The blocking functions refuse with `not-invited` (unknown account) or `account-deactivated`; the app shows the matching screen and treats any other blocking refusal as not invited. A refused read of one's own profile is treated as deactivated. | AUTH-2, AUTH-5. |
+| A-23 | Admin second factor details | 12-hour verification, never past the 7-day admin session; code sent when the admin taps "Send code"; stored only as a salted hash at `orgs/{org}/secure/adminCodes/codes/{uid}`. In `demo-` projects the MOCK e-mail provider also writes to an `emulatorOutbox` collection no app can read. | D-01. |
+| A-24 | Consent version | `consentVersion` is `2026-10`; bump it whenever the consent text changes so everyone accepts again. | SEC-7. |
+| A-25 | Network timing | Callables time out after 20 seconds and show "needs connection" when offline. An offline-capable write not confirmed within 3 seconds shows "saved on phone"; a later refusal shows a message. | OFF requirements. |
+| A-26 | Form limits | Reminder and escalation hours up to 720, escalation levels up to 10, names and job roles up to 100 characters. | Catch typing mistakes only. |
 
 ## Contradictions found between the documents
 

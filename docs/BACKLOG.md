@@ -35,7 +35,7 @@ Key points:
   and choosing participants.
 - Counters for dashboards (M10) hook into every task change, so they come after M3 to M6 are stable.
 
-## Sprint 0: foundation (current)
+## Sprint 0: foundation (done)
 
 | Item | Status |
 | --- | --- |
@@ -51,7 +51,7 @@ Key points:
 | Clickable prototype reviewed with 3 to 5 future users | Prototype exists; review is Robert's |
 | Testing strategy | Done (TESTING.md) |
 
-## Sprint 1: sign-in, onboarding, organisation (M1, M2)
+## Sprint 1: sign-in, onboarding, organisation (M1, M2) (built 8 Oct 2026; see PROJECT_STATUS)
 
 1. `adminUpsertUser` callable: create Auth user with phone, set `orgId` claim, write user and
    contact docs, validate department and supervisor, reject reporting loops, compute
