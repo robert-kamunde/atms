@@ -34,6 +34,7 @@ abstract final class RoutePaths {
   static const String adminPrefix = '/admin';
   static const String adminDepartments = '/admin/departments';
   static const String adminUsers = '/admin/users';
+  static const String adminUserNew = '/admin/users/new';
   static const String adminUserDetail = '/admin/users/:id';
   static const String adminReportingTree = '/admin/reporting-tree';
   static const String adminTemplates = '/admin/templates';
@@ -48,6 +49,15 @@ abstract final class RoutePaths {
       '/admin/users/${Uri.encodeComponent(id)}';
   static String adminTemplateDetailFor(String id) =>
       '/admin/templates/${Uri.encodeComponent(id)}';
+
+  /// Query parameter of [adminVerify] naming the admin screen to open after
+  /// the second factor succeeds.
+  static const String returnToParam = 'from';
+
+  static String adminVerifyFor(String returnTo) => Uri(
+    path: adminVerify,
+    queryParameters: {returnToParam: returnTo},
+  ).toString();
 }
 
 /// Route names (for `context.goNamed`) — kept equal to a readable id.
@@ -75,6 +85,7 @@ abstract final class RouteNames {
   static const String reports = 'reports';
   static const String adminDepartments = 'adminDepartments';
   static const String adminUsers = 'adminUsers';
+  static const String adminUserNew = 'adminUserNew';
   static const String adminUserDetail = 'adminUserDetail';
   static const String adminReportingTree = 'adminReportingTree';
   static const String adminTemplates = 'adminTemplates';
