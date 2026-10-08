@@ -20,5 +20,5 @@ export function redact(value: unknown): unknown {
 export function scrubText(text: string): string {
   return text
     .replace(/[^\s@"'<>()]+@[^\s@"'<>()]+/g, '[email]')
-    .replace(/\+?\d[\d\s-]{5,}\d/g, '[number]');
+    .replace(/\+?\d[\d\s-]{4,}\d/g, '[number]');
 }
