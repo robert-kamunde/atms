@@ -26,11 +26,11 @@ Robert accepted every recommendation below ("answers on open decisions: agree", 
 | D-08 | Which email service sends optional report emails (and admin codes)? | The master instructions exclude "external integrations" but require optional report email. An email service is the minimum needed. | SendGrid, Mailgun, Amazon SES, or the organisation's own SMTP | One transactional email service, shared with D-01 | Sprint 6 reports |
 | D-09 | Which SMS provider, and the sender ID? | Africa's Talking and Beem both work in Tanzania; sender ID registration with TCRA takes time. | Africa's Talking or Beem | Whichever the pilot organisation can contract; start sender ID registration now | Sprint 4 SMS |
 
-## Open decisions
+## Decided after Sprint 1
 
-| ID | Question | Why it matters | Options | Recommendation | Affects |
+| ID | Question | Why it matters | Options | Decision | Affects |
 | --- | --- | --- | --- | --- | --- |
-| D-10 | How does an admin change who is at the top of the reporting tree? | Every user except one must have a supervisor, so the first admin (made by the bootstrap script) starts as the top person. Making the director the top would otherwise be impossible: the director must report to someone, and moving the admin under the director is a loop. | (a) Saving someone with no supervisor makes them the new top person and moves the previous top person under them, in one transaction, after a warning in the app. (b) A separate "change top person" screen. | (a), as built in Sprint 1 | Reporting tree, escalation |
+| D-10 | How does an admin change who is at the top of the reporting tree? | Every user except one must have a supervisor, so the first admin (made by the bootstrap script) starts as the top person. Making the director the top would otherwise be impossible: the director must report to someone, and moving the admin under the director is a loop. | (a) Saving someone with no supervisor makes them the new top person and moves the previous top person under them, in one transaction, after a warning in the app. (b) A separate "change top person" screen. | (a), as built in Sprint 1. Robert chose "Keep as built" on 9 Oct 2026. | Reporting tree, escalation |
 
 ## Defaults taken (documented, easy to revisit)
 

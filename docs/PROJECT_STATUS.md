@@ -31,7 +31,6 @@
 - Admin second factor and invitation SMS in the real project: need the email service (D-08) and
   SMS provider (D-09) accounts (KI-6).
 - Connected Android build: needs `google-services.json` (KI-5).
-- Decision D-10 (changing the top of the reporting tree) awaits Robert's confirmation; built as recommended.
 
 ## Technical debt
 - Kiswahili review (KI-4), FCM token registration (Sprint 4), `jose` test stub (KI-13).
