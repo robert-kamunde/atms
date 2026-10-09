@@ -1,5 +1,13 @@
 {
   "@@locale": "sw",
+  "accountInactiveHelp": "Ikiwa unadhani hili ni kosa, wasiliana na msimamizi wako.",
+  "@accountInactiveHelp": {
+    "description": "Help text on the screen for deactivated users."
+  },
+  "accountInactiveTitle": "Akaunti haitumiki",
+  "@accountInactiveTitle": {
+    "description": "Title of the screen for deactivated users."
+  },
   "actionAddAttachment": "Ambatisha faili",
   "@actionAddAttachment": {
     "description": "Button: add a file to a task."
@@ -24,13 +32,41 @@
   "@actionBackToPhone": {
     "description": "Button back to the phone entry screen."
   },
+  "actionCancel": "Ghairi",
+  "@actionCancel": {
+    "description": "Cancel button in dialogs."
+  },
+  "actionClear": "Ondoa",
+  "@actionClear": {
+    "description": "Tooltip: clear the chosen value."
+  },
+  "actionClose": "Funga",
+  "@actionClose": {
+    "description": "Close button / tooltip."
+  },
   "actionContinue": "Endelea",
   "@actionContinue": {
     "description": "Generic continue button."
   },
+  "actionContinueAnyway": "Ndiyo, endelea",
+  "@actionContinueAnyway": {
+    "description": "Confirm button."
+  },
+  "actionDeactivate": "Simamisha",
+  "@actionDeactivate": {
+    "description": "Button: deactivate. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "actionDeactivateUser": "Simamisha mtu",
+  "@actionDeactivateUser": {
+    "description": "Button in the user editor. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "actionEdit": "Hariri",
   "@actionEdit": {
     "description": "Edit button / tooltip."
+  },
+  "actionForgotPassword": "Umesahau nenosiri?",
+  "@actionForgotPassword": {
+    "description": "Button on the email sign-in screen."
   },
   "actionGoToTasks": "Nenda kwenye kazi zangu",
   "@actionGoToTasks": {
@@ -39,6 +75,18 @@
   "actionHidePassword": "Ficha nenosiri",
   "@actionHidePassword": {
     "description": "Tooltip on password field."
+  },
+  "actionHideReports": "Ficha walio chini yake",
+  "@actionHideReports": {
+    "description": "Tooltip in the reporting tree. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "actionLoadMore": "Pakia zaidi",
+  "@actionLoadMore": {
+    "description": "Button: load the next page of a list."
+  },
+  "actionMoreOptions": "Chaguo zaidi",
+  "@actionMoreOptions": {
+    "description": "Tooltip of a menu button."
   },
   "actionNewTask": "Kazi mpya",
   "@actionNewTask": {
@@ -52,21 +100,41 @@
   "@actionNotNow": {
     "description": "Skip button."
   },
+  "actionRemove": "Ondoa",
+  "@actionRemove": {
+    "description": "Tooltip: remove an item from a list."
+  },
   "actionResendCode": "Tuma msimbo tena",
   "@actionResendCode": {
     "description": "Resend SMS/email code."
+  },
+  "actionRetry": "Jaribu tena",
+  "@actionRetry": {
+    "description": "Retry button after a load error."
   },
   "actionSave": "Hifadhi",
   "@actionSave": {
     "description": "Save button."
   },
+  "actionSendAdminCode": "Nitumie msimbo kwa barua pepe",
+  "@actionSendAdminCode": {
+    "description": "Button: send the admin second-factor code by email."
+  },
   "actionSendCode": "Tuma msimbo",
   "@actionSendCode": {
     "description": "Phone sign-in: send SMS code."
   },
+  "actionSendResetLink": "Tuma kiungo",
+  "@actionSendResetLink": {
+    "description": "Button: send password reset email."
+  },
   "actionShowPassword": "Onyesha nenosiri",
   "@actionShowPassword": {
     "description": "Tooltip on password field."
+  },
+  "actionShowReports": "Onyesha walio chini yake",
+  "@actionShowReports": {
+    "description": "Tooltip in the reporting tree. SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "actionSignIn": "Ingia",
   "@actionSignIn": {
@@ -87,6 +155,20 @@
   "adminAuditTitle": "Kumbukumbu za ukaguzi",
   "@adminAuditTitle": {
     "description": "SW_REVIEW: Admin: audit log screen title."
+  },
+  "adminCodeSentTo": "Tumetuma msimbo wa tarakimu 6 kwa {email}. Unatumika hadi saa {time}.",
+  "@adminCodeSentTo": {
+    "description": "After sending the admin code. email is masked, e.g. i***@org.tz.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "i***@org.tz"
+      },
+      "time": {
+        "type": "String",
+        "example": "10:52"
+      }
+    }
   },
   "adminDepartmentsTitle": "Idara",
   "@adminDepartmentsTitle": {
@@ -116,9 +198,23 @@
   "@adminUsersTitle": {
     "description": "Admin: users list title."
   },
+  "adminVerifiedUntil": "Umethibitishwa hadi saa {time}.",
+  "@adminVerifiedUntil": {
+    "description": "Shown when the admin second factor is already valid.",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "22:15"
+      }
+    }
+  },
   "adminVerifyHelp": "Kwa usalama zaidi, wasimamizi wa mfumo lazima pia waweke msimbo wa tarakimu 6 uliotumwa kwenye barua pepe yao.",
   "@adminVerifyHelp": {
     "description": "Admin second factor explanation."
+  },
+  "adminVerifySuccess": "Uthibitisho wa msimamizi umekamilika.",
+  "@adminVerifySuccess": {
+    "description": "Snackbar after the admin second factor succeeds. SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "adminVerifyTitle": "Uthibitisho wa msimamizi",
   "@adminVerifyTitle": {
@@ -190,6 +286,10 @@
   "codeLabel": "Msimbo wa tarakimu 6",
   "@codeLabel": {
     "description": "Code field label."
+  },
+  "codeResent": "Tumetuma msimbo mpya.",
+  "@codeResent": {
+    "description": "Snackbar after resending the SMS code."
   },
   "commentInputHint": "Andika maoni",
   "@commentInputHint": {
@@ -323,6 +423,92 @@
   "@dashboardTitle": {
     "description": "SW_REVIEW: Dashboard screen title."
   },
+  "dayFri": "Ijm",
+  "@dayFri": {
+    "description": "Short weekday."
+  },
+  "dayMon": "Jtatu",
+  "@dayMon": {
+    "description": "Short weekday."
+  },
+  "daySat": "Jmos",
+  "@daySat": {
+    "description": "Short weekday."
+  },
+  "daySun": "Jpili",
+  "@daySun": {
+    "description": "Short weekday."
+  },
+  "dayThu": "Alh",
+  "@dayThu": {
+    "description": "Short weekday."
+  },
+  "dayTue": "Jnne",
+  "@dayTue": {
+    "description": "Short weekday."
+  },
+  "dayWed": "Jtano",
+  "@dayWed": {
+    "description": "Short weekday."
+  },
+  "deactivateDepartmentMessage": "{name} haitaonyeshwa tena wakati wa kuongeza watu. Kazi zilizopo zitabaki na idara hii.",
+  "@deactivateDepartmentMessage": {
+    "description": "Confirmation dialog text. Departments are never deleted. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Finance"
+      }
+    }
+  },
+  "deactivateDepartmentTitle": "Simamisha idara?",
+  "@deactivateDepartmentTitle": {
+    "description": "Confirmation dialog title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "deactivateUserMessage": "{name} atatolewa kwenye akaunti ndani ya saa moja na hataweza kuingia tena. Kazi zake zilizo wazi zitawekewa alama ili zipangiwe mtu mwingine.",
+  "@deactivateUserMessage": {
+    "description": "Confirmation dialog text (spec 4.1). SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Asha"
+      }
+    }
+  },
+  "deactivateUserTitle": "Simamisha mtu huyu?",
+  "@deactivateUserTitle": {
+    "description": "Confirmation dialog title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "departmentCreateTitle": "Idara mpya",
+  "@departmentCreateTitle": {
+    "description": "Dialog title."
+  },
+  "departmentEditTitle": "Hariri idara",
+  "@departmentEditTitle": {
+    "description": "Dialog title."
+  },
+  "departmentFieldHead": "Mkuu wa idara",
+  "@departmentFieldHead": {
+    "description": "Department field."
+  },
+  "departmentFieldName": "Jina la idara",
+  "@departmentFieldName": {
+    "description": "Department field."
+  },
+  "departmentHead": "Mkuu: {name}",
+  "@departmentHead": {
+    "description": "Department list subtitle.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Neema"
+      }
+    }
+  },
+  "departmentNoHead": "Hakuna mkuu aliyetajwa",
+  "@departmentNoHead": {
+    "description": "Department without a head."
+  },
   "departmentsEmptyMessage": "Ongeza idara kama Fedha, Rasilimali Watu au TEHAMA, na umtaje mkuu wa kila moja.",
   "@departmentsEmptyMessage": {
     "description": "Departments empty message."
@@ -330,24 +516,6 @@
   "departmentsEmptyTitle": "Bado hakuna idara",
   "@departmentsEmptyTitle": {
     "description": "Departments empty title."
-  },
-  "devPreviewAsRole": "Fungua kama {role}",
-  "@devPreviewAsRole": {
-    "description": "Developer preview button. Development builds only.",
-    "placeholders": {
-      "role": {
-        "type": "String",
-        "example": "Manager"
-      }
-    }
-  },
-  "devPreviewMessage": "Kwa matoleo ya majaribio tu. Inafungua skrini bila takwimu na bila kuingia.",
-  "@devPreviewMessage": {
-    "description": "SW_REVIEW: Developer preview explanation. Development builds only."
-  },
-  "devPreviewTitle": "Onyesho la msanidi",
-  "@devPreviewTitle": {
-    "description": "SW_REVIEW: Developer preview card title. Development builds only."
   },
   "dueOverdue": "Zimechelewa",
   "@dueOverdue": {
@@ -373,6 +541,40 @@
   "@emailSignInTitle": {
     "description": "Email sign-in title."
   },
+  "errorAccountDeactivated": "Akaunti yako haitumiki kwa sasa. Muulize msimamizi wako.",
+  "@errorAccountDeactivated": {
+    "description": "Error account-deactivated: the account was deactivated by an administrator."
+  },
+  "errorAdminCodeExpired": "Msimbo huo umeisha muda wake. Omba msimbo mpya.",
+  "@errorAdminCodeExpired": {
+    "description": "Error code-expired (10 minutes)."
+  },
+  "errorAdminCodeTooManyAttempts": "Umekosea msimbo mara nyingi mno. Omba msimbo mpya.",
+  "@errorAdminCodeTooManyAttempts": {
+    "description": "Error code-attempts-exceeded."
+  },
+  "errorAdminCodeWrong": "Msimbo huo si sahihi. Angalia barua pepe yako na ujaribu tena.",
+  "@errorAdminCodeWrong": {
+    "description": "Error code-invalid without attempts count."
+  },
+  "errorAdminCodeWrongAttempts": "{count, plural, =0{Msimbo huo si sahihi. Omba msimbo mpya.} =1{Msimbo huo si sahihi. Imebaki nafasi 1.} other{Msimbo huo si sahihi. Zimebaki nafasi {count}.}}",
+  "@errorAdminCodeWrongAttempts": {
+    "description": "Error code-invalid with details.attemptsLeft.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "errorAdminEmailMissing": "Akaunti yako haina barua pepe ya kupokea msimbo wa msimamizi. Muombe msimamizi mwingine aiongeze.",
+  "@errorAdminEmailMissing": {
+    "description": "Error admin-email-missing. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "errorAdminVerificationRequired": "Tafadhali thibitisha tena msimbo wako wa msimamizi.",
+  "@errorAdminVerificationRequired": {
+    "description": "Error: the admin second factor has expired. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "errorConflict": "Mtu mwingine amebadilisha hiki kwanza. Tafadhali angalia toleo la sasa.",
   "@errorConflict": {
     "description": "Generic conflict error."
@@ -391,6 +593,22 @@
       }
     }
   },
+  "errorConnectionRequired": "Hii inahitaji intaneti. Unganisha kisha ujaribu tena.",
+  "@errorConnectionRequired": {
+    "description": "Error: an online-only action (sign-in, saving a person, admin code) could not reach the server."
+  },
+  "errorDepartmentInvalid": "Idara uliyochagua haipo au haitumiki. Chagua idara nyingine.",
+  "@errorDepartmentInvalid": {
+    "description": "Error department-invalid."
+  },
+  "errorEmailCannotBeRemoved": "Barua pepe haiwezi kuondolewa ikishawekwa. Weka barua pepe mpya badala yake.",
+  "@errorEmailCannotBeRemoved": {
+    "description": "Error email-cannot-be-removed (also client-side validation). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "errorEmailInUse": "Barua pepe hii tayari inatumiwa na mtu mwingine.",
+  "@errorEmailInUse": {
+    "description": "Error email-in-use."
+  },
   "errorInvalidCode": "Msimbo huo si sahihi. Angalia SMS na ujaribu tena.",
   "@errorInvalidCode": {
     "description": "Wrong verification code."
@@ -407,6 +625,10 @@
   "@errorInvalidPhone": {
     "description": "Invalid phone number."
   },
+  "errorLastAdmin": "Huyu ndiye msimamizi wa mwisho anayefanya kazi. Ongeza msimamizi mwingine kwanza.",
+  "@errorLastAdmin": {
+    "description": "Error last-admin."
+  },
   "errorNetwork": "Hakuna mtandao. Mabadiliko yako yamehifadhiwa kwenye simu hii; jaribu tena ukiwa mtandaoni.",
   "@errorNetwork": {
     "description": "Network error."
@@ -419,13 +641,57 @@
   "@errorNotInvited": {
     "description": "User not invited."
   },
+  "errorPermissionDenied": "Huna ruhusa ya kufanya hili.",
+  "@errorPermissionDenied": {
+    "description": "Error permission-denied from a server function."
+  },
+  "errorPhoneInUse": "Namba hii ya simu tayari inatumiwa na mtu mwingine.",
+  "@errorPhoneInUse": {
+    "description": "Error phone-in-use."
+  },
+  "errorProviderUnavailable": "Huduma ya ujumbe haipatikani kwa sasa. Tafadhali jaribu tena baadaye.",
+  "@errorProviderUnavailable": {
+    "description": "Error provider-unavailable (SMS/email provider down)."
+  },
+  "errorRateLimited": "Umeomba misimbo mingi mno. Tafadhali subiri kisha ujaribu tena baadaye.",
+  "@errorRateLimited": {
+    "description": "Error code-rate-limited (5 codes per hour)."
+  },
+  "errorReportingLoop": "Msimamizi huyu angesababisha mzunguko katika mfumo wa uwajibikaji. Chagua mtu mwingine.",
+  "@errorReportingLoop": {
+    "description": "Error reporting-loop: the chosen supervisor reports (directly or indirectly) to this person. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "errorSelfDeactivation": "Huwezi kusimamisha akaunti yako mwenyewe.",
+  "@errorSelfDeactivation": {
+    "description": "Error self-deactivation."
+  },
+  "errorSelfDemotion": "Huwezi kuondoa jukumu lako mwenyewe la msimamizi.",
+  "@errorSelfDemotion": {
+    "description": "Error self-demotion."
+  },
   "errorSessionExpired": "Kwa usalama wako, tafadhali ingia tena.",
   "@errorSessionExpired": {
     "description": "Session expired."
   },
+  "errorSmsCapReached": "Kikomo cha SMS cha mwezi kimefikiwa.",
+  "@errorSmsCapReached": {
+    "description": "Error sms-cap-reached."
+  },
+  "errorSupervisorInvalid": "Msimamizi uliyemchagua si mtu anayetumika katika taasisi hii. Chagua mtu mwingine.",
+  "@errorSupervisorInvalid": {
+    "description": "Error supervisor-invalid. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "errorTooManyAttempts": "Umejaribu mara nyingi mno. Tafadhali subiri dakika chache kisha ujaribu tena.",
   "@errorTooManyAttempts": {
     "description": "Rate limited."
+  },
+  "errorTopPersonRequiresSupervisor": "Badiliko hili haliwezekani kwa mtu wa juu kabisa wa taasisi. Angalia mfumo wa uwajibikaji kisha ujaribu tena.",
+  "@errorTopPersonRequiresSupervisor": {
+    "description": "Error top-person-requires-supervisor. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "errorTreeBusy": "Mfumo wa uwajibikaji unasasishwa. Tafadhali jaribu tena baada ya muda mfupi.",
+  "@errorTreeBusy": {
+    "description": "Error tree-busy (retryable). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "errorUnauthenticated": "Tafadhali ingia ili uendelee.",
   "@errorUnauthenticated": {
@@ -471,6 +737,22 @@
   "@filterStatus": {
     "description": "Task filter chip."
   },
+  "forgotPasswordHelp": "Weka barua pepe yako. Ikiwa ni ya akaunti ya ATMS, tutatuma kiungo cha kuweka nenosiri jipya. Akaunti mpya hutumia njia hii kuweka nenosiri la kwanza.",
+  "@forgotPasswordHelp": {
+    "description": "Forgot password dialog text. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "forgotPasswordTitle": "Weka nenosiri jipya",
+  "@forgotPasswordTitle": {
+    "description": "Title of the forgot password dialog."
+  },
+  "labelInactive": "Haitumiki",
+  "@labelInactive": {
+    "description": "Label on a deactivated person or department."
+  },
+  "labelSupervisorInactive": "Msimamizi hatumiki",
+  "@labelSupervisorInactive": {
+    "description": "Warning label: this person's supervisor was deactivated and must be changed. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "languageEnglish": "English",
   "@languageEnglish": {
     "description": "Language option; always shown in English."
@@ -486,6 +768,10 @@
   "loadingMessage": "Tunaandaa akaunti yako...",
   "@loadingMessage": {
     "description": "Loading screen text."
+  },
+  "loadingWaitingForConnection": "Inasubiri intaneti ili kupakia akaunti yako...",
+  "@loadingWaitingForConnection": {
+    "description": "Loading screen when offline and nothing is cached yet."
   },
   "managerSection": "Timu",
   "@managerSection": {
@@ -519,6 +805,14 @@
   "@navTasks": {
     "description": "Bottom navigation: task list tab."
   },
+  "needsConnectionNote": "Hii inahitaji intaneti.",
+  "@needsConnectionNote": {
+    "description": "Note under buttons that call the server (online only)."
+  },
+  "noChangesMessage": "Hakuna mabadiliko ya kuhifadhi",
+  "@noChangesMessage": {
+    "description": "Snackbar when saving without changes."
+  },
   "notInvitedHelp": "Ni namba za simu zilizoongezwa na taasisi yako pekee zinazoweza kutumia ATMS.",
   "@notInvitedHelp": {
     "description": "Not-invited explanation."
@@ -543,6 +837,16 @@
   "@notificationsTitle": {
     "description": "Notifications screen title."
   },
+  "offlineChangeRefused": "Badiliko lililohifadhiwa bila intaneti halikukubaliwa: {reason}",
+  "@offlineChangeRefused": {
+    "description": "Snackbar when a change queued offline is refused after syncing. reason is another friendly error message. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "reason": {
+        "type": "String",
+        "example": "This item was not found."
+      }
+    }
+  },
   "onboardingLanguageHelp": "Chagua lugha ya programu. Unaweza kuibadilisha baadaye kwenye Zaidi.",
   "@onboardingLanguageHelp": {
     "description": "Language step help."
@@ -566,6 +870,10 @@
   "passwordLabel": "Nenosiri",
   "@passwordLabel": {
     "description": "Password field label."
+  },
+  "passwordResetSent": "Ikiwa barua pepe hii ina akaunti, kiungo cha kuweka nenosiri jipya kimetumwa. Angalia sanduku lako la barua.",
+  "@passwordResetSent": {
+    "description": "Snackbar after requesting a password reset (does not reveal whether the account exists). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "phoneNumberHint": "0712 345 678",
   "@phoneNumberHint": {
@@ -621,6 +929,10 @@
   "@reportingTreeEmptyTitle": {
     "description": "SW_REVIEW: Reporting tree empty title."
   },
+  "reportingTreeHelp": "Gusa mtu ili kuona wanaoripoti kwake. Bonyeza na ushikilie ili kufungua taarifa zake.",
+  "@reportingTreeHelp": {
+    "description": "Help text above the reporting tree. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "reportsEmptyMessage": "Muhtasari wa wiki hutolewa kila Jumatatu na wa mwezi tarehe 1.",
   "@reportsEmptyMessage": {
     "description": "Reports empty message."
@@ -637,6 +949,16 @@
   "@requiredFieldHint": {
     "description": "Helper text for required fields."
   },
+  "resendCodeIn": "Tuma msimbo tena baada ya sekunde {seconds}",
+  "@resendCodeIn": {
+    "description": "Disabled resend button with countdown.",
+    "placeholders": {
+      "seconds": {
+        "type": "int",
+        "example": "42"
+      }
+    }
+  },
   "roleAdmin": "Msimamizi wa mfumo",
   "@roleAdmin": {
     "description": "Role name."
@@ -649,21 +971,95 @@
   "@roleStaff": {
     "description": "SW_REVIEW: Role name."
   },
+  "savedMessage": "Imehifadhiwa",
+  "@savedMessage": {
+    "description": "Snackbar after a save reached the server."
+  },
+  "savedOnPhoneMessage": "Imehifadhiwa kwenye simu hii. Itatumwa utakapopata intaneti tena.",
+  "@savedOnPhoneMessage": {
+    "description": "Snackbar after an offline save (queued)."
+  },
+  "searchByName": "Tafuta kwa jina",
+  "@searchByName": {
+    "description": "Search field label."
+  },
+  "searchLoadedOnlyNote": "Utafutaji unahusu watu waliopakiwa hadi sasa. Pakia zaidi ili kutafuta zaidi.",
+  "@searchLoadedOnlyNote": {
+    "description": "Note shown while searching within loaded pages only. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "sessionExpiredMessage": "Kwa usalama wako umetolewa kwenye akaunti. Muda wa kuingia ni siku {staffDays} (siku {adminDays} kwa wasimamizi). Tafadhali ingia tena.",
+  "@sessionExpiredMessage": {
+    "description": "Banner on the sign-in screen after the app signed the user out because the session was too old. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "staffDays": {
+        "type": "int",
+        "example": "30"
+      },
+      "adminDays": {
+        "type": "int",
+        "example": "7"
+      }
+    }
+  },
   "settingEscalationDelay": "Muda kabla ya kupandisha kazi",
   "@settingEscalationDelay": {
     "description": "SW_REVIEW: Org setting."
+  },
+  "settingEscalationDelayHelp": "Saa baada ya muda wa mwisho kabla msimamizi hajajulishwa",
+  "@settingEscalationDelayHelp": {
+    "description": "Helper for escalation delay. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "settingEscalationLevels": "Ngazi za upandishaji",
+  "@settingEscalationLevels": {
+    "description": "How many levels up an overdue task climbs. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "settingEscalationLevelsHelp": "Kazi iliyochelewa hupanda ngazi ngapi katika mfumo wa uwajibikaji",
+  "@settingEscalationLevelsHelp": {
+    "description": "Helper for escalation levels. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "settingReminderHoursHelp": "Saa kabla ya muda wa mwisho, zikitenganishwa kwa koma, mfano 24, 1",
+  "@settingReminderHoursHelp": {
+    "description": "Helper for the reminder hours field."
   },
   "settingReminderTimes": "Nyakati za vikumbusho",
   "@settingReminderTimes": {
     "description": "Org setting."
   },
+  "settingRemindersSection": "Vikumbusho na upandishaji",
+  "@settingRemindersSection": {
+    "description": "Settings section title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "settingSmsCap": "Kikomo cha SMS kwa mwezi",
   "@settingSmsCap": {
     "description": "Org setting."
   },
+  "settingSmsCapHelp": "Kiwango cha juu cha matumizi ya SMS kwa mwezi, kwa shilingi za Tanzania (TZS).",
+  "@settingSmsCapHelp": {
+    "description": "Helper for the SMS cap."
+  },
+  "settingSmsEnabled": "Tuma SMS",
+  "@settingSmsEnabled": {
+    "description": "Switch: SMS on/off."
+  },
+  "settingSmsEnabledHelp": "Taarifa kwa SMS, mfano arifa ya simu isipofunguliwa.",
+  "@settingSmsEnabledHelp": {
+    "description": "Help for the SMS switch. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "settingSmsSection": "SMS",
+  "@settingSmsSection": {
+    "description": "Settings section title."
+  },
   "settingTimeZone": "Saa za eneo",
   "@settingTimeZone": {
     "description": "SW_REVIEW: Org setting."
+  },
+  "settingWorkEnd": "Kazi inaisha",
+  "@settingWorkEnd": {
+    "description": "Working hours end."
+  },
+  "settingWorkStart": "Kazi inaanza",
+  "@settingWorkStart": {
+    "description": "Working hours start."
   },
   "settingWorkingDays": "Siku za kazi",
   "@settingWorkingDays": {
@@ -673,6 +1069,14 @@
   "@settingWorkingHours": {
     "description": "Org setting."
   },
+  "settingWorkingHoursEnabled": "Hesabu saa za kazi tu",
+  "@settingWorkingHoursEnabled": {
+    "description": "Organisation setting switch."
+  },
+  "settingWorkingHoursEnabledHelp": "Ikiwashwa, muda wa mwisho na upandishaji huhesabu saa za kazi katika siku za kazi tu.",
+  "@settingWorkingHoursEnabledHelp": {
+    "description": "Help for the working-hours switch (spec 4.2). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "setupMissingMessage": "Nakala hii ya programu imetengenezwa bila mipangilio ya seva, kwa hiyo haiwezi kuunganishwa. Tafadhali sakinisha toleo lililotolewa na taasisi yako.",
   "@setupMissingMessage": {
     "description": "App not configured explanation."
@@ -680,6 +1084,10 @@
   "setupMissingTitle": "Programu haijasanidiwa",
   "@setupMissingTitle": {
     "description": "SW_REVIEW: App not configured title."
+  },
+  "signInNeedsConnection": "Kuingia kunahitaji intaneti.",
+  "@signInNeedsConnection": {
+    "description": "Note under the sign-in buttons."
   },
   "signInTitle": "Ingia",
   "@signInTitle": {
@@ -821,9 +1229,63 @@
   "@templatesEmptyTitle": {
     "description": "SW_REVIEW: Templates empty title."
   },
+  "timeZoneEastAfrica": "Saa za Afrika Mashariki ({zone})",
+  "@timeZoneEastAfrica": {
+    "description": "Time zone display (not editable).",
+    "placeholders": {
+      "zone": {
+        "type": "String",
+        "example": "Africa/Dar_es_Salaam"
+      }
+    }
+  },
+  "topPersonWarningMessage": "Mtu asiye na msimamizi anakuwa wa juu kabisa wa taasisi. Mtu wa juu wa sasa ataripoti kwa {name}. Uendelee?",
+  "@topPersonWarningMessage": {
+    "description": "Confirmation text (adminUpsertUser moves the previous top under the new one). SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Neema"
+      }
+    }
+  },
+  "topPersonWarningTitle": "Mfanye mtu huyu kuwa wa juu kabisa wa taasisi?",
+  "@topPersonWarningTitle": {
+    "description": "Confirmation when saving a person without a supervisor. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "useEmailInstead": "Hupati SMS? Ingia kwa barua pepe",
   "@useEmailInstead": {
     "description": "Link to email fallback."
+  },
+  "userAccessSection": "Jukumu na uwajibikaji",
+  "@userAccessSection": {
+    "description": "Section title in the user editor. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "userAddedMessage": "Mtu ameongezwa.",
+  "@userAddedMessage": {
+    "description": "Snackbar after adding a person."
+  },
+  "userConfidentialHelp": "Anaweza kuona kazi za siri za idara hizi.",
+  "@userConfidentialHelp": {
+    "description": "Confidential access help."
+  },
+  "userContactHelp": "Namba ya simu au barua pepe inahitajika ili kuingia.",
+  "@userContactHelp": {
+    "description": "Helper under the phone field."
+  },
+  "userCreateTitle": "Ongeza mtu",
+  "@userCreateTitle": {
+    "description": "Title of the user editor when adding."
+  },
+  "userDeactivatedMessage": "{count, plural, =0{Mtu amesimamishwa. Hakuwa na kazi zilizo wazi.} =1{Mtu amesimamishwa. Kazi 1 iliyo wazi imewekewa alama ipangiwe mtu mwingine.} other{Mtu amesimamishwa. Kazi {count} zilizo wazi zimewekewa alama zipangiwe watu wengine.}}",
+  "@userDeactivatedMessage": {
+    "description": "Snackbar after deactivating a person. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
   },
   "userDetailsSection": "Taarifa",
   "@userDetailsSection": {
@@ -837,6 +1299,10 @@
   "@userFieldDepartment": {
     "description": "User field."
   },
+  "userFieldJobRole": "Cheo cha kazi",
+  "@userFieldJobRole": {
+    "description": "User field (D-05), e.g. Finance Officer."
+  },
   "userFieldName": "Jina",
   "@userFieldName": {
     "description": "User field."
@@ -848,6 +1314,26 @@
   "userFieldSupervisor": "Msimamizi",
   "@userFieldSupervisor": {
     "description": "User field."
+  },
+  "userInviteNote": "Kuhifadhi kunahitaji intaneti. Watu wenye namba ya simu hupata mwaliko kwa SMS.",
+  "@userInviteNote": {
+    "description": "Note under Save when adding a person."
+  },
+  "userJobRoleHelp": "Hutumika na hatua za mtiririko zilizopangiwa cheo, mfano Afisa Fedha.",
+  "@userJobRoleHelp": {
+    "description": "Helper for job title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "userLanguageLabel": "Lugha ya SMS na programu",
+  "@userLanguageLabel": {
+    "description": "User editor language label."
+  },
+  "userNoSupervisor": "Hakuna (juu kabisa ya taasisi)",
+  "@userNoSupervisor": {
+    "description": "Supervisor picker when empty. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "userTopOfOrganisation": "Juu kabisa ya taasisi",
+  "@userTopOfOrganisation": {
+    "description": "Person without a supervisor. SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "usersEmptyMessage": "Ongeza watu pamoja na namba zao za simu, idara, cheo na msimamizi.",
   "@usersEmptyMessage": {
@@ -873,13 +1359,25 @@
   "@validationDeadlineRequired": {
     "description": "Required deadline."
   },
+  "validationDepartmentRequired": "Chagua idara",
+  "@validationDepartmentRequired": {
+    "description": "Validation."
+  },
   "validationEmailRequired": "Weka barua pepe yako",
   "@validationEmailRequired": {
     "description": "Required email."
   },
+  "validationNameRequired": "Weka jina",
+  "@validationNameRequired": {
+    "description": "Validation: name required."
+  },
   "validationPasswordRequired": "Weka nenosiri lako",
   "@validationPasswordRequired": {
     "description": "Required password."
+  },
+  "validationPhoneOrEmail": "Weka namba ya simu au barua pepe",
+  "@validationPhoneOrEmail": {
+    "description": "Validation: at least one contact."
   },
   "validationPhoneRequired": "Weka namba yako ya simu",
   "@validationPhoneRequired": {
@@ -889,9 +1387,41 @@
   "@validationPriorityRequired": {
     "description": "Required priority."
   },
+  "validationReminderHours": "Weka idadi kamili ya saa kuanzia 1 hadi {max}, zikitenganishwa kwa koma",
+  "@validationReminderHours": {
+    "description": "Validation for reminder hours.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "example": "720"
+      }
+    }
+  },
   "validationTitleRequired": "Weka kichwa cha kazi",
   "@validationTitleRequired": {
     "description": "Required title."
+  },
+  "validationWholeNumberRange": "Weka namba kamili kuanzia {min} hadi {max}",
+  "@validationWholeNumberRange": {
+    "description": "Validation for number fields.",
+    "placeholders": {
+      "min": {
+        "type": "int",
+        "example": "1"
+      },
+      "max": {
+        "type": "int",
+        "example": "720"
+      }
+    }
+  },
+  "validationWorkingDaysRequired": "Chagua angalau siku moja ya kazi",
+  "@validationWorkingDaysRequired": {
+    "description": "Validation."
+  },
+  "valueNotChosen": "Haijachaguliwa",
+  "@valueNotChosen": {
+    "description": "Placeholder for an empty picker."
   },
   "valueNotLoaded": "Bado haijapakiwa",
   "@valueNotLoaded": {

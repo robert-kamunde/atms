@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/errors/failure_mapper.dart';
 import '../../../../core/localization/l10n.dart';
+import '../../../../shared/widgets/failure_snackbar.dart';
 import '../auth_providers.dart';
 
 /// Privacy notice and consent (Tanzania Personal Data Protection Act, 2022;
 /// spec 6). Text lives in the ARB files and must be reviewed by the
 /// client's legal/data-protection contact before the pilot.
+///
+/// Accepting writes `consentVersion` and `consentAcceptedAt` (server time)
+/// to the person's user document, the only consent fields the rules allow.
+/// Bump `AppConstants.consentVersion` when this text changes.
 class OnboardingConsentScreen extends ConsumerStatefulWidget {
   const OnboardingConsentScreen({super.key});
 
@@ -18,6 +24,18 @@ class OnboardingConsentScreen extends ConsumerStatefulWidget {
 class _OnboardingConsentScreenState
     extends ConsumerState<OnboardingConsentScreen> {
   bool _agreed = false;
+  bool _busy = false;
+
+  Future<void> _accept() async {
+    setState(() => _busy = true);
+    try {
+      await ref.read(authControllerProvider.notifier).completeConsentStep();
+    } catch (error, stackTrace) {
+      if (mounted) showFailureSnackBar(context, mapError(error, stackTrace));
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +73,7 @@ class _OnboardingConsentScreenState
             ),
             const Divider(height: 1),
             CheckboxListTile(
+              key: const Key('consentCheckbox'),
               value: _agreed,
               onChanged: (value) => setState(() => _agreed = value ?? false),
               title: Text(l10n.consentCheckbox),
@@ -65,13 +84,8 @@ class _OnboardingConsentScreenState
               child: SizedBox(
                 width: double.infinity,
                 child: FilledButton(
-                  // NOT IMPLEMENTED (Sprint 1): store consent version and
-                  // timestamp on the user document (server time).
-                  onPressed: _agreed
-                      ? () => ref
-                            .read(authControllerProvider.notifier)
-                            .completeConsentStep()
-                      : null,
+                  key: const Key('consentAcceptButton'),
+                  onPressed: _agreed && !_busy ? _accept : null,
                   child: Text(l10n.actionAgreeAndContinue),
                 ),
               ),
