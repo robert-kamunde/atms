@@ -8,16 +8,32 @@ import '../../../../shared/widgets/enum_labels.dart';
 import '../../domain/task_filter.dart';
 
 /// Horizontal row of filter chips: status, priority, assignee, department,
-/// due date (spec 4.3).
+/// due date (spec 4.3). Assignee and department are offered only when
+/// [showPeopleFilters] is true (Team Tasks); their options are the people
+/// and departments on the loaded pages.
 class TaskFilterBar extends StatelessWidget {
   const TaskFilterBar({
     super.key,
     required this.filter,
     required this.onChanged,
+    this.showPeopleFilters = true,
+    this.assigneeOptions = const {},
+    this.departmentOptions = const {},
+    this.statuses = TaskStatus.values,
   });
 
   final TaskFilter filter;
   final ValueChanged<TaskFilter> onChanged;
+  final bool showPeopleFilters;
+
+  /// Person id -> name.
+  final Map<String, String> assigneeOptions;
+
+  /// Department id -> name.
+  final Map<String, String> departmentOptions;
+
+  /// Statuses offered by the status filter.
+  final List<TaskStatus> statuses;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +51,7 @@ class TaskFilterBar extends StatelessWidget {
             onTap: () => _pick<TaskStatus>(
               context,
               title: l10n.filterStatus,
-              options: {for (final s in TaskStatus.values) s: s.label(l10n)},
+              options: {for (final s in statuses) s: s.label(l10n)},
               current: filter.status,
               onPicked: (v) => onChanged(filter.copyWith(status: () => v)),
             ),
@@ -53,35 +69,39 @@ class TaskFilterBar extends StatelessWidget {
               onPicked: (v) => onChanged(filter.copyWith(priority: () => v)),
             ),
           ),
-          _chip(
-            context,
-            key: const Key('filterAssignee'),
-            label: l10n.filterAssignee,
-            selected: filter.assigneeId != null,
-            // NOT IMPLEMENTED (Sprint 2): people come from the users
-            // repository (paginated). Until then the sheet is empty.
-            onTap: () => _pick<String>(
+          if (showPeopleFilters) ...[
+            _chip(
               context,
-              title: l10n.filterAssignee,
-              options: const {},
-              current: filter.assigneeId,
-              onPicked: (v) => onChanged(filter.copyWith(assigneeId: () => v)),
+              key: const Key('filterAssignee'),
+              label: filter.assigneeId == null
+                  ? l10n.filterAssignee
+                  : assigneeOptions[filter.assigneeId] ?? l10n.unknownPerson,
+              selected: filter.assigneeId != null,
+              onTap: () => _pick<String>(
+                context,
+                title: l10n.filterAssignee,
+                options: assigneeOptions,
+                current: filter.assigneeId,
+                onPicked: (v) =>
+                    onChanged(filter.copyWith(assigneeId: () => v)),
+              ),
             ),
-          ),
-          _chip(
-            context,
-            key: const Key('filterDepartment'),
-            label: l10n.filterDepartment,
-            selected: filter.deptId != null,
-            // NOT IMPLEMENTED (Sprint 1): departments repository.
-            onTap: () => _pick<String>(
+            _chip(
               context,
-              title: l10n.filterDepartment,
-              options: const {},
-              current: filter.deptId,
-              onPicked: (v) => onChanged(filter.copyWith(deptId: () => v)),
+              key: const Key('filterDepartment'),
+              label: filter.deptId == null
+                  ? l10n.filterDepartment
+                  : departmentOptions[filter.deptId] ?? l10n.filterDepartment,
+              selected: filter.deptId != null,
+              onTap: () => _pick<String>(
+                context,
+                title: l10n.filterDepartment,
+                options: departmentOptions,
+                current: filter.deptId,
+                onPicked: (v) => onChanged(filter.copyWith(deptId: () => v)),
+              ),
             ),
-          ),
+          ],
           _chip(
             context,
             key: const Key('filterDue'),
@@ -139,9 +159,8 @@ class TaskFilterBar extends StatelessWidget {
       context: context,
       showDragHandle: true,
       builder: (sheetContext) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: ListView(
+          shrinkWrap: true,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
