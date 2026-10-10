@@ -136,6 +136,124 @@ void main() {
       );
     });
 
+    DocumentReference<Map<String, dynamic>> taskDoc(String id) =>
+        db.collection('orgs').doc(testOrg).collection('tasks').doc(id);
+
+    Future<void> settleFor(int rounds) async {
+      for (var i = 0; i < rounds; i++) {
+        await settle();
+      }
+    }
+
+    test('My Tasks is live: a status change and a new assignment show '
+        'without a refresh (AC-4.3-2)', () async {
+      await seedTask(db, taskFixture(id: 'a'));
+      final c = containerFor(asha);
+      final first = await loaded(c, myTasksProvider);
+      expect(first.items.single.status, TaskStatus.todo);
+
+      await taskDoc('a').update({'status': 'in_progress'});
+      await settleFor(3);
+      expect(
+        c.read(myTasksProvider).items.single.status,
+        TaskStatus.inProgress,
+      );
+
+      await seedTask(
+        db,
+        taskFixture(id: 'b', deadline: testNow.add(const Duration(hours: 1))),
+      );
+      await settleFor(3);
+      expect(c.read(myTasksProvider).items.map((t) => t.id), ['b', 'a']);
+
+      // Done tasks leave My Tasks by themselves.
+      await taskDoc('a').update({'status': 'done'});
+      await settleFor(3);
+      expect(c.read(myTasksProvider).items.map((t) => t.id), ['b']);
+    });
+
+    test(
+      "the creator's waiting section is live: refused shows, assigned leaves",
+      () async {
+        await seedTask(
+          db,
+          taskFixture(
+            id: 'p',
+            creatorId: 'asha',
+            assigneeIds: ['juma'],
+            viewerIds: ['asha'],
+            assignmentState: AssignmentState.pending,
+          ),
+        );
+        final c = containerFor(asha);
+        expect(
+          (await loaded(
+            c,
+            myUnassignedTasksProvider,
+          )).items.single.assignmentState,
+          AssignmentState.pending,
+        );
+        await taskDoc('p').update({
+          'assignmentState': 'rejected',
+          'assignmentError': 'assignee-not-allowed',
+        });
+        await settleFor(3);
+        expect(
+          c.read(myUnassignedTasksProvider).items.single.assignmentState,
+          AssignmentState.rejected,
+        );
+        await taskDoc('p').update({'assignmentState': 'assigned'});
+        await settleFor(3);
+        expect(c.read(myUnassignedTasksProvider).items, isEmpty);
+      },
+    );
+
+    test('Team Tasks: Load more shows 20 more tasks, still live', () async {
+      for (var i = 0; i < 45; i++) {
+        await seedTask(
+          db,
+          taskFixture(
+            id: 'task$i',
+            viewerIds: ['grace'],
+            deadline: testNow.add(Duration(hours: i + 1)),
+          ),
+        );
+      }
+      final c = containerFor(grace);
+      final first = await loaded(c, teamTasksProvider);
+      expect(first.items, hasLength(20));
+      expect(first.hasMore, isTrue);
+      final controller = c.read(teamTasksProvider.notifier);
+
+      await controller.loadMore();
+      await settle();
+      expect(controller.loadedPages, 2);
+      expect(c.read(teamTasksProvider).items, hasLength(40));
+      expect(c.read(teamTasksProvider).hasMore, isTrue);
+
+      await taskDoc('task35').update({'status': 'blocked'});
+      await settleFor(3);
+      expect(
+        c
+            .read(teamTasksProvider)
+            .items
+            .firstWhere((t) => t.id == 'task35')
+            .status,
+        TaskStatus.blocked,
+      );
+
+      await controller.loadMore();
+      await settle();
+      expect(controller.loadedPages, 3);
+      expect(c.read(teamTasksProvider).items, hasLength(45));
+      expect(c.read(teamTasksProvider).hasMore, isFalse);
+
+      // Pull to refresh goes back to one page.
+      await controller.refresh();
+      expect(controller.loadedPages, 1);
+      expect(c.read(teamTasksProvider).items, hasLength(20));
+    });
+
     test(
       'Team Tasks: managers by viewerIds; filters reload the query',
       () async {

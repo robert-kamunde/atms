@@ -72,7 +72,7 @@ void main() {
       expect(range.end!.difference(range.start!).inDays, 4);
     });
 
-    test('query part keeps status, priority and due; page part the rest', () {
+    test('query part keeps status, priority, department and due', () {
       const f = TaskFilter(
         status: TaskStatus.todo,
         priority: TaskPriority.high,
@@ -85,15 +85,14 @@ void main() {
         const TaskFilter(
           status: TaskStatus.todo,
           priority: TaskPriority.high,
+          deptId: 'd',
           due: DueFilter.today,
         ),
       );
       expect(f.hasPageFilters, isTrue);
       expect(f.queryPart.hasPageFilters, isFalse);
-      expect(
-        f.copyWith(assigneeId: () => null, deptId: () => null).hasPageFilters,
-        isFalse,
-      );
+      expect(f.copyWith(assigneeId: () => null).hasPageFilters, isFalse);
+      expect(const TaskFilter(deptId: 'd').hasPageFilters, isFalse);
     });
   });
 }
