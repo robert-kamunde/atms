@@ -79,7 +79,7 @@ export const tasks = {
     title: 'Prepare Q3 budget summary', description: '', priority: 'high', status: 'todo',
     deadline: inDays(2), creatorId: 'john', assigneeIds: ['asha'], deptId: 'FIN', confidential: false,
     participantIds: [], viewerIds: ['asha', 'john', 'neema'], templateId: null, completionMode: 'all',
-    completedByIds: [], assignmentState: 'assigned', escalationLevel: 0, overdue: false,
+    completedByIds: [], assignmentState: 'assigned', escalationLevel: 0, overdue: false, deleted: false,
     createdAt: minutesAgo(60), updatedAt: minutesAgo(60), updatedBy: 'john',
   },
   // Confidential HR task: only Rehema (participant) and holders of HR confidential access.
@@ -87,7 +87,7 @@ export const tasks = {
     title: 'Disciplinary case: staff member X', description: 'secret', priority: 'urgent', status: 'in_progress',
     deadline: inDays(1), creatorId: 'rehema', assigneeIds: ['rehema'], deptId: 'HR', confidential: true,
     participantIds: ['rehema'], viewerIds: ['rehema'], templateId: null, completionMode: 'all',
-    completedByIds: [], assignmentState: 'assigned', escalationLevel: 0, overdue: false,
+    completedByIds: [], assignmentState: 'assigned', escalationLevel: 0, overdue: false, deleted: false,
     createdAt: minutesAgo(60), updatedAt: minutesAgo(60), updatedBy: 'rehema',
   },
   // Workflow task at step 3 (Finance check), owned by Asha.
@@ -96,7 +96,7 @@ export const tasks = {
     deadline: inDays(5), creatorId: 'baraka', assigneeIds: ['asha'], deptId: 'OPS', confidential: false,
     participantIds: [], viewerIds: ['baraka', 'grace', 'neema', 'asha', 'john'], templateId: 'purchase',
     templateVersion: 1, currentStep: 3, stepDeadline: inDays(1), completionMode: 'all', completedByIds: [],
-    assignmentState: 'assigned', escalationLevel: 0, overdue: false,
+    assignmentState: 'assigned', escalationLevel: 0, overdue: false, deleted: false,
     createdAt: minutesAgo(600), updatedAt: minutesAgo(60), updatedBy: 'system',
   },
   // Two assignees who must both finish.
@@ -104,7 +104,7 @@ export const tasks = {
     title: 'Stock count', description: '', priority: 'medium', status: 'in_progress',
     deadline: inDays(3), creatorId: 'grace', assigneeIds: ['baraka', 'asha'], deptId: 'OPS', confidential: false,
     participantIds: [], viewerIds: ['baraka', 'asha', 'grace', 'neema', 'john'], templateId: null, completionMode: 'all',
-    completedByIds: [], assignmentState: 'assigned', escalationLevel: 0, overdue: false,
+    completedByIds: [], assignmentState: 'assigned', escalationLevel: 0, overdue: false, deleted: false,
     createdAt: minutesAgo(60), updatedAt: minutesAgo(60), updatedBy: 'grace',
   },
 };
