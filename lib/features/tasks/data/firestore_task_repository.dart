@@ -138,6 +138,9 @@ class FirestoreTaskRepository implements TaskRepository {
     DateTime now,
   ) {
     var q = query.where('deleted', isEqualTo: false);
+    if (filter.deptId case final deptId?) {
+      q = q.where('deptId', isEqualTo: deptId);
+    }
     if (filter.status case final status?) {
       q = q.where('status', isEqualTo: status.firestoreValue);
     }

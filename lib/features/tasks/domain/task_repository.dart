@@ -106,7 +106,8 @@ abstract interface class TaskRepository {
 
   /// Team Tasks for managers (and admins without a second factor):
   /// tasks they can see, by deadline. [filter]'s status, priority and due
-  /// date become query clauses; the rest is filtered within loaded pages.
+  /// date and department become query clauses; the assignee is filtered
+  /// within loaded pages.
   LivePaginatedSource<Task> teamTasks(
     TaskFilter filter, {
     required DateTime now,

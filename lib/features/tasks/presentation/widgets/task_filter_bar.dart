@@ -10,7 +10,7 @@ import '../../domain/task_filter.dart';
 /// Horizontal row of filter chips: status, priority, assignee, department,
 /// due date (spec 4.3). Assignee and department are offered only when
 /// [showPeopleFilters] is true (Team Tasks); their options are the people
-/// and departments on the loaded pages.
+/// on the loaded pages and the departments known so far.
 class TaskFilterBar extends StatelessWidget {
   const TaskFilterBar({
     super.key,

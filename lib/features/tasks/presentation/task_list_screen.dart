@@ -83,8 +83,13 @@ class _TaskListScreenState extends ConsumerState<TaskListScreen> {
       for (final id in state.items.expand((t) => t.assigneeIds))
         id: people[id]?.name ?? l10n.unknownPerson,
     };
+    // The department filter is part of the query, so the loaded tasks may
+    // all be in one department: also offer the departments seen before.
     final departmentOptions = <String, String>{
-      for (final id in state.items.map((t) => t.deptId))
+      for (final id in {
+        ...departments.keys,
+        ...state.items.map((t) => t.deptId),
+      })
         id: departments[id]?.name ?? l10n.unknownDepartment,
     };
     // Some filters only look at the tasks loaded so far: say so while more

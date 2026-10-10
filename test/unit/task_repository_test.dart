@@ -362,6 +362,60 @@ void main() {
       expect(await org(const TaskFilter()), {'a', 'b', 'late', 'hidden'});
     });
 
+    test('team and org tasks filter by department in the query', () async {
+      await seedTask(db, taskFixture(id: 'fin', viewerIds: ['asha']));
+      await seedTask(
+        db,
+        taskFixture(id: 'ops', viewerIds: ['asha'], deptId: 'ops'),
+      );
+      await seedTask(
+        db,
+        taskFixture(
+          id: 'opsBlocked',
+          viewerIds: ['asha'],
+          deptId: 'ops',
+          status: TaskStatus.blocked,
+        ),
+      );
+      await seedTask(
+        db,
+        taskFixture(id: 'opsOther', viewerIds: ['x'], deptId: 'ops'),
+      );
+      await seedTask(
+        db,
+        taskFixture(
+          id: 'opsSecret',
+          viewerIds: ['x'],
+          deptId: 'ops',
+          confidential: true,
+        ),
+      );
+
+      Future<Set<String>> team(TaskFilter f) async =>
+          (await repo.teamTasks(f, now: testNow).watch(pages: 1).first).items
+              .map((t) => t.id)
+              .toSet();
+      Future<Set<String>> org(TaskFilter f) async =>
+          (await repo.orgTasks(f, now: testNow).watch(pages: 1).first).items
+              .map((t) => t.id)
+              .toSet();
+
+      expect(await team(const TaskFilter(deptId: 'ops')), {
+        'ops',
+        'opsBlocked',
+      });
+      expect(
+        await team(const TaskFilter(deptId: 'ops', status: TaskStatus.blocked)),
+        {'opsBlocked'},
+      );
+      expect(await team(const TaskFilter(deptId: 'finance')), {'fin'});
+      expect(await org(const TaskFilter(deptId: 'ops')), {
+        'ops',
+        'opsBlocked',
+        'opsOther',
+      });
+    });
+
     test('reassign calls reassignTask with the exact input', () async {
       when(() => callables.call('reassignTask', any()))
           .thenAnswer((_) async => {'ok': true});

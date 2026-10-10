@@ -43,11 +43,11 @@ DeadlineRange deadlineRangeFor(DueFilter due, DateTime now) {
 
 /// Filters for task lists (spec 4.3).
 ///
-/// Status, priority and due date are selective and indexed, so the Team
-/// Tasks query applies them on the server (firestore.indexes.json).
-/// Assignee and department are applied within the loaded pages only
-/// (Firestore allows one `array-contains` per query, and the visibility
-/// clause already uses it), and the screen says so.
+/// Status, priority, department and due date are selective and indexed,
+/// so the Team Tasks query applies them on the server
+/// (firestore.indexes.json). The assignee is applied within the loaded
+/// pages only (Firestore allows one `array-contains` per query, and the
+/// visibility clause already uses it), and the screen says so.
 @immutable
 class TaskFilter {
   const TaskFilter({
@@ -72,11 +72,11 @@ class TaskFilter {
       due == null;
 
   /// True when some filter is applied only within the loaded pages.
-  bool get hasPageFilters => assigneeId != null || deptId != null;
+  bool get hasPageFilters => assigneeId != null;
 
   /// The part of the filter the server query applies.
   TaskFilter get queryPart =>
-      TaskFilter(status: status, priority: priority, due: due);
+      TaskFilter(status: status, priority: priority, deptId: deptId, due: due);
 
   /// Does [task] pass every filter at [now]? Used for the filters applied
   /// within loaded pages, and for lists whose query has no filters.
