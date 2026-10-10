@@ -44,6 +44,11 @@ confidential access for the department read them through the rules).
 `{ verifiedUntilMs }`, so triggers (which cannot see custom claims) can check an admin's second
 factor at the time of an action.
 
+> Backend note: `orgs/{org}/secure/adminVerification/{uid}` is a collection path (five segments),
+> so it cannot hold a document. The record is stored at
+> `orgs/{org}/secure/adminVerification/admins/{uid}` instead (same fix as `adminCodes` in
+> Sprint 1). Server-only, covered by the `secure/{document=**}` deny rule; the app never reads it.
+
 ## Callables (new)
 
 | Name | Caller | Input | Output |
