@@ -129,12 +129,19 @@ mixing data. Files live in Cloud Storage under `orgs/{org}/tasks/{task}/{attachm
 
 | Query | Index |
 | --- | --- |
-| My/visible tasks by status, sorted by deadline | tasks: viewerIds (array-contains) + status + deadline |
+| My Tasks (assigned to me), optional status, by deadline | tasks: assigneeIds (array-contains) + assignmentState + deleted + status + deadline |
+| My pending and refused requests | tasks: viewerIds (array-contains) + creatorId + assignmentState + deleted + deadline |
+| Team Tasks, optional department, status, priority, by deadline | tasks: viewerIds (array-contains) + deleted + [deptId] + [status] + [priority] + deadline (8 variants) |
+| Verified admin task list (non-confidential), same filters | tasks: confidential + deleted + [deptId] + [status] + [priority] + deadline (8 variants) |
+| Task activity log | audit: taskId + viewerIds (array-contains) + at desc; audit: taskId + confidential + at desc |
+| Admin audit screen | audit: confidential + at desc |
+| Manager's assignee picker | users: managerChain (array-contains) + name |
 | Department lists for confidential-access holders and admin stats | tasks: deptId + status |
 | Escalation job | tasks: overdue + escalationLevel |
 | Reminder job (open tasks by deadline) | tasks: status + deadline |
 | Notification list | notifications: userId + createdAt desc |
 
+Lists are live: one listener per list on the first `pages × 20` tasks; "Load more" adds a page.
 The last two are added because the reminder job and the bell list run those exact queries.
 
 ## 4. Security model
