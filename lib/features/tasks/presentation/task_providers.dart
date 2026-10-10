@@ -8,6 +8,7 @@ import '../../../core/services/offline_write.dart';
 import '../../../shared/models/app_user.dart';
 import '../../../shared/models/task.dart';
 import '../../../shared/models/task_status.dart';
+import '../../../shared/providers/live_paged_list_controller.dart';
 import '../../../shared/providers/paged_list_controller.dart';
 import '../../../shared/services/paginated_query.dart';
 import '../../auth/domain/auth_state.dart';
@@ -55,14 +56,15 @@ void _lookupNames(Ref ref, List<Task> items) {
       .ensure(items.map((t) => t.deptId));
 }
 
-/// My Tasks: open tasks assigned to me, by deadline, 20 at a time.
-class MyTasksController extends PagedListController<Task> {
+/// My Tasks: open tasks assigned to me, by deadline, 20 at a time, live
+/// (status changes and new assignments show without a refresh).
+class MyTasksController extends LivePagedListController<Task> {
   @override
-  PaginatedSource<Task> createSource() =>
+  LivePaginatedSource<Task> createSource() =>
       requireRepository(ref.read(taskRepositoryProvider)).myTasks();
 
   @override
-  void onPageLoaded(List<Task> items) => _lookupNames(ref, items);
+  void onItemsLoaded(List<Task> items) => _lookupNames(ref, items);
 }
 
 final myTasksProvider =
@@ -70,14 +72,15 @@ final myTasksProvider =
       MyTasksController.new,
     );
 
-/// Tasks I created that are waiting to be assigned or were refused (A-01).
-class MyUnassignedTasksController extends PagedListController<Task> {
+/// Tasks I created that are waiting to be assigned or were refused (A-01),
+/// live.
+class MyUnassignedTasksController extends LivePagedListController<Task> {
   @override
-  PaginatedSource<Task> createSource() =>
+  LivePaginatedSource<Task> createSource() =>
       requireRepository(ref.read(taskRepositoryProvider)).myUnassignedTasks();
 
   @override
-  void onPageLoaded(List<Task> items) => _lookupNames(ref, items);
+  void onItemsLoaded(List<Task> items) => _lookupNames(ref, items);
 }
 
 final myUnassignedTasksProvider =
@@ -99,9 +102,10 @@ final teamTaskFilterProvider =
       TeamTaskFilterController.new,
     );
 
-/// Team Tasks (managers, admins): by deadline, 20 at a time. Reloads from
-/// the first page when a filter that is part of the query changes.
-class TeamTasksController extends PagedListController<Task> {
+/// Team Tasks (managers, admins): by deadline, 20 at a time, live.
+/// Listens again from the first page when a filter that is part of the
+/// query changes.
+class TeamTasksController extends LivePagedListController<Task> {
   @override
   PagedListState<Task> build() {
     ref.watch(teamTaskFilterProvider.select((f) => f.queryPart));
@@ -110,7 +114,7 @@ class TeamTasksController extends PagedListController<Task> {
   }
 
   @override
-  PaginatedSource<Task> createSource() {
+  LivePaginatedSource<Task> createSource() {
     final repo = requireRepository(ref.read(taskRepositoryProvider));
     final filter = ref.read(teamTaskFilterProvider).queryPart;
     final now = ref.read(clockProvider)();
@@ -121,7 +125,7 @@ class TeamTasksController extends PagedListController<Task> {
   }
 
   @override
-  void onPageLoaded(List<Task> items) => _lookupNames(ref, items);
+  void onItemsLoaded(List<Task> items) => _lookupNames(ref, items);
 }
 
 final teamTasksProvider =
@@ -211,13 +215,6 @@ class TaskActions extends Notifier<void> {
   TaskRepository get _repo =>
       requireRepository(ref.read(taskRepositoryProvider));
 
-  void _refreshLists() {
-    if (!ref.mounted) return;
-    ref.invalidate(myTasksProvider);
-    ref.invalidate(myUnassignedTasksProvider);
-    ref.invalidate(teamTasksProvider);
-  }
-
   Future<WriteOutcome> _run(String name, Future<void> Function() write) async {
     final Future<void> future;
     try {
@@ -225,9 +222,8 @@ class TaskActions extends Notifier<void> {
     } catch (error, stackTrace) {
       throw mapError(error, stackTrace);
     }
-    final outcome = await awaitOfflineCapableWrite(future, writeName: name);
-    _refreshLists();
-    return outcome;
+    // The task lists are live, so they show the change by themselves.
+    return awaitOfflineCapableWrite(future, writeName: name);
   }
 
   Future<CreatedTask> create(TaskDraft draft) async {
@@ -294,7 +290,6 @@ class TaskActions extends Notifier<void> {
     } catch (error, stackTrace) {
       throw mapError(error, stackTrace);
     }
-    _refreshLists();
   }
 }
 

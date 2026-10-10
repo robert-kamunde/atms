@@ -280,11 +280,13 @@ void main() {
         db,
         taskFixture(id: 'waiting', status: TaskStatus.awaitingCheck),
       );
-      final first = await repo.myTasks().fetchPage();
+      final first = await repo.myTasks().watch(pages: 1).first;
       expect(first.items, hasLength(20));
       expect(first.items.first.id, 'mine0');
-      final second = await repo.myTasks().fetchPage(after: first.next);
-      expect(second.items.map((t) => t.id), [
+      expect(first.hasMore, isTrue);
+      final second = await repo.myTasks().watch(pages: 2).first;
+      expect(second.items, hasLength(24));
+      expect(second.items.skip(20).map((t) => t.id), [
         'mine20',
         'mine21',
         'mine22',
@@ -315,7 +317,7 @@ void main() {
         ),
       );
       await seedTask(db, taskFixture(id: 'a', creatorId: 'asha'));
-      final page = await repo.myUnassignedTasks().fetchPage();
+      final page = await repo.myUnassignedTasks().watch(pages: 1).first;
       expect(page.items.map((t) => t.id).toSet(), {'p', 'r'});
     });
 
@@ -345,11 +347,11 @@ void main() {
       await seedTask(db, taskFixture(id: 'hidden', viewerIds: ['x']));
 
       Future<Set<String>> team(TaskFilter f) async =>
-          (await repo.teamTasks(f, now: testNow).fetchPage()).items
+          (await repo.teamTasks(f, now: testNow).watch(pages: 1).first).items
               .map((t) => t.id)
               .toSet();
       Future<Set<String>> org(TaskFilter f) async =>
-          (await repo.orgTasks(f, now: testNow).fetchPage()).items
+          (await repo.orgTasks(f, now: testNow).watch(pages: 1).first).items
               .map((t) => t.id)
               .toSet();
 

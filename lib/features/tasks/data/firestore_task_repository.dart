@@ -49,7 +49,7 @@ class FirestoreTaskRepository implements TaskRepository {
     bool hasPendingWrites,
   ) => Task.fromMap(id, data, hasPendingWrites: hasPendingWrites);
 
-  PaginatedSource<Task> _paged(
+  LivePaginatedSource<Task> _paged(
     Query<Map<String, dynamic>> query,
     String label,
   ) => FirestorePaginatedQuery<Task>(
@@ -99,7 +99,7 @@ class FirestoreTaskRepository implements TaskRepository {
       });
 
   @override
-  PaginatedSource<Task> myTasks() => _paged(
+  LivePaginatedSource<Task> myTasks() => _paged(
     _tasks
         .where('assigneeIds', arrayContains: uid)
         .where(
@@ -116,7 +116,7 @@ class FirestoreTaskRepository implements TaskRepository {
   );
 
   @override
-  PaginatedSource<Task> myUnassignedTasks() => _paged(
+  LivePaginatedSource<Task> myUnassignedTasks() => _paged(
     _tasks
         .where('viewerIds', arrayContains: uid)
         .where('creatorId', isEqualTo: uid)
@@ -160,22 +160,22 @@ class FirestoreTaskRepository implements TaskRepository {
   }
 
   @override
-  PaginatedSource<Task> teamTasks(TaskFilter filter, {required DateTime now}) =>
-      _paged(
-        _withFilter(_tasks.where('viewerIds', arrayContains: uid), filter, now),
-        'teamTasks',
-      );
+  LivePaginatedSource<Task> teamTasks(
+    TaskFilter filter, {
+    required DateTime now,
+  }) => _paged(
+    _withFilter(_tasks.where('viewerIds', arrayContains: uid), filter, now),
+    'teamTasks',
+  );
 
   @override
-  PaginatedSource<Task> orgTasks(TaskFilter filter, {required DateTime now}) =>
-      _paged(
-        _withFilter(
-          _tasks.where('confidential', isEqualTo: false),
-          filter,
-          now,
-        ),
-        'orgTasks',
-      );
+  LivePaginatedSource<Task> orgTasks(
+    TaskFilter filter, {
+    required DateTime now,
+  }) => _paged(
+    _withFilter(_tasks.where('confidential', isEqualTo: false), filter, now),
+    'orgTasks',
+  );
 
   @override
   Future<void> updateDetails(String taskId, TaskEdit edit) =>

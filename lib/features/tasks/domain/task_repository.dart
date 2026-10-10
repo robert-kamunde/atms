@@ -95,19 +95,28 @@ abstract interface class TaskRepository {
   /// `PermissionDeniedFailure` (shown as "not found", A-17).
   Stream<Task?> watchTask(String taskId);
 
+  /// Task lists are live (PDD AC-4.3-2: status changes show within
+  /// seconds) and paged: see [LivePaginatedSource].
+  ///
   /// My Tasks: open tasks assigned to me, by deadline.
-  PaginatedSource<Task> myTasks();
+  LivePaginatedSource<Task> myTasks();
 
   /// Tasks I created that the server has not assigned yet or refused.
-  PaginatedSource<Task> myUnassignedTasks();
+  LivePaginatedSource<Task> myUnassignedTasks();
 
   /// Team Tasks for managers (and admins without a second factor):
   /// tasks they can see, by deadline. [filter]'s status, priority and due
   /// date become query clauses; the rest is filtered within loaded pages.
-  PaginatedSource<Task> teamTasks(TaskFilter filter, {required DateTime now});
+  LivePaginatedSource<Task> teamTasks(
+    TaskFilter filter, {
+    required DateTime now,
+  });
 
   /// Team Tasks for verified admins: every non-confidential task.
-  PaginatedSource<Task> orgTasks(TaskFilter filter, {required DateTime now});
+  LivePaginatedSource<Task> orgTasks(
+    TaskFilter filter, {
+    required DateTime now,
+  });
 
   Future<void> updateDetails(String taskId, TaskEdit edit);
 

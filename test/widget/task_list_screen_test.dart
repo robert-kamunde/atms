@@ -82,6 +82,43 @@ void main() {
         expect(find.text(TaskPriority.high.label(l10n)), findsNWidgets(2));
       });
 
+      testWidgets('list and board update live, without a refresh', (
+        tester,
+      ) async {
+        await seedTask(db, taskFixture(id: 'a', title: 'Alpha'));
+        await pump(tester);
+        expect(find.text(TaskStatus.inProgress.label(l10n)), findsNothing);
+
+        final tasks = db.collection('orgs').doc(testOrg).collection('tasks');
+        await tester.runAsync(
+          () => tasks.doc('a').update({'status': 'in_progress'}),
+        );
+        await tester.pumpAndSettle();
+        expect(find.text(TaskStatus.inProgress.label(l10n)), findsWidgets);
+
+        await tester.runAsync(
+          () => seedTask(db, taskFixture(id: 'b', title: 'Bravo')),
+        );
+        await tester.pumpAndSettle();
+        expect(find.text('Bravo'), findsOneWidget);
+
+        await tester.tap(find.byKey(const Key('toggleBoardButton')));
+        await tester.pumpAndSettle();
+        final todo = TaskStatus.todo.label(l10n);
+        expect(find.text(l10n.boardColumnTitle(todo, 1)), findsOneWidget);
+        await tester.runAsync(
+          () => tasks.doc('b').update({'status': 'in_progress'}),
+        );
+        await tester.pumpAndSettle();
+        expect(find.text(l10n.boardColumnTitle(todo, 0)), findsOneWidget);
+        expect(
+          find.text(
+            l10n.boardColumnTitle(TaskStatus.inProgress.label(l10n), 2),
+          ),
+          findsOneWidget,
+        );
+      });
+
       testWidgets('refused and pending creations show with the reason', (
         tester,
       ) async {
