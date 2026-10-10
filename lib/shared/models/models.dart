@@ -2,6 +2,8 @@
 library;
 
 export 'app_user.dart';
+export 'assignment_state.dart';
+export 'audit_entry.dart';
 export 'completion_mode.dart';
 export 'department.dart';
 export 'step_owner_type.dart';

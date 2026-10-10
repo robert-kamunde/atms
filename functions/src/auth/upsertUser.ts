@@ -7,6 +7,8 @@
 import { randomBytes, randomUUID } from 'crypto';
 import type { UpdateRequest } from 'firebase-admin/auth';
 import { FieldPath, type DocumentReference, type Firestore, type Transaction } from 'firebase-admin/firestore';
+import { userAuditDiff } from '../audit/audit';
+import { writeUserAudit } from '../audit/writer';
 import { MAX_ORG_USERS } from '../shared/config';
 import { AtmsError, ErrorCode, validationError } from '../shared/errors';
 import { log } from '../shared/logger';
@@ -172,10 +174,17 @@ async function writeTree(deps: Deps, caller: Caller, input: UpsertUserInput, uid
 
   const deferred = await db.runTransaction(async (tx) => {
     const p = await plan(deps, tx, caller, input, uid);
+    const contactRef = db.doc(paths.contact(org, uid));
+    const oldContact = p.existing ? ((await tx.get(contactRef)).data() as UserContact | undefined) : undefined;
     const userRef = db.doc(paths.user(org, uid));
     if (p.existing) tx.set(userRef, p.userDoc, { merge: true });
     else tx.create(userRef, p.userDoc);
-    tx.set(db.doc(paths.contact(org, uid)), { phone: input.phone, email: input.email } satisfies UserContact);
+    tx.set(contactRef, { phone: input.phone, email: input.email } satisfies UserContact);
+    const diff = userAuditDiff(
+      p.existing ? { ...p.existing, phone: oldContact?.phone ?? null, email: oldContact?.email ?? null } : null,
+      { ...p.userDoc, phone: input.phone, email: input.email },
+    );
+    if (diff) writeUserAudit(tx, db, org, caller.uid, p.existing ? 'user_updated' : 'user_added', uid, { before: diff.before, after: diff.after });
 
     const changes = p.others;
     const small = changes.length + 2 <= maxWrites;

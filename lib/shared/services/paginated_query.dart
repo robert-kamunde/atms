@@ -39,18 +39,56 @@ abstract interface class PaginatedSource<T> {
   Future<PageResult<T>> fetchPage({PageCursor? after});
 }
 
+/// The first `pages * pageSize` items of a live list.
+@immutable
+class LivePage<T> {
+  const LivePage({required this.items, required this.hasMore});
+
+  final List<T> items;
+
+  /// True when at least one more item exists after [items].
+  final bool hasMore;
+}
+
+/// A list that stays up to date while it is shown (e.g. task lists: a
+/// status change must reach the creator within seconds, PDD AC-4.3-2).
+///
+/// It is still paged: [watch] listens to the first `pages * pageSize`
+/// items only, and "Load more" listens again with one more page. Never
+/// an unlimited query.
+abstract interface class LivePaginatedSource<T> {
+  /// Page size used by this source; never more than [AppConstants.pageSize].
+  int get pageSize;
+
+  /// The first [pages] pages, again every time they change (including
+  /// "waiting to sync" changes). Errors are `AppFailure`s; the stream ends
+  /// after an error.
+  Stream<LivePage<T>> watch({required int pages});
+}
+
 /// Converts a Firestore document to a model.
 typedef DocumentDecoder<T> = T Function(String id, Map<String, Object?> data);
 
-/// [PaginatedSource] over a Firestore [Query].
+/// Like [DocumentDecoder], also told whether the document has changes made
+/// on this phone that have not reached the server ("waiting to sync").
+typedef PendingAwareDecoder<T> = T Function(
+  String id,
+  Map<String, Object?> data,
+  bool hasPendingWrites,
+);
+
+/// [PaginatedSource] and [LivePaginatedSource] over a Firestore [Query].
 ///
 /// The query must already contain its `where` and `orderBy` clauses (for
 /// tasks: `viewerIds array-contains me`, ordered by `deadline`; spec 5).
-/// This class adds `limit` and `startAfterDocument`.
-class FirestorePaginatedQuery<T> implements PaginatedSource<T> {
+/// This class adds `limit` and `startAfterDocument` (one-shot pages) or
+/// `limit` alone (live pages).
+class FirestorePaginatedQuery<T>
+    implements PaginatedSource<T>, LivePaginatedSource<T> {
   FirestorePaginatedQuery({
     required this.query,
     required this.decode,
+    this.pendingAwareDecode,
     this.pageSize = AppConstants.pageSize,
     this.debugLabel = 'query',
   }) : assert(
@@ -63,6 +101,10 @@ class FirestorePaginatedQuery<T> implements PaginatedSource<T> {
 
   /// Converts each document to a model.
   final DocumentDecoder<T> decode;
+
+  /// When set, used instead of [decode] with the document's
+  /// `metadata.hasPendingWrites`.
+  final PendingAwareDecoder<T>? pendingAwareDecode;
 
   @override
   final int pageSize;
@@ -96,10 +138,51 @@ class FirestorePaginatedQuery<T> implements PaginatedSource<T> {
     final docs = snapshot.docs;
     final hasMore = docs.length > pageSize;
     final pageDocs = hasMore ? docs.sublist(0, pageSize) : docs;
+    return PageResult<T>(
+      items: _decodeAll(pageDocs),
+      next: hasMore ? PageCursor._(pageDocs.last) : null,
+    );
+  }
+
+  @override
+  Stream<LivePage<T>> watch({required int pages}) {
+    assert(pages > 0, 'pages must be at least 1');
+    final limit = pages * pageSize;
+    // One extra document tells us whether more exist, as for fetchPage.
+    // Metadata changes are included so "waiting to sync" stays right.
+    return query
+        .limit(limit + 1)
+        .snapshots(includeMetadataChanges: true)
+        .map((snapshot) {
+          final docs = snapshot.docs;
+          final hasMore = docs.length > limit;
+          return LivePage<T>(
+            items: _decodeAll(hasMore ? docs.sublist(0, limit) : docs),
+            hasMore: hasMore,
+          );
+        })
+        .handleError((Object error, StackTrace stackTrace) {
+          final failure = mapError(error, stackTrace);
+          AppLogger.warning(
+            'Live paginated query failed',
+            context: {'query': debugLabel, 'code': failure.code},
+            error: failure,
+            stackTrace: stackTrace,
+          );
+          throw failure;
+        });
+  }
+
+  List<T> _decodeAll(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) {
     final items = <T>[];
-    for (final doc in pageDocs) {
+    for (final doc in docs) {
       try {
-        items.add(decode(doc.id, doc.data()));
+        final pendingAware = pendingAwareDecode;
+        items.add(
+          pendingAware != null
+              ? pendingAware(doc.id, doc.data(), doc.metadata.hasPendingWrites)
+              : decode(doc.id, doc.data()),
+        );
       } on FormatException catch (error, stackTrace) {
         // A malformed document must not break the whole list. It is
         // skipped and logged (by id only) so it can be fixed.
@@ -111,9 +194,6 @@ class FirestorePaginatedQuery<T> implements PaginatedSource<T> {
         );
       }
     }
-    return PageResult<T>(
-      items: List.unmodifiable(items),
-      next: hasMore ? PageCursor._(pageDocs.last) : null,
-    );
+    return List.unmodifiable(items);
   }
 }

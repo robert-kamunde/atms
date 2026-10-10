@@ -19,7 +19,15 @@ flutter build appbundle --release --dart-define-from-file=env/prod.json   # env 
 cd functions && npm run build && firebase deploy --only functions,firestore,storage --project prod   # alias for atms-d7f64 in .firebaserc
 ```
 
-Every sprint ends with a working debug APK built by CI (`atms-debug-apk` artifact).
+Every sprint ends with a working debug APK built by CI (`atms-debug-apk` artifact, not connected).
+CI also builds `atms-connected-debug-apk` against atms-d7f64 with the committed DEVELOPMENT key
+(DECISIONS A-33); locally:
+
+```bash
+flutter build apk --debug --dart-define-from-file=config/firebase/atms-d7f64.json
+```
+
+Never sign a Play Store release with `android/dev-signing/`.
 
 ## Release checklist
 

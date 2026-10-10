@@ -42,29 +42,19 @@ class PagedListView<T> extends StatelessWidget {
     final l10n = context.l10n;
     final visible = items ?? state.items;
     if (state.loadedOnce && state.items.isEmpty && state.failure == null) {
-      return Column(
-        children: [
-          ?header,
-          Expanded(child: empty),
-        ],
-      );
+      return _withHeader(empty);
     }
     if (!state.loadedOnce && state.failure != null) {
-      return Column(
-        children: [
-          ?header,
-          Expanded(
-            child: EmptyState(
-              icon: Icons.error_outline,
-              title: failureMessage(state.failure!, l10n),
-              action: OutlinedButton(
-                key: const Key('retryButton'),
-                onPressed: onLoadMore,
-                child: Text(l10n.actionRetry),
-              ),
-            ),
+      return _withHeader(
+        EmptyState(
+          icon: Icons.error_outline,
+          title: failureMessage(state.failure!, l10n),
+          action: OutlinedButton(
+            key: const Key('retryButton'),
+            onPressed: onLoadMore,
+            child: Text(l10n.actionRetry),
           ),
-        ],
+        ),
       );
     }
     final footer = <Widget>[
@@ -114,4 +104,13 @@ class PagedListView<T> extends StatelessWidget {
       ],
     );
   }
+
+  /// [header] (if any) above [child], which fills the remaining space and
+  /// scrolls with the header when the header is tall.
+  Widget _withHeader(Widget child) => CustomScrollView(
+    slivers: [
+      if (header != null) SliverToBoxAdapter(child: header),
+      SliverFillRemaining(hasScrollBody: false, child: child),
+    ],
+  );
 }

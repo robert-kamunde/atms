@@ -152,6 +152,12 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get actionCancel;
 
+  /// Task detail button: cancel the task (asks for a reason). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel task'**
+  String get actionCancelTask;
+
   /// Tooltip: clear the chosen value.
   ///
   /// In en, this message translates to:
@@ -163,6 +169,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close'**
   String get actionClose;
+
+  /// Creator confirms checked work (D-06). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm done'**
+  String get actionConfirmDone;
 
   /// Generic continue button.
   ///
@@ -188,11 +200,23 @@ abstract class AppLocalizations {
   /// **'Deactivate person'**
   String get actionDeactivateUser;
 
+  /// Button: delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get actionDelete;
+
   /// Edit button / tooltip.
   ///
   /// In en, this message translates to:
   /// **'Edit'**
   String get actionEdit;
+
+  /// Fix a task the server could not assign and send it again (A-01). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit and send again'**
+  String get actionEditAndResend;
 
   /// Button on the email sign-in screen.
   ///
@@ -224,11 +248,29 @@ abstract class AppLocalizations {
   /// **'Load more'**
   String get actionLoadMore;
 
+  /// Assignee marks the task blocked (asks for a reason). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark blocked'**
+  String get actionMarkBlocked;
+
+  /// Assignee marks the task done. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark done'**
+  String get actionMarkDone;
+
   /// Tooltip of a menu button.
   ///
   /// In en, this message translates to:
   /// **'More options'**
   String get actionMoreOptions;
+
+  /// One of several assignees marks their part done (A-02). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m done'**
+  String get actionMyPartDone;
 
   /// Button to create a task.
   ///
@@ -248,6 +290,12 @@ abstract class AppLocalizations {
   /// **'Not now'**
   String get actionNotNow;
 
+  /// Change the assignees (needs a connection). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Reassign'**
+  String get actionReassign;
+
   /// Tooltip: remove an item from a list.
   ///
   /// In en, this message translates to:
@@ -260,11 +308,23 @@ abstract class AppLocalizations {
   /// **'Send the code again'**
   String get actionResendCode;
 
+  /// Assignee continues a blocked task.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get actionResumeTask;
+
   /// Retry button after a load error.
   ///
   /// In en, this message translates to:
   /// **'Try again'**
   String get actionRetry;
+
+  /// Creator returns checked work with a reason (D-06). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Return for changes'**
+  String get actionReturnWork;
 
   /// Save button.
   ///
@@ -283,6 +343,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Send code'**
   String get actionSendCode;
+
+  /// Assignee finishes a task whose creator checks the work (D-06). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Send for check'**
+  String get actionSendForCheck;
 
   /// Button: send password reset email.
   ///
@@ -314,6 +380,12 @@ abstract class AppLocalizations {
   /// **'Sign out'**
   String get actionSignOut;
 
+  /// Assignee starts the task.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get actionStartTask;
+
   /// Not-invited screen: go back to sign-in.
   ///
   /// In en, this message translates to:
@@ -325,6 +397,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Verify'**
   String get actionVerify;
+
+  /// Activity log: the server accepted the assignees. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'The task was assigned'**
+  String get activityAssigned;
+
+  /// Activity log. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} cancelled the task: {reason}'**
+  String activityCancelled(String actor, String reason);
+
+  /// Activity log. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} cancelled the task'**
+  String activityCancelledNoReason(String actor);
+
+  /// Activity log: one of several assignees finished. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} finished their part'**
+  String activityCompletedBy(String actor);
+
+  /// Activity log. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} created the task'**
+  String activityCreated(String actor);
+
+  /// Activity log. from and to are dates. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} changed the deadline from {from} to {to}'**
+  String activityDeadlineChanged(String actor, String from, String to);
+
+  /// Activity log, when the dates are not available. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} changed the deadline'**
+  String activityDeadlineSet(String actor);
+
+  /// Activity log. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} deleted the task'**
+  String activityDeleted(String actor);
+
+  /// Activity log. fields is a list of field names such as 'Title, Description'. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} changed: {fields}'**
+  String activityEdited(String actor, String fields);
+
+  /// Activity log empty state. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'No activity yet'**
+  String get activityEmpty;
+
+  /// Activity log: an action this app version does not describe. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} made a change'**
+  String activityGeneric(String actor);
+
+  /// Activity log marker: the change was made without a connection and synced later. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Made offline'**
+  String get activityMadeOffline;
+
+  /// Activity log: priority changed to this value. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Priority ({priority})'**
+  String activityPriorityValue(String priority);
+
+  /// Activity log. names is a list of people. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} reassigned the task to {names}'**
+  String activityReassigned(String actor, String names);
+
+  /// Activity log. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} reassigned the task'**
+  String activityReassignedNoNames(String actor);
+
+  /// Activity log. reason is a friendly error message. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'The task could not be assigned: {reason}'**
+  String activityRejected(String reason);
+
+  /// Activity log (D-06). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} returned the work for changes: {reason}'**
+  String activityReturned(String actor, String reason);
+
+  /// Activity log (D-06). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} returned the work for changes'**
+  String activityReturnedNoReason(String actor);
+
+  /// Activity log. from and to are status names. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} changed the status from {from} to {to}'**
+  String activityStatusChanged(String actor, String from, String to);
+
+  /// Activity log. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} changed the status to {to}'**
+  String activityStatusSet(String actor, String to);
+
+  /// Activity log: the system itself did it.
+  ///
+  /// In en, this message translates to:
+  /// **'ATMS'**
+  String get activitySystemActor;
+
+  /// Task detail: activity log section. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity'**
+  String get activityTitle;
+
+  /// Audit log. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} added a person'**
+  String activityUserAdded(String actor);
+
+  /// Audit log. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} deactivated a person'**
+  String activityUserDeactivated(String actor);
+
+  /// Audit log. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} changed a person\'s details'**
+  String activityUserUpdated(String actor);
 
   /// Admin: audit log screen title. SW_REVIEW: Kiswahili needs native-speaker check.
   ///
@@ -428,17 +650,65 @@ abstract class AppLocalizations {
   /// **'Approvals waiting'**
   String get approvalsTitle;
 
-  /// Number of assignees picked.
+  /// My Tasks: heading above the tasks assigned to me. SW_REVIEW: Kiswahili needs native-speaker check.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =1{1 person chosen} other{{count} people chosen}}'**
-  String assigneeCount(int count);
+  /// **'Assigned to me'**
+  String get assignedSectionTitle;
+
+  /// Assignee picker: the signed-in person.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} (me)'**
+  String assigneeMe(String name);
+
+  /// Assignee picker confirm button. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{Choose people} =1{Choose 1 person} other{Choose {count} people}}'**
+  String assigneePickerDone(int count);
 
   /// Assignee picker empty state.
   ///
   /// In en, this message translates to:
   /// **'No people to choose from yet'**
   String get assigneePickerEmpty;
+
+  /// Edit task: assignees are changed with Reassign. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'To change who does it, use Reassign on the task.'**
+  String get assigneesChangeWithReassign;
+
+  /// Label: the server has not assigned the new task yet (A-01). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting to be assigned'**
+  String get assignmentPendingLabel;
+
+  /// Task detail notice for a pending task (A-01). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Only you can see this task until it is assigned. It is assigned when this phone is online.'**
+  String get assignmentPendingMessage;
+
+  /// Reason shown when the server gives an unknown assignment error. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'The people chosen could not be assigned.'**
+  String get assignmentRejectedGeneric;
+
+  /// Label: the server refused the assignment (A-01). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Not assigned'**
+  String get assignmentRejectedLabel;
+
+  /// Task detail notice for a refused task. reason is a full sentence. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'This task was not assigned: {reason} Edit it and send it again, or delete it.'**
+  String assignmentRejectedMessage(String reason);
 
   /// Attachments empty state.
   ///
@@ -463,6 +733,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No audit entries yet'**
   String get auditEmptyTitle;
+
+  /// Notice for assignees of a task waiting for check (D-06). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Finished. Waiting for the creator to check the work.'**
+  String get awaitingCheckAssigneeMessage;
+
+  /// Notice for the creator of a task waiting for check (D-06). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'The work is finished. Check it, then confirm or return it for changes.'**
+  String get awaitingCheckCreatorMessage;
+
+  /// Reason dialog title. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Why is this task blocked?'**
+  String get blockTaskTitle;
+
+  /// Task detail field. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocked because'**
+  String get blockedReasonLabel;
+
+  /// Kanban column without tasks.
+  ///
+  /// In en, this message translates to:
+  /// **'No tasks'**
+  String get boardColumnEmpty;
+
+  /// Kanban column header: status and number of loaded tasks.
+  ///
+  /// In en, this message translates to:
+  /// **'{status} ({count})'**
+  String boardColumnTitle(String status, int count);
+
+  /// Task detail field. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled because'**
+  String get cancelReasonLabel;
+
+  /// Reason dialog title. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Why is this task cancelled?'**
+  String get cancelTaskTitle;
 
   /// Code entry instructions.
   ///
@@ -511,6 +829,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Comments'**
   String get commentsTitle;
+
+  /// Several assignees: everyone must finish (A-02). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Done when everyone has finished'**
+  String get completionModeAll;
+
+  /// Several assignees: one is enough (A-02). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Done when any one person finishes'**
+  String get completionModeAny;
 
   /// Consent checkbox label.
   ///
@@ -758,6 +1088,18 @@ abstract class AppLocalizations {
   /// **'Deactivate this person?'**
   String get deactivateUserTitle;
 
+  /// Delete confirmation. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'The task will be removed from everyone\'s lists. The audit log keeps a record.'**
+  String get deleteTaskMessage;
+
+  /// Delete confirmation title.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this task?'**
+  String get deleteTaskTitle;
+
   /// Dialog title.
   ///
   /// In en, this message translates to:
@@ -883,6 +1225,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please confirm your administrator code again.'**
   String get errorAdminVerificationRequired;
+
+  /// Error assignee-inactive. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'One of the people chosen is no longer active. Choose someone else.'**
+  String get errorAssigneeInactive;
+
+  /// Error assignee-not-allowed. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'You cannot assign tasks to one of the people chosen. Choose people in your team.'**
+  String get errorAssigneeNotAllowed;
 
   /// Generic conflict error.
   ///
@@ -1028,6 +1382,12 @@ abstract class AppLocalizations {
   /// **'The chosen supervisor is not an active person in this organisation. Choose someone else.'**
   String get errorSupervisorInvalid;
 
+  /// Error task-closed. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'This task is already finished or cancelled.'**
+  String get errorTaskClosed;
+
   /// Rate limited.
   ///
   /// In en, this message translates to:
@@ -1094,6 +1454,12 @@ abstract class AppLocalizations {
   /// **'Due date'**
   String get filterDueDate;
 
+  /// Shown when filters apply within loaded pages only. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Some filters look only at the tasks loaded so far. Load more to see more.'**
+  String get filterLoadedOnlyNote;
+
   /// Empty filter options.
   ///
   /// In en, this message translates to:
@@ -1130,11 +1496,23 @@ abstract class AppLocalizations {
   /// **'Inactive'**
   String get labelInactive;
 
+  /// Yes/no value.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get labelNo;
+
   /// Warning label: this person's supervisor was deactivated and must be changed. SW_REVIEW: Kiswahili needs native-speaker check.
   ///
   /// In en, this message translates to:
   /// **'Supervisor inactive'**
   String get labelSupervisorInactive;
+
+  /// Yes/no value.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get labelYes;
 
   /// Language option; always shown in English.
   ///
@@ -1370,6 +1748,54 @@ abstract class AppLocalizations {
   /// **'Signed in as {role}'**
   String profileSignedInAs(String role);
 
+  /// Progress of one assignee.
+  ///
+  /// In en, this message translates to:
+  /// **'Finished'**
+  String get progressFinished;
+
+  /// Progress of one assignee.
+  ///
+  /// In en, this message translates to:
+  /// **'Not finished yet'**
+  String get progressNotFinished;
+
+  /// Reason field label.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get reasonFieldLabel;
+
+  /// Reassign picker title. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Reassign to'**
+  String get reassignTitle;
+
+  /// Snackbar after reassigning. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Task reassigned'**
+  String get reassignedMessage;
+
+  /// Label: an assignee was deactivated. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs a new assignee'**
+  String get reassignmentNeededLabel;
+
+  /// Task detail notice. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone on this task was deactivated. Reassign it to someone else.'**
+  String get reassignmentNeededMessage;
+
+  /// Task detail field. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Reassignment reason'**
+  String get reassignmentReasonLabel;
+
   /// Reporting tree empty message. SW_REVIEW: Kiswahili needs native-speaker check.
   ///
   /// In en, this message translates to:
@@ -1417,6 +1843,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Send the code again in {seconds} s'**
   String resendCodeIn(int seconds);
+
+  /// Task detail field (D-06). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Returned for changes because'**
+  String get returnReasonLabel;
+
+  /// Return dialog title (D-06). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'What needs to change?'**
+  String get returnWorkTitle;
 
   /// Role name.
   ///
@@ -1592,6 +2030,18 @@ abstract class AppLocalizations {
   /// **'App not configured'**
   String get setupMissingTitle;
 
+  /// Toggle to the Kanban board. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Show as board'**
+  String get showAsBoard;
+
+  /// Toggle to the list.
+  ///
+  /// In en, this message translates to:
+  /// **'Show as list'**
+  String get showAsList;
+
   /// Note under the sign-in buttons.
   ///
   /// In en, this message translates to:
@@ -1615,6 +2065,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Start a workflow'**
   String get startWorkflowTitle;
+
+  /// Task status (D-06). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for check'**
+  String get statusAwaitingCheck;
 
   /// Task status.
   ///
@@ -1676,6 +2132,18 @@ abstract class AppLocalizations {
   /// **'Syncing...'**
   String get syncSyncing;
 
+  /// Task detail: actions section. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'What next'**
+  String get taskActionsTitle;
+
+  /// Edit screen for a task the user may not edit. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'This task cannot be edited now.'**
+  String get taskCannotEditMessage;
+
   /// Create task title.
   ///
   /// In en, this message translates to:
@@ -1687,6 +2155,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Task'**
   String get taskDetailTitle;
+
+  /// Deadline line. date is date and time. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Due {date}'**
+  String taskDueAt(String date);
 
   /// Edit task title.
   ///
@@ -1706,6 +2180,18 @@ abstract class AppLocalizations {
   /// **'Choose people'**
   String get taskFieldAssigneeHint;
 
+  /// Completion mode field label (A-02). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'With several people'**
+  String get taskFieldCompletionMode;
+
+  /// Task detail field.
+  ///
+  /// In en, this message translates to:
+  /// **'Created by'**
+  String get taskFieldCreator;
+
   /// Deadline field label.
   ///
   /// In en, this message translates to:
@@ -1718,11 +2204,29 @@ abstract class AppLocalizations {
   /// **'Choose date and time'**
   String get taskFieldDeadlineHint;
 
+  /// Task detail field.
+  ///
+  /// In en, this message translates to:
+  /// **'Department'**
+  String get taskFieldDepartment;
+
   /// Description field label.
   ///
   /// In en, this message translates to:
   /// **'Description'**
   String get taskFieldDescription;
+
+  /// Needs-check switch (D-06). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the work before it is done'**
+  String get taskFieldNeedsCheck;
+
+  /// Needs-check help text (D-06). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'When the work is finished, you confirm it or return it for changes.'**
+  String get taskFieldNeedsCheckHelp;
 
   /// Priority field label.
   ///
@@ -1736,11 +2240,17 @@ abstract class AppLocalizations {
   /// **'Title'**
   String get taskFieldTitle;
 
-  /// Task summary placeholder while loading is not built.
+  /// Progress of several assignees (A-02). SW_REVIEW: Kiswahili needs native-speaker check.
   ///
   /// In en, this message translates to:
-  /// **'Task details will appear here.'**
-  String get taskNotLoadedYet;
+  /// **'{done} of {total} finished'**
+  String taskProgress(int done, int total);
+
+  /// Title when correcting a task the server could not assign. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Fix and send again'**
+  String get taskResubmitTitle;
 
   /// Task detail summary section.
   ///
@@ -1825,6 +2335,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Make this person the top of the organisation?'**
   String get topPersonWarningTitle;
+
+  /// My Tasks: heading above pending or refused tasks (A-01). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Created by me, not assigned yet'**
+  String get unassignedSectionTitle;
+
+  /// Placeholder while a department name loads.
+  ///
+  /// In en, this message translates to:
+  /// **'Department'**
+  String get unknownDepartment;
+
+  /// Placeholder while a person's name loads.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone'**
+  String get unknownPerson;
 
   /// Link to email fallback.
   ///
@@ -2018,6 +2546,12 @@ abstract class AppLocalizations {
   /// **'Choose a priority'**
   String get validationPriorityRequired;
 
+  /// Required reason.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a reason'**
+  String get validationReasonRequired;
+
   /// Validation for reminder hours.
   ///
   /// In en, this message translates to:
@@ -2053,6 +2587,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not loaded yet'**
   String get valueNotLoaded;
+
+  /// Label: changes on this phone not yet sent (spec 4.9). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting to sync'**
+  String get waitingToSyncLabel;
+
+  /// Task detail notice (spec 4.9). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Changes to this task are saved on this phone and will be sent when you are back online.'**
+  String get waitingToSyncMessage;
 }
 
 class _AppLocalizationsDelegate

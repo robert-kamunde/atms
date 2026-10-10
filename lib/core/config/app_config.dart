@@ -18,8 +18,9 @@ enum AppEnvironment {
 
 /// Firebase client options passed at build time with `--dart-define`.
 ///
-/// These values are *client identifiers*, not secrets, but real values are
-/// still never committed: CI and developers pass them per environment.
+/// These values are *client identifiers*, not secrets. The atms-d7f64 values
+/// live in `config/firebase/atms-d7f64.json` (DECISIONS A-33) and are passed
+/// with `--dart-define-from-file`.
 class FirebaseClientOptions {
   const FirebaseClientOptions({
     required this.apiKey,

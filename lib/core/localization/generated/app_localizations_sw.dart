@@ -38,10 +38,16 @@ class AppLocalizationsSw extends AppLocalizations {
   String get actionCancel => 'Ghairi';
 
   @override
+  String get actionCancelTask => 'Sitisha kazi';
+
+  @override
   String get actionClear => 'Ondoa';
 
   @override
   String get actionClose => 'Funga';
+
+  @override
+  String get actionConfirmDone => 'Thibitisha imekamilika';
 
   @override
   String get actionContinue => 'Endelea';
@@ -56,7 +62,13 @@ class AppLocalizationsSw extends AppLocalizations {
   String get actionDeactivateUser => 'Simamisha mtu';
 
   @override
+  String get actionDelete => 'Futa';
+
+  @override
   String get actionEdit => 'Hariri';
+
+  @override
+  String get actionEditAndResend => 'Hariri na utume tena';
 
   @override
   String get actionForgotPassword => 'Umesahau nenosiri?';
@@ -74,7 +86,16 @@ class AppLocalizationsSw extends AppLocalizations {
   String get actionLoadMore => 'Pakia zaidi';
 
   @override
+  String get actionMarkBlocked => 'Weka imekwama';
+
+  @override
+  String get actionMarkDone => 'Weka imekamilika';
+
+  @override
   String get actionMoreOptions => 'Chaguo zaidi';
+
+  @override
+  String get actionMyPartDone => 'Nimemaliza';
 
   @override
   String get actionNewTask => 'Kazi mpya';
@@ -86,13 +107,22 @@ class AppLocalizationsSw extends AppLocalizations {
   String get actionNotNow => 'Si sasa';
 
   @override
+  String get actionReassign => 'Mpangie mwingine';
+
+  @override
   String get actionRemove => 'Ondoa';
 
   @override
   String get actionResendCode => 'Tuma msimbo tena';
 
   @override
+  String get actionResumeTask => 'Endelea';
+
+  @override
   String get actionRetry => 'Jaribu tena';
+
+  @override
+  String get actionReturnWork => 'Rudisha kwa marekebisho';
 
   @override
   String get actionSave => 'Hifadhi';
@@ -102,6 +132,9 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get actionSendCode => 'Tuma msimbo';
+
+  @override
+  String get actionSendForCheck => 'Tuma ikaguliwe';
 
   @override
   String get actionSendResetLink => 'Tuma kiungo';
@@ -119,10 +152,128 @@ class AppLocalizationsSw extends AppLocalizations {
   String get actionSignOut => 'Ondoka';
 
   @override
+  String get actionStartTask => 'Anza';
+
+  @override
   String get actionUseAnotherNumber => 'Tumia namba nyingine';
 
   @override
   String get actionVerify => 'Thibitisha';
+
+  @override
+  String get activityAssigned => 'Kazi ilipangiwa watu';
+
+  @override
+  String activityCancelled(String actor, String reason) {
+    return '$actor alisitisha kazi: $reason';
+  }
+
+  @override
+  String activityCancelledNoReason(String actor) {
+    return '$actor alisitisha kazi';
+  }
+
+  @override
+  String activityCompletedBy(String actor) {
+    return '$actor alimaliza sehemu yake';
+  }
+
+  @override
+  String activityCreated(String actor) {
+    return '$actor aliunda kazi';
+  }
+
+  @override
+  String activityDeadlineChanged(String actor, String from, String to) {
+    return '$actor alibadilisha tarehe ya mwisho kutoka $from hadi $to';
+  }
+
+  @override
+  String activityDeadlineSet(String actor) {
+    return '$actor alibadilisha tarehe ya mwisho';
+  }
+
+  @override
+  String activityDeleted(String actor) {
+    return '$actor alifuta kazi';
+  }
+
+  @override
+  String activityEdited(String actor, String fields) {
+    return '$actor alibadilisha: $fields';
+  }
+
+  @override
+  String get activityEmpty => 'Bado hakuna shughuli';
+
+  @override
+  String activityGeneric(String actor) {
+    return '$actor alifanya mabadiliko';
+  }
+
+  @override
+  String get activityMadeOffline => 'Ilifanywa bila intaneti';
+
+  @override
+  String activityPriorityValue(String priority) {
+    return 'Kipaumbele ($priority)';
+  }
+
+  @override
+  String activityReassigned(String actor, String names) {
+    return '$actor aliipangia kazi $names';
+  }
+
+  @override
+  String activityReassignedNoNames(String actor) {
+    return '$actor aliipangia kazi watu wengine';
+  }
+
+  @override
+  String activityRejected(String reason) {
+    return 'Kazi haikuweza kupangiwa: $reason';
+  }
+
+  @override
+  String activityReturned(String actor, String reason) {
+    return '$actor alirudisha kazi kwa marekebisho: $reason';
+  }
+
+  @override
+  String activityReturnedNoReason(String actor) {
+    return '$actor alirudisha kazi kwa marekebisho';
+  }
+
+  @override
+  String activityStatusChanged(String actor, String from, String to) {
+    return '$actor alibadilisha hali kutoka $from hadi $to';
+  }
+
+  @override
+  String activityStatusSet(String actor, String to) {
+    return '$actor alibadilisha hali kuwa $to';
+  }
+
+  @override
+  String get activitySystemActor => 'ATMS';
+
+  @override
+  String get activityTitle => 'Shughuli';
+
+  @override
+  String activityUserAdded(String actor) {
+    return '$actor aliongeza mtu';
+  }
+
+  @override
+  String activityUserDeactivated(String actor) {
+    return '$actor alimzima mtu';
+  }
+
+  @override
+  String activityUserUpdated(String actor) {
+    return '$actor alibadilisha taarifa za mtu';
+  }
 
   @override
   String get adminAuditTitle => 'Kumbukumbu za ukaguzi';
@@ -182,18 +333,50 @@ class AppLocalizationsSw extends AppLocalizations {
   String get approvalsTitle => 'Idhini zinazosubiri';
 
   @override
-  String assigneeCount(int count) {
+  String get assignedSectionTitle => 'Nilizopangiwa';
+
+  @override
+  String assigneeMe(String name) {
+    return '$name (mimi)';
+  }
+
+  @override
+  String assigneePickerDone(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Watu $count wamechaguliwa',
-      one: 'Mtu 1 amechaguliwa',
+      other: 'Chagua watu $count',
+      one: 'Chagua mtu 1',
+      zero: 'Chagua watu',
     );
     return '$_temp0';
   }
 
   @override
   String get assigneePickerEmpty => 'Bado hakuna watu wa kuchagua';
+
+  @override
+  String get assigneesChangeWithReassign =>
+      'Ili kubadilisha anayefanya kazi, tumia \'Mpangie mwingine\' kwenye kazi.';
+
+  @override
+  String get assignmentPendingLabel => 'Inasubiri kupangiwa';
+
+  @override
+  String get assignmentPendingMessage =>
+      'Ni wewe tu unayeona kazi hii hadi ipangiwe. Itapangiwa simu hii ikiwa mtandaoni.';
+
+  @override
+  String get assignmentRejectedGeneric =>
+      'Watu uliowachagua hawakuweza kupangiwa.';
+
+  @override
+  String get assignmentRejectedLabel => 'Haijapangiwa';
+
+  @override
+  String assignmentRejectedMessage(String reason) {
+    return 'Kazi hii haikupangiwa: $reason Ihariri uitume tena, au uifute.';
+  }
 
   @override
   String get attachmentsEmpty => 'Bado hakuna viambatisho';
@@ -207,6 +390,34 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get auditEmptyTitle => 'Bado hakuna kumbukumbu za ukaguzi';
+
+  @override
+  String get awaitingCheckAssigneeMessage =>
+      'Imekamilika. Inasubiri aliyeunda akague kazi.';
+
+  @override
+  String get awaitingCheckCreatorMessage =>
+      'Kazi imekamilika. Ikague, kisha uthibitishe au uirudishe kwa marekebisho.';
+
+  @override
+  String get blockTaskTitle => 'Kwa nini kazi hii imekwama?';
+
+  @override
+  String get blockedReasonLabel => 'Imekwama kwa sababu';
+
+  @override
+  String get boardColumnEmpty => 'Hakuna kazi';
+
+  @override
+  String boardColumnTitle(String status, int count) {
+    return '$status ($count)';
+  }
+
+  @override
+  String get cancelReasonLabel => 'Imesitishwa kwa sababu';
+
+  @override
+  String get cancelTaskTitle => 'Kwa nini kazi hii inasitishwa?';
 
   @override
   String codeEntryHelp(String phone) {
@@ -234,6 +445,12 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get commentsTitle => 'Maoni';
+
+  @override
+  String get completionModeAll => 'Imekamilika wote wakimaliza';
+
+  @override
+  String get completionModeAny => 'Imekamilika mtu yeyote mmoja akimaliza';
 
   @override
   String get consentCheckbox =>
@@ -371,6 +588,13 @@ class AppLocalizationsSw extends AppLocalizations {
   String get deactivateUserTitle => 'Simamisha mtu huyu?';
 
   @override
+  String get deleteTaskMessage =>
+      'Kazi itaondolewa kwenye orodha za kila mtu. Kumbukumbu za ukaguzi zitabaki.';
+
+  @override
+  String get deleteTaskTitle => 'Ufute kazi hii?';
+
+  @override
   String get departmentCreateTitle => 'Idara mpya';
 
   @override
@@ -451,6 +675,14 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String get errorAdminVerificationRequired =>
       'Tafadhali thibitisha tena msimbo wako wa msimamizi.';
+
+  @override
+  String get errorAssigneeInactive =>
+      'Mmoja wa watu uliowachagua hatumiki tena. Chagua mtu mwingine.';
+
+  @override
+  String get errorAssigneeNotAllowed =>
+      'Huwezi kumpangia kazi mmoja wa watu uliowachagua. Chagua watu wa timu yako.';
 
   @override
   String get errorConflict =>
@@ -544,6 +776,9 @@ class AppLocalizationsSw extends AppLocalizations {
       'Msimamizi uliyemchagua si mtu anayetumika katika taasisi hii. Chagua mtu mwingine.';
 
   @override
+  String get errorTaskClosed => 'Kazi hii tayari imekamilika au imesitishwa.';
+
+  @override
   String get errorTooManyAttempts =>
       'Umejaribu mara nyingi mno. Tafadhali subiri dakika chache kisha ujaribu tena.';
 
@@ -581,6 +816,10 @@ class AppLocalizationsSw extends AppLocalizations {
   String get filterDueDate => 'Tarehe ya mwisho';
 
   @override
+  String get filterLoadedOnlyNote =>
+      'Baadhi ya vichujio vinaangalia kazi zilizopakiwa tu. Pakia zaidi kuona zaidi.';
+
+  @override
   String get filterNoOptionsYet => 'Bado hakuna machaguo';
 
   @override
@@ -600,7 +839,13 @@ class AppLocalizationsSw extends AppLocalizations {
   String get labelInactive => 'Haitumiki';
 
   @override
+  String get labelNo => 'Hapana';
+
+  @override
   String get labelSupervisorInactive => 'Msimamizi hatumiki';
+
+  @override
+  String get labelYes => 'Ndiyo';
 
   @override
   String get languageEnglish => 'English';
@@ -731,6 +976,31 @@ class AppLocalizationsSw extends AppLocalizations {
   }
 
   @override
+  String get progressFinished => 'Amemaliza';
+
+  @override
+  String get progressNotFinished => 'Bado hajamaliza';
+
+  @override
+  String get reasonFieldLabel => 'Sababu';
+
+  @override
+  String get reassignTitle => 'Mpangie';
+
+  @override
+  String get reassignedMessage => 'Kazi imepangiwa watu wengine';
+
+  @override
+  String get reassignmentNeededLabel => 'Inahitaji mtu mwingine';
+
+  @override
+  String get reassignmentNeededMessage =>
+      'Mtu mmoja kwenye kazi hii amezimwa. Mpangie mtu mwingine.';
+
+  @override
+  String get reassignmentReasonLabel => 'Sababu ya kupangiwa upya';
+
+  @override
   String get reportingTreeEmptyMessage =>
       'Weka msimamizi wa kila mtu ili kujenga mfumo wa uwajibikaji unaotumika kupandisha kazi.';
 
@@ -758,6 +1028,12 @@ class AppLocalizationsSw extends AppLocalizations {
   String resendCodeIn(int seconds) {
     return 'Tuma msimbo tena baada ya sekunde $seconds';
   }
+
+  @override
+  String get returnReasonLabel => 'Imerudishwa kwa marekebisho kwa sababu';
+
+  @override
+  String get returnWorkTitle => 'Nini kinahitaji kubadilishwa?';
 
   @override
   String get roleAdmin => 'Msimamizi wa mfumo';
@@ -858,6 +1134,12 @@ class AppLocalizationsSw extends AppLocalizations {
   String get setupMissingTitle => 'Programu haijasanidiwa';
 
   @override
+  String get showAsBoard => 'Onyesha kama ubao';
+
+  @override
+  String get showAsList => 'Onyesha kama orodha';
+
+  @override
   String get signInNeedsConnection => 'Kuingia kunahitaji intaneti.';
 
   @override
@@ -869,6 +1151,9 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get startWorkflowTitle => 'Anzisha mtiririko wa kazi';
+
+  @override
+  String get statusAwaitingCheck => 'Inasubiri ukaguzi';
 
   @override
   String get statusBlocked => 'Imekwama';
@@ -902,10 +1187,21 @@ class AppLocalizationsSw extends AppLocalizations {
   String get syncSyncing => 'Inasawazisha...';
 
   @override
+  String get taskActionsTitle => 'Hatua inayofuata';
+
+  @override
+  String get taskCannotEditMessage => 'Kazi hii haiwezi kuhaririwa sasa.';
+
+  @override
   String get taskCreateTitle => 'Kazi mpya';
 
   @override
   String get taskDetailTitle => 'Kazi';
+
+  @override
+  String taskDueAt(String date) {
+    return 'Mwisho $date';
+  }
 
   @override
   String get taskEditTitle => 'Hariri kazi';
@@ -917,13 +1213,29 @@ class AppLocalizationsSw extends AppLocalizations {
   String get taskFieldAssigneeHint => 'Chagua watu';
 
   @override
+  String get taskFieldCompletionMode => 'Kwa watu kadhaa';
+
+  @override
+  String get taskFieldCreator => 'Imeundwa na';
+
+  @override
   String get taskFieldDeadline => 'Tarehe ya mwisho';
 
   @override
   String get taskFieldDeadlineHint => 'Chagua tarehe na saa';
 
   @override
+  String get taskFieldDepartment => 'Idara';
+
+  @override
   String get taskFieldDescription => 'Maelezo';
+
+  @override
+  String get taskFieldNeedsCheck => 'Kagua kazi kabla haijakamilika';
+
+  @override
+  String get taskFieldNeedsCheckHelp =>
+      'Kazi ikikamilika, utaithibitisha au kuirudisha kwa marekebisho.';
 
   @override
   String get taskFieldPriority => 'Kipaumbele';
@@ -932,7 +1244,12 @@ class AppLocalizationsSw extends AppLocalizations {
   String get taskFieldTitle => 'Kichwa';
 
   @override
-  String get taskNotLoadedYet => 'Taarifa za kazi zitaonekana hapa.';
+  String taskProgress(int done, int total) {
+    return '$done kati ya $total wamemaliza';
+  }
+
+  @override
+  String get taskResubmitTitle => 'Rekebisha na utume tena';
 
   @override
   String get taskSummaryTitle => 'Taarifa';
@@ -983,6 +1300,15 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String get topPersonWarningTitle =>
       'Mfanye mtu huyu kuwa wa juu kabisa wa taasisi?';
+
+  @override
+  String get unassignedSectionTitle => 'Nilizounda, bado hazijapangiwa';
+
+  @override
+  String get unknownDepartment => 'Idara';
+
+  @override
+  String get unknownPerson => 'Mtu fulani';
 
   @override
   String get useEmailInstead => 'Hupati SMS? Ingia kwa barua pepe';
@@ -1097,6 +1423,9 @@ class AppLocalizationsSw extends AppLocalizations {
   String get validationPriorityRequired => 'Chagua kipaumbele';
 
   @override
+  String get validationReasonRequired => 'Andika sababu';
+
+  @override
   String validationReminderHours(int max) {
     return 'Weka idadi kamili ya saa kuanzia 1 hadi $max, zikitenganishwa kwa koma';
   }
@@ -1118,4 +1447,11 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get valueNotLoaded => 'Bado haijapakiwa';
+
+  @override
+  String get waitingToSyncLabel => 'Inasubiri kusawazishwa';
+
+  @override
+  String get waitingToSyncMessage =>
+      'Mabadiliko ya kazi hii yamehifadhiwa kwenye simu hii na yatatumwa ukipata intaneti tena.';
 }
