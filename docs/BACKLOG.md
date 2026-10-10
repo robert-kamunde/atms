@@ -71,17 +71,19 @@ Key points:
 9. Rules tests for every new path; widget tests EN/SW.
 Demo: an admin sets up an organisation; staff sign in by phone.
 
-## Sprint 2: tasks, offline, audit foundation (M3, M9, M11)
+## Sprint 2: tasks, offline, audit foundation (M3, M9, M11) (built, in review)
 
-1. `onTaskCreated`: assignment permission check (A-01), `viewerIds`, workflow start hook.
-2. `onTaskWritten` audit writer: one entry per change with before/after, `madeOffline`.
-3. Multiple-assignee completion (A-02); deadline-change notification hook.
-4. Reassign callable; soft delete.
-5. `viewerIds` recompute when `managerChain` changes.
-6. App: My Tasks (paged, sorted by deadline), filters, Team Tasks, Kanban, task detail, create
-   and edit, status changes with reasons, sync banner from pending writes.
-7. Offline tests: flight mode, create, status, restart while offline, duplicates.
-Demo: create, assign and finish tasks with Wi-Fi off.
+| Item | Status |
+| --- | --- |
+| `onTaskCreated`: assignment permission check (A-01), `viewerIds`; workflow tasks left for Sprint 3 (KI-19) | Done |
+| Audit writer: one entry per change with before/after, `madeOffline` (A-31); user changes too | Done |
+| Multiple-assignee completion (A-02, A-30); deadline-change notification hook | Done; the notification itself is Sprint 4 (KI-20) |
+| `reassignTask` callable; soft delete and discard | Done |
+| `viewerIds` recompute when `managerChain` changes (pages of 200) | Done |
+| App: My Tasks (paged, by deadline, live), filters, Team Tasks, Kanban, task detail, create, edit, resubmit, status changes with reasons, checked work (D-06), activity log, admin audit screen, sync banner | Done |
+| Offline tests: flight mode, create, status, restart while offline, duplicates | Widget and rules tests done; the flight-mode run on a phone needs the connected build (KI-5) |
+
+Demo: create, assign and finish tasks with Wi-Fi off (needs the connected build).
 
 ## Sprint 3: workflow engine (M4)
 

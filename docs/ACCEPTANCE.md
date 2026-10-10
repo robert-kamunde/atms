@@ -15,9 +15,9 @@ Last updated: 8 Oct 2026 (Sprint 1).
 | AC-4.1-3 | A deactivated user is signed out within 1 hour and their tasks are flagged for reassignment. | 1 | Rules test + `deactivateUser` emulator test (tokens revoked, 206 tasks flagged over pages) | NOT TESTED (server side passes; the 1-hour sign-out relies on ID token expiry and must be seen on a device) |
 | AC-4.2-1 | An Admin can set up a 50-person organisation with 5 departments in under 1 hour. | 1 | Timed usability test | NOT TESTED (needs the real project and Robert) |
 | AC-4.2-2 | The reporting tree shows correctly and loops are rejected. | 1 | Jest emulator tests (loop refused, concurrent opposite moves give one success, chains recomputed below) + reporting tree widget tests (EN/SW) | PASS (emulator and widget tests, 8 Oct 2026) |
-| AC-4.3-1 | A task can be created in under 30 seconds with only the required fields. | 2 | Timed usability test | NOT TESTED |
-| AC-4.3-2 | Status changes show for the creator within 5 seconds when both are online. | 2 | Integration timing | NOT TESTED |
-| AC-4.3-3 | Filters work by status, priority, assignee, department and due date. | 2 | Widget + repository tests | NOT TESTED |
+| AC-4.3-1 | A task can be created in under 30 seconds with only the required fields. | 2 | Timed usability test | NOT TESTED (form needs only title, deadline, priority and assignee; needs a phone) |
+| AC-4.3-2 | Status changes show for the creator within 5 seconds when both are online. | 2 | Integration timing | NOT TESTED (task detail and task lists listen live; timing needs two connected phones) |
+| AC-4.3-3 | Filters work by status, priority, assignee, department and due date. | 2 | Widget + repository tests | NOT TESTED (status, priority, department and due date are query filters with tests; assignee applies to loaded pages, KI-23; needs a check against real indexes) |
 | AC-4.4-1 | A 5-step template can be built in the app without code. | 3 | Integration | NOT TESTED |
 | AC-4.4-2 | Submitting a step assigns the next owner and notifies them within 10 seconds. | 3 | Emulator integration timing | NOT TESTED |
 | AC-4.4-3 | Reject and send back return the task to the right step with the comment visible. | 3 | Jest + integration | NOT TESTED |
@@ -32,13 +32,13 @@ Last updated: 8 Oct 2026 (Sprint 1).
 | AC-4.7-2 | A 4 MB phone photo uploads at under 500 KB. | 5 | Widget/unit test + device | NOT TESTED |
 | AC-4.8-1 | A user who is not a participant cannot read a confidential task even with a modified app (tested with the Firebase Emulator). | 0, 5 | Rules tests `CRITICAL: confidential tasks` (12 cases) and Storage `CRITICAL` case | NOT TESTED (Firestore cases pass in the emulator; the Storage allowed-read case is blocked in this sandbox and must pass in CI; will be marked PASS when the confidential feature is complete in Sprint 5) |
 | AC-4.8-2 | Confidential titles never appear in push or SMS text. | 4 | Jest | NOT TESTED |
-| AC-4.9-1 | A user can work for a full day offline and sync with no lost changes. | 2 | Manual script on a real phone | NOT TESTED |
+| AC-4.9-1 | A user can work for a full day offline and sync with no lost changes. | 2 | Manual script on a real phone | NOT TESTED (every task action except reassign works offline in widget tests; needs a phone) |
 | AC-4.9-2 | Changes sync within 10 seconds of the connection returning. | 2 | Scripted timing test | NOT TESTED |
 | AC-4.9-3 | Conflicting workflow approvals produce one move and a clear message for the other user. | 3 | Jest + offline integration | NOT TESTED |
 | AC-4.10-1 | Dashboards load in under 2 seconds on 3G. | 6 | Device timing, throttled | NOT TESTED |
 | AC-4.10-2 | Report numbers match a manual count of the same tasks. | 6 | Jest against seeded data | NOT TESTED |
-| AC-4.11-1 | Every action in the list creates exactly one entry. | 2-5 | Jest per action | NOT TESTED |
-| AC-4.11-2 | An attempt to edit a log entry from the app is refused by the server. | 0 | Rules test `nobody writes audit entries from the app` | NOT TESTED (rules test passes; marked PASS when the audit module ships in Sprint 2) |
+| AC-4.11-1 | Every action in the list creates exactly one entry. | 2-5 | Jest per action | NOT TESTED (Sprint 2 actions pass in emulator tests with idempotent ids; workflow, comment and attachment actions come in Sprints 3 and 5) |
+| AC-4.11-2 | An attempt to edit a log entry from the app is refused by the server. | 0 | Rules test `nobody writes audit entries from the app` | PASS (rules tests, 10 Oct 2026) |
 
 ## Prototype scenarios as end-to-end tests (MI 44)
 
@@ -74,3 +74,16 @@ Last updated: 8 Oct 2026 (Sprint 1).
 | S1-5 | Admin code: wrong code, expiry, 5 attempts, 5 codes per hour, single use | Jest emulator tests | PASS |
 | S1-6 | Department and settings changes made offline show "saved on phone"; callables offline show "needs connection" | Widget/controller tests | PASS |
 | S1-7 | Every new screen in English and Kiswahili | Widget tests (EN/SW) | PASS |
+
+## Sprint 2 additional checks (from the build)
+
+| ID | Check | Test | Status |
+| --- | --- | --- | --- |
+| S2-1 | Staff can assign only themselves; a manager only their reporting tree; a verified admin anyone. A task assigned outside that is refused and the creator sees why | Jest emulator tests (`onTaskCreated`) + picker widget tests | PASS |
+| S2-2 | A pending or refused task is visible only to its creator | Rules tests | PASS |
+| S2-3 | A verified admin's list query cannot return confidential audit entries | Rules tests (CRITICAL) | PASS |
+| S2-4 | Several assignees: each marks only their own part; the task is Done when all (or, in "any" mode, one) have | Rules + Jest emulator tests | PASS |
+| S2-5 | Checked work (D-06): done goes to "awaiting check"; only the creator confirms or returns it with a reason | Rules + Jest + widget tests | PASS |
+| S2-6 | Reassign goes through the server, logs once, and needs a connection | Jest emulator + widget tests | PASS |
+| S2-7 | Sync banner shows offline, syncing and all changes saved | Unit + widget tests | PASS |
+| S2-8 | Every new screen in English and Kiswahili at 360 dp | Widget tests (EN/SW) | PASS |

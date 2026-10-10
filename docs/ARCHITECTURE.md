@@ -93,12 +93,12 @@ mixing data. Files live in Cloud Storage under `orgs/{org}/tasks/{task}/{attachm
 | `.../users/{uid}/private/devices` | fcmTokens [max 10], updatedAt | The user's own app |
 | `orgs/{org}/templates/{tpl}` | name, version, steps [{name, ownerType (user, role, supervisor), ownerRef, needsApproval, hoursAllowed}], active, staffCanStart | Server (saveTemplate) |
 | `.../templates/{tpl}/versions/{v}` | frozen copy of name and steps for version v | Server |
-| `orgs/{org}/tasks/{task}` | title, description, priority, status, deadline, creatorId, assigneeIds, deptId, confidential, participantIds, viewerIds, templateId, templateVersion, currentStep, stepDeadline, escalationLevel, overdue, createdAt, updatedAt; plus assignmentState, assignmentError, completionMode, completedByIds, needsCheck (D-06), blockedReason, cancelReason, updatedBy, clientUpdatedAt, deleted, deletedAt, remindersSent | App for plain fields (see rules); server for workflow state, visibility, escalation, assignment |
+| `orgs/{org}/tasks/{task}` | title, description, priority, status, deadline, creatorId, assigneeIds, deptId, confidential, participantIds, viewerIds, templateId, templateVersion, currentStep, stepDeadline, escalationLevel, overdue, createdAt, updatedAt; plus assignmentState, assignmentError, completionMode, completedByIds, needsCheck (D-06), returnReason, blockedReason, cancelReason, reassignmentNeeded, reassignmentReason, updatedBy, clientUpdatedAt, deleted, deletedAt, remindersSent | App for plain fields (see rules); server for workflow state, visibility, escalation, assignment |
 | `.../tasks/{task}/comments/{c}` | authorId, text, mentions, createdAt, editedAt, removed, removedAt | Author (rules enforce the 15-minute window) |
 | `.../tasks/{task}/attachments/{a}` | fileName, storagePath, sizeBytes (<= 10 MB), contentType, uploadedBy, createdAt | Uploader |
 | `orgs/{org}/transitionRequests/{r}` | taskId, fromStep, action (submit, approve, reject, sendBack), toStep, comment, requestedBy, createdAt, clientCreatedAt, result {status, code, alreadyDoneBy, alreadyDoneAt, processedAt} | App creates; server fills result |
 | `orgs/{org}/notifications/{n}` | userId, type, taskId, text (never a confidential title), read, openedAt, pushSent, smsSent, createdAt | Server; the owner marks read or opened |
-| `orgs/{org}/audit/{entry}` | taskId, actorId, action, before, after, at, madeOffline, viewerIds, confidential | Server only |
+| `orgs/{org}/audit/{entry}` | taskId or subjectUid (user changes), actorId, action, before, after, at, madeOffline, viewerIds, confidential; the document id is derived from the change so a retried trigger writes it once | Server only |
 | `orgs/{org}/stats/{scope_id_day}` | scope (user, team, dept, org), scopeId, date, created, completed, onTime, overdue, escalated, plus per-step timing for workflows | Server only |
 | `orgs/{org}/smsUsage/{yyyy-mm}` | sent, failed, costTzs, cap | Server only; verified admins read |
 | `orgs/{org}/reports/{id}` | period, kind (weekly, monthly), scope, recipientIds, pdfPath, csvPath, createdAt | Server only |
@@ -116,10 +116,11 @@ mixing data. Files live in Cloud Storage under `orgs/{org}/tasks/{task}/{attachm
 | Tasks: `updatedBy`, `clientUpdatedAt` | Who made a change and whether it was made offline, for the audit log (AUD-2). |
 | Tasks: `deleted`, `deletedAt` | Soft delete (TASK-11). |
 | Tasks: `remindersSent` | Idempotency of reminders and escalations (REM-6). |
-| Tasks: `needsCheck` (pending D-06) | Creator check on Done. |
+| Tasks: `needsCheck`, `returnReason`, status `awaiting_check` | Creator check on Done (D-06). |
+| Tasks: `reassignmentNeeded`, `reassignmentReason` | Open tasks of a deactivated person are flagged (AUTH-5). |
 | Templates: `staffCanStart`, `versions` subcollection | WF-12, WF-10. |
 | Departments: `active`, timestamps | Deactivate instead of delete (A-13). |
-| Audit: `viewerIds`, `confidential` | Read access by rules (A-15). |
+| Audit: `viewerIds`, `confidential`, `subjectUid` | Read access by rules (A-15); user changes are logged against the person (AUD-1). |
 | Stats: `scopeId`, `team` scope | Per-person and per-manager-tree counters for DASH-1, DASH-2. |
 | New: `smsUsage`, `reports`, `secure`, `templates/{tpl}/versions` | NOT-6, REP-1, AUTH-10, WF-10. |
 | Org: `escalationMaxLevel`, `smsEnabled`, `auditRetentionYears` | REM-4, NOT-6, AUD-4. |
