@@ -7,7 +7,11 @@ import type { Timestamp } from 'firebase-admin/firestore';
 
 export type Role = 'admin' | 'manager' | 'staff';
 export type Language = 'en' | 'sw';
-export type TaskStatus = 'todo' | 'in_progress' | 'blocked' | 'done' | 'cancelled';
+export type TaskStatus = 'todo' | 'in_progress' | 'blocked' | 'awaiting_check' | 'done' | 'cancelled';
+/** Statuses an assignee is still working in. */
+export const ACTIVE_STATUSES: readonly TaskStatus[] = ['todo', 'in_progress', 'blocked'];
+/** Open = not final; awaiting_check (D-06) is open until the creator confirms or returns it. */
+export const OPEN_STATUSES: readonly TaskStatus[] = [...ACTIVE_STATUSES, 'awaiting_check'];
 export type Priority = 'low' | 'medium' | 'high' | 'urgent';
 export type StepOwnerType = 'user' | 'role' | 'supervisor';
 export type TransitionAction = 'submit' | 'approve' | 'reject' | 'sendBack';
@@ -94,11 +98,15 @@ export interface Task {
   assignmentError?: string;
   completionMode: 'all' | 'any';
   completedByIds: string[];
+  /** D-06: the creator checks the work; an assignee's Done becomes awaiting_check. */
+  needsCheck?: boolean;
+  /** D-06: why the creator returned the task from awaiting_check to in_progress. */
+  returnReason?: string;
   blockedReason?: string;
   cancelReason?: string;
   updatedBy: string;
   clientUpdatedAt?: Timestamp;
-  deleted?: boolean;
+  deleted: boolean; // written as false on create so list queries can filter on it
   deletedAt?: Timestamp;
   remindersSent?: string[]; // idempotency keys, e.g. "due-24h", "esc-1"
   /** Server-only: set when an assignee is deactivated, cleared when the task is reassigned. */

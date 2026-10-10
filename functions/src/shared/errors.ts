@@ -35,6 +35,10 @@ export const ErrorCode = {
   codeRateLimited: 'code-rate-limited',
   providerUnavailable: 'provider-unavailable',
   smsCapReached: 'sms-cap-reached',
+  taskNotFound: 'task-not-found', // also when the caller cannot read the task (confidential tasks look absent)
+  taskClosed: 'task-closed', // done or cancelled
+  assigneeNotAllowed: 'assignee-not-allowed', // the person may not assign this assignee (PDD 2 matrix)
+  assigneeInactive: 'assignee-inactive', // assignee or participant missing, inactive or in another org
   validation: 'validation',
   internal: 'internal',
 } as const;

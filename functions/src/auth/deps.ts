@@ -34,6 +34,13 @@ export const paths = {
   dept: (org: string, dept: string) => `orgs/${org}/departments/${dept}`,
   users: (org: string) => `orgs/${org}/users`,
   tasks: (org: string) => `orgs/${org}/tasks`,
+  task: (org: string, taskId: string) => `orgs/${org}/tasks/${taskId}`,
+  audit: (org: string) => `orgs/${org}/audit`,
+  /**
+   * Admin second-factor record read by triggers (which cannot see custom claims). The contract's
+   * `secure/adminVerification/{uid}` is a collection path, so an extra `admins` segment is added.
+   */
+  adminVerification: (org: string, uid: string) => `orgs/${org}/secure/adminVerification/admins/${uid}`,
   /** One document per admin (the contract's `secure/adminCodes/{uid}` needs an extra segment). */
   adminCode: (org: string, uid: string) => `orgs/${org}/secure/adminCodes/codes/${uid}`,
   /** Lock held while a large reporting-tree update is written in chunks. */
