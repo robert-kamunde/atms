@@ -111,7 +111,8 @@ AppFailure mapServerErrorCode(
   ServerErrorCode.unauthenticated => UnauthenticatedFailure(
     code: code.wireValue,
   ),
-  ServerErrorCode.notFound => NotFoundFailure(code: code.wireValue),
+  ServerErrorCode.notFound ||
+  ServerErrorCode.taskNotFound => NotFoundFailure(code: code.wireValue),
   ServerErrorCode.internal => UnknownFailure(code: code.wireValue),
   _ => ServerFailure(code, attemptsLeft: attemptsLeft, field: field),
 };

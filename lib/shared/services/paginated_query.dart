@@ -42,6 +42,14 @@ abstract interface class PaginatedSource<T> {
 /// Converts a Firestore document to a model.
 typedef DocumentDecoder<T> = T Function(String id, Map<String, Object?> data);
 
+/// Like [DocumentDecoder], also told whether the document has changes made
+/// on this phone that have not reached the server ("waiting to sync").
+typedef PendingAwareDecoder<T> = T Function(
+  String id,
+  Map<String, Object?> data,
+  bool hasPendingWrites,
+);
+
 /// [PaginatedSource] over a Firestore [Query].
 ///
 /// The query must already contain its `where` and `orderBy` clauses (for
@@ -51,6 +59,7 @@ class FirestorePaginatedQuery<T> implements PaginatedSource<T> {
   FirestorePaginatedQuery({
     required this.query,
     required this.decode,
+    this.pendingAwareDecode,
     this.pageSize = AppConstants.pageSize,
     this.debugLabel = 'query',
   }) : assert(
@@ -63,6 +72,10 @@ class FirestorePaginatedQuery<T> implements PaginatedSource<T> {
 
   /// Converts each document to a model.
   final DocumentDecoder<T> decode;
+
+  /// When set, used instead of [decode] with the document's
+  /// `metadata.hasPendingWrites`.
+  final PendingAwareDecoder<T>? pendingAwareDecode;
 
   @override
   final int pageSize;
@@ -99,7 +112,12 @@ class FirestorePaginatedQuery<T> implements PaginatedSource<T> {
     final items = <T>[];
     for (final doc in pageDocs) {
       try {
-        items.add(decode(doc.id, doc.data()));
+        final pendingAware = pendingAwareDecode;
+        items.add(
+          pendingAware != null
+              ? pendingAware(doc.id, doc.data(), doc.metadata.hasPendingWrites)
+              : decode(doc.id, doc.data()),
+        );
       } on FormatException catch (error, stackTrace) {
         // A malformed document must not break the whole list. It is
         // skipped and logged (by id only) so it can be fixed.

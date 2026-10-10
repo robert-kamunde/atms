@@ -9,6 +9,7 @@ extension TaskStatusLabel on TaskStatus {
     TaskStatus.todo => l10n.statusTodo,
     TaskStatus.inProgress => l10n.statusInProgress,
     TaskStatus.blocked => l10n.statusBlocked,
+    TaskStatus.awaitingCheck => l10n.statusAwaitingCheck,
     TaskStatus.done => l10n.statusDone,
     TaskStatus.cancelled => l10n.statusCancelled,
   };

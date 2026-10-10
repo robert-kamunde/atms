@@ -194,6 +194,26 @@ void main() {
       expect(validation.field, 'phone');
     });
 
+    test(
+      'task codes (Sprint 2): own messages; task-not-found is "not found"',
+      () {
+        final l10n = l10nFor(testLocales.first);
+        AppFailure of(String code) =>
+            mapFirebaseException(fn('failed-precondition', {'code': code}));
+        expect(of('task-not-found'), isA<NotFoundFailure>());
+        expect(failureMessage(of('task-not-found'), l10n), l10n.errorNotFound);
+        expect(
+          failureMessage(of('assignee-not-allowed'), l10n),
+          l10n.errorAssigneeNotAllowed,
+        );
+        expect(
+          failureMessage(of('assignee-inactive'), l10n),
+          l10n.errorAssigneeInactive,
+        );
+        expect(failureMessage(of('task-closed'), l10n), l10n.errorTaskClosed);
+      },
+    );
+
     test('tree-busy is retryable', () {
       final busy = mapFirebaseException(
         fn('aborted', {'code': 'tree-busy'}),
