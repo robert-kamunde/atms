@@ -22,6 +22,12 @@ enum WriteOutcome {
 /// show a message; logged in every case.
 void Function(AppFailure failure)? lateWriteFailureHandler;
 
+final StreamController<void> _localWrites = StreamController<void>.broadcast();
+
+/// Fires each time the app starts an offline-capable write, so the sync
+/// banner checks for unconfirmed writes again (spec 4.9).
+Stream<void> get localWriteEvents => _localWrites.stream;
+
 /// Waits up to [wait] for [write] (a Firestore `set`/`update`) to be
 /// acknowledged. Firestore applies the change to the local cache at once
 /// but its future only completes when the server answers, which never
@@ -33,6 +39,7 @@ Future<WriteOutcome> awaitOfflineCapableWrite(
   required String writeName,
   Duration wait = AppConstants.offlineWriteWait,
 }) async {
+  _localWrites.add(null);
   try {
     await write.timeout(wait);
     return WriteOutcome.saved;
