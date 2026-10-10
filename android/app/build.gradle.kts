@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
@@ -29,7 +31,24 @@ android {
         versionName = flutter.versionName
     }
 
+    // DEVELOPMENT key committed on purpose (DECISIONS A-33): debug builds of every machine and
+    // of CI share one signature, registered on the atms-d7f64 Android app for phone sign-in.
+    val devSigning = Properties().apply {
+        file("../dev-signing/dev-signing.properties").inputStream().use { load(it) }
+    }
+    signingConfigs {
+        create("dev") {
+            storeFile = file("../dev-signing/" + devSigning.getProperty("storeFile"))
+            storePassword = devSigning.getProperty("storePassword")
+            keyAlias = devSigning.getProperty("keyAlias")
+            keyPassword = devSigning.getProperty("keyPassword")
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig = signingConfigs.getByName("dev")
+        }
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
