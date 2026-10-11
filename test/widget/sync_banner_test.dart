@@ -8,6 +8,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../helpers/pump_app.dart';
 
+/// Lets a stream event reach the provider, the listener and the frame.
+Future<void> flush(WidgetTester tester) async {
+  await tester.pump();
+  await tester.pump();
+}
+
 class ControlledSyncSource implements SyncStatusSource {
   final controller = StreamController<SyncState>.broadcast();
 
@@ -20,7 +26,7 @@ void main() {
     group('SyncBanner [$locale]', () {
       final l10n = l10nFor(locale);
 
-      testWidgets('shows each state from the provider', (tester) async {
+      Future<ControlledSyncSource> pump(WidgetTester tester) async {
         final source = ControlledSyncSource();
         addTearDown(source.controller.close);
         await pumpLocalized(
@@ -29,22 +35,52 @@ void main() {
           locale: locale,
           overrides: [syncStatusSourceProvider.overrideWithValue(source)],
         );
-        expect(find.text(l10n.syncOffline), findsNothing);
+        return source;
+      }
+
+      testWidgets('offline, syncing, then "all saved" which then hides', (
+        tester,
+      ) async {
+        final source = await pump(tester);
+        expect(find.byKey(const Key('syncBanner')), findsNothing);
 
         source.controller.add(SyncState.offline);
-        await tester.pumpAndSettle();
+        await flush(tester);
         expect(find.text(l10n.syncOffline), findsOneWidget);
 
         source.controller.add(SyncState.syncing);
-        await tester.pumpAndSettle();
+        await flush(tester);
         expect(find.text(l10n.syncSyncing), findsOneWidget);
 
         source.controller.add(SyncState.synced);
-        await tester.pumpAndSettle();
+        await flush(tester);
         expect(find.text(l10n.syncAllSaved), findsOneWidget);
+
+        await tester.pump(SyncBanner.syncedVisibleFor);
+        expect(find.byKey(const Key('syncBanner')), findsNothing);
       });
 
-      testWidgets('default source keeps the banner hidden', (tester) async {
+      testWidgets('in sync from the start: nothing to say', (tester) async {
+        final source = await pump(tester);
+        source.controller.add(SyncState.synced);
+        await flush(tester);
+        expect(find.byKey(const Key('syncBanner')), findsNothing);
+      });
+
+      testWidgets('unknown hides the banner (never claims unchecked state)', (
+        tester,
+      ) async {
+        final source = await pump(tester);
+        source.controller.add(SyncState.offline);
+        await flush(tester);
+        source.controller.add(SyncState.unknown);
+        await flush(tester);
+        expect(find.byKey(const Key('syncBanner')), findsNothing);
+      });
+
+      testWidgets('signed out: the default source keeps it hidden', (
+        tester,
+      ) async {
         await pumpLocalized(
           tester,
           const Scaffold(body: SyncBanner()),

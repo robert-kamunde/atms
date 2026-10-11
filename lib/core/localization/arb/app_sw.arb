@@ -36,6 +36,10 @@
   "@actionCancel": {
     "description": "Cancel button in dialogs."
   },
+  "actionCancelTask": "Sitisha kazi",
+  "@actionCancelTask": {
+    "description": "Task detail button: cancel the task (asks for a reason). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "actionClear": "Ondoa",
   "@actionClear": {
     "description": "Tooltip: clear the chosen value."
@@ -43,6 +47,10 @@
   "actionClose": "Funga",
   "@actionClose": {
     "description": "Close button / tooltip."
+  },
+  "actionConfirmDone": "Thibitisha imekamilika",
+  "@actionConfirmDone": {
+    "description": "Creator confirms checked work (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "actionContinue": "Endelea",
   "@actionContinue": {
@@ -60,9 +68,17 @@
   "@actionDeactivateUser": {
     "description": "Button in the user editor. SW_REVIEW: Kiswahili needs native-speaker check."
   },
+  "actionDelete": "Futa",
+  "@actionDelete": {
+    "description": "Button: delete."
+  },
   "actionEdit": "Hariri",
   "@actionEdit": {
     "description": "Edit button / tooltip."
+  },
+  "actionEditAndResend": "Hariri na utume tena",
+  "@actionEditAndResend": {
+    "description": "Fix a task the server could not assign and send it again (A-01). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "actionForgotPassword": "Umesahau nenosiri?",
   "@actionForgotPassword": {
@@ -84,9 +100,21 @@
   "@actionLoadMore": {
     "description": "Button: load the next page of a list."
   },
+  "actionMarkBlocked": "Weka imekwama",
+  "@actionMarkBlocked": {
+    "description": "Assignee marks the task blocked (asks for a reason). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "actionMarkDone": "Weka imekamilika",
+  "@actionMarkDone": {
+    "description": "Assignee marks the task done. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "actionMoreOptions": "Chaguo zaidi",
   "@actionMoreOptions": {
     "description": "Tooltip of a menu button."
+  },
+  "actionMyPartDone": "Nimemaliza",
+  "@actionMyPartDone": {
+    "description": "One of several assignees marks their part done (A-02). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "actionNewTask": "Kazi mpya",
   "@actionNewTask": {
@@ -100,6 +128,10 @@
   "@actionNotNow": {
     "description": "Skip button."
   },
+  "actionReassign": "Mpangie mwingine",
+  "@actionReassign": {
+    "description": "Change the assignees (needs a connection). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "actionRemove": "Ondoa",
   "@actionRemove": {
     "description": "Tooltip: remove an item from a list."
@@ -108,9 +140,17 @@
   "@actionResendCode": {
     "description": "Resend SMS/email code."
   },
+  "actionResumeTask": "Endelea",
+  "@actionResumeTask": {
+    "description": "Assignee continues a blocked task."
+  },
   "actionRetry": "Jaribu tena",
   "@actionRetry": {
     "description": "Retry button after a load error."
+  },
+  "actionReturnWork": "Rudisha kwa marekebisho",
+  "@actionReturnWork": {
+    "description": "Creator returns checked work with a reason (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "actionSave": "Hifadhi",
   "@actionSave": {
@@ -123,6 +163,10 @@
   "actionSendCode": "Tuma msimbo",
   "@actionSendCode": {
     "description": "Phone sign-in: send SMS code."
+  },
+  "actionSendForCheck": "Tuma ikaguliwe",
+  "@actionSendForCheck": {
+    "description": "Assignee finishes a task whose creator checks the work (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "actionSendResetLink": "Tuma kiungo",
   "@actionSendResetLink": {
@@ -144,6 +188,10 @@
   "@actionSignOut": {
     "description": "Sign-out button."
   },
+  "actionStartTask": "Anza",
+  "@actionStartTask": {
+    "description": "Assignee starts the task."
+  },
   "actionUseAnotherNumber": "Tumia namba nyingine",
   "@actionUseAnotherNumber": {
     "description": "Not-invited screen: go back to sign-in."
@@ -151,6 +199,233 @@
   "actionVerify": "Thibitisha",
   "@actionVerify": {
     "description": "Verify code button."
+  },
+  "activityAssigned": "Kazi ilipangiwa watu",
+  "@activityAssigned": {
+    "description": "Activity log: the server accepted the assignees. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "activityCancelled": "{actor} alisitisha kazi: {reason}",
+  "@activityCancelled": {
+    "description": "Activity log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      },
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "activityCancelledNoReason": "{actor} alisitisha kazi",
+  "@activityCancelledNoReason": {
+    "description": "Activity log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityCompletedBy": "{actor} alimaliza sehemu yake",
+  "@activityCompletedBy": {
+    "description": "Activity log: one of several assignees finished. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityCreated": "{actor} aliunda kazi",
+  "@activityCreated": {
+    "description": "Activity log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityDeadlineChanged": "{actor} alibadilisha tarehe ya mwisho kutoka {from} hadi {to}",
+  "@activityDeadlineChanged": {
+    "description": "Activity log. from and to are dates. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "activityDeadlineSet": "{actor} alibadilisha tarehe ya mwisho",
+  "@activityDeadlineSet": {
+    "description": "Activity log, when the dates are not available. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityDeleted": "{actor} alifuta kazi",
+  "@activityDeleted": {
+    "description": "Activity log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityEdited": "{actor} alibadilisha: {fields}",
+  "@activityEdited": {
+    "description": "Activity log. fields is a list of field names such as 'Title, Description'. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      },
+      "fields": {
+        "type": "String"
+      }
+    }
+  },
+  "activityEmpty": "Bado hakuna shughuli",
+  "@activityEmpty": {
+    "description": "Activity log empty state. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "activityGeneric": "{actor} alifanya mabadiliko",
+  "@activityGeneric": {
+    "description": "Activity log: an action this app version does not describe. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityMadeOffline": "Ilifanywa bila intaneti",
+  "@activityMadeOffline": {
+    "description": "Activity log marker: the change was made without a connection and synced later. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "activityPriorityValue": "Kipaumbele ({priority})",
+  "@activityPriorityValue": {
+    "description": "Activity log: priority changed to this value. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "priority": {
+        "type": "String"
+      }
+    }
+  },
+  "activityReassigned": "{actor} aliipangia kazi {names}",
+  "@activityReassigned": {
+    "description": "Activity log. names is a list of people. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      },
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "activityReassignedNoNames": "{actor} aliipangia kazi watu wengine",
+  "@activityReassignedNoNames": {
+    "description": "Activity log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityRejected": "Kazi haikuweza kupangiwa: {reason}",
+  "@activityRejected": {
+    "description": "Activity log. reason is a friendly error message. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "activityReturned": "{actor} alirudisha kazi kwa marekebisho: {reason}",
+  "@activityReturned": {
+    "description": "Activity log (D-06). SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      },
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "activityReturnedNoReason": "{actor} alirudisha kazi kwa marekebisho",
+  "@activityReturnedNoReason": {
+    "description": "Activity log (D-06). SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityStatusChanged": "{actor} alibadilisha hali kutoka {from} hadi {to}",
+  "@activityStatusChanged": {
+    "description": "Activity log. from and to are status names. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "activityStatusSet": "{actor} alibadilisha hali kuwa {to}",
+  "@activityStatusSet": {
+    "description": "Activity log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "activitySystemActor": "ATMS",
+  "@activitySystemActor": {
+    "description": "Activity log: the system itself did it."
+  },
+  "activityTitle": "Shughuli",
+  "@activityTitle": {
+    "description": "Task detail: activity log section. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "activityUserAdded": "{actor} aliongeza mtu",
+  "@activityUserAdded": {
+    "description": "Audit log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityUserDeactivated": "{actor} alimzima mtu",
+  "@activityUserDeactivated": {
+    "description": "Audit log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityUserUpdated": "{actor} alibadilisha taarifa za mtu",
+  "@activityUserUpdated": {
+    "description": "Audit log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
   },
   "adminAuditTitle": "Kumbukumbu za ukaguzi",
   "@adminAuditTitle": {
@@ -236,9 +511,22 @@
   "@approvalsTitle": {
     "description": "Approvals screen title."
   },
-  "assigneeCount": "{count, plural, =1{Mtu 1 amechaguliwa} other{Watu {count} wamechaguliwa}}",
-  "@assigneeCount": {
-    "description": "Number of assignees picked.",
+  "assignedSectionTitle": "Nilizopangiwa",
+  "@assignedSectionTitle": {
+    "description": "My Tasks: heading above the tasks assigned to me. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "assigneeMe": "{name} (mimi)",
+  "@assigneeMe": {
+    "description": "Assignee picker: the signed-in person.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "assigneePickerDone": "{count, plural, =0{Chagua watu} =1{Chagua mtu 1} other{Chagua watu {count}}}",
+  "@assigneePickerDone": {
+    "description": "Assignee picker confirm button. SW_REVIEW: Kiswahili needs native-speaker check.",
     "placeholders": {
       "count": {
         "type": "int"
@@ -248,6 +536,35 @@
   "assigneePickerEmpty": "Bado hakuna watu wa kuchagua",
   "@assigneePickerEmpty": {
     "description": "Assignee picker empty state."
+  },
+  "assigneesChangeWithReassign": "Ili kubadilisha anayefanya kazi, tumia 'Mpangie mwingine' kwenye kazi.",
+  "@assigneesChangeWithReassign": {
+    "description": "Edit task: assignees are changed with Reassign. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "assignmentPendingLabel": "Inasubiri kupangiwa",
+  "@assignmentPendingLabel": {
+    "description": "Label: the server has not assigned the new task yet (A-01). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "assignmentPendingMessage": "Ni wewe tu unayeona kazi hii hadi ipangiwe. Itapangiwa simu hii ikiwa mtandaoni.",
+  "@assignmentPendingMessage": {
+    "description": "Task detail notice for a pending task (A-01). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "assignmentRejectedGeneric": "Watu uliowachagua hawakuweza kupangiwa.",
+  "@assignmentRejectedGeneric": {
+    "description": "Reason shown when the server gives an unknown assignment error. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "assignmentRejectedLabel": "Haijapangiwa",
+  "@assignmentRejectedLabel": {
+    "description": "Label: the server refused the assignment (A-01). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "assignmentRejectedMessage": "Kazi hii haikupangiwa: {reason} Ihariri uitume tena, au uifute.",
+  "@assignmentRejectedMessage": {
+    "description": "Task detail notice for a refused task. reason is a full sentence. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
   },
   "attachmentsEmpty": "Bado hakuna viambatisho",
   "@attachmentsEmpty": {
@@ -264,6 +581,46 @@
   "auditEmptyTitle": "Bado hakuna kumbukumbu za ukaguzi",
   "@auditEmptyTitle": {
     "description": "SW_REVIEW: Audit empty title."
+  },
+  "awaitingCheckAssigneeMessage": "Imekamilika. Inasubiri aliyeunda akague kazi.",
+  "@awaitingCheckAssigneeMessage": {
+    "description": "Notice for assignees of a task waiting for check (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "awaitingCheckCreatorMessage": "Kazi imekamilika. Ikague, kisha uthibitishe au uirudishe kwa marekebisho.",
+  "@awaitingCheckCreatorMessage": {
+    "description": "Notice for the creator of a task waiting for check (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "blockTaskTitle": "Kwa nini kazi hii imekwama?",
+  "@blockTaskTitle": {
+    "description": "Reason dialog title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "blockedReasonLabel": "Imekwama kwa sababu",
+  "@blockedReasonLabel": {
+    "description": "Task detail field. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "boardColumnEmpty": "Hakuna kazi",
+  "@boardColumnEmpty": {
+    "description": "Kanban column without tasks."
+  },
+  "boardColumnTitle": "{status} ({count})",
+  "@boardColumnTitle": {
+    "description": "Kanban column header: status and number of loaded tasks.",
+    "placeholders": {
+      "status": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cancelReasonLabel": "Imesitishwa kwa sababu",
+  "@cancelReasonLabel": {
+    "description": "Task detail field. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "cancelTaskTitle": "Kwa nini kazi hii inasitishwa?",
+  "@cancelTaskTitle": {
+    "description": "Reason dialog title. SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "codeEntryHelp": "Weka msimbo wa tarakimu 6 tuliokutumia kwa SMS kwenda {phone}.",
   "@codeEntryHelp": {
@@ -302,6 +659,14 @@
   "commentsTitle": "Maoni",
   "@commentsTitle": {
     "description": "Task detail: comments section."
+  },
+  "completionModeAll": "Imekamilika wote wakimaliza",
+  "@completionModeAll": {
+    "description": "Several assignees: everyone must finish (A-02). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "completionModeAny": "Imekamilika mtu yeyote mmoja akimaliza",
+  "@completionModeAny": {
+    "description": "Several assignees: one is enough (A-02). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "consentCheckbox": "Nimesoma taarifa hii na ninakubali taarifa zangu zitumike kama ilivyoelezwa.",
   "@consentCheckbox": {
@@ -479,6 +844,14 @@
   "@deactivateUserTitle": {
     "description": "Confirmation dialog title. SW_REVIEW: Kiswahili needs native-speaker check."
   },
+  "deleteTaskMessage": "Kazi itaondolewa kwenye orodha za kila mtu. Kumbukumbu za ukaguzi zitabaki.",
+  "@deleteTaskMessage": {
+    "description": "Delete confirmation. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "deleteTaskTitle": "Ufute kazi hii?",
+  "@deleteTaskTitle": {
+    "description": "Delete confirmation title."
+  },
   "departmentCreateTitle": "Idara mpya",
   "@departmentCreateTitle": {
     "description": "Dialog title."
@@ -574,6 +947,14 @@
   "errorAdminVerificationRequired": "Tafadhali thibitisha tena msimbo wako wa msimamizi.",
   "@errorAdminVerificationRequired": {
     "description": "Error: the admin second factor has expired. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "errorAssigneeInactive": "Mmoja wa watu uliowachagua hatumiki tena. Chagua mtu mwingine.",
+  "@errorAssigneeInactive": {
+    "description": "Error assignee-inactive. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "errorAssigneeNotAllowed": "Huwezi kumpangia kazi mmoja wa watu uliowachagua. Chagua watu wa timu yako.",
+  "@errorAssigneeNotAllowed": {
+    "description": "Error assignee-not-allowed. SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "errorConflict": "Mtu mwingine amebadilisha hiki kwanza. Tafadhali angalia toleo la sasa.",
   "@errorConflict": {
@@ -681,6 +1062,10 @@
   "@errorSupervisorInvalid": {
     "description": "Error supervisor-invalid. SW_REVIEW: Kiswahili needs native-speaker check."
   },
+  "errorTaskClosed": "Kazi hii tayari imekamilika au imesitishwa.",
+  "@errorTaskClosed": {
+    "description": "Error task-closed. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "errorTooManyAttempts": "Umejaribu mara nyingi mno. Tafadhali subiri dakika chache kisha ujaribu tena.",
   "@errorTooManyAttempts": {
     "description": "Rate limited."
@@ -725,6 +1110,10 @@
   "@filterDueDate": {
     "description": "Task filter chip."
   },
+  "filterLoadedOnlyNote": "Baadhi ya vichujio vinaangalia kazi zilizopakiwa tu. Pakia zaidi kuona zaidi.",
+  "@filterLoadedOnlyNote": {
+    "description": "Shown when filters apply within loaded pages only. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "filterNoOptionsYet": "Bado hakuna machaguo",
   "@filterNoOptionsYet": {
     "description": "Empty filter options."
@@ -749,9 +1138,17 @@
   "@labelInactive": {
     "description": "Label on a deactivated person or department."
   },
+  "labelNo": "Hapana",
+  "@labelNo": {
+    "description": "Yes/no value."
+  },
   "labelSupervisorInactive": "Msimamizi hatumiki",
   "@labelSupervisorInactive": {
     "description": "Warning label: this person's supervisor was deactivated and must be changed. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "labelYes": "Ndiyo",
+  "@labelYes": {
+    "description": "Yes/no value."
   },
   "languageEnglish": "English",
   "@languageEnglish": {
@@ -921,6 +1318,38 @@
       }
     }
   },
+  "progressFinished": "Amemaliza",
+  "@progressFinished": {
+    "description": "Progress of one assignee."
+  },
+  "progressNotFinished": "Bado hajamaliza",
+  "@progressNotFinished": {
+    "description": "Progress of one assignee."
+  },
+  "reasonFieldLabel": "Sababu",
+  "@reasonFieldLabel": {
+    "description": "Reason field label."
+  },
+  "reassignTitle": "Mpangie",
+  "@reassignTitle": {
+    "description": "Reassign picker title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "reassignedMessage": "Kazi imepangiwa watu wengine",
+  "@reassignedMessage": {
+    "description": "Snackbar after reassigning. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "reassignmentNeededLabel": "Inahitaji mtu mwingine",
+  "@reassignmentNeededLabel": {
+    "description": "Label: an assignee was deactivated. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "reassignmentNeededMessage": "Mtu mmoja kwenye kazi hii amezimwa. Mpangie mtu mwingine.",
+  "@reassignmentNeededMessage": {
+    "description": "Task detail notice. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "reassignmentReasonLabel": "Sababu ya kupangiwa upya",
+  "@reassignmentReasonLabel": {
+    "description": "Task detail field. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "reportingTreeEmptyMessage": "Weka msimamizi wa kila mtu ili kujenga mfumo wa uwajibikaji unaotumika kupandisha kazi.",
   "@reportingTreeEmptyMessage": {
     "description": "SW_REVIEW: Reporting tree empty message."
@@ -958,6 +1387,14 @@
         "example": "42"
       }
     }
+  },
+  "returnReasonLabel": "Imerudishwa kwa marekebisho kwa sababu",
+  "@returnReasonLabel": {
+    "description": "Task detail field (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "returnWorkTitle": "Nini kinahitaji kubadilishwa?",
+  "@returnWorkTitle": {
+    "description": "Return dialog title (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "roleAdmin": "Msimamizi wa mfumo",
   "@roleAdmin": {
@@ -1085,6 +1522,14 @@
   "@setupMissingTitle": {
     "description": "SW_REVIEW: App not configured title."
   },
+  "showAsBoard": "Onyesha kama ubao",
+  "@showAsBoard": {
+    "description": "Toggle to the Kanban board. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "showAsList": "Onyesha kama orodha",
+  "@showAsList": {
+    "description": "Toggle to the list."
+  },
   "signInNeedsConnection": "Kuingia kunahitaji intaneti.",
   "@signInNeedsConnection": {
     "description": "Note under the sign-in buttons."
@@ -1100,6 +1545,10 @@
   "startWorkflowTitle": "Anzisha mtiririko wa kazi",
   "@startWorkflowTitle": {
     "description": "SW_REVIEW: Start workflow title."
+  },
+  "statusAwaitingCheck": "Inasubiri ukaguzi",
+  "@statusAwaitingCheck": {
+    "description": "Task status (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "statusBlocked": "Imekwama",
   "@statusBlocked": {
@@ -1141,6 +1590,14 @@
   "@syncSyncing": {
     "description": "SW_REVIEW: Sync banner: syncing."
   },
+  "taskActionsTitle": "Hatua inayofuata",
+  "@taskActionsTitle": {
+    "description": "Task detail: actions section. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "taskCannotEditMessage": "Kazi hii haiwezi kuhaririwa sasa.",
+  "@taskCannotEditMessage": {
+    "description": "Edit screen for a task the user may not edit. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "taskCreateTitle": "Kazi mpya",
   "@taskCreateTitle": {
     "description": "Create task title."
@@ -1148,6 +1605,15 @@
   "taskDetailTitle": "Kazi",
   "@taskDetailTitle": {
     "description": "Task detail title."
+  },
+  "taskDueAt": "Mwisho {date}",
+  "@taskDueAt": {
+    "description": "Deadline line. date is date and time. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
   },
   "taskEditTitle": "Hariri kazi",
   "@taskEditTitle": {
@@ -1161,6 +1627,14 @@
   "@taskFieldAssigneeHint": {
     "description": "Assignee field placeholder."
   },
+  "taskFieldCompletionMode": "Kwa watu kadhaa",
+  "@taskFieldCompletionMode": {
+    "description": "Completion mode field label (A-02). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "taskFieldCreator": "Imeundwa na",
+  "@taskFieldCreator": {
+    "description": "Task detail field."
+  },
   "taskFieldDeadline": "Tarehe ya mwisho",
   "@taskFieldDeadline": {
     "description": "Deadline field label."
@@ -1169,9 +1643,21 @@
   "@taskFieldDeadlineHint": {
     "description": "Deadline placeholder."
   },
+  "taskFieldDepartment": "Idara",
+  "@taskFieldDepartment": {
+    "description": "Task detail field."
+  },
   "taskFieldDescription": "Maelezo",
   "@taskFieldDescription": {
     "description": "Description field label."
+  },
+  "taskFieldNeedsCheck": "Kagua kazi kabla haijakamilika",
+  "@taskFieldNeedsCheck": {
+    "description": "Needs-check switch (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "taskFieldNeedsCheckHelp": "Kazi ikikamilika, utaithibitisha au kuirudisha kwa marekebisho.",
+  "@taskFieldNeedsCheckHelp": {
+    "description": "Needs-check help text (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "taskFieldPriority": "Kipaumbele",
   "@taskFieldPriority": {
@@ -1181,9 +1667,21 @@
   "@taskFieldTitle": {
     "description": "Title field label."
   },
-  "taskNotLoadedYet": "Taarifa za kazi zitaonekana hapa.",
-  "@taskNotLoadedYet": {
-    "description": "Task summary placeholder while loading is not built."
+  "taskProgress": "{done} kati ya {total} wamemaliza",
+  "@taskProgress": {
+    "description": "Progress of several assignees (A-02). SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "taskResubmitTitle": "Rekebisha na utume tena",
+  "@taskResubmitTitle": {
+    "description": "Title when correcting a task the server could not assign. SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "taskSummaryTitle": "Taarifa",
   "@taskSummaryTitle": {
@@ -1252,6 +1750,18 @@
   "topPersonWarningTitle": "Mfanye mtu huyu kuwa wa juu kabisa wa taasisi?",
   "@topPersonWarningTitle": {
     "description": "Confirmation when saving a person without a supervisor. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "unassignedSectionTitle": "Nilizounda, bado hazijapangiwa",
+  "@unassignedSectionTitle": {
+    "description": "My Tasks: heading above pending or refused tasks (A-01). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "unknownDepartment": "Idara",
+  "@unknownDepartment": {
+    "description": "Placeholder while a department name loads."
+  },
+  "unknownPerson": "Mtu fulani",
+  "@unknownPerson": {
+    "description": "Placeholder while a person's name loads."
   },
   "useEmailInstead": "Hupati SMS? Ingia kwa barua pepe",
   "@useEmailInstead": {
@@ -1387,6 +1897,10 @@
   "@validationPriorityRequired": {
     "description": "Required priority."
   },
+  "validationReasonRequired": "Andika sababu",
+  "@validationReasonRequired": {
+    "description": "Required reason."
+  },
   "validationReminderHours": "Weka idadi kamili ya saa kuanzia 1 hadi {max}, zikitenganishwa kwa koma",
   "@validationReminderHours": {
     "description": "Validation for reminder hours.",
@@ -1426,5 +1940,13 @@
   "valueNotLoaded": "Bado haijapakiwa",
   "@valueNotLoaded": {
     "description": "Value placeholder while data source is not built."
+  },
+  "waitingToSyncLabel": "Inasubiri kusawazishwa",
+  "@waitingToSyncLabel": {
+    "description": "Label: changes on this phone not yet sent (spec 4.9). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "waitingToSyncMessage": "Mabadiliko ya kazi hii yamehifadhiwa kwenye simu hii na yatatumwa ukipata intaneti tena.",
+  "@waitingToSyncMessage": {
+    "description": "Task detail notice (spec 4.9). SW_REVIEW: Kiswahili needs native-speaker check."
   }
 }

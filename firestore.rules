@@ -64,11 +64,15 @@ service cloud.firestore {
       return deptId in me(org).get('confidentialDepts', []);
     }
 
+    // `deleted` is written as false on create (and never removed), so list queries filtering on
+    // deleted == false can be proved by these rules. Assignees of an assigned task read it
+    // directly (My Tasks queries assigneeIds); once assigned they are also in viewerIds.
     function canReadTaskData(org, task) {
       return isMember(org)
-        && task.get('deleted', false) == false
+        && task.deleted == false
         && (
           request.auth.uid in task.viewerIds
+          || (task.assignmentState == 'assigned' && request.auth.uid in task.assigneeIds)
           || (task.confidential == false && isVerifiedAdmin(org))
           || (task.confidential == true && hasConfidentialAccess(org, task.deptId))
         );
@@ -167,13 +171,15 @@ service cloud.firestore {
                'title', 'description', 'priority', 'deadline', 'assigneeIds', 'deptId',
                'confidential', 'participantIds', 'templateId', 'completionMode',
                'creatorId', 'status', 'viewerIds', 'assignmentState', 'completedByIds',
-               'createdAt', 'updatedAt', 'updatedBy', 'clientUpdatedAt'])
+               'createdAt', 'updatedAt', 'updatedBy', 'clientUpdatedAt', 'needsCheck', 'deleted'])
           && request.resource.data.creatorId == request.auth.uid
           && request.resource.data.updatedBy == request.auth.uid
           && request.resource.data.viewerIds == [request.auth.uid]
           && request.resource.data.status == 'todo'
           && request.resource.data.assignmentState == 'pending'
           && request.resource.data.completedByIds == []
+          && request.resource.data.deleted == false
+          && request.resource.data.get('needsCheck', false) is bool
           && request.resource.data.createdAt == request.time
           && request.resource.data.updatedAt == request.time
           && nonEmptyString(request.resource.data.title, 200)
@@ -197,18 +203,28 @@ service cloud.firestore {
         // are never in these lists, so only Cloud Functions can change them. That includes
         // reassignmentNeeded and reassignmentReason, set by deactivateUser (Sprint 1).
         allow update: if canReadTaskData(org, resource.data)
-          && resource.data.assignmentState == 'assigned'
           && request.resource.data.updatedAt == request.time
           && request.resource.data.updatedBy == request.auth.uid
           && (
-            creatorEdit(org) || assigneeStatusChange(org) || assigneeCompletes(org)
-            || cancelSimpleTask(org) || softDelete(org)
+            (resource.data.assignmentState == 'assigned' && (
+              creatorEdit(org) || assigneeStatusChange(org) || assigneeCompletes(org)
+              || creatorCheck(org) || cancelSimpleTask(org) || softDelete(org)
+            ))
+            || resubmitRejected(org) || discardUnassigned(org)
           );
 
         allow delete: if false;
 
+        // Open = not final. awaiting_check (D-06) is open until the creator confirms or returns it.
         function isOpen() {
+          return resource.data.status in ['todo', 'in_progress', 'blocked', 'awaiting_check'];
+        }
+        // Statuses in which the assignees are still working.
+        function isActive() {
           return resource.data.status in ['todo', 'in_progress', 'blocked'];
+        }
+        function needsCheck() {
+          return resource.data.get('needsCheck', false) == true;
         }
         function isSimpleTask() {
           return resource.data.get('templateId', null) == null;
@@ -217,12 +233,14 @@ service cloud.firestore {
           return ['updatedAt', 'updatedBy', 'clientUpdatedAt'];
         }
 
-        // The creator edits the plain fields of an open task. Deadline changes are logged and the
-        // assignees notified by a Cloud Function.
+        // The creator edits the plain fields of an open task, including whether they check the
+        // work (needsCheck, D-06). Deadline changes are logged and the assignees notified by a
+        // Cloud Function.
         function creatorEdit(org) {
           return resource.data.creatorId == request.auth.uid
             && isOpen()
-            && changed().hasOnly(['title', 'description', 'priority', 'deadline'].concat(bookkeeping()))
+            && changed().hasOnly(['title', 'description', 'priority', 'deadline', 'needsCheck'].concat(bookkeeping()))
+            && request.resource.data.get('needsCheck', false) is bool
             && nonEmptyString(request.resource.data.title, 200)
             && request.resource.data.get('description', '').size() <= 5000
             && request.resource.data.priority in ['low', 'medium', 'high', 'urgent']
@@ -230,6 +248,7 @@ service cloud.firestore {
         }
 
         // An assignee moves a simple task through its statuses (PDD 4.3). Blocked needs a reason.
+        // "Done" is `done`, or `awaiting_check` when the creator checks the work (D-06).
         function assigneeStatusChange(org) {
           let from = resource.data.status;
           let to = request.resource.data.status;
@@ -240,7 +259,8 @@ service cloud.firestore {
               (from == 'todo' && to == 'in_progress')
               || (from == 'in_progress' && to == 'blocked' && nonEmptyString(request.resource.data.blockedReason, 1000))
               || (from == 'blocked' && to == 'in_progress')
-              || (from in ['todo', 'in_progress'] && to == 'done'
+              || (from in ['todo', 'in_progress']
+                  && ((to == 'done' && !needsCheck()) || (to == 'awaiting_check' && needsCheck()))
                   && (resource.data.assigneeIds.size() == 1 || resource.data.completionMode == 'any'))
             );
         }
@@ -249,12 +269,28 @@ service cloud.firestore {
         // a Cloud Function marks the task Done when everyone has.
         function assigneeCompletes(org) {
           return isSimpleTask()
-            && isOpen()
+            && isActive()
             && request.auth.uid in resource.data.assigneeIds
             && !(request.auth.uid in resource.data.completedByIds)
             && changed().hasOnly(['completedByIds'].concat(bookkeeping()))
             && request.resource.data.completedByIds.toSet().difference(resource.data.completedByIds.toSet()) == [request.auth.uid].toSet()
             && request.resource.data.completedByIds.size() == resource.data.completedByIds.size() + 1;
+        }
+
+        // D-06: the creator confirms checked work (awaiting_check -> done) or returns it with a
+        // reason (awaiting_check -> in_progress). After a return of a shared task the server
+        // clears completedByIds so every assignee finishes again.
+        function creatorCheck(org) {
+          return isSimpleTask()
+            && resource.data.creatorId == request.auth.uid
+            && resource.data.status == 'awaiting_check'
+            && (
+              (request.resource.data.status == 'done'
+                && changed().hasOnly(['status'].concat(bookkeeping())))
+              || (request.resource.data.status == 'in_progress'
+                && changed().hasOnly(['status', 'returnReason'].concat(bookkeeping()))
+                && nonEmptyString(request.resource.data.returnReason, 1000))
+            );
         }
 
         // The creator, or a manager above the assignee, cancels a simple task with a reason.
@@ -278,6 +314,38 @@ service cloud.firestore {
               isVerifiedAdmin(org)
               || (hasRole(org, 'manager') && resource.data.creatorId == request.auth.uid && resource.data.status == 'todo')
             );
+        }
+
+        // The creator fixes a task the server refused to assign and sends it back for the
+        // assignment check (A-01): only the plain fields and the assignees change, the state
+        // returns to pending and the refusal code is removed. Visibility stays creator-only until
+        // the server assigns it.
+        function resubmitRejected(org) {
+          return resource.data.creatorId == request.auth.uid
+            && resource.data.assignmentState == 'rejected'
+            && changed().hasOnly(['title', 'description', 'priority', 'deadline', 'assigneeIds', 'completionMode',
+                                  'needsCheck', 'assignmentState', 'assignmentError'].concat(bookkeeping()))
+            && request.resource.data.assignmentState == 'pending'
+            && !('assignmentError' in request.resource.data)
+            && nonEmptyString(request.resource.data.title, 200)
+            && request.resource.data.get('description', '') is string
+            && request.resource.data.get('description', '').size() <= 5000
+            && request.resource.data.priority in ['low', 'medium', 'high', 'urgent']
+            && request.resource.data.deadline is timestamp
+            && request.resource.data.assigneeIds is list
+            && request.resource.data.assigneeIds.size() >= 1
+            && request.resource.data.assigneeIds.size() <= 50
+            && request.resource.data.completionMode in ['all', 'any']
+            && request.resource.data.get('needsCheck', false) is bool;
+        }
+
+        // The creator discards a task that was never assigned (pending or rejected).
+        function discardUnassigned(org) {
+          return resource.data.creatorId == request.auth.uid
+            && resource.data.assignmentState in ['pending', 'rejected']
+            && changed().hasOnly(['deleted', 'deletedAt'].concat(bookkeeping()))
+            && request.resource.data.deleted == true
+            && request.resource.data.deletedAt == request.time;
         }
 
         match /comments/{commentId} {
@@ -354,12 +422,15 @@ service cloud.firestore {
         allow create, delete: if false;
       }
 
-      // Audit entries carry a copy of the task's viewerIds and confidential flag when written.
+      // Audit entries carry a copy of the task's viewerIds and confidential flag when written
+      // (the server always writes both). The fields are read directly, not with get() defaults:
+      // with a default, a query that does not filter on `confidential` was allowed to return
+      // confidential entries to admins (found by the Sprint 2 list-query tests).
       match /audit/{entryId} {
         allow read: if isMember(org)
           && (
-            request.auth.uid in resource.data.get('viewerIds', [])
-            || (isVerifiedAdmin(org) && resource.data.get('confidential', false) == false)
+            request.auth.uid in resource.data.viewerIds
+            || (isVerifiedAdmin(org) && resource.data.confidential == false)
           );
         allow write: if false;
       }

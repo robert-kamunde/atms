@@ -90,6 +90,9 @@ export async function verifyAdminCode(deps: Deps, callerAuth: CallerAuth | undef
 
   const until = verifiedUntilSeconds(nowMs, caller.claims.auth_time as number);
   await deps.auth.setCustomUserClaims(caller.uid, { orgId: org, adminVerifiedUntil: until });
+  // Triggers cannot see custom claims, so they check this record for the admin's second factor
+  // at the time of an action (SPRINT2_CONTRACT "Admin verification record").
+  await db.doc(paths.adminVerification(org, caller.uid)).set({ verifiedUntilMs: until * 1000 });
   log.info('admin_verified', { orgId: org, uid: caller.uid, until });
   return { verifiedUntil: until * 1000 };
 }

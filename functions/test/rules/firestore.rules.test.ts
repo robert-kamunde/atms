@@ -29,7 +29,7 @@ const newTask = (uid: string, extra: Record<string, unknown> = {}) => ({
   title: 'Collect receipts', description: '', priority: 'medium', deadline: inDays(1), assigneeIds: [uid],
   deptId: 'FIN', confidential: false, participantIds: [], templateId: null, completionMode: 'all',
   creatorId: uid, status: 'todo', viewerIds: [uid], assignmentState: 'pending', completedByIds: [],
-  createdAt: serverTimestamp(), updatedAt: serverTimestamp(), updatedBy: uid, ...extra,
+  createdAt: serverTimestamp(), updatedAt: serverTimestamp(), updatedBy: uid, deleted: false, ...extra,
 });
 
 describe('who can read a task', () => {
@@ -71,14 +71,14 @@ describe('who can read a task', () => {
   test('lists must be limited to tasks the reader may see', async () => {
     const db = as(env, 'asha').firestore();
     const tasksCol = collection(db, `orgs/${ORG}/tasks`);
-    await assertSucceeds(getDocs(query(tasksCol, where('viewerIds', 'array-contains', 'asha'), limit(20))));
+    await assertSucceeds(getDocs(query(tasksCol, where('viewerIds', 'array-contains', 'asha'), where('deleted', '==', false), limit(20))));
     await assertFails(getDocs(query(tasksCol, limit(20))));
     await assertFails(getDocs(query(tasksCol, where('deptId', '==', 'FIN'), limit(20))));
   });
 
   test('a verified admin can list non-confidential tasks but not all tasks', async () => {
     const tasksCol = collection(as(env, 'idrisa').firestore(), `orgs/${ORG}/tasks`);
-    await assertSucceeds(getDocs(query(tasksCol, where('confidential', '==', false), limit(20))));
+    await assertSucceeds(getDocs(query(tasksCol, where('confidential', '==', false), where('deleted', '==', false), limit(20))));
     await assertFails(getDocs(query(tasksCol, limit(20))));
   });
 });
@@ -104,7 +104,7 @@ describe('CRITICAL: confidential tasks', () => {
 
   test('a holder of HR confidential access can list HR confidential tasks', async () => {
     const tasksCol = collection(as(env, 'neema').firestore(), `orgs/${ORG}/tasks`);
-    await assertSucceeds(getDocs(query(tasksCol, where('deptId', '==', 'HR'), where('confidential', '==', true), limit(20))));
+    await assertSucceeds(getDocs(query(tasksCol, where('deptId', '==', 'HR'), where('confidential', '==', true), where('deleted', '==', false), limit(20))));
   });
 
   test('comments and attachments of a confidential task are protected the same way', async () => {

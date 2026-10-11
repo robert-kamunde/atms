@@ -57,5 +57,7 @@ storage-debug.log
 # Secrets: never commit real Firebase config or provider keys
 .env
 *.keystore
+# DEVELOPMENT signing key, committed on purpose (DECISIONS A-33). Release keys never.
+!android/dev-signing/atms-dev.keystore
 google-services.json
 GoogleService-Info.plist

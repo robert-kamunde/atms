@@ -38,6 +38,20 @@ enum ServerErrorCode {
   codeAttemptsExceeded('code-attempts-exceeded'),
   codeRateLimited('code-rate-limited'),
 
+  // Tasks (onTaskCreated, reassignTask; docs/SPRINT2_CONTRACT.md).
+  /// The creator may not assign one of the people (spec 2 matrix).
+  assigneeNotAllowed('assignee-not-allowed'),
+
+  /// One of the people is deactivated or not in the organisation.
+  assigneeInactive('assignee-inactive'),
+
+  /// The task does not exist or the caller cannot read it (shown as "not
+  /// found", A-17).
+  taskNotFound('task-not-found'),
+
+  /// The task is finished or cancelled (or is a workflow task).
+  taskClosed('task-closed'),
+
   /// The SMS or email provider is down.
   providerUnavailable('provider-unavailable'),
   smsCapReached('sms-cap-reached');

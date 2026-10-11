@@ -202,6 +202,7 @@ describe('deactivateUser', () => {
     for (let i = 0; i < 205; i++) batch.set(db.doc(`orgs/${ORG}/tasks/open${String(i).padStart(3, '0')}`), { status: i % 3 === 0 ? 'in_progress' : 'todo', assigneeIds: ['asha', 'john'] });
     await batch.commit();
     await task('blocked', { status: 'blocked' });
+    await task('awaiting', { status: 'awaiting_check' });
     await task('done', { status: 'done' });
     await task('cancelled', { status: 'cancelled' });
     await task('deleted', { deleted: true });
@@ -215,7 +216,7 @@ describe('deactivateUser', () => {
     const startedAt = Math.floor(Date.now() / 1000) * 1000; // tokensValidAfterTime has one-second resolution
 
     const res = await deactivateUser(deps, caller(deps, 'idrisa'), { uid: 'asha' });
-    expect(res).toEqual({ flaggedTaskCount: 206 });
+    expect(res).toEqual({ flaggedTaskCount: 207 });
 
     expect((await userDoc('asha')).active).toBe(false);
     const after = await validAfter();
@@ -226,6 +227,7 @@ describe('deactivateUser', () => {
     expect(await t('open000')).toMatchObject({ reassignmentNeeded: true, reassignmentReason: 'user_deactivated' });
     expect(await t('open204')).toMatchObject({ reassignmentNeeded: true });
     expect(await t('blocked')).toMatchObject({ reassignmentNeeded: true });
+    expect(await t('awaiting')).toMatchObject({ reassignmentNeeded: true }); // awaiting_check is open (D-06)
     for (const id of ['done', 'cancelled', 'deleted', 'johns']) expect((await t(id)).reassignmentNeeded).toBeUndefined();
 
     // People who reported to her keep that supervisor until an admin changes it.
@@ -244,5 +246,45 @@ describe('deactivateUser', () => {
     await expectCode(deactivateUser(deps, caller(deps, 'idrisa'), { uid: 'idrisa' }), ErrorCode.selfDeactivation);
     await expectCode(deactivateUser(deps, caller(deps, 'idrisa'), { uid: 'nobody' }), ErrorCode.notFound);
     await expectCode(deactivateUser(deps, caller(deps, 'idrisa'), { uid: 'outsider' }), ErrorCode.notFound);
+  });
+});
+
+describe('user audit entries (PDD 4.11, KNOWN_ISSUES KI-14)', () => {
+  const userEntries = async (uid: string) => {
+    const snap = await db.collection(`orgs/${ORG}/audit`).where('subjectUid', '==', uid).get();
+    return snap.docs.map((d) => d.data());
+  };
+
+  test('adding, changing and deactivating a user each write exactly one entry, readable only by verified admins', async () => {
+    const { uid } = await adminUpsertUser(deps, caller(deps, 'idrisa'), newStaff());
+    let es = await userEntries(uid);
+    expect(es).toHaveLength(1);
+    expect(es[0]).toMatchObject({
+      action: 'user_added', actorId: 'idrisa', taskId: null, viewerIds: [], confidential: false, madeOffline: false, before: null,
+    });
+    expect(es[0].after).toMatchObject({ name: 'Zawadi Said', role: 'staff', supervisorId: 'asha', phone: '+255712000001' });
+
+    await adminUpsertUser(deps, caller(deps, 'idrisa'), await existingInput(uid, { role: 'manager', phone: '+255712000002' }));
+    es = await userEntries(uid);
+    const updated = es.filter((e) => e.action === 'user_updated');
+    expect(updated).toHaveLength(1);
+    expect(updated[0].before).toEqual({ role: 'staff', phone: '+255712000001' });
+    expect(updated[0].after).toEqual({ role: 'manager', phone: '+255712000002' });
+
+    // Saving without a change is not an action.
+    await adminUpsertUser(deps, caller(deps, 'idrisa'), await existingInput(uid));
+    expect((await userEntries(uid)).filter((e) => e.action === 'user_updated')).toHaveLength(1);
+
+    await deactivateUser(deps, caller(deps, 'idrisa'), { uid });
+    await deactivateUser(deps, caller(deps, 'idrisa'), { uid }); // already inactive: no second entry
+    const deactivated = (await userEntries(uid)).filter((e) => e.action === 'user_deactivated');
+    expect(deactivated).toHaveLength(1);
+    expect(deactivated[0]).toMatchObject({ before: { active: true }, after: { active: false }, actorId: 'idrisa' });
+  });
+
+  test('a refused change writes no entry', async () => {
+    await expectCode(adminUpsertUser(deps, caller(deps, 'idrisa'), newStaff({ deptId: 'OLD' })), ErrorCode.departmentInvalid);
+    const snap = await db.collection(`orgs/${ORG}/audit`).get();
+    expect(snap.size).toBe(0);
   });
 });

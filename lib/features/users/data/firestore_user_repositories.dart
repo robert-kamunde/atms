@@ -73,6 +73,18 @@ class FirestoreUserDirectoryRepository implements UserDirectoryRepository {
   );
 
   @override
+  PaginatedSource<AppUser> teamMembers(String managerId) =>
+      FirestorePaginatedQuery<AppUser>(
+        // Index: users (managerChain CONTAINS, name ASC).
+        query: _users(
+          _db,
+          orgId,
+        ).where('managerChain', arrayContains: managerId).orderBy('name'),
+        decode: _decode,
+        debugLabel: 'teamMembers',
+      );
+
+  @override
   PaginatedSource<AppUser> directReports(String? supervisorId) =>
       FirestorePaginatedQuery<AppUser>(
         // Equality plus document-id order needs no composite index.

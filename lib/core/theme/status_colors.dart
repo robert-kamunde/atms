@@ -14,6 +14,7 @@ class AtmsColors extends ThemeExtension<AtmsColors> {
     required this.todo,
     required this.inProgress,
     required this.blocked,
+    required this.awaitingCheck,
     required this.done,
     required this.cancelled,
     required this.overdue,
@@ -32,6 +33,7 @@ class AtmsColors extends ThemeExtension<AtmsColors> {
     todo: Color(0xFF455A64), // blue grey 700
     inProgress: Color(0xFF1565C0), // blue 800
     blocked: Color(0xFF8D4B00), // dark amber
+    awaitingCheck: Color(0xFF6A1B9A), // purple 800
     done: Color(0xFF2E7D32), // green 800
     cancelled: Color(0xFF616161), // grey 700
     overdue: Color(0xFFC62828), // red 800
@@ -49,6 +51,7 @@ class AtmsColors extends ThemeExtension<AtmsColors> {
     todo: Color(0xFFB0BEC5),
     inProgress: Color(0xFF90CAF9),
     blocked: Color(0xFFFFCC80),
+    awaitingCheck: Color(0xFFCE93D8),
     done: Color(0xFFA5D6A7),
     cancelled: Color(0xFFBDBDBD),
     overdue: Color(0xFFEF9A9A),
@@ -64,6 +67,9 @@ class AtmsColors extends ThemeExtension<AtmsColors> {
   final Color todo;
   final Color inProgress;
   final Color blocked;
+
+  /// Waiting for the creator's check (D-06).
+  final Color awaitingCheck;
   final Color done;
   final Color cancelled;
 
@@ -83,6 +89,7 @@ class AtmsColors extends ThemeExtension<AtmsColors> {
     TaskStatus.todo => todo,
     TaskStatus.inProgress => inProgress,
     TaskStatus.blocked => blocked,
+    TaskStatus.awaitingCheck => awaitingCheck,
     TaskStatus.done => done,
     TaskStatus.cancelled => cancelled,
   };
@@ -99,6 +106,7 @@ class AtmsColors extends ThemeExtension<AtmsColors> {
     Color? todo,
     Color? inProgress,
     Color? blocked,
+    Color? awaitingCheck,
     Color? done,
     Color? cancelled,
     Color? overdue,
@@ -113,6 +121,7 @@ class AtmsColors extends ThemeExtension<AtmsColors> {
     todo: todo ?? this.todo,
     inProgress: inProgress ?? this.inProgress,
     blocked: blocked ?? this.blocked,
+    awaitingCheck: awaitingCheck ?? this.awaitingCheck,
     done: done ?? this.done,
     cancelled: cancelled ?? this.cancelled,
     overdue: overdue ?? this.overdue,
@@ -133,6 +142,7 @@ class AtmsColors extends ThemeExtension<AtmsColors> {
       todo: l(todo, other.todo),
       inProgress: l(inProgress, other.inProgress),
       blocked: l(blocked, other.blocked),
+      awaitingCheck: l(awaitingCheck, other.awaitingCheck),
       done: l(done, other.done),
       cancelled: l(cancelled, other.cancelled),
       overdue: l(overdue, other.overdue),

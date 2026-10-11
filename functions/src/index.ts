@@ -21,3 +21,10 @@ export {
   beforeUserCreatedFn as beforeUserCreated,
   beforeUserSignedInFn as beforeUserSignedIn,
 } from './auth/functions';
+
+export {
+  onTaskCreatedFn as onTaskCreated,
+  onTaskUpdatedFn as onTaskUpdated,
+  onUserUpdatedFn as onUserUpdated,
+  reassignTaskFn as reassignTask,
+} from './tasks/functions';

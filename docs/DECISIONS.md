@@ -63,6 +63,15 @@ Robert accepted every recommendation below ("answers on open decisions: agree", 
 | A-25 | Network timing | Callables time out after 20 seconds and show "needs connection" when offline. An offline-capable write not confirmed within 3 seconds shows "saved on phone"; a later refusal shows a message. | OFF requirements. |
 | A-26 | Form limits | Reminder and escalation hours up to 720, escalation levels up to 10, names and job roles up to 100 characters. | Catch typing mistakes only. |
 
+| A-27 | Task department | A new task takes the creator's department (`deptId`). | The PDD has no department picker on the task form. |
+| A-28 | Unverified admin creating tasks | Treated like a manager by the server; the app offers only themselves until the admin code is checked. | Admin powers need the second factor. |
+| A-29 | Assignment refusals | The server marks a refused task `rejected` with `task-not-found`, `assignee-not-allowed` or `assignee-inactive`; the creator edits and sends it again, or discards it. | A-01; nothing is assigned that the creator was not allowed to assign. |
+| A-30 | Completion with several assignees | In `any` mode the first assignee to finish completes the task; returning checked work (D-06) clears `completedByIds`; a reassignment that leaves only people who have finished completes the task. | A-02. |
+| A-31 | Changes made offline | An audit entry is marked "made offline" when the phone's `clientUpdatedAt` is more than 60 seconds before the server time. | PDD 4.11 asks for it; phone clocks drift. |
+| A-32 | Buttons shown | The app's `TaskPolicy` mirrors the rules only to decide which actions to show; the rules and Cloud Functions are the security check. | Never trust the client. |
+
+| A-33 | Connected test builds | Robert chose (10 Oct 2026) to commit a DEVELOPMENT signing key (`android/dev-signing/`) and the atms-d7f64 Firebase client settings (`config/firebase/atms-d7f64.json`). Debug builds everywhere share that key, whose SHA-1/SHA-256 are registered on the Firebase Android app, and CI publishes `atms-connected-debug-apk`. The key must never sign a Play Store release; release signing stays secret (RELEASE.md). The Firebase values are client identifiers; protection comes from the rules, Cloud Functions and App Check. | Phone sign-in needs a registered signature; GitHub secrets could not be set from here. |
+
 ## Contradictions found between the documents
 
 | ID | Where | Conflict | Resolution |

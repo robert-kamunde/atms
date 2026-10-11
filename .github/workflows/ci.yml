@@ -58,3 +58,10 @@ jobs:
           name: atms-debug-apk
           path: build/app/outputs/flutter-apk/app-debug.apk
           retention-days: 14
+      # Connected build against atms-d7f64, signed with the committed development key (A-33).
+      - run: flutter build apk --debug --dart-define-from-file=config/firebase/atms-d7f64.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: atms-connected-debug-apk
+          path: build/app/outputs/flutter-apk/app-debug.apk
+          retention-days: 14

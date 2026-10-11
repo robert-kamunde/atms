@@ -36,6 +36,10 @@ abstract interface class UserDirectoryRepository {
   /// All people, by name, [PaginatedSource.pageSize] at a time.
   PaginatedSource<AppUser> allUsers();
 
+  /// Everyone below [managerId] in the reporting tree (people with the
+  /// manager in their `managerChain`), by name: who a manager may assign.
+  PaginatedSource<AppUser> teamMembers(String managerId);
+
   /// The people whose supervisor is [supervisorId]; with null, the top of
   /// the organisation (people without a supervisor).
   PaginatedSource<AppUser> directReports(String? supervisorId);

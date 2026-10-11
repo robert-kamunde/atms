@@ -36,6 +36,10 @@
   "@actionCancel": {
     "description": "Cancel button in dialogs."
   },
+  "actionCancelTask": "Cancel task",
+  "@actionCancelTask": {
+    "description": "Task detail button: cancel the task (asks for a reason). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "actionClear": "Clear",
   "@actionClear": {
     "description": "Tooltip: clear the chosen value."
@@ -43,6 +47,10 @@
   "actionClose": "Close",
   "@actionClose": {
     "description": "Close button / tooltip."
+  },
+  "actionConfirmDone": "Confirm done",
+  "@actionConfirmDone": {
+    "description": "Creator confirms checked work (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "actionContinue": "Continue",
   "@actionContinue": {
@@ -60,9 +68,17 @@
   "@actionDeactivateUser": {
     "description": "Button in the user editor. SW_REVIEW: Kiswahili needs native-speaker check."
   },
+  "actionDelete": "Delete",
+  "@actionDelete": {
+    "description": "Button: delete."
+  },
   "actionEdit": "Edit",
   "@actionEdit": {
     "description": "Edit button / tooltip."
+  },
+  "actionEditAndResend": "Edit and send again",
+  "@actionEditAndResend": {
+    "description": "Fix a task the server could not assign and send it again (A-01). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "actionForgotPassword": "Forgot password?",
   "@actionForgotPassword": {
@@ -84,9 +100,21 @@
   "@actionLoadMore": {
     "description": "Button: load the next page of a list."
   },
+  "actionMarkBlocked": "Mark blocked",
+  "@actionMarkBlocked": {
+    "description": "Assignee marks the task blocked (asks for a reason). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "actionMarkDone": "Mark done",
+  "@actionMarkDone": {
+    "description": "Assignee marks the task done. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "actionMoreOptions": "More options",
   "@actionMoreOptions": {
     "description": "Tooltip of a menu button."
+  },
+  "actionMyPartDone": "I'm done",
+  "@actionMyPartDone": {
+    "description": "One of several assignees marks their part done (A-02). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "actionNewTask": "New task",
   "@actionNewTask": {
@@ -100,6 +128,10 @@
   "@actionNotNow": {
     "description": "Skip button."
   },
+  "actionReassign": "Reassign",
+  "@actionReassign": {
+    "description": "Change the assignees (needs a connection). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "actionRemove": "Remove",
   "@actionRemove": {
     "description": "Tooltip: remove an item from a list."
@@ -108,9 +140,17 @@
   "@actionResendCode": {
     "description": "Resend SMS/email code."
   },
+  "actionResumeTask": "Resume",
+  "@actionResumeTask": {
+    "description": "Assignee continues a blocked task."
+  },
   "actionRetry": "Try again",
   "@actionRetry": {
     "description": "Retry button after a load error."
+  },
+  "actionReturnWork": "Return for changes",
+  "@actionReturnWork": {
+    "description": "Creator returns checked work with a reason (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "actionSave": "Save",
   "@actionSave": {
@@ -123,6 +163,10 @@
   "actionSendCode": "Send code",
   "@actionSendCode": {
     "description": "Phone sign-in: send SMS code."
+  },
+  "actionSendForCheck": "Send for check",
+  "@actionSendForCheck": {
+    "description": "Assignee finishes a task whose creator checks the work (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "actionSendResetLink": "Send link",
   "@actionSendResetLink": {
@@ -144,6 +188,10 @@
   "@actionSignOut": {
     "description": "Sign-out button."
   },
+  "actionStartTask": "Start",
+  "@actionStartTask": {
+    "description": "Assignee starts the task."
+  },
   "actionUseAnotherNumber": "Use another number",
   "@actionUseAnotherNumber": {
     "description": "Not-invited screen: go back to sign-in."
@@ -151,6 +199,233 @@
   "actionVerify": "Verify",
   "@actionVerify": {
     "description": "Verify code button."
+  },
+  "activityAssigned": "The task was assigned",
+  "@activityAssigned": {
+    "description": "Activity log: the server accepted the assignees. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "activityCancelled": "{actor} cancelled the task: {reason}",
+  "@activityCancelled": {
+    "description": "Activity log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      },
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "activityCancelledNoReason": "{actor} cancelled the task",
+  "@activityCancelledNoReason": {
+    "description": "Activity log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityCompletedBy": "{actor} finished their part",
+  "@activityCompletedBy": {
+    "description": "Activity log: one of several assignees finished. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityCreated": "{actor} created the task",
+  "@activityCreated": {
+    "description": "Activity log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityDeadlineChanged": "{actor} changed the deadline from {from} to {to}",
+  "@activityDeadlineChanged": {
+    "description": "Activity log. from and to are dates. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "activityDeadlineSet": "{actor} changed the deadline",
+  "@activityDeadlineSet": {
+    "description": "Activity log, when the dates are not available. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityDeleted": "{actor} deleted the task",
+  "@activityDeleted": {
+    "description": "Activity log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityEdited": "{actor} changed: {fields}",
+  "@activityEdited": {
+    "description": "Activity log. fields is a list of field names such as 'Title, Description'. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      },
+      "fields": {
+        "type": "String"
+      }
+    }
+  },
+  "activityEmpty": "No activity yet",
+  "@activityEmpty": {
+    "description": "Activity log empty state. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "activityGeneric": "{actor} made a change",
+  "@activityGeneric": {
+    "description": "Activity log: an action this app version does not describe. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityMadeOffline": "Made offline",
+  "@activityMadeOffline": {
+    "description": "Activity log marker: the change was made without a connection and synced later. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "activityPriorityValue": "Priority ({priority})",
+  "@activityPriorityValue": {
+    "description": "Activity log: priority changed to this value. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "priority": {
+        "type": "String"
+      }
+    }
+  },
+  "activityReassigned": "{actor} reassigned the task to {names}",
+  "@activityReassigned": {
+    "description": "Activity log. names is a list of people. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      },
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "activityReassignedNoNames": "{actor} reassigned the task",
+  "@activityReassignedNoNames": {
+    "description": "Activity log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityRejected": "The task could not be assigned: {reason}",
+  "@activityRejected": {
+    "description": "Activity log. reason is a friendly error message. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "activityReturned": "{actor} returned the work for changes: {reason}",
+  "@activityReturned": {
+    "description": "Activity log (D-06). SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      },
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "activityReturnedNoReason": "{actor} returned the work for changes",
+  "@activityReturnedNoReason": {
+    "description": "Activity log (D-06). SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityStatusChanged": "{actor} changed the status from {from} to {to}",
+  "@activityStatusChanged": {
+    "description": "Activity log. from and to are status names. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "activityStatusSet": "{actor} changed the status to {to}",
+  "@activityStatusSet": {
+    "description": "Activity log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "activitySystemActor": "ATMS",
+  "@activitySystemActor": {
+    "description": "Activity log: the system itself did it."
+  },
+  "activityTitle": "Activity",
+  "@activityTitle": {
+    "description": "Task detail: activity log section. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "activityUserAdded": "{actor} added a person",
+  "@activityUserAdded": {
+    "description": "Audit log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityUserDeactivated": "{actor} deactivated a person",
+  "@activityUserDeactivated": {
+    "description": "Audit log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
+  },
+  "activityUserUpdated": "{actor} changed a person's details",
+  "@activityUserUpdated": {
+    "description": "Audit log. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "actor": {
+        "type": "String"
+      }
+    }
   },
   "adminAuditTitle": "Audit log",
   "@adminAuditTitle": {
@@ -236,9 +511,22 @@
   "@approvalsTitle": {
     "description": "Approvals screen title."
   },
-  "assigneeCount": "{count, plural, =1{1 person chosen} other{{count} people chosen}}",
-  "@assigneeCount": {
-    "description": "Number of assignees picked.",
+  "assignedSectionTitle": "Assigned to me",
+  "@assignedSectionTitle": {
+    "description": "My Tasks: heading above the tasks assigned to me. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "assigneeMe": "{name} (me)",
+  "@assigneeMe": {
+    "description": "Assignee picker: the signed-in person.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "assigneePickerDone": "{count, plural, =0{Choose people} =1{Choose 1 person} other{Choose {count} people}}",
+  "@assigneePickerDone": {
+    "description": "Assignee picker confirm button. SW_REVIEW: Kiswahili needs native-speaker check.",
     "placeholders": {
       "count": {
         "type": "int"
@@ -248,6 +536,35 @@
   "assigneePickerEmpty": "No people to choose from yet",
   "@assigneePickerEmpty": {
     "description": "Assignee picker empty state."
+  },
+  "assigneesChangeWithReassign": "To change who does it, use Reassign on the task.",
+  "@assigneesChangeWithReassign": {
+    "description": "Edit task: assignees are changed with Reassign. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "assignmentPendingLabel": "Waiting to be assigned",
+  "@assignmentPendingLabel": {
+    "description": "Label: the server has not assigned the new task yet (A-01). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "assignmentPendingMessage": "Only you can see this task until it is assigned. It is assigned when this phone is online.",
+  "@assignmentPendingMessage": {
+    "description": "Task detail notice for a pending task (A-01). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "assignmentRejectedGeneric": "The people chosen could not be assigned.",
+  "@assignmentRejectedGeneric": {
+    "description": "Reason shown when the server gives an unknown assignment error. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "assignmentRejectedLabel": "Not assigned",
+  "@assignmentRejectedLabel": {
+    "description": "Label: the server refused the assignment (A-01). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "assignmentRejectedMessage": "This task was not assigned: {reason} Edit it and send it again, or delete it.",
+  "@assignmentRejectedMessage": {
+    "description": "Task detail notice for a refused task. reason is a full sentence. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
   },
   "attachmentsEmpty": "No attachments yet",
   "@attachmentsEmpty": {
@@ -264,6 +581,46 @@
   "auditEmptyTitle": "No audit entries yet",
   "@auditEmptyTitle": {
     "description": "Audit empty title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "awaitingCheckAssigneeMessage": "Finished. Waiting for the creator to check the work.",
+  "@awaitingCheckAssigneeMessage": {
+    "description": "Notice for assignees of a task waiting for check (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "awaitingCheckCreatorMessage": "The work is finished. Check it, then confirm or return it for changes.",
+  "@awaitingCheckCreatorMessage": {
+    "description": "Notice for the creator of a task waiting for check (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "blockTaskTitle": "Why is this task blocked?",
+  "@blockTaskTitle": {
+    "description": "Reason dialog title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "blockedReasonLabel": "Blocked because",
+  "@blockedReasonLabel": {
+    "description": "Task detail field. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "boardColumnEmpty": "No tasks",
+  "@boardColumnEmpty": {
+    "description": "Kanban column without tasks."
+  },
+  "boardColumnTitle": "{status} ({count})",
+  "@boardColumnTitle": {
+    "description": "Kanban column header: status and number of loaded tasks.",
+    "placeholders": {
+      "status": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cancelReasonLabel": "Cancelled because",
+  "@cancelReasonLabel": {
+    "description": "Task detail field. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "cancelTaskTitle": "Why is this task cancelled?",
+  "@cancelTaskTitle": {
+    "description": "Reason dialog title. SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "codeEntryHelp": "Enter the 6-digit code we sent by SMS to {phone}.",
   "@codeEntryHelp": {
@@ -302,6 +659,14 @@
   "commentsTitle": "Comments",
   "@commentsTitle": {
     "description": "Task detail: comments section."
+  },
+  "completionModeAll": "Done when everyone has finished",
+  "@completionModeAll": {
+    "description": "Several assignees: everyone must finish (A-02). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "completionModeAny": "Done when any one person finishes",
+  "@completionModeAny": {
+    "description": "Several assignees: one is enough (A-02). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "consentCheckbox": "I have read this notice and agree to my data being used as described.",
   "@consentCheckbox": {
@@ -479,6 +844,14 @@
   "@deactivateUserTitle": {
     "description": "Confirmation dialog title. SW_REVIEW: Kiswahili needs native-speaker check."
   },
+  "deleteTaskMessage": "The task will be removed from everyone's lists. The audit log keeps a record.",
+  "@deleteTaskMessage": {
+    "description": "Delete confirmation. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "deleteTaskTitle": "Delete this task?",
+  "@deleteTaskTitle": {
+    "description": "Delete confirmation title."
+  },
   "departmentCreateTitle": "New department",
   "@departmentCreateTitle": {
     "description": "Dialog title."
@@ -574,6 +947,14 @@
   "errorAdminVerificationRequired": "Please confirm your administrator code again.",
   "@errorAdminVerificationRequired": {
     "description": "Error: the admin second factor has expired. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "errorAssigneeInactive": "One of the people chosen is no longer active. Choose someone else.",
+  "@errorAssigneeInactive": {
+    "description": "Error assignee-inactive. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "errorAssigneeNotAllowed": "You cannot assign tasks to one of the people chosen. Choose people in your team.",
+  "@errorAssigneeNotAllowed": {
+    "description": "Error assignee-not-allowed. SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "errorConflict": "Someone else changed this first. Please check the latest version.",
   "@errorConflict": {
@@ -681,6 +1062,10 @@
   "@errorSupervisorInvalid": {
     "description": "Error supervisor-invalid. SW_REVIEW: Kiswahili needs native-speaker check."
   },
+  "errorTaskClosed": "This task is already finished or cancelled.",
+  "@errorTaskClosed": {
+    "description": "Error task-closed. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "errorTooManyAttempts": "Too many attempts. Please wait a few minutes and try again.",
   "@errorTooManyAttempts": {
     "description": "Rate limited."
@@ -725,6 +1110,10 @@
   "@filterDueDate": {
     "description": "Task filter chip."
   },
+  "filterLoadedOnlyNote": "Some filters look only at the tasks loaded so far. Load more to see more.",
+  "@filterLoadedOnlyNote": {
+    "description": "Shown when filters apply within loaded pages only. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "filterNoOptionsYet": "No options available yet",
   "@filterNoOptionsYet": {
     "description": "Empty filter options."
@@ -749,9 +1138,17 @@
   "@labelInactive": {
     "description": "Label on a deactivated person or department."
   },
+  "labelNo": "No",
+  "@labelNo": {
+    "description": "Yes/no value."
+  },
   "labelSupervisorInactive": "Supervisor inactive",
   "@labelSupervisorInactive": {
     "description": "Warning label: this person's supervisor was deactivated and must be changed. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "labelYes": "Yes",
+  "@labelYes": {
+    "description": "Yes/no value."
   },
   "languageEnglish": "English",
   "@languageEnglish": {
@@ -921,6 +1318,38 @@
       }
     }
   },
+  "progressFinished": "Finished",
+  "@progressFinished": {
+    "description": "Progress of one assignee."
+  },
+  "progressNotFinished": "Not finished yet",
+  "@progressNotFinished": {
+    "description": "Progress of one assignee."
+  },
+  "reasonFieldLabel": "Reason",
+  "@reasonFieldLabel": {
+    "description": "Reason field label."
+  },
+  "reassignTitle": "Reassign to",
+  "@reassignTitle": {
+    "description": "Reassign picker title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "reassignedMessage": "Task reassigned",
+  "@reassignedMessage": {
+    "description": "Snackbar after reassigning. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "reassignmentNeededLabel": "Needs a new assignee",
+  "@reassignmentNeededLabel": {
+    "description": "Label: an assignee was deactivated. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "reassignmentNeededMessage": "Someone on this task was deactivated. Reassign it to someone else.",
+  "@reassignmentNeededMessage": {
+    "description": "Task detail notice. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "reassignmentReasonLabel": "Reassignment reason",
+  "@reassignmentReasonLabel": {
+    "description": "Task detail field. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "reportingTreeEmptyMessage": "Set each person's supervisor to build the reporting lines used for escalation.",
   "@reportingTreeEmptyMessage": {
     "description": "Reporting tree empty message. SW_REVIEW: Kiswahili needs native-speaker check."
@@ -958,6 +1387,14 @@
         "example": "42"
       }
     }
+  },
+  "returnReasonLabel": "Returned for changes because",
+  "@returnReasonLabel": {
+    "description": "Task detail field (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "returnWorkTitle": "What needs to change?",
+  "@returnWorkTitle": {
+    "description": "Return dialog title (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "roleAdmin": "Administrator",
   "@roleAdmin": {
@@ -1085,6 +1522,14 @@
   "@setupMissingTitle": {
     "description": "App not configured title. SW_REVIEW: Kiswahili needs native-speaker check."
   },
+  "showAsBoard": "Show as board",
+  "@showAsBoard": {
+    "description": "Toggle to the Kanban board. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "showAsList": "Show as list",
+  "@showAsList": {
+    "description": "Toggle to the list."
+  },
   "signInNeedsConnection": "Signing in needs an internet connection.",
   "@signInNeedsConnection": {
     "description": "Note under the sign-in buttons."
@@ -1100,6 +1545,10 @@
   "startWorkflowTitle": "Start a workflow",
   "@startWorkflowTitle": {
     "description": "Start workflow title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "statusAwaitingCheck": "Waiting for check",
+  "@statusAwaitingCheck": {
+    "description": "Task status (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "statusBlocked": "Blocked",
   "@statusBlocked": {
@@ -1141,6 +1590,14 @@
   "@syncSyncing": {
     "description": "Sync banner: syncing. SW_REVIEW: Kiswahili needs native-speaker check."
   },
+  "taskActionsTitle": "What next",
+  "@taskActionsTitle": {
+    "description": "Task detail: actions section. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "taskCannotEditMessage": "This task cannot be edited now.",
+  "@taskCannotEditMessage": {
+    "description": "Edit screen for a task the user may not edit. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "taskCreateTitle": "New task",
   "@taskCreateTitle": {
     "description": "Create task title."
@@ -1148,6 +1605,15 @@
   "taskDetailTitle": "Task",
   "@taskDetailTitle": {
     "description": "Task detail title."
+  },
+  "taskDueAt": "Due {date}",
+  "@taskDueAt": {
+    "description": "Deadline line. date is date and time. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
   },
   "taskEditTitle": "Edit task",
   "@taskEditTitle": {
@@ -1161,6 +1627,14 @@
   "@taskFieldAssigneeHint": {
     "description": "Assignee field placeholder."
   },
+  "taskFieldCompletionMode": "With several people",
+  "@taskFieldCompletionMode": {
+    "description": "Completion mode field label (A-02). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "taskFieldCreator": "Created by",
+  "@taskFieldCreator": {
+    "description": "Task detail field."
+  },
   "taskFieldDeadline": "Deadline",
   "@taskFieldDeadline": {
     "description": "Deadline field label."
@@ -1169,9 +1643,21 @@
   "@taskFieldDeadlineHint": {
     "description": "Deadline placeholder."
   },
+  "taskFieldDepartment": "Department",
+  "@taskFieldDepartment": {
+    "description": "Task detail field."
+  },
   "taskFieldDescription": "Description",
   "@taskFieldDescription": {
     "description": "Description field label."
+  },
+  "taskFieldNeedsCheck": "Check the work before it is done",
+  "@taskFieldNeedsCheck": {
+    "description": "Needs-check switch (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "taskFieldNeedsCheckHelp": "When the work is finished, you confirm it or return it for changes.",
+  "@taskFieldNeedsCheckHelp": {
+    "description": "Needs-check help text (D-06). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "taskFieldPriority": "Priority",
   "@taskFieldPriority": {
@@ -1181,9 +1667,21 @@
   "@taskFieldTitle": {
     "description": "Title field label."
   },
-  "taskNotLoadedYet": "Task details will appear here.",
-  "@taskNotLoadedYet": {
-    "description": "Task summary placeholder while loading is not built."
+  "taskProgress": "{done} of {total} finished",
+  "@taskProgress": {
+    "description": "Progress of several assignees (A-02). SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "taskResubmitTitle": "Fix and send again",
+  "@taskResubmitTitle": {
+    "description": "Title when correcting a task the server could not assign. SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "taskSummaryTitle": "Details",
   "@taskSummaryTitle": {
@@ -1252,6 +1750,18 @@
   "topPersonWarningTitle": "Make this person the top of the organisation?",
   "@topPersonWarningTitle": {
     "description": "Confirmation when saving a person without a supervisor. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "unassignedSectionTitle": "Created by me, not assigned yet",
+  "@unassignedSectionTitle": {
+    "description": "My Tasks: heading above pending or refused tasks (A-01). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "unknownDepartment": "Department",
+  "@unknownDepartment": {
+    "description": "Placeholder while a department name loads."
+  },
+  "unknownPerson": "Someone",
+  "@unknownPerson": {
+    "description": "Placeholder while a person's name loads."
   },
   "useEmailInstead": "No SMS? Sign in with email",
   "@useEmailInstead": {
@@ -1387,6 +1897,10 @@
   "@validationPriorityRequired": {
     "description": "Required priority."
   },
+  "validationReasonRequired": "Enter a reason",
+  "@validationReasonRequired": {
+    "description": "Required reason."
+  },
   "validationReminderHours": "Enter whole numbers of hours from 1 to {max}, separated by commas",
   "@validationReminderHours": {
     "description": "Validation for reminder hours.",
@@ -1426,5 +1940,13 @@
   "valueNotLoaded": "Not loaded yet",
   "@valueNotLoaded": {
     "description": "Value placeholder while data source is not built."
+  },
+  "waitingToSyncLabel": "Waiting to sync",
+  "@waitingToSyncLabel": {
+    "description": "Label: changes on this phone not yet sent (spec 4.9). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "waitingToSyncMessage": "Changes to this task are saved on this phone and will be sent when you are back online.",
+  "@waitingToSyncMessage": {
+    "description": "Task detail notice (spec 4.9). SW_REVIEW: Kiswahili needs native-speaker check."
   }
 }

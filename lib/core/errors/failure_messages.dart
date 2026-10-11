@@ -45,7 +45,11 @@ String serverErrorMessage(ServerFailure failure, AppLocalizations l10n) =>
       ServerErrorCode.permissionDenied => l10n.errorPermissionDenied,
       ServerErrorCode.adminVerificationRequired =>
         l10n.errorAdminVerificationRequired,
-      ServerErrorCode.notFound => l10n.errorNotFound,
+      ServerErrorCode.notFound ||
+      ServerErrorCode.taskNotFound => l10n.errorNotFound,
+      ServerErrorCode.assigneeNotAllowed => l10n.errorAssigneeNotAllowed,
+      ServerErrorCode.assigneeInactive => l10n.errorAssigneeInactive,
+      ServerErrorCode.taskClosed => l10n.errorTaskClosed,
       ServerErrorCode.validation => l10n.errorInvalidInput,
       ServerErrorCode.internal => l10n.errorUnknown,
       ServerErrorCode.reportingLoop => l10n.errorReportingLoop,
@@ -79,4 +83,12 @@ String formatClockTime(DateTime time) {
   final local = time.toLocal();
   String two(int v) => v.toString().padLeft(2, '0');
   return '${two(local.hour)}:${two(local.minute)}';
+}
+
+/// Why the server refused to assign a new task (`assignmentError`, A-01),
+/// in friendly words. Unknown codes get a general sentence.
+String assignmentErrorMessage(String? code, AppLocalizations l10n) {
+  final serverCode = ServerErrorCode.tryParse(code);
+  if (serverCode == null) return l10n.assignmentRejectedGeneric;
+  return serverErrorMessage(ServerFailure(serverCode), l10n);
 }

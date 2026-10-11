@@ -16,6 +16,7 @@ class PagedListState<T> {
     this.loading = false,
     this.loadedOnce = false,
     this.failure,
+    this.moreAvailable,
   });
 
   final List<T> items;
@@ -28,7 +29,10 @@ class PagedListState<T> {
   /// The last load error, shown with a retry button.
   final AppFailure? failure;
 
-  bool get hasMore => next != null;
+  /// Set by live lists, which have no cursor; null means "use [next]".
+  final bool? moreAvailable;
+
+  bool get hasMore => moreAvailable ?? next != null;
 
   PagedListState<T> copyWith({
     List<T>? items,
@@ -44,6 +48,7 @@ class PagedListState<T> {
     loading: loading ?? this.loading,
     loadedOnce: loadedOnce ?? this.loadedOnce,
     failure: clearFailure ? null : (failure ?? this.failure),
+    moreAvailable: moreAvailable,
   );
 }
 

@@ -2,6 +2,28 @@
 
 All notable changes. Versions follow `pubspec.yaml`.
 
+## [Unreleased] - Sprint 2 (tasks, offline, audit)
+
+### Added
+- Cloud Functions: `onTaskCreated` assignment check (staff assign themselves, managers their
+  reporting tree, verified admins anyone; refusals shown to the creator), `onTaskUpdated`
+  (completion with several assignees, checked work, audit), `reassignTask`, `onUserUpdated`
+  (`viewerIds` kept in step with reporting changes), server-written audit log for task and user
+  changes with "made offline" marking; new error codes `task-not-found`, `task-closed`,
+  `assignee-not-allowed`, `assignee-inactive`.
+- Rules: checked work (D-06), resubmitting or discarding a refused task, `deleted` flag on every
+  task.
+- App: My Tasks, Team Tasks and admin task lists (20 per page, live), Kanban board, task detail
+  with status actions and reasons, "my part done", confirm or return checked work, cancel,
+  delete, reassign, create, edit and resubmit, task activity log, admin audit screen, real sync
+  banner, per-task "waiting to sync" marker; EN/SW strings.
+- Firestore composite indexes for every new query.
+
+### Fixed
+- Audit read rule: a verified admin's list query could include confidential entries because the
+  rule used defaults for missing fields. The rule now reads the fields directly (CRITICAL tests).
+- Task titles allow 200 characters in the app, as in the rules (KI-10).
+
 ## [Unreleased] - Sprint 1 (sign-in, onboarding, organisation)
 
 ### Added

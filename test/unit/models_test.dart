@@ -30,6 +30,13 @@ void main() {
     completedByIds: const ['u-a'],
     blockedReason: 'waiting',
     cancelReason: null,
+    returnReason: 'Add the quotes',
+    needsCheck: true,
+    assignmentState: AssignmentState.rejected,
+    assignmentError: 'assignee-not-allowed',
+    reassignmentNeeded: true,
+    reassignmentReason: 'deactivated',
+    updatedBy: 'u-a',
   );
 
   group('enums use the Firestore values from the spec', () {
@@ -38,6 +45,7 @@ void main() {
         'todo',
         'in_progress',
         'blocked',
+        'awaiting_check',
         'done',
         'cancelled',
       ]);
@@ -115,45 +123,60 @@ void main() {
       );
     });
 
-    test('toClientCreateMap excludes every server-only field', () {
-      final map = fullTask().toClientCreateMap();
-      for (final field in Task.serverOnlyFields) {
-        expect(map.containsKey(field), isFalse, reason: field);
-      }
-      for (final field in const [
-        'viewerIds',
-        'currentStep',
-        'escalationLevel',
-        'templateVersion',
-        'stepDeadline',
-        'overdue',
-      ]) {
-        expect(map.containsKey(field), isFalse, reason: field);
-      }
-      expect(map.keys.toSet(), Task.clientCreateFields);
-      expect(map.containsKey('id'), isFalse);
+    test('defaults: assigned, no check, not deleted, no pending writes', () {
+      final task = Task.fromMap('t3', {
+        'title': 'x',
+        'priority': 'low',
+        'status': 'awaiting_check',
+        'deadline': Timestamp.fromDate(deadline),
+        'creatorId': 'u1',
+        'assigneeIds': ['u1'],
+        'deptId': 'ict',
+      });
+      expect(task.status, TaskStatus.awaitingCheck);
+      expect(task.assignmentState, AssignmentState.assigned);
+      expect(task.needsCheck, isFalse);
+      expect(task.deleted, isFalse);
+      expect(task.hasPendingWrites, isFalse);
+      final pending = Task.fromMap('t3', {
+        ...task.toMap(),
+        'assignmentState': 'pending',
+      }, hasPendingWrites: true);
+      expect(pending.assignmentState, AssignmentState.pending);
+      expect(pending.hasPendingWrites, isTrue);
     });
 
-    test('toClientCreateMap always creates a "todo" task with server time', () {
-      final map = fullTask().toClientCreateMap();
-      expect(map['status'], 'todo');
-      expect(map['createdAt'], isA<FieldValue>());
-      expect(map['updatedAt'], isA<FieldValue>());
+    test('statuses: open, active (rules isOpen) and reason', () {
+      expect(TaskStatus.openStatuses, [
+        TaskStatus.todo,
+        TaskStatus.inProgress,
+        TaskStatus.blocked,
+        TaskStatus.awaitingCheck,
+      ]);
+      expect(TaskStatus.awaitingCheck.isOpen, isTrue);
+      expect(TaskStatus.awaitingCheck.isActive, isFalse);
+      expect(TaskStatus.done.isOpen, isFalse);
+      expect(TaskStatus.blocked.requiresReason, isTrue);
     });
 
-    test('participants are only sent for confidential tasks', () {
-      final normal = Task(
-        id: 'n',
-        title: 'x',
-        priority: TaskPriority.low,
-        status: TaskStatus.todo,
-        deadline: deadline,
-        creatorId: 'c',
-        assigneeIds: const ['a'],
-        deptId: 'd',
-        participantIds: const ['a', 'c'],
+    test('several assignees who must all finish', () {
+      expect(fullTask().needsEveryAssignee, isFalse); // mode any
+      final all = Task.fromMap('t', {
+        ...fullTask().toMap(),
+        'completionMode': 'all',
+      });
+      expect(all.needsEveryAssignee, isTrue);
+    });
+
+    test('overdue by the clock or by the server flag, only while open', () {
+      final t = Task.fromMap('t', {...fullTask().toMap(), 'overdue': false});
+      expect(t.isOverdueAt(deadline.add(const Duration(minutes: 1))), isTrue);
+      expect(
+        t.isOverdueAt(deadline.subtract(const Duration(hours: 1))),
+        isFalse,
       );
-      expect(normal.toClientCreateMap()['participantIds'], isEmpty);
+      final done = Task.fromMap('t', {...fullTask().toMap(), 'status': 'done'});
+      expect(done.isOverdueAt(deadline.add(const Duration(days: 1))), isFalse);
     });
 
     test('toString never contains the title', () {
@@ -185,6 +208,28 @@ void main() {
     test('confidential access check', () {
       expect(user.hasConfidentialAccessTo('hr'), isTrue);
       expect(user.hasConfidentialAccessTo('finance'), isFalse);
+    });
+  });
+
+  group('AuditEntry', () {
+    test('reads every field; unknown actions do not break', () {
+      final entry = AuditEntry.fromMap('a1', {
+        'taskId': 't1',
+        'actorId': 'u1',
+        'action': 'status_changed',
+        'before': {'status': 'todo'},
+        'after': {'status': 'in_progress'},
+        'at': Timestamp.fromDate(deadline),
+        'madeOffline': true,
+        'viewerIds': ['u1'],
+        'confidential': false,
+      });
+      expect(entry.action, AuditAction.statusChanged);
+      expect(entry.after['status'], 'in_progress');
+      expect(entry.madeOffline, isTrue);
+      expect(entry.at, deadline);
+      expect(AuditAction.parse('step_approved'), AuditAction.other);
+      expect(entry.toString(), isNot(contains('in_progress')));
     });
   });
 

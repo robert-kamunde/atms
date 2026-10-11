@@ -8,13 +8,14 @@ import { FieldPath } from 'firebase-admin/firestore';
 import { AtmsError, ErrorCode } from '../shared/errors';
 import { log } from '../shared/logger';
 import { scrubText } from '../shared/redact';
-import type { Task, User } from '../shared/model';
+import { OPEN_STATUSES, type Task, type User } from '../shared/model';
+import { writeUserAudit } from '../audit/writer';
 import { requireVerifiedAdmin } from '../security/caller';
 import { paths, type CallerAuth, type Deps } from './deps';
 import { validateUidInput } from './validation';
 
 const TASK_PAGE = 200;
-const OPEN_STATUSES = new Set(['todo', 'in_progress', 'blocked']);
+const OPEN = new Set<string>(OPEN_STATUSES);
 export const REASSIGNMENT_REASON_DEACTIVATED = 'user_deactivated';
 
 export async function deactivateUser(deps: Deps, callerAuth: CallerAuth | undefined, data: unknown): Promise<{ flaggedTaskCount: number }> {
@@ -36,6 +37,9 @@ export async function deactivateUser(deps: Deps, callerAuth: CallerAuth | undefi
       if (admins.size <= 1) throw new AtmsError('failed-precondition', ErrorCode.lastAdmin, 'The last administrator cannot be deactivated.');
     }
     tx.update(ref, { active: false });
+    if (user.active === true) {
+      writeUserAudit(tx, db, org, caller.uid, 'user_deactivated', uid, { before: { active: true }, after: { active: false } });
+    }
   });
 
   try {
@@ -63,7 +67,7 @@ export async function flagOpenTasks(deps: Deps, org: string, uid: string): Promi
     const page = await q.get();
     const open = page.docs.filter((d) => {
       const t = d.data() as Partial<Task>;
-      return OPEN_STATUSES.has(t.status as string) && t.deleted !== true;
+      return OPEN.has(t.status as string) && t.deleted !== true;
     });
     if (open.length > 0) {
       const batch = db.batch();

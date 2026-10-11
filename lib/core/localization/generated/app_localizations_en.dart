@@ -38,10 +38,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actionCancel => 'Cancel';
 
   @override
+  String get actionCancelTask => 'Cancel task';
+
+  @override
   String get actionClear => 'Clear';
 
   @override
   String get actionClose => 'Close';
+
+  @override
+  String get actionConfirmDone => 'Confirm done';
 
   @override
   String get actionContinue => 'Continue';
@@ -56,7 +62,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actionDeactivateUser => 'Deactivate person';
 
   @override
+  String get actionDelete => 'Delete';
+
+  @override
   String get actionEdit => 'Edit';
+
+  @override
+  String get actionEditAndResend => 'Edit and send again';
 
   @override
   String get actionForgotPassword => 'Forgot password?';
@@ -74,7 +86,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actionLoadMore => 'Load more';
 
   @override
+  String get actionMarkBlocked => 'Mark blocked';
+
+  @override
+  String get actionMarkDone => 'Mark done';
+
+  @override
   String get actionMoreOptions => 'More options';
+
+  @override
+  String get actionMyPartDone => 'I\'m done';
 
   @override
   String get actionNewTask => 'New task';
@@ -86,13 +107,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actionNotNow => 'Not now';
 
   @override
+  String get actionReassign => 'Reassign';
+
+  @override
   String get actionRemove => 'Remove';
 
   @override
   String get actionResendCode => 'Send the code again';
 
   @override
+  String get actionResumeTask => 'Resume';
+
+  @override
   String get actionRetry => 'Try again';
+
+  @override
+  String get actionReturnWork => 'Return for changes';
 
   @override
   String get actionSave => 'Save';
@@ -102,6 +132,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionSendCode => 'Send code';
+
+  @override
+  String get actionSendForCheck => 'Send for check';
 
   @override
   String get actionSendResetLink => 'Send link';
@@ -119,10 +152,128 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actionSignOut => 'Sign out';
 
   @override
+  String get actionStartTask => 'Start';
+
+  @override
   String get actionUseAnotherNumber => 'Use another number';
 
   @override
   String get actionVerify => 'Verify';
+
+  @override
+  String get activityAssigned => 'The task was assigned';
+
+  @override
+  String activityCancelled(String actor, String reason) {
+    return '$actor cancelled the task: $reason';
+  }
+
+  @override
+  String activityCancelledNoReason(String actor) {
+    return '$actor cancelled the task';
+  }
+
+  @override
+  String activityCompletedBy(String actor) {
+    return '$actor finished their part';
+  }
+
+  @override
+  String activityCreated(String actor) {
+    return '$actor created the task';
+  }
+
+  @override
+  String activityDeadlineChanged(String actor, String from, String to) {
+    return '$actor changed the deadline from $from to $to';
+  }
+
+  @override
+  String activityDeadlineSet(String actor) {
+    return '$actor changed the deadline';
+  }
+
+  @override
+  String activityDeleted(String actor) {
+    return '$actor deleted the task';
+  }
+
+  @override
+  String activityEdited(String actor, String fields) {
+    return '$actor changed: $fields';
+  }
+
+  @override
+  String get activityEmpty => 'No activity yet';
+
+  @override
+  String activityGeneric(String actor) {
+    return '$actor made a change';
+  }
+
+  @override
+  String get activityMadeOffline => 'Made offline';
+
+  @override
+  String activityPriorityValue(String priority) {
+    return 'Priority ($priority)';
+  }
+
+  @override
+  String activityReassigned(String actor, String names) {
+    return '$actor reassigned the task to $names';
+  }
+
+  @override
+  String activityReassignedNoNames(String actor) {
+    return '$actor reassigned the task';
+  }
+
+  @override
+  String activityRejected(String reason) {
+    return 'The task could not be assigned: $reason';
+  }
+
+  @override
+  String activityReturned(String actor, String reason) {
+    return '$actor returned the work for changes: $reason';
+  }
+
+  @override
+  String activityReturnedNoReason(String actor) {
+    return '$actor returned the work for changes';
+  }
+
+  @override
+  String activityStatusChanged(String actor, String from, String to) {
+    return '$actor changed the status from $from to $to';
+  }
+
+  @override
+  String activityStatusSet(String actor, String to) {
+    return '$actor changed the status to $to';
+  }
+
+  @override
+  String get activitySystemActor => 'ATMS';
+
+  @override
+  String get activityTitle => 'Activity';
+
+  @override
+  String activityUserAdded(String actor) {
+    return '$actor added a person';
+  }
+
+  @override
+  String activityUserDeactivated(String actor) {
+    return '$actor deactivated a person';
+  }
+
+  @override
+  String activityUserUpdated(String actor) {
+    return '$actor changed a person\'s details';
+  }
 
   @override
   String get adminAuditTitle => 'Audit log';
@@ -182,18 +333,50 @@ class AppLocalizationsEn extends AppLocalizations {
   String get approvalsTitle => 'Approvals waiting';
 
   @override
-  String assigneeCount(int count) {
+  String get assignedSectionTitle => 'Assigned to me';
+
+  @override
+  String assigneeMe(String name) {
+    return '$name (me)';
+  }
+
+  @override
+  String assigneePickerDone(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count people chosen',
-      one: '1 person chosen',
+      other: 'Choose $count people',
+      one: 'Choose 1 person',
+      zero: 'Choose people',
     );
     return '$_temp0';
   }
 
   @override
   String get assigneePickerEmpty => 'No people to choose from yet';
+
+  @override
+  String get assigneesChangeWithReassign =>
+      'To change who does it, use Reassign on the task.';
+
+  @override
+  String get assignmentPendingLabel => 'Waiting to be assigned';
+
+  @override
+  String get assignmentPendingMessage =>
+      'Only you can see this task until it is assigned. It is assigned when this phone is online.';
+
+  @override
+  String get assignmentRejectedGeneric =>
+      'The people chosen could not be assigned.';
+
+  @override
+  String get assignmentRejectedLabel => 'Not assigned';
+
+  @override
+  String assignmentRejectedMessage(String reason) {
+    return 'This task was not assigned: $reason Edit it and send it again, or delete it.';
+  }
 
   @override
   String get attachmentsEmpty => 'No attachments yet';
@@ -207,6 +390,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get auditEmptyTitle => 'No audit entries yet';
+
+  @override
+  String get awaitingCheckAssigneeMessage =>
+      'Finished. Waiting for the creator to check the work.';
+
+  @override
+  String get awaitingCheckCreatorMessage =>
+      'The work is finished. Check it, then confirm or return it for changes.';
+
+  @override
+  String get blockTaskTitle => 'Why is this task blocked?';
+
+  @override
+  String get blockedReasonLabel => 'Blocked because';
+
+  @override
+  String get boardColumnEmpty => 'No tasks';
+
+  @override
+  String boardColumnTitle(String status, int count) {
+    return '$status ($count)';
+  }
+
+  @override
+  String get cancelReasonLabel => 'Cancelled because';
+
+  @override
+  String get cancelTaskTitle => 'Why is this task cancelled?';
 
   @override
   String codeEntryHelp(String phone) {
@@ -234,6 +445,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get commentsTitle => 'Comments';
+
+  @override
+  String get completionModeAll => 'Done when everyone has finished';
+
+  @override
+  String get completionModeAny => 'Done when any one person finishes';
 
   @override
   String get consentCheckbox =>
@@ -371,6 +588,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deactivateUserTitle => 'Deactivate this person?';
 
   @override
+  String get deleteTaskMessage =>
+      'The task will be removed from everyone\'s lists. The audit log keeps a record.';
+
+  @override
+  String get deleteTaskTitle => 'Delete this task?';
+
+  @override
   String get departmentCreateTitle => 'New department';
 
   @override
@@ -451,6 +675,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get errorAdminVerificationRequired =>
       'Please confirm your administrator code again.';
+
+  @override
+  String get errorAssigneeInactive =>
+      'One of the people chosen is no longer active. Choose someone else.';
+
+  @override
+  String get errorAssigneeNotAllowed =>
+      'You cannot assign tasks to one of the people chosen. Choose people in your team.';
 
   @override
   String get errorConflict =>
@@ -542,6 +774,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'The chosen supervisor is not an active person in this organisation. Choose someone else.';
 
   @override
+  String get errorTaskClosed => 'This task is already finished or cancelled.';
+
+  @override
   String get errorTooManyAttempts =>
       'Too many attempts. Please wait a few minutes and try again.';
 
@@ -579,6 +814,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get filterDueDate => 'Due date';
 
   @override
+  String get filterLoadedOnlyNote =>
+      'Some filters look only at the tasks loaded so far. Load more to see more.';
+
+  @override
   String get filterNoOptionsYet => 'No options available yet';
 
   @override
@@ -598,7 +837,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get labelInactive => 'Inactive';
 
   @override
+  String get labelNo => 'No';
+
+  @override
   String get labelSupervisorInactive => 'Supervisor inactive';
+
+  @override
+  String get labelYes => 'Yes';
 
   @override
   String get languageEnglish => 'English';
@@ -729,6 +974,31 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get progressFinished => 'Finished';
+
+  @override
+  String get progressNotFinished => 'Not finished yet';
+
+  @override
+  String get reasonFieldLabel => 'Reason';
+
+  @override
+  String get reassignTitle => 'Reassign to';
+
+  @override
+  String get reassignedMessage => 'Task reassigned';
+
+  @override
+  String get reassignmentNeededLabel => 'Needs a new assignee';
+
+  @override
+  String get reassignmentNeededMessage =>
+      'Someone on this task was deactivated. Reassign it to someone else.';
+
+  @override
+  String get reassignmentReasonLabel => 'Reassignment reason';
+
+  @override
   String get reportingTreeEmptyMessage =>
       'Set each person\'s supervisor to build the reporting lines used for escalation.';
 
@@ -756,6 +1026,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String resendCodeIn(int seconds) {
     return 'Send the code again in $seconds s';
   }
+
+  @override
+  String get returnReasonLabel => 'Returned for changes because';
+
+  @override
+  String get returnWorkTitle => 'What needs to change?';
 
   @override
   String get roleAdmin => 'Administrator';
@@ -856,6 +1132,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get setupMissingTitle => 'App not configured';
 
   @override
+  String get showAsBoard => 'Show as board';
+
+  @override
+  String get showAsList => 'Show as list';
+
+  @override
   String get signInNeedsConnection =>
       'Signing in needs an internet connection.';
 
@@ -868,6 +1150,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get startWorkflowTitle => 'Start a workflow';
+
+  @override
+  String get statusAwaitingCheck => 'Waiting for check';
 
   @override
   String get statusBlocked => 'Blocked';
@@ -900,10 +1185,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get syncSyncing => 'Syncing...';
 
   @override
+  String get taskActionsTitle => 'What next';
+
+  @override
+  String get taskCannotEditMessage => 'This task cannot be edited now.';
+
+  @override
   String get taskCreateTitle => 'New task';
 
   @override
   String get taskDetailTitle => 'Task';
+
+  @override
+  String taskDueAt(String date) {
+    return 'Due $date';
+  }
 
   @override
   String get taskEditTitle => 'Edit task';
@@ -915,13 +1211,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get taskFieldAssigneeHint => 'Choose people';
 
   @override
+  String get taskFieldCompletionMode => 'With several people';
+
+  @override
+  String get taskFieldCreator => 'Created by';
+
+  @override
   String get taskFieldDeadline => 'Deadline';
 
   @override
   String get taskFieldDeadlineHint => 'Choose date and time';
 
   @override
+  String get taskFieldDepartment => 'Department';
+
+  @override
   String get taskFieldDescription => 'Description';
+
+  @override
+  String get taskFieldNeedsCheck => 'Check the work before it is done';
+
+  @override
+  String get taskFieldNeedsCheckHelp =>
+      'When the work is finished, you confirm it or return it for changes.';
 
   @override
   String get taskFieldPriority => 'Priority';
@@ -930,7 +1242,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get taskFieldTitle => 'Title';
 
   @override
-  String get taskNotLoadedYet => 'Task details will appear here.';
+  String taskProgress(int done, int total) {
+    return '$done of $total finished';
+  }
+
+  @override
+  String get taskResubmitTitle => 'Fix and send again';
 
   @override
   String get taskSummaryTitle => 'Details';
@@ -980,6 +1297,15 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get topPersonWarningTitle =>
       'Make this person the top of the organisation?';
+
+  @override
+  String get unassignedSectionTitle => 'Created by me, not assigned yet';
+
+  @override
+  String get unknownDepartment => 'Department';
+
+  @override
+  String get unknownPerson => 'Someone';
 
   @override
   String get useEmailInstead => 'No SMS? Sign in with email';
@@ -1093,6 +1419,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get validationPriorityRequired => 'Choose a priority';
 
   @override
+  String get validationReasonRequired => 'Enter a reason';
+
+  @override
   String validationReminderHours(int max) {
     return 'Enter whole numbers of hours from 1 to $max, separated by commas';
   }
@@ -1113,4 +1442,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get valueNotLoaded => 'Not loaded yet';
+
+  @override
+  String get waitingToSyncLabel => 'Waiting to sync';
+
+  @override
+  String get waitingToSyncMessage =>
+      'Changes to this task are saved on this phone and will be sent when you are back online.';
 }
