@@ -27,8 +27,10 @@
 - Review of PR #2 (Sprint 1) and PR #3 (Sprint 2).
 
 ## Next
-- First deploy of rules, indexes and functions to atms-d7f64, and `bootstrap-org` (waits for
-  Robert's go-ahead); then the phone checks (AC-4.1-*, AC-4.3-1/2, AC-4.9-1/2).
+- 11 Oct 2026: Firestore (africa-south1) rules and indexes and all 11 Cloud Functions deployed to
+  atms-d7f64 from main. Still to do: `bootstrap-org` for FAR Data Solutions (run by Robert with his
+  own Google credentials), Storage set-up in the console and the Storage rules deploy, then the
+  phone checks (AC-4.1-*, AC-4.3-1/2, AC-4.9-1/2).
 - Sprint 3: workflow engine.
 
 ## Known bugs
