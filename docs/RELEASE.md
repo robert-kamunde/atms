@@ -10,6 +10,11 @@ Status: not yet released. Filled in fully in Sprint 7; Sprint 0 records what is 
 - A release signing key kept outside the repository (Play App Signing recommended).
 - Google Play developer account (USD 25 once); iOS later needs an Apple developer account and a Mac.
 - SMS provider account and TCRA-registered sender ID (D-09).
+- E-mail for admin codes and reports (D-08), sent over SMTP. Per project, put
+  `EMAIL_SMTP_HOST`, `EMAIL_SMTP_PORT` (465, or 587 with STARTTLS), `EMAIL_SMTP_USER` and
+  `EMAIL_FROM` (for example `ATMS <atms@example.org>`) in `functions/.env.<projectId>`, and the
+  password in Secret Manager: `firebase functions:secrets:set EMAIL_SMTP_PASSWORD --project prod`.
+  The secret must exist before `sendAdminCode` can be deployed.
 - Crashlytics and Analytics enabled; daily Firestore export with 30-day retention.
 
 ## Build

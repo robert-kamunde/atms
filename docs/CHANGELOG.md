@@ -2,6 +2,13 @@
 
 All notable changes. Versions follow `pubspec.yaml`.
 
+## [Unreleased] - E-mail (D-08)
+
+### Added
+- SMTP e-mail provider for admin codes (and later report e-mails): settings per project in
+  `functions/.env.<projectId>`, password in Secret Manager (`EMAIL_SMTP_PASSWORD`), TLS always
+  required, only a short error code is ever logged.
+
 ## [Unreleased] - Sprint 2 (tasks, offline, audit)
 
 ### Added
