@@ -795,6 +795,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorUnknown => 'Something went wrong. Please try again.';
 
   @override
+  String errorUnknownWithReference(String code) {
+    return 'Something went wrong. Please try again. (Reference: $code)';
+  }
+
+  @override
   String get errorWrongCredentials => 'The email or password is not correct.';
 
   @override

@@ -797,6 +797,11 @@ class AppLocalizationsSw extends AppLocalizations {
   String get errorUnknown => 'Hitilafu imetokea. Tafadhali jaribu tena.';
 
   @override
+  String errorUnknownWithReference(String code) {
+    return 'Hitilafu imetokea. Tafadhali jaribu tena. (Kumbukumbu: $code)';
+  }
+
+  @override
   String get errorWrongCredentials => 'Barua pepe au nenosiri si sahihi.';
 
   @override

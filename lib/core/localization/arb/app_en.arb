@@ -1086,6 +1086,13 @@
   "@errorUnknown": {
     "description": "Unknown error."
   },
+  "errorUnknownWithReference": "Something went wrong. Please try again. (Reference: {code})",
+  "@errorUnknownWithReference": {
+    "description": "Unknown error with a short reference code (a Firebase error code such as app-not-authorized), so support can tell what failed.",
+    "placeholders": {
+      "code": { "type": "String", "example": "app-not-authorized" }
+    }
+  },
   "errorWrongCredentials": "The email or password is not correct.",
   "@errorWrongCredentials": {
     "description": "Wrong email/password."

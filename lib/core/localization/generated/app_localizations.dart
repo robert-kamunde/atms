@@ -1418,6 +1418,12 @@ abstract class AppLocalizations {
   /// **'Something went wrong. Please try again.'**
   String get errorUnknown;
 
+  /// Unknown error with a short reference code (a Firebase error code such as app-not-authorized), so support can tell what failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again. (Reference: {code})'**
+  String errorUnknownWithReference(String code);
+
   /// Wrong email/password.
   ///
   /// In en, this message translates to:

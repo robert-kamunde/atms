@@ -287,13 +287,14 @@ void main() {
           for (final r in ValidationReason.values)
             ValidationFailure(r, code: 'x-code'),
           const ConflictFailure(code: 'aborted'),
-          const UnknownFailure(code: 'data-loss'),
         ];
         for (final f in failures) {
           final message = failureMessage(f, l10n);
           expect(message, isNotEmpty);
           expect(message, isNot(contains(f.code!)));
         }
+        // Unknown errors are the one exception: they carry the code as a
+        // reference (DECISIONS A-34), tested in 'unknown errors' below.
       });
 
       test('[$locale] conflict names who approved and when', () {
@@ -308,5 +309,30 @@ void main() {
         expect(message, contains('10:42'));
       });
     }
+  });
+
+  group('unknown errors', () {
+    test('show a short Firebase code as a reference', () {
+      final failure = mapFirebaseAuthException(
+        FirebaseAuthException(code: 'app-not-authorized', message: 'raw text'),
+      );
+      for (final locale in testLocales) {
+        final message = failureMessage(failure, l10nFor(locale));
+        expect(message, contains('app-not-authorized'));
+        expect(message, isNot(contains('raw text')));
+      }
+    });
+
+    test('never show free text as a reference', () {
+      const failure = UnknownFailure(
+        code: 'Some Raw Message with +255700000001',
+      );
+      for (final locale in testLocales) {
+        expect(
+          failureMessage(failure, l10nFor(locale)),
+          l10nFor(locale).errorUnknown,
+        );
+      }
+    });
   });
 }

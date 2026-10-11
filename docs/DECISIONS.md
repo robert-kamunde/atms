@@ -71,6 +71,7 @@ Robert accepted every recommendation below ("answers on open decisions: agree", 
 | A-32 | Buttons shown | The app's `TaskPolicy` mirrors the rules only to decide which actions to show; the rules and Cloud Functions are the security check. | Never trust the client. |
 
 | A-33 | Connected test builds | Robert chose (10 Oct 2026) to commit a DEVELOPMENT signing key (`android/dev-signing/`) and the atms-d7f64 Firebase client settings (`config/firebase/atms-d7f64.json`). Debug builds everywhere share that key, whose SHA-1/SHA-256 are registered on the Firebase Android app, and CI publishes `atms-connected-debug-apk`. The key must never sign a Play Store release; release signing stays secret (RELEASE.md). The Firebase values are client identifiers; protection comes from the rules, Cloud Functions and App Check. | Phone sign-in needs a registered signature; GitHub secrets could not be set from here. |
+| A-34 | Reference code on unknown errors | When an error has no friendly message, the app adds its short Firebase code, for example "(Reference: app-not-authorized)". Only lowercase slugs of up to 40 characters are shown, never raw error text. | Without it, a sign-in failure in the pilot shows only "Something went wrong" and cannot be diagnosed from a phone (11 Oct 2026, SMS codes not arriving). |
 
 ## Contradictions found between the documents
 
