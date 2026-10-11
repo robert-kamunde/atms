@@ -1086,6 +1086,13 @@
   "@errorUnknown": {
     "description": "Unknown error."
   },
+  "errorUnknownWithReference": "Hitilafu imetokea. Tafadhali jaribu tena. (Kumbukumbu: {code})",
+  "@errorUnknownWithReference": {
+    "description": "Unknown error with a short reference code. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "code": { "type": "String", "example": "app-not-authorized" }
+    }
+  },
   "errorWrongCredentials": "Barua pepe au nenosiri si sahihi.",
   "@errorWrongCredentials": {
     "description": "Wrong email/password."

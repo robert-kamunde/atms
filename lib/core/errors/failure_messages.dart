@@ -31,9 +31,20 @@ String failureMessage(AppFailure failure, AppLocalizations l10n) {
               formatClockTime(at),
             )
           : l10n.errorConflict,
-    UnknownFailure() => l10n.errorUnknown,
+    UnknownFailure(:final code) =>
+      (code != null &&
+              _safeReference.hasMatch(code) &&
+              !_uninformative.contains(code))
+          ? l10n.errorUnknownWithReference(code)
+          : l10n.errorUnknown,
   };
 }
+
+/// Firebase error codes are short lowercase slugs; anything else is not shown.
+final RegExp _safeReference = RegExp(r'^[a-z0-9_-]{1,40}$');
+
+/// Codes that say nothing about the cause, so they are not worth showing.
+const Set<String> _uninformative = {'internal', 'unknown'};
 
 /// Message for a business error named by a Cloud Function.
 String serverErrorMessage(ServerFailure failure, AppLocalizations l10n) =>
