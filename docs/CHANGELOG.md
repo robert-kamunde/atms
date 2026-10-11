@@ -2,6 +2,13 @@
 
 All notable changes. Versions follow `pubspec.yaml`.
 
+## [Unreleased] - SMS (D-09)
+
+### Added
+- Beem SMS provider for invitation SMS (and later reminders and escalations): sender name per
+  project in `functions/.env.<projectId>`, keys in Secret Manager (`BEEM_API_KEY`,
+  `BEEM_SECRET_KEY`); only a short error code is ever logged.
+
 ## [Unreleased] - Sprint 2 (tasks, offline, audit)
 
 ### Added
