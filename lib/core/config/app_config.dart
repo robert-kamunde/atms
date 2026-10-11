@@ -71,6 +71,23 @@ class FirebaseClientOptions {
 /// ```
 /// Optional: `--dart-define=FIREBASE_EMULATOR_HOST=192.168.1.20` to reach
 /// emulators running on another machine (e.g. from a physical phone).
+///
+/// Running against the local emulators (development and screenshots; the
+/// Sprint 0 developer preview buttons were removed in Sprint 1):
+/// ```sh
+/// firebase emulators:start   # auth, firestore, functions (firebase.json)
+/// # create the organisation and first admin with
+/// # functions/scripts/bootstrap-org.ts against the emulators, then:
+/// flutter run \
+///   --dart-define=ATMS_ENV=dev \
+///   --dart-define=USE_FIREBASE_EMULATOR=true \
+///   --dart-define=FIREBASE_PROJECT_ID=demo-atms \
+///   --dart-define=FIREBASE_API_KEY=demo-key \
+///   --dart-define=FIREBASE_APP_ID=1:1:android:1 \
+///   --dart-define=FIREBASE_MESSAGING_SENDER_ID=1
+/// ```
+/// The Auth emulator shows SMS codes in its UI and the emulator-only email
+/// provider logs admin codes (MOCK/TEMPORARY, functions/).
 class AppConfig {
   const AppConfig({
     required this.environment,

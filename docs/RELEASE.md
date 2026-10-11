@@ -16,7 +16,7 @@ Status: not yet released. Filled in fully in Sprint 7; Sprint 0 records what is 
 
 ```bash
 flutter build appbundle --release --dart-define-from-file=env/prod.json   # env files are not committed
-cd functions && npm run build && firebase deploy --only functions,firestore,storage --project <prod>
+cd functions && npm run build && firebase deploy --only functions,firestore,storage --project prod   # alias for atms-d7f64 in .firebaserc
 ```
 
 Every sprint ends with a working debug APK built by CI (`atms-debug-apk` artifact).

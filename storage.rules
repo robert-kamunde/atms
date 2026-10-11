@@ -41,10 +41,12 @@ service firebase.storage {
     }
 
     // orgs/{org}/tasks/{taskId}/{attachmentId}: the attachment id matches the Firestore
-    // attachments document, so an upload cannot overwrite another file.
+    // attachments document. `resource == null` refuses writes over an existing file: the
+    // Storage emulator evaluates such a write as `create`, so `update: if false` alone is not enough.
     match /orgs/{org}/tasks/{taskId}/{attachmentId} {
       allow read: if canReadTask(org, taskId);
-      allow create: if canReadTask(org, taskId)
+      allow create: if resource == null
+        && canReadTask(org, taskId)
         && request.resource.size <= 10 * 1024 * 1024
         && (request.resource.contentType.matches('image/.*')
             || request.resource.contentType == 'application/pdf'

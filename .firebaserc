@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "demo-atms"
+    "default": "demo-atms",
+    "prod": "atms-d7f64"
   }
 }

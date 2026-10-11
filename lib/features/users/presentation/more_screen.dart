@@ -21,6 +21,7 @@ class MoreScreen extends ConsumerWidget {
     final l10n = context.l10n;
     final role = ref.watch(currentRoleProvider) ?? UserRole.staff;
     final locale = ref.watch(localeProvider);
+    final user = ref.watch(currentSessionProvider)?.user;
 
     Widget link(IconData icon, String label, String path) => ListTile(
       leading: Icon(icon),
@@ -43,16 +44,31 @@ class MoreScreen extends ConsumerWidget {
         children: [
           header(l10n.profileSection),
           ListTile(
-            // NOT IMPLEMENTED (Sprint 1): name and department from the
-            // user document.
             leading: const CircleAvatar(child: Icon(Icons.person)),
-            title: Text(l10n.profileSignedInAs(role.label(l10n))),
+            title: Text(user?.name ?? l10n.profileSignedInAs(role.label(l10n))),
+            subtitle: user == null
+                ? null
+                : Text(
+                    [
+                      role.label(l10n),
+                      ?user.jobRole,
+                    ].join(' · '), // l10n-ignore: separator
+                  ),
           ),
           header(l10n.languageSection),
           LanguageSelector(
             selected: locale,
-            onChanged: (value) =>
-                ref.read(localeProvider.notifier).setLocale(value),
+            onChanged: (value) async {
+              try {
+                await ref
+                    .read(authControllerProvider.notifier)
+                    .changeLanguage(value);
+              } catch (error, stackTrace) {
+                if (context.mounted) {
+                  showFailureSnackBar(context, mapError(error, stackTrace));
+                }
+              }
+            },
           ),
           if (role.canSeeTeam) ...[
             header(l10n.managerSection),

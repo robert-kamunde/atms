@@ -40,7 +40,12 @@ void main() {
         await tester.tap(find.byKey(const Key('sendCodeButton')));
         await tester.pump();
         expect(find.text(l10n.validationPhoneRequired), findsOneWidget);
-        verifyNever(() => repo.startPhoneVerification(any()));
+        verifyNever(
+          () => repo.startPhoneVerification(
+            any(),
+            onAutoSignInFailed: any(named: 'onAutoSignInFailed'),
+          ),
+        );
       });
 
       testWidgets('invalid number shows a friendly message', (tester) async {
@@ -49,12 +54,21 @@ void main() {
         await tester.tap(find.byKey(const Key('sendCodeButton')));
         await tester.pump();
         expect(find.text(l10n.errorInvalidPhone), findsOneWidget);
-        verifyNever(() => repo.startPhoneVerification(any()));
+        verifyNever(
+          () => repo.startPhoneVerification(
+            any(),
+            onAutoSignInFailed: any(named: 'onAutoSignInFailed'),
+          ),
+        );
       });
 
       testWidgets('valid number is sent in E.164 format', (tester) async {
-        when(() => repo.startPhoneVerification(any()))
-            .thenAnswer((_) => Completer<PhoneVerificationResult>().future);
+        when(
+          () => repo.startPhoneVerification(
+            any(),
+            onAutoSignInFailed: any(named: 'onAutoSignInFailed'),
+          ),
+        ).thenAnswer((_) => Completer<PhoneVerificationResult>().future);
         await pump(tester);
         await tester.enterText(
           find.byKey(const Key('phoneField')),
@@ -62,7 +76,12 @@ void main() {
         );
         await tester.tap(find.byKey(const Key('sendCodeButton')));
         await tester.pump();
-        verify(() => repo.startPhoneVerification('+255712345678')).called(1);
+        verify(
+          () => repo.startPhoneVerification(
+            '+255712345678',
+            onAutoSignInFailed: any(named: 'onAutoSignInFailed'),
+          ),
+        ).called(1);
       });
     });
   }

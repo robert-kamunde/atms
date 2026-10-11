@@ -4,17 +4,17 @@ Every "Done when" item from the PDD (section 4), unchanged in wording, plus the 
 scenarios (MI 44) and the quality targets (PDD 6). Status is one of PASS, FAIL, BLOCKED,
 NOT TESTED. A feature is not complete while any of its items is not PASS.
 
-Last updated: 7 Oct 2026 (Sprint 0).
+Last updated: 8 Oct 2026 (Sprint 1).
 
 ## Module criteria
 
 | ID | Criterion (PDD wording) | Sprint | Test | Status |
 | --- | --- | --- | --- | --- |
-| AC-4.1-1 | A new user can sign in with phone and code and see their tasks. | 1 | Integration (emulator Auth) + device | NOT TESTED |
-| AC-4.1-2 | An uninvited number cannot get in. | 1 | Rules test + integration | NOT TESTED |
-| AC-4.1-3 | A deactivated user is signed out within 1 hour and their tasks are flagged for reassignment. | 1 | Rules test (deactivated user refused: written) + function test | NOT TESTED |
-| AC-4.2-1 | An Admin can set up a 50-person organisation with 5 departments in under 1 hour. | 1 | Timed usability test | NOT TESTED |
-| AC-4.2-2 | The reporting tree shows correctly and loops are rejected. | 1 | Jest + widget test | NOT TESTED |
+| AC-4.1-1 | A new user can sign in with phone and code and see their tasks. | 1 | Integration (emulator Auth) + device | NOT TESTED (sign-in screens and flows have widget tests; needs a connected build on a phone, KI-5) |
+| AC-4.1-2 | An uninvited number cannot get in. | 1 | Blocking function (Jest, emulator) + not-invited screen (widget) | NOT TESTED (both pieces pass; needs Identity Platform deploy to atms-d7f64 and a device) |
+| AC-4.1-3 | A deactivated user is signed out within 1 hour and their tasks are flagged for reassignment. | 1 | Rules test + `deactivateUser` emulator test (tokens revoked, 206 tasks flagged over pages) | NOT TESTED (server side passes; the 1-hour sign-out relies on ID token expiry and must be seen on a device) |
+| AC-4.2-1 | An Admin can set up a 50-person organisation with 5 departments in under 1 hour. | 1 | Timed usability test | NOT TESTED (needs the real project and Robert) |
+| AC-4.2-2 | The reporting tree shows correctly and loops are rejected. | 1 | Jest emulator tests (loop refused, concurrent opposite moves give one success, chains recomputed below) + reporting tree widget tests (EN/SW) | PASS (emulator and widget tests, 8 Oct 2026) |
 | AC-4.3-1 | A task can be created in under 30 seconds with only the required fields. | 2 | Timed usability test | NOT TESTED |
 | AC-4.3-2 | Status changes show for the creator within 5 seconds when both are online. | 2 | Integration timing | NOT TESTED |
 | AC-4.3-3 | Filters work by status, priority, assignee, department and due date. | 2 | Widget + repository tests | NOT TESTED |
@@ -62,3 +62,15 @@ Last updated: 7 Oct 2026 (Sprint 0).
 | Q-6 | SUS 70+ | 7 | NOT TESTED |
 | Q-7 | Daily backup kept 30 days | 7 | NOT TESTED |
 | Q-8 | Every screen in Kiswahili and English, reviewed | 6 | NOT TESTED (ARB parity test exists) |
+
+## Sprint 1 additional checks (from the build)
+
+| ID | Check | Test | Status |
+| --- | --- | --- | --- |
+| S1-1 | An unverified admin opening an admin screen is sent to the code check and returned there afterwards | Route guard tests | PASS |
+| S1-2 | A staff session older than 30 days, or an admin session older than 7, is signed out with a message | Unit + guard tests; rules tests | PASS |
+| S1-3 | A deactivated account sees the deactivated message | Blocking function test + widget test | PASS |
+| S1-4 | Saving a user with no supervisor warns first that they become the top person | Widget test | PASS |
+| S1-5 | Admin code: wrong code, expiry, 5 attempts, 5 codes per hour, single use | Jest emulator tests | PASS |
+| S1-6 | Department and settings changes made offline show "saved on phone"; callables offline show "needs connection" | Widget/controller tests | PASS |
+| S1-7 | Every new screen in English and Kiswahili | Widget tests (EN/SW) | PASS |

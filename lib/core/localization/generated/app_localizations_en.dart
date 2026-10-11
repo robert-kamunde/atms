@@ -10,6 +10,13 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get accountInactiveHelp =>
+      'If you think this is a mistake, contact your administrator.';
+
+  @override
+  String get accountInactiveTitle => 'Account not active';
+
+  @override
   String get actionAddAttachment => 'Add attachment';
 
   @override
@@ -28,16 +35,46 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actionBackToPhone => 'Enter phone number again';
 
   @override
+  String get actionCancel => 'Cancel';
+
+  @override
+  String get actionClear => 'Clear';
+
+  @override
+  String get actionClose => 'Close';
+
+  @override
   String get actionContinue => 'Continue';
 
   @override
+  String get actionContinueAnyway => 'Yes, continue';
+
+  @override
+  String get actionDeactivate => 'Deactivate';
+
+  @override
+  String get actionDeactivateUser => 'Deactivate person';
+
+  @override
   String get actionEdit => 'Edit';
+
+  @override
+  String get actionForgotPassword => 'Forgot password?';
 
   @override
   String get actionGoToTasks => 'Go to my tasks';
 
   @override
   String get actionHidePassword => 'Hide password';
+
+  @override
+  String get actionHideReports => 'Hide direct reports';
+
+  @override
+  String get actionLoadMore => 'Load more';
+
+  @override
+  String get actionMoreOptions => 'More options';
 
   @override
   String get actionNewTask => 'New task';
@@ -49,16 +86,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actionNotNow => 'Not now';
 
   @override
+  String get actionRemove => 'Remove';
+
+  @override
   String get actionResendCode => 'Send the code again';
+
+  @override
+  String get actionRetry => 'Try again';
 
   @override
   String get actionSave => 'Save';
 
   @override
+  String get actionSendAdminCode => 'Email me a code';
+
+  @override
   String get actionSendCode => 'Send code';
 
   @override
+  String get actionSendResetLink => 'Send link';
+
+  @override
   String get actionShowPassword => 'Show password';
+
+  @override
+  String get actionShowReports => 'Show direct reports';
 
   @override
   String get actionSignIn => 'Sign in';
@@ -74,6 +126,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminAuditTitle => 'Audit log';
+
+  @override
+  String adminCodeSentTo(String email, String time) {
+    return 'We sent a 6-digit code to $email. It works until $time.';
+  }
 
   @override
   String get adminDepartmentsTitle => 'Departments';
@@ -97,8 +154,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminUsersTitle => 'People';
 
   @override
+  String adminVerifiedUntil(String time) {
+    return 'You are verified until $time.';
+  }
+
+  @override
   String get adminVerifyHelp =>
       'For extra security, administrators must also enter the 6-digit code sent to their email.';
+
+  @override
+  String get adminVerifySuccess => 'Administrator check complete.';
 
   @override
   String get adminVerifyTitle => 'Administrator check';
@@ -157,6 +222,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get codeLabel => '6-digit code';
+
+  @override
+  String get codeResent => 'We sent a new code.';
 
   @override
   String get commentInputHint => 'Write a comment';
@@ -266,23 +334,68 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboardTitle => 'Dashboard';
 
   @override
+  String get dayFri => 'Fri';
+
+  @override
+  String get dayMon => 'Mon';
+
+  @override
+  String get daySat => 'Sat';
+
+  @override
+  String get daySun => 'Sun';
+
+  @override
+  String get dayThu => 'Thu';
+
+  @override
+  String get dayTue => 'Tue';
+
+  @override
+  String get dayWed => 'Wed';
+
+  @override
+  String deactivateDepartmentMessage(String name) {
+    return '$name will no longer be offered when adding people. Existing tasks keep this department.';
+  }
+
+  @override
+  String get deactivateDepartmentTitle => 'Deactivate department?';
+
+  @override
+  String deactivateUserMessage(String name) {
+    return '$name will be signed out within an hour and can no longer sign in. Their open tasks will be flagged for reassignment.';
+  }
+
+  @override
+  String get deactivateUserTitle => 'Deactivate this person?';
+
+  @override
+  String get departmentCreateTitle => 'New department';
+
+  @override
+  String get departmentEditTitle => 'Edit department';
+
+  @override
+  String get departmentFieldHead => 'Head of department';
+
+  @override
+  String get departmentFieldName => 'Department name';
+
+  @override
+  String departmentHead(String name) {
+    return 'Head: $name';
+  }
+
+  @override
+  String get departmentNoHead => 'No head named';
+
+  @override
   String get departmentsEmptyMessage =>
       'Add departments such as Finance, HR or ICT, and name a head for each.';
 
   @override
   String get departmentsEmptyTitle => 'No departments yet';
-
-  @override
-  String devPreviewAsRole(String role) {
-    return 'Open as $role';
-  }
-
-  @override
-  String get devPreviewMessage =>
-      'Development builds only. Opens the screens with no data and no sign-in.';
-
-  @override
-  String get devPreviewTitle => 'Developer preview';
 
   @override
   String get dueOverdue => 'Overdue';
@@ -304,6 +417,42 @@ class AppLocalizationsEn extends AppLocalizations {
   String get emailSignInTitle => 'Sign in with email';
 
   @override
+  String get errorAccountDeactivated =>
+      'Your account is not active. Ask your administrator.';
+
+  @override
+  String get errorAdminCodeExpired =>
+      'That code has expired. Ask for a new code.';
+
+  @override
+  String get errorAdminCodeTooManyAttempts =>
+      'Too many wrong codes. Ask for a new code.';
+
+  @override
+  String get errorAdminCodeWrong =>
+      'That code is not correct. Check your email and try again.';
+
+  @override
+  String errorAdminCodeWrongAttempts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'That code is not correct. $count attempts left.',
+      one: 'That code is not correct. 1 attempt left.',
+      zero: 'That code is not correct. Ask for a new code.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get errorAdminEmailMissing =>
+      'Your account has no email for the administrator code. Ask another administrator to add one.';
+
+  @override
+  String get errorAdminVerificationRequired =>
+      'Please confirm your administrator code again.';
+
+  @override
   String get errorConflict =>
       'Someone else changed this first. Please check the latest version.';
 
@@ -311,6 +460,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String errorConflictAlreadyApproved(String name, String time) {
     return 'This step was already approved by $name at $time.';
   }
+
+  @override
+  String get errorConnectionRequired =>
+      'This needs an internet connection. Connect and try again.';
+
+  @override
+  String get errorDepartmentInvalid =>
+      'The chosen department does not exist or is not active. Choose another department.';
+
+  @override
+  String get errorEmailCannotBeRemoved =>
+      'An email cannot be removed once it is set. Enter a new email instead.';
+
+  @override
+  String get errorEmailInUse => 'This email is already used by another person.';
 
   @override
   String get errorInvalidCode =>
@@ -328,6 +492,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Enter a valid Tanzanian mobile number, for example 0712 345 678.';
 
   @override
+  String get errorLastAdmin =>
+      'This is the last active administrator. Add another administrator first.';
+
+  @override
   String get errorNetwork =>
       'No internet connection. Your changes are kept on this phone; try again when you are online.';
 
@@ -338,11 +506,52 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorNotInvited => 'Ask your administrator to add you.';
 
   @override
+  String get errorPermissionDenied => 'You do not have permission to do this.';
+
+  @override
+  String get errorPhoneInUse =>
+      'This phone number is already used by another person.';
+
+  @override
+  String get errorProviderUnavailable =>
+      'The message service is not available right now. Please try again later.';
+
+  @override
+  String get errorRateLimited =>
+      'Too many codes requested. Please wait and try again later.';
+
+  @override
+  String get errorReportingLoop =>
+      'This supervisor would create a loop in the reporting lines. Choose someone else.';
+
+  @override
+  String get errorSelfDeactivation => 'You cannot deactivate your own account.';
+
+  @override
+  String get errorSelfDemotion =>
+      'You cannot remove your own administrator role.';
+
+  @override
   String get errorSessionExpired => 'For your security, please sign in again.';
+
+  @override
+  String get errorSmsCapReached => 'The monthly SMS limit has been reached.';
+
+  @override
+  String get errorSupervisorInvalid =>
+      'The chosen supervisor is not an active person in this organisation. Choose someone else.';
 
   @override
   String get errorTooManyAttempts =>
       'Too many attempts. Please wait a few minutes and try again.';
+
+  @override
+  String get errorTopPersonRequiresSupervisor =>
+      'This change is not possible for the top person of the organisation. Check the reporting lines and try again.';
+
+  @override
+  String get errorTreeBusy =>
+      'The reporting lines are being updated. Please try again in a moment.';
 
   @override
   String get errorUnauthenticated => 'Please sign in to continue.';
@@ -379,6 +588,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get filterStatus => 'Status';
 
   @override
+  String get forgotPasswordHelp =>
+      'Enter your email. If it belongs to an ATMS account, we will send a link to set a new password. New accounts use this to set their first password.';
+
+  @override
+  String get forgotPasswordTitle => 'Set a new password';
+
+  @override
+  String get labelInactive => 'Inactive';
+
+  @override
+  String get labelSupervisorInactive => 'Supervisor inactive';
+
+  @override
   String get languageEnglish => 'English';
 
   @override
@@ -389,6 +611,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loadingMessage => 'Getting your account ready...';
+
+  @override
+  String get loadingWaitingForConnection =>
+      'Waiting for an internet connection to load your account...';
 
   @override
   String get managerSection => 'Team';
@@ -415,6 +641,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navTasks => 'Tasks';
 
   @override
+  String get needsConnectionNote => 'This needs an internet connection.';
+
+  @override
+  String get noChangesMessage => 'No changes to save';
+
+  @override
   String get notInvitedHelp =>
       'Only phone numbers added by your organisation can use ATMS.';
 
@@ -435,6 +667,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notificationsTitle => 'Notifications';
 
   @override
+  String offlineChangeRefused(String reason) {
+    return 'A change saved offline was not accepted: $reason';
+  }
+
+  @override
   String get onboardingLanguageHelp =>
       'Choose the language for the app. You can change it later under More.';
 
@@ -453,6 +690,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get passwordLabel => 'Password';
+
+  @override
+  String get passwordResetSent =>
+      'If this email has an account, a link to set a new password has been sent. Check your inbox.';
 
   @override
   String get phoneNumberHint => '0712 345 678';
@@ -495,6 +736,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reportingTreeEmptyTitle => 'No reporting lines yet';
 
   @override
+  String get reportingTreeHelp =>
+      'Tap a person to show who reports to them. Press and hold to open their details.';
+
+  @override
   String get reportsEmptyMessage =>
       'Weekly summaries are made every Monday and monthly summaries on the 1st.';
 
@@ -508,6 +753,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get requiredFieldHint => 'Required';
 
   @override
+  String resendCodeIn(int seconds) {
+    return 'Send the code again in $seconds s';
+  }
+
+  @override
   String get roleAdmin => 'Administrator';
 
   @override
@@ -517,16 +767,73 @@ class AppLocalizationsEn extends AppLocalizations {
   String get roleStaff => 'Staff';
 
   @override
+  String get savedMessage => 'Saved';
+
+  @override
+  String get savedOnPhoneMessage =>
+      'Saved on this phone. It will be sent when you are back online.';
+
+  @override
+  String get searchByName => 'Search by name';
+
+  @override
+  String get searchLoadedOnlyNote =>
+      'Search covers the people loaded so far. Load more to search further.';
+
+  @override
+  String sessionExpiredMessage(int staffDays, int adminDays) {
+    return 'For your security you were signed out. Sessions last $staffDays days ($adminDays days for administrators). Please sign in again.';
+  }
+
+  @override
   String get settingEscalationDelay => 'Escalation delay';
+
+  @override
+  String get settingEscalationDelayHelp =>
+      'Hours after the deadline before the supervisor is alerted';
+
+  @override
+  String get settingEscalationLevels => 'Escalation levels';
+
+  @override
+  String get settingEscalationLevelsHelp =>
+      'How many levels up the reporting line an overdue task climbs';
+
+  @override
+  String get settingReminderHoursHelp =>
+      'Hours before the deadline, separated by commas, e.g. 24, 1';
 
   @override
   String get settingReminderTimes => 'Reminder times';
 
   @override
+  String get settingRemindersSection => 'Reminders and escalation';
+
+  @override
   String get settingSmsCap => 'Monthly SMS limit';
 
   @override
+  String get settingSmsCapHelp =>
+      'Maximum SMS spending per month, in Tanzanian shillings (TZS).';
+
+  @override
+  String get settingSmsEnabled => 'Send SMS';
+
+  @override
+  String get settingSmsEnabledHelp =>
+      'SMS alerts, for example when a push notification is not opened.';
+
+  @override
+  String get settingSmsSection => 'SMS';
+
+  @override
   String get settingTimeZone => 'Time zone';
+
+  @override
+  String get settingWorkEnd => 'Work ends';
+
+  @override
+  String get settingWorkStart => 'Work starts';
 
   @override
   String get settingWorkingDays => 'Working days';
@@ -535,11 +842,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingWorkingHours => 'Working hours';
 
   @override
+  String get settingWorkingHoursEnabled => 'Count working hours only';
+
+  @override
+  String get settingWorkingHoursEnabledHelp =>
+      'When on, deadlines and escalation count only working hours on working days.';
+
+  @override
   String get setupMissingMessage =>
       'This copy of the app was built without its server settings, so it cannot connect. Please install the version provided by your organisation.';
 
   @override
   String get setupMissingTitle => 'App not configured';
+
+  @override
+  String get signInNeedsConnection =>
+      'Signing in needs an internet connection.';
 
   @override
   String get signInTitle => 'Sign in';
@@ -650,7 +968,51 @@ class AppLocalizationsEn extends AppLocalizations {
   String get templatesEmptyTitle => 'No workflow templates yet';
 
   @override
+  String timeZoneEastAfrica(String zone) {
+    return 'East Africa Time ($zone)';
+  }
+
+  @override
+  String topPersonWarningMessage(String name) {
+    return 'A person without a supervisor becomes the top of the organisation. The current top person will then report to $name. Continue?';
+  }
+
+  @override
+  String get topPersonWarningTitle =>
+      'Make this person the top of the organisation?';
+
+  @override
   String get useEmailInstead => 'No SMS? Sign in with email';
+
+  @override
+  String get userAccessSection => 'Role and reporting';
+
+  @override
+  String get userAddedMessage => 'Person added.';
+
+  @override
+  String get userConfidentialHelp =>
+      'Can see confidential tasks of these departments.';
+
+  @override
+  String get userContactHelp =>
+      'A phone number or an email is needed to sign in.';
+
+  @override
+  String get userCreateTitle => 'Add person';
+
+  @override
+  String userDeactivatedMessage(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'Person deactivated. $count open tasks were flagged for reassignment.',
+      one: 'Person deactivated. 1 open task was flagged for reassignment.',
+      zero: 'Person deactivated. They had no open tasks.',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get userDetailsSection => 'Details';
@@ -662,6 +1024,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get userFieldDepartment => 'Department';
 
   @override
+  String get userFieldJobRole => 'Job title';
+
+  @override
   String get userFieldName => 'Name';
 
   @override
@@ -669,6 +1034,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get userFieldSupervisor => 'Supervisor';
+
+  @override
+  String get userInviteNote =>
+      'Saving needs an internet connection. People with a phone number get an SMS invitation.';
+
+  @override
+  String get userJobRoleHelp =>
+      'Used by workflow steps assigned to a job title, e.g. Finance Officer.';
+
+  @override
+  String get userLanguageLabel => 'Language for SMS and the app';
+
+  @override
+  String get userNoSupervisor => 'None (top of organisation)';
+
+  @override
+  String get userTopOfOrganisation => 'Top of organisation';
 
   @override
   String get usersEmptyMessage =>
@@ -690,10 +1072,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get validationDeadlineRequired => 'Choose a deadline';
 
   @override
+  String get validationDepartmentRequired => 'Choose a department';
+
+  @override
   String get validationEmailRequired => 'Enter your email';
 
   @override
+  String get validationNameRequired => 'Enter a name';
+
+  @override
   String get validationPasswordRequired => 'Enter your password';
+
+  @override
+  String get validationPhoneOrEmail => 'Enter a phone number or an email';
 
   @override
   String get validationPhoneRequired => 'Enter your phone number';
@@ -702,7 +1093,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get validationPriorityRequired => 'Choose a priority';
 
   @override
+  String validationReminderHours(int max) {
+    return 'Enter whole numbers of hours from 1 to $max, separated by commas';
+  }
+
+  @override
   String get validationTitleRequired => 'Enter a title';
+
+  @override
+  String validationWholeNumberRange(int min, int max) {
+    return 'Enter a whole number from $min to $max';
+  }
+
+  @override
+  String get validationWorkingDaysRequired => 'Choose at least one working day';
+
+  @override
+  String get valueNotChosen => 'Not chosen';
 
   @override
   String get valueNotLoaded => 'Not loaded yet';

@@ -10,6 +10,13 @@ class AppLocalizationsSw extends AppLocalizations {
   AppLocalizationsSw([String locale = 'sw']) : super(locale);
 
   @override
+  String get accountInactiveHelp =>
+      'Ikiwa unadhani hili ni kosa, wasiliana na msimamizi wako.';
+
+  @override
+  String get accountInactiveTitle => 'Akaunti haitumiki';
+
+  @override
   String get actionAddAttachment => 'Ambatisha faili';
 
   @override
@@ -28,16 +35,46 @@ class AppLocalizationsSw extends AppLocalizations {
   String get actionBackToPhone => 'Weka namba ya simu tena';
 
   @override
+  String get actionCancel => 'Ghairi';
+
+  @override
+  String get actionClear => 'Ondoa';
+
+  @override
+  String get actionClose => 'Funga';
+
+  @override
   String get actionContinue => 'Endelea';
 
   @override
+  String get actionContinueAnyway => 'Ndiyo, endelea';
+
+  @override
+  String get actionDeactivate => 'Simamisha';
+
+  @override
+  String get actionDeactivateUser => 'Simamisha mtu';
+
+  @override
   String get actionEdit => 'Hariri';
+
+  @override
+  String get actionForgotPassword => 'Umesahau nenosiri?';
 
   @override
   String get actionGoToTasks => 'Nenda kwenye kazi zangu';
 
   @override
   String get actionHidePassword => 'Ficha nenosiri';
+
+  @override
+  String get actionHideReports => 'Ficha walio chini yake';
+
+  @override
+  String get actionLoadMore => 'Pakia zaidi';
+
+  @override
+  String get actionMoreOptions => 'Chaguo zaidi';
 
   @override
   String get actionNewTask => 'Kazi mpya';
@@ -49,16 +86,31 @@ class AppLocalizationsSw extends AppLocalizations {
   String get actionNotNow => 'Si sasa';
 
   @override
+  String get actionRemove => 'Ondoa';
+
+  @override
   String get actionResendCode => 'Tuma msimbo tena';
+
+  @override
+  String get actionRetry => 'Jaribu tena';
 
   @override
   String get actionSave => 'Hifadhi';
 
   @override
+  String get actionSendAdminCode => 'Nitumie msimbo kwa barua pepe';
+
+  @override
   String get actionSendCode => 'Tuma msimbo';
 
   @override
+  String get actionSendResetLink => 'Tuma kiungo';
+
+  @override
   String get actionShowPassword => 'Onyesha nenosiri';
+
+  @override
+  String get actionShowReports => 'Onyesha walio chini yake';
 
   @override
   String get actionSignIn => 'Ingia';
@@ -74,6 +126,11 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get adminAuditTitle => 'Kumbukumbu za ukaguzi';
+
+  @override
+  String adminCodeSentTo(String email, String time) {
+    return 'Tumetuma msimbo wa tarakimu 6 kwa $email. Unatumika hadi saa $time.';
+  }
 
   @override
   String get adminDepartmentsTitle => 'Idara';
@@ -97,8 +154,16 @@ class AppLocalizationsSw extends AppLocalizations {
   String get adminUsersTitle => 'Watu';
 
   @override
+  String adminVerifiedUntil(String time) {
+    return 'Umethibitishwa hadi saa $time.';
+  }
+
+  @override
   String get adminVerifyHelp =>
       'Kwa usalama zaidi, wasimamizi wa mfumo lazima pia waweke msimbo wa tarakimu 6 uliotumwa kwenye barua pepe yao.';
+
+  @override
+  String get adminVerifySuccess => 'Uthibitisho wa msimamizi umekamilika.';
 
   @override
   String get adminVerifyTitle => 'Uthibitisho wa msimamizi';
@@ -157,6 +222,9 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get codeLabel => 'Msimbo wa tarakimu 6';
+
+  @override
+  String get codeResent => 'Tumetuma msimbo mpya.';
 
   @override
   String get commentInputHint => 'Andika maoni';
@@ -266,23 +334,68 @@ class AppLocalizationsSw extends AppLocalizations {
   String get dashboardTitle => 'Dashibodi';
 
   @override
+  String get dayFri => 'Ijm';
+
+  @override
+  String get dayMon => 'Jtatu';
+
+  @override
+  String get daySat => 'Jmos';
+
+  @override
+  String get daySun => 'Jpili';
+
+  @override
+  String get dayThu => 'Alh';
+
+  @override
+  String get dayTue => 'Jnne';
+
+  @override
+  String get dayWed => 'Jtano';
+
+  @override
+  String deactivateDepartmentMessage(String name) {
+    return '$name haitaonyeshwa tena wakati wa kuongeza watu. Kazi zilizopo zitabaki na idara hii.';
+  }
+
+  @override
+  String get deactivateDepartmentTitle => 'Simamisha idara?';
+
+  @override
+  String deactivateUserMessage(String name) {
+    return '$name atatolewa kwenye akaunti ndani ya saa moja na hataweza kuingia tena. Kazi zake zilizo wazi zitawekewa alama ili zipangiwe mtu mwingine.';
+  }
+
+  @override
+  String get deactivateUserTitle => 'Simamisha mtu huyu?';
+
+  @override
+  String get departmentCreateTitle => 'Idara mpya';
+
+  @override
+  String get departmentEditTitle => 'Hariri idara';
+
+  @override
+  String get departmentFieldHead => 'Mkuu wa idara';
+
+  @override
+  String get departmentFieldName => 'Jina la idara';
+
+  @override
+  String departmentHead(String name) {
+    return 'Mkuu: $name';
+  }
+
+  @override
+  String get departmentNoHead => 'Hakuna mkuu aliyetajwa';
+
+  @override
   String get departmentsEmptyMessage =>
       'Ongeza idara kama Fedha, Rasilimali Watu au TEHAMA, na umtaje mkuu wa kila moja.';
 
   @override
   String get departmentsEmptyTitle => 'Bado hakuna idara';
-
-  @override
-  String devPreviewAsRole(String role) {
-    return 'Fungua kama $role';
-  }
-
-  @override
-  String get devPreviewMessage =>
-      'Kwa matoleo ya majaribio tu. Inafungua skrini bila takwimu na bila kuingia.';
-
-  @override
-  String get devPreviewTitle => 'Onyesho la msanidi';
 
   @override
   String get dueOverdue => 'Zimechelewa';
@@ -304,6 +417,42 @@ class AppLocalizationsSw extends AppLocalizations {
   String get emailSignInTitle => 'Ingia kwa barua pepe';
 
   @override
+  String get errorAccountDeactivated =>
+      'Akaunti yako haitumiki kwa sasa. Muulize msimamizi wako.';
+
+  @override
+  String get errorAdminCodeExpired =>
+      'Msimbo huo umeisha muda wake. Omba msimbo mpya.';
+
+  @override
+  String get errorAdminCodeTooManyAttempts =>
+      'Umekosea msimbo mara nyingi mno. Omba msimbo mpya.';
+
+  @override
+  String get errorAdminCodeWrong =>
+      'Msimbo huo si sahihi. Angalia barua pepe yako na ujaribu tena.';
+
+  @override
+  String errorAdminCodeWrongAttempts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Msimbo huo si sahihi. Zimebaki nafasi $count.',
+      one: 'Msimbo huo si sahihi. Imebaki nafasi 1.',
+      zero: 'Msimbo huo si sahihi. Omba msimbo mpya.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get errorAdminEmailMissing =>
+      'Akaunti yako haina barua pepe ya kupokea msimbo wa msimamizi. Muombe msimamizi mwingine aiongeze.';
+
+  @override
+  String get errorAdminVerificationRequired =>
+      'Tafadhali thibitisha tena msimbo wako wa msimamizi.';
+
+  @override
   String get errorConflict =>
       'Mtu mwingine amebadilisha hiki kwanza. Tafadhali angalia toleo la sasa.';
 
@@ -311,6 +460,22 @@ class AppLocalizationsSw extends AppLocalizations {
   String errorConflictAlreadyApproved(String name, String time) {
     return 'Hatua hii tayari imeidhinishwa na $name saa $time.';
   }
+
+  @override
+  String get errorConnectionRequired =>
+      'Hii inahitaji intaneti. Unganisha kisha ujaribu tena.';
+
+  @override
+  String get errorDepartmentInvalid =>
+      'Idara uliyochagua haipo au haitumiki. Chagua idara nyingine.';
+
+  @override
+  String get errorEmailCannotBeRemoved =>
+      'Barua pepe haiwezi kuondolewa ikishawekwa. Weka barua pepe mpya badala yake.';
+
+  @override
+  String get errorEmailInUse =>
+      'Barua pepe hii tayari inatumiwa na mtu mwingine.';
 
   @override
   String get errorInvalidCode =>
@@ -328,6 +493,10 @@ class AppLocalizationsSw extends AppLocalizations {
       'Weka namba sahihi ya simu ya mkononi ya Tanzania, kwa mfano 0712 345 678.';
 
   @override
+  String get errorLastAdmin =>
+      'Huyu ndiye msimamizi wa mwisho anayefanya kazi. Ongeza msimamizi mwingine kwanza.';
+
+  @override
   String get errorNetwork =>
       'Hakuna mtandao. Mabadiliko yako yamehifadhiwa kwenye simu hii; jaribu tena ukiwa mtandaoni.';
 
@@ -338,11 +507,53 @@ class AppLocalizationsSw extends AppLocalizations {
   String get errorNotInvited => 'Mwombe msimamizi wa mfumo akuongeze.';
 
   @override
+  String get errorPermissionDenied => 'Huna ruhusa ya kufanya hili.';
+
+  @override
+  String get errorPhoneInUse =>
+      'Namba hii ya simu tayari inatumiwa na mtu mwingine.';
+
+  @override
+  String get errorProviderUnavailable =>
+      'Huduma ya ujumbe haipatikani kwa sasa. Tafadhali jaribu tena baadaye.';
+
+  @override
+  String get errorRateLimited =>
+      'Umeomba misimbo mingi mno. Tafadhali subiri kisha ujaribu tena baadaye.';
+
+  @override
+  String get errorReportingLoop =>
+      'Msimamizi huyu angesababisha mzunguko katika mfumo wa uwajibikaji. Chagua mtu mwingine.';
+
+  @override
+  String get errorSelfDeactivation =>
+      'Huwezi kusimamisha akaunti yako mwenyewe.';
+
+  @override
+  String get errorSelfDemotion =>
+      'Huwezi kuondoa jukumu lako mwenyewe la msimamizi.';
+
+  @override
   String get errorSessionExpired => 'Kwa usalama wako, tafadhali ingia tena.';
+
+  @override
+  String get errorSmsCapReached => 'Kikomo cha SMS cha mwezi kimefikiwa.';
+
+  @override
+  String get errorSupervisorInvalid =>
+      'Msimamizi uliyemchagua si mtu anayetumika katika taasisi hii. Chagua mtu mwingine.';
 
   @override
   String get errorTooManyAttempts =>
       'Umejaribu mara nyingi mno. Tafadhali subiri dakika chache kisha ujaribu tena.';
+
+  @override
+  String get errorTopPersonRequiresSupervisor =>
+      'Badiliko hili haliwezekani kwa mtu wa juu kabisa wa taasisi. Angalia mfumo wa uwajibikaji kisha ujaribu tena.';
+
+  @override
+  String get errorTreeBusy =>
+      'Mfumo wa uwajibikaji unasasishwa. Tafadhali jaribu tena baada ya muda mfupi.';
 
   @override
   String get errorUnauthenticated => 'Tafadhali ingia ili uendelee.';
@@ -379,6 +590,19 @@ class AppLocalizationsSw extends AppLocalizations {
   String get filterStatus => 'Hali';
 
   @override
+  String get forgotPasswordHelp =>
+      'Weka barua pepe yako. Ikiwa ni ya akaunti ya ATMS, tutatuma kiungo cha kuweka nenosiri jipya. Akaunti mpya hutumia njia hii kuweka nenosiri la kwanza.';
+
+  @override
+  String get forgotPasswordTitle => 'Weka nenosiri jipya';
+
+  @override
+  String get labelInactive => 'Haitumiki';
+
+  @override
+  String get labelSupervisorInactive => 'Msimamizi hatumiki';
+
+  @override
   String get languageEnglish => 'English';
 
   @override
@@ -389,6 +613,10 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get loadingMessage => 'Tunaandaa akaunti yako...';
+
+  @override
+  String get loadingWaitingForConnection =>
+      'Inasubiri intaneti ili kupakia akaunti yako...';
 
   @override
   String get managerSection => 'Timu';
@@ -415,6 +643,12 @@ class AppLocalizationsSw extends AppLocalizations {
   String get navTasks => 'Kazi';
 
   @override
+  String get needsConnectionNote => 'Hii inahitaji intaneti.';
+
+  @override
+  String get noChangesMessage => 'Hakuna mabadiliko ya kuhifadhi';
+
+  @override
   String get notInvitedHelp =>
       'Ni namba za simu zilizoongezwa na taasisi yako pekee zinazoweza kutumia ATMS.';
 
@@ -435,6 +669,11 @@ class AppLocalizationsSw extends AppLocalizations {
   String get notificationsTitle => 'Arifa';
 
   @override
+  String offlineChangeRefused(String reason) {
+    return 'Badiliko lililohifadhiwa bila intaneti halikukubaliwa: $reason';
+  }
+
+  @override
   String get onboardingLanguageHelp =>
       'Chagua lugha ya programu. Unaweza kuibadilisha baadaye kwenye Zaidi.';
 
@@ -453,6 +692,10 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get passwordLabel => 'Nenosiri';
+
+  @override
+  String get passwordResetSent =>
+      'Ikiwa barua pepe hii ina akaunti, kiungo cha kuweka nenosiri jipya kimetumwa. Angalia sanduku lako la barua.';
 
   @override
   String get phoneNumberHint => '0712 345 678';
@@ -495,6 +738,10 @@ class AppLocalizationsSw extends AppLocalizations {
   String get reportingTreeEmptyTitle => 'Bado hakuna mfumo wa uwajibikaji';
 
   @override
+  String get reportingTreeHelp =>
+      'Gusa mtu ili kuona wanaoripoti kwake. Bonyeza na ushikilie ili kufungua taarifa zake.';
+
+  @override
   String get reportsEmptyMessage =>
       'Muhtasari wa wiki hutolewa kila Jumatatu na wa mwezi tarehe 1.';
 
@@ -508,6 +755,11 @@ class AppLocalizationsSw extends AppLocalizations {
   String get requiredFieldHint => 'Lazima';
 
   @override
+  String resendCodeIn(int seconds) {
+    return 'Tuma msimbo tena baada ya sekunde $seconds';
+  }
+
+  @override
   String get roleAdmin => 'Msimamizi wa mfumo';
 
   @override
@@ -517,16 +769,73 @@ class AppLocalizationsSw extends AppLocalizations {
   String get roleStaff => 'Mtumishi';
 
   @override
+  String get savedMessage => 'Imehifadhiwa';
+
+  @override
+  String get savedOnPhoneMessage =>
+      'Imehifadhiwa kwenye simu hii. Itatumwa utakapopata intaneti tena.';
+
+  @override
+  String get searchByName => 'Tafuta kwa jina';
+
+  @override
+  String get searchLoadedOnlyNote =>
+      'Utafutaji unahusu watu waliopakiwa hadi sasa. Pakia zaidi ili kutafuta zaidi.';
+
+  @override
+  String sessionExpiredMessage(int staffDays, int adminDays) {
+    return 'Kwa usalama wako umetolewa kwenye akaunti. Muda wa kuingia ni siku $staffDays (siku $adminDays kwa wasimamizi). Tafadhali ingia tena.';
+  }
+
+  @override
   String get settingEscalationDelay => 'Muda kabla ya kupandisha kazi';
+
+  @override
+  String get settingEscalationDelayHelp =>
+      'Saa baada ya muda wa mwisho kabla msimamizi hajajulishwa';
+
+  @override
+  String get settingEscalationLevels => 'Ngazi za upandishaji';
+
+  @override
+  String get settingEscalationLevelsHelp =>
+      'Kazi iliyochelewa hupanda ngazi ngapi katika mfumo wa uwajibikaji';
+
+  @override
+  String get settingReminderHoursHelp =>
+      'Saa kabla ya muda wa mwisho, zikitenganishwa kwa koma, mfano 24, 1';
 
   @override
   String get settingReminderTimes => 'Nyakati za vikumbusho';
 
   @override
+  String get settingRemindersSection => 'Vikumbusho na upandishaji';
+
+  @override
   String get settingSmsCap => 'Kikomo cha SMS kwa mwezi';
 
   @override
+  String get settingSmsCapHelp =>
+      'Kiwango cha juu cha matumizi ya SMS kwa mwezi, kwa shilingi za Tanzania (TZS).';
+
+  @override
+  String get settingSmsEnabled => 'Tuma SMS';
+
+  @override
+  String get settingSmsEnabledHelp =>
+      'Taarifa kwa SMS, mfano arifa ya simu isipofunguliwa.';
+
+  @override
+  String get settingSmsSection => 'SMS';
+
+  @override
   String get settingTimeZone => 'Saa za eneo';
+
+  @override
+  String get settingWorkEnd => 'Kazi inaisha';
+
+  @override
+  String get settingWorkStart => 'Kazi inaanza';
 
   @override
   String get settingWorkingDays => 'Siku za kazi';
@@ -535,11 +844,21 @@ class AppLocalizationsSw extends AppLocalizations {
   String get settingWorkingHours => 'Saa za kazi';
 
   @override
+  String get settingWorkingHoursEnabled => 'Hesabu saa za kazi tu';
+
+  @override
+  String get settingWorkingHoursEnabledHelp =>
+      'Ikiwashwa, muda wa mwisho na upandishaji huhesabu saa za kazi katika siku za kazi tu.';
+
+  @override
   String get setupMissingMessage =>
       'Nakala hii ya programu imetengenezwa bila mipangilio ya seva, kwa hiyo haiwezi kuunganishwa. Tafadhali sakinisha toleo lililotolewa na taasisi yako.';
 
   @override
   String get setupMissingTitle => 'Programu haijasanidiwa';
+
+  @override
+  String get signInNeedsConnection => 'Kuingia kunahitaji intaneti.';
 
   @override
   String get signInTitle => 'Ingia';
@@ -652,7 +971,51 @@ class AppLocalizationsSw extends AppLocalizations {
   String get templatesEmptyTitle => 'Bado hakuna violezo vya mtiririko wa kazi';
 
   @override
+  String timeZoneEastAfrica(String zone) {
+    return 'Saa za Afrika Mashariki ($zone)';
+  }
+
+  @override
+  String topPersonWarningMessage(String name) {
+    return 'Mtu asiye na msimamizi anakuwa wa juu kabisa wa taasisi. Mtu wa juu wa sasa ataripoti kwa $name. Uendelee?';
+  }
+
+  @override
+  String get topPersonWarningTitle =>
+      'Mfanye mtu huyu kuwa wa juu kabisa wa taasisi?';
+
+  @override
   String get useEmailInstead => 'Hupati SMS? Ingia kwa barua pepe';
+
+  @override
+  String get userAccessSection => 'Jukumu na uwajibikaji';
+
+  @override
+  String get userAddedMessage => 'Mtu ameongezwa.';
+
+  @override
+  String get userConfidentialHelp =>
+      'Anaweza kuona kazi za siri za idara hizi.';
+
+  @override
+  String get userContactHelp =>
+      'Namba ya simu au barua pepe inahitajika ili kuingia.';
+
+  @override
+  String get userCreateTitle => 'Ongeza mtu';
+
+  @override
+  String userDeactivatedMessage(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'Mtu amesimamishwa. Kazi $count zilizo wazi zimewekewa alama zipangiwe watu wengine.',
+      one: 'Mtu amesimamishwa. Kazi 1 iliyo wazi imewekewa alama ipangiwe mtu mwingine.',
+      zero: 'Mtu amesimamishwa. Hakuwa na kazi zilizo wazi.',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get userDetailsSection => 'Taarifa';
@@ -664,6 +1027,9 @@ class AppLocalizationsSw extends AppLocalizations {
   String get userFieldDepartment => 'Idara';
 
   @override
+  String get userFieldJobRole => 'Cheo cha kazi';
+
+  @override
   String get userFieldName => 'Jina';
 
   @override
@@ -671,6 +1037,23 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get userFieldSupervisor => 'Msimamizi';
+
+  @override
+  String get userInviteNote =>
+      'Kuhifadhi kunahitaji intaneti. Watu wenye namba ya simu hupata mwaliko kwa SMS.';
+
+  @override
+  String get userJobRoleHelp =>
+      'Hutumika na hatua za mtiririko zilizopangiwa cheo, mfano Afisa Fedha.';
+
+  @override
+  String get userLanguageLabel => 'Lugha ya SMS na programu';
+
+  @override
+  String get userNoSupervisor => 'Hakuna (juu kabisa ya taasisi)';
+
+  @override
+  String get userTopOfOrganisation => 'Juu kabisa ya taasisi';
 
   @override
   String get usersEmptyMessage =>
@@ -693,10 +1076,19 @@ class AppLocalizationsSw extends AppLocalizations {
   String get validationDeadlineRequired => 'Chagua tarehe ya mwisho';
 
   @override
+  String get validationDepartmentRequired => 'Chagua idara';
+
+  @override
   String get validationEmailRequired => 'Weka barua pepe yako';
 
   @override
+  String get validationNameRequired => 'Weka jina';
+
+  @override
   String get validationPasswordRequired => 'Weka nenosiri lako';
+
+  @override
+  String get validationPhoneOrEmail => 'Weka namba ya simu au barua pepe';
 
   @override
   String get validationPhoneRequired => 'Weka namba yako ya simu';
@@ -705,7 +1097,24 @@ class AppLocalizationsSw extends AppLocalizations {
   String get validationPriorityRequired => 'Chagua kipaumbele';
 
   @override
+  String validationReminderHours(int max) {
+    return 'Weka idadi kamili ya saa kuanzia 1 hadi $max, zikitenganishwa kwa koma';
+  }
+
+  @override
   String get validationTitleRequired => 'Weka kichwa cha kazi';
+
+  @override
+  String validationWholeNumberRange(int min, int max) {
+    return 'Weka namba kamili kuanzia $min hadi $max';
+  }
+
+  @override
+  String get validationWorkingDaysRequired =>
+      'Chagua angalau siku moja ya kazi';
+
+  @override
+  String get valueNotChosen => 'Haijachaguliwa';
 
   @override
   String get valueNotLoaded => 'Bado haijapakiwa';

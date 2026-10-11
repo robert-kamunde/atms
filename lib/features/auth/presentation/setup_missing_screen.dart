@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/localization/l10n.dart';
-import 'widgets/developer_preview_panel.dart';
 
 /// Shown when the app was built without Firebase options (or Firebase failed
 /// to start). Lets CI builds and widget tests run without real keys.
+///
+/// To see the real screens locally, run against the emulators with the
+/// dart-defines documented on `AppConfig` (`USE_FIREBASE_EMULATOR=true`).
 class SetupMissingScreen extends StatelessWidget {
   const SetupMissingScreen({super.key});
 
@@ -35,8 +37,6 @@ class SetupMissingScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyLarge,
             ),
-            const SizedBox(height: 32),
-            const DeveloperPreviewPanel(),
           ],
         ),
       ),

@@ -101,6 +101,9 @@ export interface Task {
   deleted?: boolean;
   deletedAt?: Timestamp;
   remindersSent?: string[]; // idempotency keys, e.g. "due-24h", "esc-1"
+  /** Server-only: set when an assignee is deactivated, cleared when the task is reassigned. */
+  reassignmentNeeded?: boolean;
+  reassignmentReason?: 'user_deactivated';
 }
 
 export interface TransitionRequest {

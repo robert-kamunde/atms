@@ -154,6 +154,8 @@ describe('creating tasks', () => {
     ['no assignee', { assigneeIds: [] }],
     ['a client clock createdAt', { createdAt: inDays(0) }],
     ['a bad completion mode', { completionMode: 'some' }],
+    ['a reassignment flag (server-only)', { reassignmentNeeded: true }],
+    ['a reassignment reason (server-only)', { reassignmentReason: 'user_deactivated' }],
   ])('is refused with %s', async (_label, extra) => {
     await assertFails(addDoc(tasksCol('asha'), newTask('asha', extra)));
   });
@@ -189,6 +191,8 @@ describe('updating tasks', () => {
     ['deptId', { deptId: 'OPS' }],
     ['creatorId', { creatorId: 'asha' }],
     ['assignmentState', { assignmentState: 'pending' }],
+    ['reassignmentNeeded (server-only)', { reassignmentNeeded: true }],
+    ['reassignmentReason (server-only)', { reassignmentReason: 'user_deactivated' }],
   ])('nobody can change %s from the app', async (_label, change) => {
     await assertFails(updateDoc(taskRef(as(env, 'asha').firestore(), 'normal'), { ...change, ...stamp('asha') }));
     await assertFails(updateDoc(taskRef(as(env, 'john').firestore(), 'normal'), { ...change, ...stamp('john') }));
@@ -230,6 +234,19 @@ describe('updating tasks', () => {
     await assertFails(updateDoc(taskRef(as(env, 'asha').firestore(), 'normal'), soft('asha')));
     await assertSucceeds(updateDoc(taskRef(as(env, 'john').firestore(), 'normal'), soft('john')));
     await assertFails(getDoc(taskRef(as(env, 'asha').firestore(), 'normal')));
+  });
+
+  test('a task flagged for reassignment keeps its flag until the server clears it', async () => {
+    await env.withSecurityRulesDisabled(async (ctx) => {
+      await updateDoc(doc(ctx.firestore(), `orgs/${ORG}/tasks/normal`), { reassignmentNeeded: true, reassignmentReason: 'user_deactivated' });
+    });
+    const asha = taskRef(as(env, 'asha').firestore(), 'normal');
+    await assertFails(updateDoc(asha, { reassignmentNeeded: false, ...stamp('asha') }));
+    await assertFails(updateDoc(asha, { status: 'in_progress', reassignmentNeeded: false, ...stamp('asha') }));
+    await assertFails(updateDoc(taskRef(as(env, 'john').firestore(), 'normal'), { priority: 'low', reassignmentReason: 'other', ...stamp('john') }));
+    await assertFails(updateDoc(taskRef(as(env, 'idrisa').firestore(), 'normal'), { deleted: true, deletedAt: serverTimestamp(), reassignmentNeeded: false, ...stamp('idrisa') }));
+    // Ordinary allowed changes still work and leave the flag alone.
+    await assertSucceeds(updateDoc(asha, { status: 'in_progress', ...stamp('asha') }));
   });
 
   test('a user who cannot see a task cannot update it', async () => {

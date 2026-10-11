@@ -1,5 +1,13 @@
 {
   "@@locale": "en",
+  "accountInactiveHelp": "If you think this is a mistake, contact your administrator.",
+  "@accountInactiveHelp": {
+    "description": "Help text on the screen for deactivated users."
+  },
+  "accountInactiveTitle": "Account not active",
+  "@accountInactiveTitle": {
+    "description": "Title of the screen for deactivated users."
+  },
   "actionAddAttachment": "Add attachment",
   "@actionAddAttachment": {
     "description": "Button: add a file to a task."
@@ -24,13 +32,41 @@
   "@actionBackToPhone": {
     "description": "Button back to the phone entry screen."
   },
+  "actionCancel": "Cancel",
+  "@actionCancel": {
+    "description": "Cancel button in dialogs."
+  },
+  "actionClear": "Clear",
+  "@actionClear": {
+    "description": "Tooltip: clear the chosen value."
+  },
+  "actionClose": "Close",
+  "@actionClose": {
+    "description": "Close button / tooltip."
+  },
   "actionContinue": "Continue",
   "@actionContinue": {
     "description": "Generic continue button."
   },
+  "actionContinueAnyway": "Yes, continue",
+  "@actionContinueAnyway": {
+    "description": "Confirm button."
+  },
+  "actionDeactivate": "Deactivate",
+  "@actionDeactivate": {
+    "description": "Button: deactivate. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "actionDeactivateUser": "Deactivate person",
+  "@actionDeactivateUser": {
+    "description": "Button in the user editor. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "actionEdit": "Edit",
   "@actionEdit": {
     "description": "Edit button / tooltip."
+  },
+  "actionForgotPassword": "Forgot password?",
+  "@actionForgotPassword": {
+    "description": "Button on the email sign-in screen."
   },
   "actionGoToTasks": "Go to my tasks",
   "@actionGoToTasks": {
@@ -39,6 +75,18 @@
   "actionHidePassword": "Hide password",
   "@actionHidePassword": {
     "description": "Tooltip on password field."
+  },
+  "actionHideReports": "Hide direct reports",
+  "@actionHideReports": {
+    "description": "Tooltip in the reporting tree. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "actionLoadMore": "Load more",
+  "@actionLoadMore": {
+    "description": "Button: load the next page of a list."
+  },
+  "actionMoreOptions": "More options",
+  "@actionMoreOptions": {
+    "description": "Tooltip of a menu button."
   },
   "actionNewTask": "New task",
   "@actionNewTask": {
@@ -52,21 +100,41 @@
   "@actionNotNow": {
     "description": "Skip button."
   },
+  "actionRemove": "Remove",
+  "@actionRemove": {
+    "description": "Tooltip: remove an item from a list."
+  },
   "actionResendCode": "Send the code again",
   "@actionResendCode": {
     "description": "Resend SMS/email code."
+  },
+  "actionRetry": "Try again",
+  "@actionRetry": {
+    "description": "Retry button after a load error."
   },
   "actionSave": "Save",
   "@actionSave": {
     "description": "Save button."
   },
+  "actionSendAdminCode": "Email me a code",
+  "@actionSendAdminCode": {
+    "description": "Button: send the admin second-factor code by email."
+  },
   "actionSendCode": "Send code",
   "@actionSendCode": {
     "description": "Phone sign-in: send SMS code."
   },
+  "actionSendResetLink": "Send link",
+  "@actionSendResetLink": {
+    "description": "Button: send password reset email."
+  },
   "actionShowPassword": "Show password",
   "@actionShowPassword": {
     "description": "Tooltip on password field."
+  },
+  "actionShowReports": "Show direct reports",
+  "@actionShowReports": {
+    "description": "Tooltip in the reporting tree. SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "actionSignIn": "Sign in",
   "@actionSignIn": {
@@ -87,6 +155,20 @@
   "adminAuditTitle": "Audit log",
   "@adminAuditTitle": {
     "description": "Admin: audit log screen title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "adminCodeSentTo": "We sent a 6-digit code to {email}. It works until {time}.",
+  "@adminCodeSentTo": {
+    "description": "After sending the admin code. email is masked, e.g. i***@org.tz.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "i***@org.tz"
+      },
+      "time": {
+        "type": "String",
+        "example": "10:52"
+      }
+    }
   },
   "adminDepartmentsTitle": "Departments",
   "@adminDepartmentsTitle": {
@@ -116,9 +198,23 @@
   "@adminUsersTitle": {
     "description": "Admin: users list title."
   },
+  "adminVerifiedUntil": "You are verified until {time}.",
+  "@adminVerifiedUntil": {
+    "description": "Shown when the admin second factor is already valid.",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "22:15"
+      }
+    }
+  },
   "adminVerifyHelp": "For extra security, administrators must also enter the 6-digit code sent to their email.",
   "@adminVerifyHelp": {
     "description": "Admin second factor explanation."
+  },
+  "adminVerifySuccess": "Administrator check complete.",
+  "@adminVerifySuccess": {
+    "description": "Snackbar after the admin second factor succeeds. SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "adminVerifyTitle": "Administrator check",
   "@adminVerifyTitle": {
@@ -190,6 +286,10 @@
   "codeLabel": "6-digit code",
   "@codeLabel": {
     "description": "Code field label."
+  },
+  "codeResent": "We sent a new code.",
+  "@codeResent": {
+    "description": "Snackbar after resending the SMS code."
   },
   "commentInputHint": "Write a comment",
   "@commentInputHint": {
@@ -323,6 +423,92 @@
   "@dashboardTitle": {
     "description": "Dashboard screen title. SW_REVIEW: Kiswahili needs native-speaker check."
   },
+  "dayFri": "Fri",
+  "@dayFri": {
+    "description": "Short weekday."
+  },
+  "dayMon": "Mon",
+  "@dayMon": {
+    "description": "Short weekday."
+  },
+  "daySat": "Sat",
+  "@daySat": {
+    "description": "Short weekday."
+  },
+  "daySun": "Sun",
+  "@daySun": {
+    "description": "Short weekday."
+  },
+  "dayThu": "Thu",
+  "@dayThu": {
+    "description": "Short weekday."
+  },
+  "dayTue": "Tue",
+  "@dayTue": {
+    "description": "Short weekday."
+  },
+  "dayWed": "Wed",
+  "@dayWed": {
+    "description": "Short weekday."
+  },
+  "deactivateDepartmentMessage": "{name} will no longer be offered when adding people. Existing tasks keep this department.",
+  "@deactivateDepartmentMessage": {
+    "description": "Confirmation dialog text. Departments are never deleted. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Finance"
+      }
+    }
+  },
+  "deactivateDepartmentTitle": "Deactivate department?",
+  "@deactivateDepartmentTitle": {
+    "description": "Confirmation dialog title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "deactivateUserMessage": "{name} will be signed out within an hour and can no longer sign in. Their open tasks will be flagged for reassignment.",
+  "@deactivateUserMessage": {
+    "description": "Confirmation dialog text (spec 4.1). SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Asha"
+      }
+    }
+  },
+  "deactivateUserTitle": "Deactivate this person?",
+  "@deactivateUserTitle": {
+    "description": "Confirmation dialog title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "departmentCreateTitle": "New department",
+  "@departmentCreateTitle": {
+    "description": "Dialog title."
+  },
+  "departmentEditTitle": "Edit department",
+  "@departmentEditTitle": {
+    "description": "Dialog title."
+  },
+  "departmentFieldHead": "Head of department",
+  "@departmentFieldHead": {
+    "description": "Department field."
+  },
+  "departmentFieldName": "Department name",
+  "@departmentFieldName": {
+    "description": "Department field."
+  },
+  "departmentHead": "Head: {name}",
+  "@departmentHead": {
+    "description": "Department list subtitle.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Neema"
+      }
+    }
+  },
+  "departmentNoHead": "No head named",
+  "@departmentNoHead": {
+    "description": "Department without a head."
+  },
   "departmentsEmptyMessage": "Add departments such as Finance, HR or ICT, and name a head for each.",
   "@departmentsEmptyMessage": {
     "description": "Departments empty message."
@@ -330,24 +516,6 @@
   "departmentsEmptyTitle": "No departments yet",
   "@departmentsEmptyTitle": {
     "description": "Departments empty title."
-  },
-  "devPreviewAsRole": "Open as {role}",
-  "@devPreviewAsRole": {
-    "description": "Developer preview button. Development builds only.",
-    "placeholders": {
-      "role": {
-        "type": "String",
-        "example": "Manager"
-      }
-    }
-  },
-  "devPreviewMessage": "Development builds only. Opens the screens with no data and no sign-in.",
-  "@devPreviewMessage": {
-    "description": "Developer preview explanation. Development builds only. SW_REVIEW: Kiswahili needs native-speaker check."
-  },
-  "devPreviewTitle": "Developer preview",
-  "@devPreviewTitle": {
-    "description": "Developer preview card title. Development builds only. SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "dueOverdue": "Overdue",
   "@dueOverdue": {
@@ -373,6 +541,40 @@
   "@emailSignInTitle": {
     "description": "Email sign-in title."
   },
+  "errorAccountDeactivated": "Your account is not active. Ask your administrator.",
+  "@errorAccountDeactivated": {
+    "description": "Error account-deactivated: the account was deactivated by an administrator."
+  },
+  "errorAdminCodeExpired": "That code has expired. Ask for a new code.",
+  "@errorAdminCodeExpired": {
+    "description": "Error code-expired (10 minutes)."
+  },
+  "errorAdminCodeTooManyAttempts": "Too many wrong codes. Ask for a new code.",
+  "@errorAdminCodeTooManyAttempts": {
+    "description": "Error code-attempts-exceeded."
+  },
+  "errorAdminCodeWrong": "That code is not correct. Check your email and try again.",
+  "@errorAdminCodeWrong": {
+    "description": "Error code-invalid without attempts count."
+  },
+  "errorAdminCodeWrongAttempts": "{count, plural, =0{That code is not correct. Ask for a new code.} =1{That code is not correct. 1 attempt left.} other{That code is not correct. {count} attempts left.}}",
+  "@errorAdminCodeWrongAttempts": {
+    "description": "Error code-invalid with details.attemptsLeft.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "errorAdminEmailMissing": "Your account has no email for the administrator code. Ask another administrator to add one.",
+  "@errorAdminEmailMissing": {
+    "description": "Error admin-email-missing. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "errorAdminVerificationRequired": "Please confirm your administrator code again.",
+  "@errorAdminVerificationRequired": {
+    "description": "Error: the admin second factor has expired. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "errorConflict": "Someone else changed this first. Please check the latest version.",
   "@errorConflict": {
     "description": "Generic conflict error."
@@ -391,6 +593,22 @@
       }
     }
   },
+  "errorConnectionRequired": "This needs an internet connection. Connect and try again.",
+  "@errorConnectionRequired": {
+    "description": "Error: an online-only action (sign-in, saving a person, admin code) could not reach the server."
+  },
+  "errorDepartmentInvalid": "The chosen department does not exist or is not active. Choose another department.",
+  "@errorDepartmentInvalid": {
+    "description": "Error department-invalid."
+  },
+  "errorEmailCannotBeRemoved": "An email cannot be removed once it is set. Enter a new email instead.",
+  "@errorEmailCannotBeRemoved": {
+    "description": "Error email-cannot-be-removed (also client-side validation). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "errorEmailInUse": "This email is already used by another person.",
+  "@errorEmailInUse": {
+    "description": "Error email-in-use."
+  },
   "errorInvalidCode": "That code is not correct. Check the SMS and try again.",
   "@errorInvalidCode": {
     "description": "Wrong verification code."
@@ -407,6 +625,10 @@
   "@errorInvalidPhone": {
     "description": "Invalid phone number."
   },
+  "errorLastAdmin": "This is the last active administrator. Add another administrator first.",
+  "@errorLastAdmin": {
+    "description": "Error last-admin."
+  },
   "errorNetwork": "No internet connection. Your changes are kept on this phone; try again when you are online.",
   "@errorNetwork": {
     "description": "Network error."
@@ -419,13 +641,57 @@
   "@errorNotInvited": {
     "description": "User not invited."
   },
+  "errorPermissionDenied": "You do not have permission to do this.",
+  "@errorPermissionDenied": {
+    "description": "Error permission-denied from a server function."
+  },
+  "errorPhoneInUse": "This phone number is already used by another person.",
+  "@errorPhoneInUse": {
+    "description": "Error phone-in-use."
+  },
+  "errorProviderUnavailable": "The message service is not available right now. Please try again later.",
+  "@errorProviderUnavailable": {
+    "description": "Error provider-unavailable (SMS/email provider down)."
+  },
+  "errorRateLimited": "Too many codes requested. Please wait and try again later.",
+  "@errorRateLimited": {
+    "description": "Error code-rate-limited (5 codes per hour)."
+  },
+  "errorReportingLoop": "This supervisor would create a loop in the reporting lines. Choose someone else.",
+  "@errorReportingLoop": {
+    "description": "Error reporting-loop: the chosen supervisor reports (directly or indirectly) to this person. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "errorSelfDeactivation": "You cannot deactivate your own account.",
+  "@errorSelfDeactivation": {
+    "description": "Error self-deactivation."
+  },
+  "errorSelfDemotion": "You cannot remove your own administrator role.",
+  "@errorSelfDemotion": {
+    "description": "Error self-demotion."
+  },
   "errorSessionExpired": "For your security, please sign in again.",
   "@errorSessionExpired": {
     "description": "Session expired."
   },
+  "errorSmsCapReached": "The monthly SMS limit has been reached.",
+  "@errorSmsCapReached": {
+    "description": "Error sms-cap-reached."
+  },
+  "errorSupervisorInvalid": "The chosen supervisor is not an active person in this organisation. Choose someone else.",
+  "@errorSupervisorInvalid": {
+    "description": "Error supervisor-invalid. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "errorTooManyAttempts": "Too many attempts. Please wait a few minutes and try again.",
   "@errorTooManyAttempts": {
     "description": "Rate limited."
+  },
+  "errorTopPersonRequiresSupervisor": "This change is not possible for the top person of the organisation. Check the reporting lines and try again.",
+  "@errorTopPersonRequiresSupervisor": {
+    "description": "Error top-person-requires-supervisor. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "errorTreeBusy": "The reporting lines are being updated. Please try again in a moment.",
+  "@errorTreeBusy": {
+    "description": "Error tree-busy (retryable). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "errorUnauthenticated": "Please sign in to continue.",
   "@errorUnauthenticated": {
@@ -471,6 +737,22 @@
   "@filterStatus": {
     "description": "Task filter chip."
   },
+  "forgotPasswordHelp": "Enter your email. If it belongs to an ATMS account, we will send a link to set a new password. New accounts use this to set their first password.",
+  "@forgotPasswordHelp": {
+    "description": "Forgot password dialog text. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "forgotPasswordTitle": "Set a new password",
+  "@forgotPasswordTitle": {
+    "description": "Title of the forgot password dialog."
+  },
+  "labelInactive": "Inactive",
+  "@labelInactive": {
+    "description": "Label on a deactivated person or department."
+  },
+  "labelSupervisorInactive": "Supervisor inactive",
+  "@labelSupervisorInactive": {
+    "description": "Warning label: this person's supervisor was deactivated and must be changed. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "languageEnglish": "English",
   "@languageEnglish": {
     "description": "Language option; always shown in English."
@@ -486,6 +768,10 @@
   "loadingMessage": "Getting your account ready...",
   "@loadingMessage": {
     "description": "Loading screen text."
+  },
+  "loadingWaitingForConnection": "Waiting for an internet connection to load your account...",
+  "@loadingWaitingForConnection": {
+    "description": "Loading screen when offline and nothing is cached yet."
   },
   "managerSection": "Team",
   "@managerSection": {
@@ -519,6 +805,14 @@
   "@navTasks": {
     "description": "Bottom navigation: task list tab."
   },
+  "needsConnectionNote": "This needs an internet connection.",
+  "@needsConnectionNote": {
+    "description": "Note under buttons that call the server (online only)."
+  },
+  "noChangesMessage": "No changes to save",
+  "@noChangesMessage": {
+    "description": "Snackbar when saving without changes."
+  },
   "notInvitedHelp": "Only phone numbers added by your organisation can use ATMS.",
   "@notInvitedHelp": {
     "description": "Not-invited explanation."
@@ -543,6 +837,16 @@
   "@notificationsTitle": {
     "description": "Notifications screen title."
   },
+  "offlineChangeRefused": "A change saved offline was not accepted: {reason}",
+  "@offlineChangeRefused": {
+    "description": "Snackbar when a change queued offline is refused after syncing. reason is another friendly error message. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "reason": {
+        "type": "String",
+        "example": "This item was not found."
+      }
+    }
+  },
   "onboardingLanguageHelp": "Choose the language for the app. You can change it later under More.",
   "@onboardingLanguageHelp": {
     "description": "Language step help."
@@ -566,6 +870,10 @@
   "passwordLabel": "Password",
   "@passwordLabel": {
     "description": "Password field label."
+  },
+  "passwordResetSent": "If this email has an account, a link to set a new password has been sent. Check your inbox.",
+  "@passwordResetSent": {
+    "description": "Snackbar after requesting a password reset (does not reveal whether the account exists). SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "phoneNumberHint": "0712 345 678",
   "@phoneNumberHint": {
@@ -621,6 +929,10 @@
   "@reportingTreeEmptyTitle": {
     "description": "Reporting tree empty title. SW_REVIEW: Kiswahili needs native-speaker check."
   },
+  "reportingTreeHelp": "Tap a person to show who reports to them. Press and hold to open their details.",
+  "@reportingTreeHelp": {
+    "description": "Help text above the reporting tree. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "reportsEmptyMessage": "Weekly summaries are made every Monday and monthly summaries on the 1st.",
   "@reportsEmptyMessage": {
     "description": "Reports empty message."
@@ -637,6 +949,16 @@
   "@requiredFieldHint": {
     "description": "Helper text for required fields."
   },
+  "resendCodeIn": "Send the code again in {seconds} s",
+  "@resendCodeIn": {
+    "description": "Disabled resend button with countdown.",
+    "placeholders": {
+      "seconds": {
+        "type": "int",
+        "example": "42"
+      }
+    }
+  },
   "roleAdmin": "Administrator",
   "@roleAdmin": {
     "description": "Role name."
@@ -649,21 +971,95 @@
   "@roleStaff": {
     "description": "Role name. SW_REVIEW: Kiswahili needs native-speaker check."
   },
+  "savedMessage": "Saved",
+  "@savedMessage": {
+    "description": "Snackbar after a save reached the server."
+  },
+  "savedOnPhoneMessage": "Saved on this phone. It will be sent when you are back online.",
+  "@savedOnPhoneMessage": {
+    "description": "Snackbar after an offline save (queued)."
+  },
+  "searchByName": "Search by name",
+  "@searchByName": {
+    "description": "Search field label."
+  },
+  "searchLoadedOnlyNote": "Search covers the people loaded so far. Load more to search further.",
+  "@searchLoadedOnlyNote": {
+    "description": "Note shown while searching within loaded pages only. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "sessionExpiredMessage": "For your security you were signed out. Sessions last {staffDays} days ({adminDays} days for administrators). Please sign in again.",
+  "@sessionExpiredMessage": {
+    "description": "Banner on the sign-in screen after the app signed the user out because the session was too old. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "staffDays": {
+        "type": "int",
+        "example": "30"
+      },
+      "adminDays": {
+        "type": "int",
+        "example": "7"
+      }
+    }
+  },
   "settingEscalationDelay": "Escalation delay",
   "@settingEscalationDelay": {
     "description": "Org setting. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "settingEscalationDelayHelp": "Hours after the deadline before the supervisor is alerted",
+  "@settingEscalationDelayHelp": {
+    "description": "Helper for escalation delay. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "settingEscalationLevels": "Escalation levels",
+  "@settingEscalationLevels": {
+    "description": "How many levels up an overdue task climbs. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "settingEscalationLevelsHelp": "How many levels up the reporting line an overdue task climbs",
+  "@settingEscalationLevelsHelp": {
+    "description": "Helper for escalation levels. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "settingReminderHoursHelp": "Hours before the deadline, separated by commas, e.g. 24, 1",
+  "@settingReminderHoursHelp": {
+    "description": "Helper for the reminder hours field."
   },
   "settingReminderTimes": "Reminder times",
   "@settingReminderTimes": {
     "description": "Org setting."
   },
+  "settingRemindersSection": "Reminders and escalation",
+  "@settingRemindersSection": {
+    "description": "Settings section title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "settingSmsCap": "Monthly SMS limit",
   "@settingSmsCap": {
     "description": "Org setting."
   },
+  "settingSmsCapHelp": "Maximum SMS spending per month, in Tanzanian shillings (TZS).",
+  "@settingSmsCapHelp": {
+    "description": "Helper for the SMS cap."
+  },
+  "settingSmsEnabled": "Send SMS",
+  "@settingSmsEnabled": {
+    "description": "Switch: SMS on/off."
+  },
+  "settingSmsEnabledHelp": "SMS alerts, for example when a push notification is not opened.",
+  "@settingSmsEnabledHelp": {
+    "description": "Help for the SMS switch. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "settingSmsSection": "SMS",
+  "@settingSmsSection": {
+    "description": "Settings section title."
+  },
   "settingTimeZone": "Time zone",
   "@settingTimeZone": {
     "description": "Org setting. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "settingWorkEnd": "Work ends",
+  "@settingWorkEnd": {
+    "description": "Working hours end."
+  },
+  "settingWorkStart": "Work starts",
+  "@settingWorkStart": {
+    "description": "Working hours start."
   },
   "settingWorkingDays": "Working days",
   "@settingWorkingDays": {
@@ -673,6 +1069,14 @@
   "@settingWorkingHours": {
     "description": "Org setting."
   },
+  "settingWorkingHoursEnabled": "Count working hours only",
+  "@settingWorkingHoursEnabled": {
+    "description": "Organisation setting switch."
+  },
+  "settingWorkingHoursEnabledHelp": "When on, deadlines and escalation count only working hours on working days.",
+  "@settingWorkingHoursEnabledHelp": {
+    "description": "Help for the working-hours switch (spec 4.2). SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "setupMissingMessage": "This copy of the app was built without its server settings, so it cannot connect. Please install the version provided by your organisation.",
   "@setupMissingMessage": {
     "description": "App not configured explanation."
@@ -680,6 +1084,10 @@
   "setupMissingTitle": "App not configured",
   "@setupMissingTitle": {
     "description": "App not configured title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "signInNeedsConnection": "Signing in needs an internet connection.",
+  "@signInNeedsConnection": {
+    "description": "Note under the sign-in buttons."
   },
   "signInTitle": "Sign in",
   "@signInTitle": {
@@ -821,9 +1229,63 @@
   "@templatesEmptyTitle": {
     "description": "Templates empty title. SW_REVIEW: Kiswahili needs native-speaker check."
   },
+  "timeZoneEastAfrica": "East Africa Time ({zone})",
+  "@timeZoneEastAfrica": {
+    "description": "Time zone display (not editable).",
+    "placeholders": {
+      "zone": {
+        "type": "String",
+        "example": "Africa/Dar_es_Salaam"
+      }
+    }
+  },
+  "topPersonWarningMessage": "A person without a supervisor becomes the top of the organisation. The current top person will then report to {name}. Continue?",
+  "@topPersonWarningMessage": {
+    "description": "Confirmation text (adminUpsertUser moves the previous top under the new one). SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Neema"
+      }
+    }
+  },
+  "topPersonWarningTitle": "Make this person the top of the organisation?",
+  "@topPersonWarningTitle": {
+    "description": "Confirmation when saving a person without a supervisor. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
   "useEmailInstead": "No SMS? Sign in with email",
   "@useEmailInstead": {
     "description": "Link to email fallback."
+  },
+  "userAccessSection": "Role and reporting",
+  "@userAccessSection": {
+    "description": "Section title in the user editor. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "userAddedMessage": "Person added.",
+  "@userAddedMessage": {
+    "description": "Snackbar after adding a person."
+  },
+  "userConfidentialHelp": "Can see confidential tasks of these departments.",
+  "@userConfidentialHelp": {
+    "description": "Confidential access help."
+  },
+  "userContactHelp": "A phone number or an email is needed to sign in.",
+  "@userContactHelp": {
+    "description": "Helper under the phone field."
+  },
+  "userCreateTitle": "Add person",
+  "@userCreateTitle": {
+    "description": "Title of the user editor when adding."
+  },
+  "userDeactivatedMessage": "{count, plural, =0{Person deactivated. They had no open tasks.} =1{Person deactivated. 1 open task was flagged for reassignment.} other{Person deactivated. {count} open tasks were flagged for reassignment.}}",
+  "@userDeactivatedMessage": {
+    "description": "Snackbar after deactivating a person. SW_REVIEW: Kiswahili needs native-speaker check.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
   },
   "userDetailsSection": "Details",
   "@userDetailsSection": {
@@ -837,6 +1299,10 @@
   "@userFieldDepartment": {
     "description": "User field."
   },
+  "userFieldJobRole": "Job title",
+  "@userFieldJobRole": {
+    "description": "User field (D-05), e.g. Finance Officer."
+  },
   "userFieldName": "Name",
   "@userFieldName": {
     "description": "User field."
@@ -848,6 +1314,26 @@
   "userFieldSupervisor": "Supervisor",
   "@userFieldSupervisor": {
     "description": "User field."
+  },
+  "userInviteNote": "Saving needs an internet connection. People with a phone number get an SMS invitation.",
+  "@userInviteNote": {
+    "description": "Note under Save when adding a person."
+  },
+  "userJobRoleHelp": "Used by workflow steps assigned to a job title, e.g. Finance Officer.",
+  "@userJobRoleHelp": {
+    "description": "Helper for job title. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "userLanguageLabel": "Language for SMS and the app",
+  "@userLanguageLabel": {
+    "description": "User editor language label."
+  },
+  "userNoSupervisor": "None (top of organisation)",
+  "@userNoSupervisor": {
+    "description": "Supervisor picker when empty. SW_REVIEW: Kiswahili needs native-speaker check."
+  },
+  "userTopOfOrganisation": "Top of organisation",
+  "@userTopOfOrganisation": {
+    "description": "Person without a supervisor. SW_REVIEW: Kiswahili needs native-speaker check."
   },
   "usersEmptyMessage": "Add people with their phone number, department, role and supervisor.",
   "@usersEmptyMessage": {
@@ -873,13 +1359,25 @@
   "@validationDeadlineRequired": {
     "description": "Required deadline."
   },
+  "validationDepartmentRequired": "Choose a department",
+  "@validationDepartmentRequired": {
+    "description": "Validation."
+  },
   "validationEmailRequired": "Enter your email",
   "@validationEmailRequired": {
     "description": "Required email."
   },
+  "validationNameRequired": "Enter a name",
+  "@validationNameRequired": {
+    "description": "Validation: name required."
+  },
   "validationPasswordRequired": "Enter your password",
   "@validationPasswordRequired": {
     "description": "Required password."
+  },
+  "validationPhoneOrEmail": "Enter a phone number or an email",
+  "@validationPhoneOrEmail": {
+    "description": "Validation: at least one contact."
   },
   "validationPhoneRequired": "Enter your phone number",
   "@validationPhoneRequired": {
@@ -889,9 +1387,41 @@
   "@validationPriorityRequired": {
     "description": "Required priority."
   },
+  "validationReminderHours": "Enter whole numbers of hours from 1 to {max}, separated by commas",
+  "@validationReminderHours": {
+    "description": "Validation for reminder hours.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "example": "720"
+      }
+    }
+  },
   "validationTitleRequired": "Enter a title",
   "@validationTitleRequired": {
     "description": "Required title."
+  },
+  "validationWholeNumberRange": "Enter a whole number from {min} to {max}",
+  "@validationWholeNumberRange": {
+    "description": "Validation for number fields.",
+    "placeholders": {
+      "min": {
+        "type": "int",
+        "example": "1"
+      },
+      "max": {
+        "type": "int",
+        "example": "720"
+      }
+    }
+  },
+  "validationWorkingDaysRequired": "Choose at least one working day",
+  "@validationWorkingDaysRequired": {
+    "description": "Validation."
+  },
+  "valueNotChosen": "Not chosen",
+  "@valueNotChosen": {
+    "description": "Placeholder for an empty picker."
   },
   "valueNotLoaded": "Not loaded yet",
   "@valueNotLoaded": {

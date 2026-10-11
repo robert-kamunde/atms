@@ -168,7 +168,7 @@ permission matrix in PDD section 2 is reproduced below with how each cell is enf
 | View own tasks | Yes | Yes | Yes | Rules: uid in viewerIds |
 | View team's tasks | No | Own department and reports below | All non-confidential | viewerIds (server adds managerChain); admin rule on confidential == false |
 | View confidential tasks | If participant | If participant or confidential access | Only with confidential access | Rules: viewerIds (participants only) or deptId in confidentialDepts |
-| Create a task | Only for themselves | For own team | Anyone | Server check on create ("assigned when online"); see DECISIONS D-04 |
+| Create a task | Only for themselves | For own team | Anyone | Server check on create ("assigned when online"); see DECISIONS A-01 |
 | Start a workflow | If template allows | Yes | Yes | Server check (template.staffCanStart) |
 | Approve or reject a step | If the step is theirs | When the step is theirs | Only if the step is theirs | Server transition processor |
 | Reassign | No | Within own team | Anyone | Server callable |

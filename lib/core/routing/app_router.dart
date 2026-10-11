@@ -7,11 +7,11 @@
 // /sign-in/phone             | signed out                      | 0 UI, 1
 // /sign-in/code              | signed out                      | 0 UI, 1
 // /sign-in/email             | signed out (fallback)           | 0 UI, 1
-// /not-invited               | signed in, no user document     | 0 UI, 1
+// /not-invited               | refused / not invited / inactive| 0 UI, 1
 // /onboarding/language       | first sign-in                   | 0 UI, 1
 // /onboarding/consent        | first sign-in (PDPA 2022)       | 0 UI, 1
-// /onboarding/notifications  | first sign-in                   | 0 UI, 4
-// /admin-verify              | admin (2nd factor, UI only)     | 0 UI, 1*
+// /onboarding/notifications  | phone never asked (permission)  | 0 UI, 1
+// /admin-verify?from=...     | admin (email code, D-01)        | 0 UI, 1
 // --- bottom navigation shell (all signed-in roles) ---
 // /tasks                     | all roles (my tasks)            | 0 UI, 2
 // /approvals                 | all roles (steps waiting on me) | 0 UI, 3
@@ -20,21 +20,23 @@
 // /more                      | all roles                       | 0
 // /team-tasks                | manager, admin                  | 0 UI, 2
 // /reports                   | manager, admin                  | 0 UI, 6
-// /admin/departments         | admin                           | 0 UI, 1
-// /admin/users               | admin                           | 0 UI, 1
-// /admin/users/:id           | admin                           | 0 UI, 1
-// /admin/reporting-tree      | admin                           | 0 UI, 1
-// /admin/templates           | admin                           | 0 UI, 3
-// /admin/templates/:id       | admin                           | 0 UI, 3
-// /admin/settings            | admin                           | 0 UI, 1
-// /admin/audit               | admin                           | 0 UI, 2
+// /admin/departments         | verified admin*                 | 1
+// /admin/users               | verified admin*                 | 1
+// /admin/users/new           | verified admin*                 | 1
+// /admin/users/:id           | verified admin*                 | 1
+// /admin/reporting-tree      | verified admin*                 | 1
+// /admin/templates           | verified admin*                 | 0 UI, 3
+// /admin/templates/:id       | verified admin*                 | 0 UI, 3
+// /admin/settings            | verified admin*                 | 1
+// /admin/audit               | verified admin*                 | 0 UI, 2
 // --- full screen (above the shell) ---
 // /tasks/new                 | all roles (staff: for self)     | 0 UI, 2
 // /tasks/:id                 | viewers of the task (rules)     | 0 UI, 2/3/5
 // /tasks/:id/edit            | creator / manager (rules)       | 0 UI, 2
 // /workflows/start           | all roles if template allows    | 0 UI, 3
 // ---------------------------------------------------------------------------
-// * Admin MFA mechanism is an open decision; only the screen exists.
+// * Admins without a current `adminVerifiedUntil` claim are sent to
+//   /admin-verify first and keep staff-level access everywhere else.
 // Guard rules: lib/core/routing/route_guard.dart. The guard only hides
 // screens; Security Rules and Cloud Functions enforce access (spec 6).
 
@@ -71,6 +73,7 @@ import '../../features/workflows/presentation/approvals_screen.dart';
 import '../../features/workflows/presentation/start_workflow_screen.dart';
 import '../../features/workflows/presentation/template_detail_screen.dart';
 import '../../features/workflows/presentation/template_list_screen.dart';
+import '../config/firebase_providers.dart';
 import 'not_found_screen.dart';
 import 'route_guard.dart';
 import 'route_names.dart';
@@ -103,17 +106,19 @@ GoRoute _route(
 String _param(GoRouterState state, String key) => state.pathParameters[key]!;
 
 /// Creates the app router. [readAuth] returns the current auth state and
-/// [refresh] notifies when it changes.
+/// [refresh] notifies when it (or anything else the guard reads) changes.
 GoRouter createRouter({
   required AuthState Function() readAuth,
   required Listenable refresh,
+  DateTime Function() now = DateTime.now,
   String initialLocation = RoutePaths.tasks,
 }) {
   return GoRouter(
     navigatorKey: _rootNavigatorKey,
     initialLocation: initialLocation,
     refreshListenable: refresh,
-    redirect: (context, state) => guardRedirect(readAuth(), state.uri),
+    redirect: (context, state) =>
+        guardRedirect(readAuth(), state.uri, now: now()),
     errorPageBuilder: (context, state) => _page(state, const NotFoundScreen()),
     routes: [
       _route(
@@ -164,7 +169,9 @@ GoRouter createRouter({
       _route(
         RoutePaths.adminVerify,
         RouteNames.adminVerify,
-        (_) => const AdminVerifyScreen(),
+        (s) => AdminVerifyScreen(
+          returnTo: s.uri.queryParameters[RoutePaths.returnToParam],
+        ),
       ),
       _route(
         RoutePaths.workflowStart,
@@ -261,6 +268,11 @@ GoRouter createRouter({
                 (_) => const AdminUsersScreen(),
                 routes: [
                   _route(
+                    'new',
+                    RouteNames.adminUserNew,
+                    (_) => const AdminUserDetailScreen(),
+                  ),
+                  _route(
                     ':id',
                     RouteNames.adminUserDetail,
                     (s) => AdminUserDetailScreen(userId: _param(s, 'id')),
@@ -311,9 +323,11 @@ class _AuthRefresh extends ChangeNotifier {
 final routerProvider = Provider<GoRouter>((ref) {
   final refresh = _AuthRefresh();
   ref.listen<AuthState>(authControllerProvider, (_, _) => refresh.notify());
+  ref.listen<int>(routeRefreshProvider, (_, _) => refresh.notify());
   final router = createRouter(
     readAuth: () => ref.read(authControllerProvider),
     refresh: refresh,
+    now: () => ref.read(clockProvider)(),
   );
   ref.onDispose(() {
     router.dispose();

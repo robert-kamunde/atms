@@ -4,23 +4,33 @@ The master instructions say: when a requirement is unclear and the answer affect
 integrity, workflow state or extensibility, stop and surface it; otherwise choose the simplest
 option and document it. This file holds both kinds.
 
-- **Open** decisions need the product owner. Work on the affected feature waits, or continues on
-  the stated default where that default is easy to change later.
+- **Product owner decisions** were surfaced for Robert; all nine were decided on 8 Oct 2026.
+- **Open** decisions need the product owner. Work on the affected feature waits,
+  or continues on the stated default where that default is easy to change later.
 - **Defaults taken** are minor or reversible choices made to keep going.
 
-## Open decisions (need Robert)
+## Product owner decisions (decided 8 Oct 2026)
 
-| ID | Question | Why it matters | Options | Recommendation | Blocks |
+Robert accepted every recommendation below ("answers on open decisions: agree", 8 Oct 2026). The
+**Recommendation** column is now the decision.
+
+| ID | Question | Why it matters | Options | Recommendation (decided) | Affects |
 | --- | --- | --- | --- | --- | --- |
 | D-01 | How should the admin second factor ("email code") work? | Firebase's built-in multi-factor sign-in supports SMS and authenticator apps (TOTP), not email codes. An email code needs our own Cloud Function plus an email-sending service. | (a) Email code: a Cloud Function emails a 6-digit code through an email service (for example SendGrid or Mailgun) and sets the `adminVerifiedUntil` claim. (b) Authenticator app (TOTP), supported natively. | (a), because it is what the PDD specifies. It needs an email service account, which D-08 can share. | Sprint 1 admin sign-in |
 | D-02 | Upgrade Firebase Authentication to Identity Platform? | Without it, Firebase creates an account for any phone number that completes the code. Our rules then refuse that account everything and the app shows "Ask your administrator to add you", but the code SMS has already been paid for and an empty account exists. Identity Platform adds "blocking functions" that refuse unknown numbers before the account is created and can refuse deactivated users at sign-in. | (a) Upgrade (free up to a monthly user allowance; phone SMS billed either way). (b) Stay on basic Auth, rely on rules and a nightly clean-up of stray accounts. | (a) | Sprint 1 sign-in |
-| D-03 | Where should the data live (Firestore region)? | Tanzania PDPA 2022 governs transferring personal data outside Tanzania. Google Cloud has no Tanzanian region; the nearest is Johannesburg (`africa-south1`). The Firestore location cannot be changed after creation. | `africa-south1` (Johannesburg), or `europe-west1` (Belgium) | `africa-south1`, subject to a check of PDPA cross-border transfer requirements by the pilot organisation | Creating the Firebase project |
+| D-03 | Where should the data live (Firestore region)? | Tanzania PDPA 2022 governs transferring personal data outside Tanzania. Google Cloud has no Tanzanian region; the nearest is Johannesburg (`africa-south1`). The Firestore location cannot be changed after creation. | `africa-south1` (Johannesburg), or `europe-west1` (Belgium) | `africa-south1`, subject to a check of PDPA cross-border transfer requirements by the pilot organisation. Decided; the Firestore location must be set to `africa-south1` when the database is created | Creating the Firebase project |
 | D-04 | App Check: enforce, or monitor only at first? | App Check on Android uses Play Integrity, which needs Google Play services. Phones without them (for example recent Huawei models, common in Tanzania) would be locked out if App Check is enforced. | (a) Enforce from day one. (b) Monitor in the pilot, then enforce once the share of failing devices is known. | (b), with the Security Rules (which do not depend on App Check) as the real protection | Sprint 1 setup |
 | D-05 | How do "role" steps pick a person, and who may act on them? | The PDD's templates use job titles ("Role: Finance Officer", "Role: Director"), which are not the Admin/Manager/Staff roles, and says "the step goes to the one with the fewest open tasks, and any of them can pick it up". | Add a `jobRole` field to users. The server assigns the step to the eligible person with the fewest open tasks; any active person with that job role may submit, approve or reject it (the server accepts them as owner). If nobody holds the job role, the step is not moved, the task is flagged and admins are notified. | As described | Sprint 3 workflow engine |
 | D-06 | What does "Done (or creator, if the creator requires a check)" mean? | PDD 4.3 mentions a creator check on simple tasks, but the data model has no field for it and no screen describes it. | (a) Add a "needs my check" option: the assignee's Done becomes "Waiting for check" until the creator confirms. (b) Leave it out of V1 and remove the phrase from the PDD. | (a), because the PDD specifies it and the instructions forbid dropping specified behaviour. It adds a `needsCheck` flag and a "Waiting for check" state, both documented deviations | Sprint 2 task statuses |
 | D-07 | With working hours on, how are 24 h and 48 h escalation delays counted? | PDD 4.2 says deadlines and escalation "count working hours only" when the setting is on; PDD 4.5 says reminders falling outside working hours are held until 08:00. These give different escalation times. | (a) Count elapsed working hours (24 working hours = 3 working days of 8 hours). (b) Count calendar hours and hold any send that falls outside working hours until 08:00. | (a) for escalation and step time limits, plus (b)'s holding rule for every send | Sprint 4 escalation |
 | D-08 | Which email service sends optional report emails (and admin codes)? | The master instructions exclude "external integrations" but require optional report email. An email service is the minimum needed. | SendGrid, Mailgun, Amazon SES, or the organisation's own SMTP | One transactional email service, shared with D-01 | Sprint 6 reports |
 | D-09 | Which SMS provider, and the sender ID? | Africa's Talking and Beem both work in Tanzania; sender ID registration with TCRA takes time. | Africa's Talking or Beem | Whichever the pilot organisation can contract; start sender ID registration now | Sprint 4 SMS |
+
+## Decided after Sprint 1
+
+| ID | Question | Why it matters | Options | Decision | Affects |
+| --- | --- | --- | --- | --- | --- |
+| D-10 | How does an admin change who is at the top of the reporting tree? | Every user except one must have a supervisor, so the first admin (made by the bootstrap script) starts as the top person. Making the director the top would otherwise be impossible: the director must report to someone, and moving the admin under the director is a loop. | (a) Saving someone with no supervisor makes them the new top person and moves the previous top person under them, in one transaction, after a warning in the app. (b) A separate "change top person" screen. | (a), as built in Sprint 1. Robert chose "Keep as built" on 9 Oct 2026. | Reporting tree, escalation |
 
 ## Defaults taken (documented, easy to revisit)
 
@@ -44,6 +54,14 @@ option and document it. This file holds both kinds.
 | A-16 | Escalation levels | `escalationMaxLevel` per organisation, default 2. | PDD 4.5 "times are configurable per organisation"; the prototype shows a 3-level setting as a possible change. |
 | A-17 | "Not found" for confidential tasks | Firestore returns "permission denied"; the app shows the same "not found" message for a denied read and a missing task. | CONF-2; Firestore cannot return "not found" for a denied read. |
 | A-18 | App languages before sign-in | English until the user picks a language; the phone's language is offered first if it is Swahili. | AUTH-6. |
+| A-19 | First organisation | Created by `functions/scripts/bootstrap-org.ts` (Admin SDK) with one department and one admin; it refuses to run without `--project`, prints its plan, writes nothing without `--yes` and never overwrites an org. The first admin needs an e-mail address because the admin code is e-mailed. | PDD 4.2 starts with an admin who already exists. |
+| A-20 | "Last active admin" check | Counts active admins (the server cannot see other admins' claims). Admins also cannot demote or deactivate themselves. | Keeps an organisation from losing its last admin. |
+| A-21 | Removing an e-mail address | Refused (`email-cannot-be-removed`); Firebase Authentication cannot remove an e-mail from an account. The address can be changed. | Platform limit. |
+| A-22 | Sign-in refusals | The blocking functions refuse with `not-invited` (unknown account) or `account-deactivated`; the app shows the matching screen and treats any other blocking refusal as not invited. A refused read of one's own profile is treated as deactivated. | AUTH-2, AUTH-5. |
+| A-23 | Admin second factor details | 12-hour verification, never past the 7-day admin session; code sent when the admin taps "Send code"; stored only as a salted hash at `orgs/{org}/secure/adminCodes/codes/{uid}`. In `demo-` projects the MOCK e-mail provider also writes to an `emulatorOutbox` collection no app can read. | D-01. |
+| A-24 | Consent version | `consentVersion` is `2026-10`; bump it whenever the consent text changes so everyone accepts again. | SEC-7. |
+| A-25 | Network timing | Callables time out after 20 seconds and show "needs connection" when offline. An offline-capable write not confirmed within 3 seconds shows "saved on phone"; a later refusal shows a message. | OFF requirements. |
+| A-26 | Form limits | Reminder and escalation hours up to 720, escalation levels up to 10, names and job roles up to 100 characters. | Catch typing mistakes only. |
 
 ## Contradictions found between the documents
 
@@ -51,8 +69,8 @@ option and document it. This file holds both kinds.
 | --- | --- | --- | --- |
 | C-01 | MI 38 vs MI 39 | Sprint 5 lists "Security rules", but MI 39 requires rules before UI for every feature. | Rules for each feature are written in that feature's sprint; the baseline rules exist from Sprint 0. Sprint 5 completes confidential creation and attachment flows and runs the full rules review. |
 | C-02 | PDD 2 matrix vs PDD 4.8 | "Own department and reports below" vs "everyone who reports to them". | A-03. |
-| C-03 | PDD 4.2 vs PDD 4.5 | Working-hours counting vs holding sends until 08:00. | D-07 (open). |
+| C-03 | PDD 4.2 vs PDD 4.5 | Working-hours counting vs holding sends until 08:00. | D-07 (decided). |
 | C-04 | PDD 4.10 vs MI 25 | MI adds "completion rate" to report contents. | Include it; MI is the newer client instruction and it does not conflict. |
-| C-05 | MI 2 vs MI 25 | "No external integrations" vs "optional email". | D-08 (open). |
+| C-05 | MI 2 vs MI 25 | "No external integrations" vs "optional email". | D-08 (decided). |
 | C-06 | PDD 7 Sprint 0 vs MI 38 Sprint 0 | PDD Sprint 0 includes interviews and a baseline survey; MI Sprint 0 is technical. | Interviews and the survey are the product owner's work; tracked in PROJECT_STATUS as outside engineering. |
 | C-07 | PDD 4.6 table vs MI 16 | MI lists "sign-in codes" as a notification event; those codes come from Firebase Authentication, not the ATMS notification system. | A-11. |

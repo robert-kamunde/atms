@@ -98,6 +98,18 @@ abstract class AppLocalizations {
     Locale('sw'),
   ];
 
+  /// Help text on the screen for deactivated users.
+  ///
+  /// In en, this message translates to:
+  /// **'If you think this is a mistake, contact your administrator.'**
+  String get accountInactiveHelp;
+
+  /// Title of the screen for deactivated users.
+  ///
+  /// In en, this message translates to:
+  /// **'Account not active'**
+  String get accountInactiveTitle;
+
   /// Button: add a file to a task.
   ///
   /// In en, this message translates to:
@@ -134,17 +146,59 @@ abstract class AppLocalizations {
   /// **'Enter phone number again'**
   String get actionBackToPhone;
 
+  /// Cancel button in dialogs.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get actionCancel;
+
+  /// Tooltip: clear the chosen value.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get actionClear;
+
+  /// Close button / tooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get actionClose;
+
   /// Generic continue button.
   ///
   /// In en, this message translates to:
   /// **'Continue'**
   String get actionContinue;
 
+  /// Confirm button.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, continue'**
+  String get actionContinueAnyway;
+
+  /// Button: deactivate. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Deactivate'**
+  String get actionDeactivate;
+
+  /// Button in the user editor. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Deactivate person'**
+  String get actionDeactivateUser;
+
   /// Edit button / tooltip.
   ///
   /// In en, this message translates to:
   /// **'Edit'**
   String get actionEdit;
+
+  /// Button on the email sign-in screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get actionForgotPassword;
 
   /// Button on not-found screen.
   ///
@@ -157,6 +211,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hide password'**
   String get actionHidePassword;
+
+  /// Tooltip in the reporting tree. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide direct reports'**
+  String get actionHideReports;
+
+  /// Button: load the next page of a list.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get actionLoadMore;
+
+  /// Tooltip of a menu button.
+  ///
+  /// In en, this message translates to:
+  /// **'More options'**
+  String get actionMoreOptions;
 
   /// Button to create a task.
   ///
@@ -176,11 +248,23 @@ abstract class AppLocalizations {
   /// **'Not now'**
   String get actionNotNow;
 
+  /// Tooltip: remove an item from a list.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get actionRemove;
+
   /// Resend SMS/email code.
   ///
   /// In en, this message translates to:
   /// **'Send the code again'**
   String get actionResendCode;
+
+  /// Retry button after a load error.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get actionRetry;
 
   /// Save button.
   ///
@@ -188,17 +272,35 @@ abstract class AppLocalizations {
   /// **'Save'**
   String get actionSave;
 
+  /// Button: send the admin second-factor code by email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email me a code'**
+  String get actionSendAdminCode;
+
   /// Phone sign-in: send SMS code.
   ///
   /// In en, this message translates to:
   /// **'Send code'**
   String get actionSendCode;
 
+  /// Button: send password reset email.
+  ///
+  /// In en, this message translates to:
+  /// **'Send link'**
+  String get actionSendResetLink;
+
   /// Tooltip on password field.
   ///
   /// In en, this message translates to:
   /// **'Show password'**
   String get actionShowPassword;
+
+  /// Tooltip in the reporting tree. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Show direct reports'**
+  String get actionShowReports;
 
   /// Sign-in button.
   ///
@@ -229,6 +331,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Audit log'**
   String get adminAuditTitle;
+
+  /// After sending the admin code. email is masked, e.g. i***@org.tz.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent a 6-digit code to {email}. It works until {time}.'**
+  String adminCodeSentTo(String email, String time);
 
   /// Admin: departments screen title.
   ///
@@ -272,11 +380,23 @@ abstract class AppLocalizations {
   /// **'People'**
   String get adminUsersTitle;
 
+  /// Shown when the admin second factor is already valid.
+  ///
+  /// In en, this message translates to:
+  /// **'You are verified until {time}.'**
+  String adminVerifiedUntil(String time);
+
   /// Admin second factor explanation.
   ///
   /// In en, this message translates to:
   /// **'For extra security, administrators must also enter the 6-digit code sent to their email.'**
   String get adminVerifyHelp;
+
+  /// Snackbar after the admin second factor succeeds. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Administrator check complete.'**
+  String get adminVerifySuccess;
 
   /// Admin second-factor screen title.
   ///
@@ -367,6 +487,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'6-digit code'**
   String get codeLabel;
+
+  /// Snackbar after resending the SMS code.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent a new code.'**
+  String get codeResent;
 
   /// Comment field hint.
   ///
@@ -566,6 +692,108 @@ abstract class AppLocalizations {
   /// **'Dashboard'**
   String get dashboardTitle;
 
+  /// Short weekday.
+  ///
+  /// In en, this message translates to:
+  /// **'Fri'**
+  String get dayFri;
+
+  /// Short weekday.
+  ///
+  /// In en, this message translates to:
+  /// **'Mon'**
+  String get dayMon;
+
+  /// Short weekday.
+  ///
+  /// In en, this message translates to:
+  /// **'Sat'**
+  String get daySat;
+
+  /// Short weekday.
+  ///
+  /// In en, this message translates to:
+  /// **'Sun'**
+  String get daySun;
+
+  /// Short weekday.
+  ///
+  /// In en, this message translates to:
+  /// **'Thu'**
+  String get dayThu;
+
+  /// Short weekday.
+  ///
+  /// In en, this message translates to:
+  /// **'Tue'**
+  String get dayTue;
+
+  /// Short weekday.
+  ///
+  /// In en, this message translates to:
+  /// **'Wed'**
+  String get dayWed;
+
+  /// Confirmation dialog text. Departments are never deleted. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} will no longer be offered when adding people. Existing tasks keep this department.'**
+  String deactivateDepartmentMessage(String name);
+
+  /// Confirmation dialog title. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Deactivate department?'**
+  String get deactivateDepartmentTitle;
+
+  /// Confirmation dialog text (spec 4.1). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} will be signed out within an hour and can no longer sign in. Their open tasks will be flagged for reassignment.'**
+  String deactivateUserMessage(String name);
+
+  /// Confirmation dialog title. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Deactivate this person?'**
+  String get deactivateUserTitle;
+
+  /// Dialog title.
+  ///
+  /// In en, this message translates to:
+  /// **'New department'**
+  String get departmentCreateTitle;
+
+  /// Dialog title.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit department'**
+  String get departmentEditTitle;
+
+  /// Department field.
+  ///
+  /// In en, this message translates to:
+  /// **'Head of department'**
+  String get departmentFieldHead;
+
+  /// Department field.
+  ///
+  /// In en, this message translates to:
+  /// **'Department name'**
+  String get departmentFieldName;
+
+  /// Department list subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Head: {name}'**
+  String departmentHead(String name);
+
+  /// Department without a head.
+  ///
+  /// In en, this message translates to:
+  /// **'No head named'**
+  String get departmentNoHead;
+
   /// Departments empty message.
   ///
   /// In en, this message translates to:
@@ -577,24 +805,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No departments yet'**
   String get departmentsEmptyTitle;
-
-  /// Developer preview button. Development builds only.
-  ///
-  /// In en, this message translates to:
-  /// **'Open as {role}'**
-  String devPreviewAsRole(String role);
-
-  /// Developer preview explanation. Development builds only. SW_REVIEW: Kiswahili needs native-speaker check.
-  ///
-  /// In en, this message translates to:
-  /// **'Development builds only. Opens the screens with no data and no sign-in.'**
-  String get devPreviewMessage;
-
-  /// Developer preview card title. Development builds only. SW_REVIEW: Kiswahili needs native-speaker check.
-  ///
-  /// In en, this message translates to:
-  /// **'Developer preview'**
-  String get devPreviewTitle;
 
   /// Due-date filter option.
   ///
@@ -632,6 +842,48 @@ abstract class AppLocalizations {
   /// **'Sign in with email'**
   String get emailSignInTitle;
 
+  /// Error account-deactivated: the account was deactivated by an administrator.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account is not active. Ask your administrator.'**
+  String get errorAccountDeactivated;
+
+  /// Error code-expired (10 minutes).
+  ///
+  /// In en, this message translates to:
+  /// **'That code has expired. Ask for a new code.'**
+  String get errorAdminCodeExpired;
+
+  /// Error code-attempts-exceeded.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many wrong codes. Ask for a new code.'**
+  String get errorAdminCodeTooManyAttempts;
+
+  /// Error code-invalid without attempts count.
+  ///
+  /// In en, this message translates to:
+  /// **'That code is not correct. Check your email and try again.'**
+  String get errorAdminCodeWrong;
+
+  /// Error code-invalid with details.attemptsLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{That code is not correct. Ask for a new code.} =1{That code is not correct. 1 attempt left.} other{That code is not correct. {count} attempts left.}}'**
+  String errorAdminCodeWrongAttempts(int count);
+
+  /// Error admin-email-missing. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account has no email for the administrator code. Ask another administrator to add one.'**
+  String get errorAdminEmailMissing;
+
+  /// Error: the admin second factor has expired. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Please confirm your administrator code again.'**
+  String get errorAdminVerificationRequired;
+
   /// Generic conflict error.
   ///
   /// In en, this message translates to:
@@ -643,6 +895,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This step was already approved by {name} at {time}.'**
   String errorConflictAlreadyApproved(String name, String time);
+
+  /// Error: an online-only action (sign-in, saving a person, admin code) could not reach the server.
+  ///
+  /// In en, this message translates to:
+  /// **'This needs an internet connection. Connect and try again.'**
+  String get errorConnectionRequired;
+
+  /// Error department-invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'The chosen department does not exist or is not active. Choose another department.'**
+  String get errorDepartmentInvalid;
+
+  /// Error email-cannot-be-removed (also client-side validation). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'An email cannot be removed once it is set. Enter a new email instead.'**
+  String get errorEmailCannotBeRemoved;
+
+  /// Error email-in-use.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is already used by another person.'**
+  String get errorEmailInUse;
 
   /// Wrong verification code.
   ///
@@ -668,6 +944,12 @@ abstract class AppLocalizations {
   /// **'Enter a valid Tanzanian mobile number, for example 0712 345 678.'**
   String get errorInvalidPhone;
 
+  /// Error last-admin.
+  ///
+  /// In en, this message translates to:
+  /// **'This is the last active administrator. Add another administrator first.'**
+  String get errorLastAdmin;
+
   /// Network error.
   ///
   /// In en, this message translates to:
@@ -686,17 +968,83 @@ abstract class AppLocalizations {
   /// **'Ask your administrator to add you.'**
   String get errorNotInvited;
 
+  /// Error permission-denied from a server function.
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission to do this.'**
+  String get errorPermissionDenied;
+
+  /// Error phone-in-use.
+  ///
+  /// In en, this message translates to:
+  /// **'This phone number is already used by another person.'**
+  String get errorPhoneInUse;
+
+  /// Error provider-unavailable (SMS/email provider down).
+  ///
+  /// In en, this message translates to:
+  /// **'The message service is not available right now. Please try again later.'**
+  String get errorProviderUnavailable;
+
+  /// Error code-rate-limited (5 codes per hour).
+  ///
+  /// In en, this message translates to:
+  /// **'Too many codes requested. Please wait and try again later.'**
+  String get errorRateLimited;
+
+  /// Error reporting-loop: the chosen supervisor reports (directly or indirectly) to this person. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'This supervisor would create a loop in the reporting lines. Choose someone else.'**
+  String get errorReportingLoop;
+
+  /// Error self-deactivation.
+  ///
+  /// In en, this message translates to:
+  /// **'You cannot deactivate your own account.'**
+  String get errorSelfDeactivation;
+
+  /// Error self-demotion.
+  ///
+  /// In en, this message translates to:
+  /// **'You cannot remove your own administrator role.'**
+  String get errorSelfDemotion;
+
   /// Session expired.
   ///
   /// In en, this message translates to:
   /// **'For your security, please sign in again.'**
   String get errorSessionExpired;
 
+  /// Error sms-cap-reached.
+  ///
+  /// In en, this message translates to:
+  /// **'The monthly SMS limit has been reached.'**
+  String get errorSmsCapReached;
+
+  /// Error supervisor-invalid. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'The chosen supervisor is not an active person in this organisation. Choose someone else.'**
+  String get errorSupervisorInvalid;
+
   /// Rate limited.
   ///
   /// In en, this message translates to:
   /// **'Too many attempts. Please wait a few minutes and try again.'**
   String get errorTooManyAttempts;
+
+  /// Error top-person-requires-supervisor. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'This change is not possible for the top person of the organisation. Check the reporting lines and try again.'**
+  String get errorTopPersonRequiresSupervisor;
+
+  /// Error tree-busy (retryable). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'The reporting lines are being updated. Please try again in a moment.'**
+  String get errorTreeBusy;
 
   /// Not signed in.
   ///
@@ -764,6 +1112,30 @@ abstract class AppLocalizations {
   /// **'Status'**
   String get filterStatus;
 
+  /// Forgot password dialog text. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email. If it belongs to an ATMS account, we will send a link to set a new password. New accounts use this to set their first password.'**
+  String get forgotPasswordHelp;
+
+  /// Title of the forgot password dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a new password'**
+  String get forgotPasswordTitle;
+
+  /// Label on a deactivated person or department.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get labelInactive;
+
+  /// Warning label: this person's supervisor was deactivated and must be changed. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Supervisor inactive'**
+  String get labelSupervisorInactive;
+
   /// Language option; always shown in English.
   ///
   /// In en, this message translates to:
@@ -787,6 +1159,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Getting your account ready...'**
   String get loadingMessage;
+
+  /// Loading screen when offline and nothing is cached yet.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for an internet connection to load your account...'**
+  String get loadingWaitingForConnection;
 
   /// More screen: manager section.
   ///
@@ -836,6 +1214,18 @@ abstract class AppLocalizations {
   /// **'Tasks'**
   String get navTasks;
 
+  /// Note under buttons that call the server (online only).
+  ///
+  /// In en, this message translates to:
+  /// **'This needs an internet connection.'**
+  String get needsConnectionNote;
+
+  /// Snackbar when saving without changes.
+  ///
+  /// In en, this message translates to:
+  /// **'No changes to save'**
+  String get noChangesMessage;
+
   /// Not-invited explanation.
   ///
   /// In en, this message translates to:
@@ -872,6 +1262,12 @@ abstract class AppLocalizations {
   /// **'Notifications'**
   String get notificationsTitle;
 
+  /// Snackbar when a change queued offline is refused after syncing. reason is another friendly error message. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'A change saved offline was not accepted: {reason}'**
+  String offlineChangeRefused(String reason);
+
   /// Language step help.
   ///
   /// In en, this message translates to:
@@ -907,6 +1303,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password'**
   String get passwordLabel;
+
+  /// Snackbar after requesting a password reset (does not reveal whether the account exists). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'If this email has an account, a link to set a new password has been sent. Check your inbox.'**
+  String get passwordResetSent;
 
   /// Phone number example.
   ///
@@ -980,6 +1382,12 @@ abstract class AppLocalizations {
   /// **'No reporting lines yet'**
   String get reportingTreeEmptyTitle;
 
+  /// Help text above the reporting tree. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a person to show who reports to them. Press and hold to open their details.'**
+  String get reportingTreeHelp;
+
   /// Reports empty message.
   ///
   /// In en, this message translates to:
@@ -1004,6 +1412,12 @@ abstract class AppLocalizations {
   /// **'Required'**
   String get requiredFieldHint;
 
+  /// Disabled resend button with countdown.
+  ///
+  /// In en, this message translates to:
+  /// **'Send the code again in {seconds} s'**
+  String resendCodeIn(int seconds);
+
   /// Role name.
   ///
   /// In en, this message translates to:
@@ -1022,11 +1436,65 @@ abstract class AppLocalizations {
   /// **'Staff'**
   String get roleStaff;
 
+  /// Snackbar after a save reached the server.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get savedMessage;
+
+  /// Snackbar after an offline save (queued).
+  ///
+  /// In en, this message translates to:
+  /// **'Saved on this phone. It will be sent when you are back online.'**
+  String get savedOnPhoneMessage;
+
+  /// Search field label.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name'**
+  String get searchByName;
+
+  /// Note shown while searching within loaded pages only. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Search covers the people loaded so far. Load more to search further.'**
+  String get searchLoadedOnlyNote;
+
+  /// Banner on the sign-in screen after the app signed the user out because the session was too old. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'For your security you were signed out. Sessions last {staffDays} days ({adminDays} days for administrators). Please sign in again.'**
+  String sessionExpiredMessage(int staffDays, int adminDays);
+
   /// Org setting. SW_REVIEW: Kiswahili needs native-speaker check.
   ///
   /// In en, this message translates to:
   /// **'Escalation delay'**
   String get settingEscalationDelay;
+
+  /// Helper for escalation delay. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Hours after the deadline before the supervisor is alerted'**
+  String get settingEscalationDelayHelp;
+
+  /// How many levels up an overdue task climbs. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Escalation levels'**
+  String get settingEscalationLevels;
+
+  /// Helper for escalation levels. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'How many levels up the reporting line an overdue task climbs'**
+  String get settingEscalationLevelsHelp;
+
+  /// Helper for the reminder hours field.
+  ///
+  /// In en, this message translates to:
+  /// **'Hours before the deadline, separated by commas, e.g. 24, 1'**
+  String get settingReminderHoursHelp;
 
   /// Org setting.
   ///
@@ -1034,17 +1502,59 @@ abstract class AppLocalizations {
   /// **'Reminder times'**
   String get settingReminderTimes;
 
+  /// Settings section title. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders and escalation'**
+  String get settingRemindersSection;
+
   /// Org setting.
   ///
   /// In en, this message translates to:
   /// **'Monthly SMS limit'**
   String get settingSmsCap;
 
+  /// Helper for the SMS cap.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum SMS spending per month, in Tanzanian shillings (TZS).'**
+  String get settingSmsCapHelp;
+
+  /// Switch: SMS on/off.
+  ///
+  /// In en, this message translates to:
+  /// **'Send SMS'**
+  String get settingSmsEnabled;
+
+  /// Help for the SMS switch. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'SMS alerts, for example when a push notification is not opened.'**
+  String get settingSmsEnabledHelp;
+
+  /// Settings section title.
+  ///
+  /// In en, this message translates to:
+  /// **'SMS'**
+  String get settingSmsSection;
+
   /// Org setting. SW_REVIEW: Kiswahili needs native-speaker check.
   ///
   /// In en, this message translates to:
   /// **'Time zone'**
   String get settingTimeZone;
+
+  /// Working hours end.
+  ///
+  /// In en, this message translates to:
+  /// **'Work ends'**
+  String get settingWorkEnd;
+
+  /// Working hours start.
+  ///
+  /// In en, this message translates to:
+  /// **'Work starts'**
+  String get settingWorkStart;
 
   /// Org setting.
   ///
@@ -1058,6 +1568,18 @@ abstract class AppLocalizations {
   /// **'Working hours'**
   String get settingWorkingHours;
 
+  /// Organisation setting switch.
+  ///
+  /// In en, this message translates to:
+  /// **'Count working hours only'**
+  String get settingWorkingHoursEnabled;
+
+  /// Help for the working-hours switch (spec 4.2). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'When on, deadlines and escalation count only working hours on working days.'**
+  String get settingWorkingHoursEnabledHelp;
+
   /// App not configured explanation.
   ///
   /// In en, this message translates to:
@@ -1069,6 +1591,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'App not configured'**
   String get setupMissingTitle;
+
+  /// Note under the sign-in buttons.
+  ///
+  /// In en, this message translates to:
+  /// **'Signing in needs an internet connection.'**
+  String get signInNeedsConnection;
 
   /// Sign-in screen title.
   ///
@@ -1280,11 +1808,65 @@ abstract class AppLocalizations {
   /// **'No workflow templates yet'**
   String get templatesEmptyTitle;
 
+  /// Time zone display (not editable).
+  ///
+  /// In en, this message translates to:
+  /// **'East Africa Time ({zone})'**
+  String timeZoneEastAfrica(String zone);
+
+  /// Confirmation text (adminUpsertUser moves the previous top under the new one). SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'A person without a supervisor becomes the top of the organisation. The current top person will then report to {name}. Continue?'**
+  String topPersonWarningMessage(String name);
+
+  /// Confirmation when saving a person without a supervisor. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Make this person the top of the organisation?'**
+  String get topPersonWarningTitle;
+
   /// Link to email fallback.
   ///
   /// In en, this message translates to:
   /// **'No SMS? Sign in with email'**
   String get useEmailInstead;
+
+  /// Section title in the user editor. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Role and reporting'**
+  String get userAccessSection;
+
+  /// Snackbar after adding a person.
+  ///
+  /// In en, this message translates to:
+  /// **'Person added.'**
+  String get userAddedMessage;
+
+  /// Confidential access help.
+  ///
+  /// In en, this message translates to:
+  /// **'Can see confidential tasks of these departments.'**
+  String get userConfidentialHelp;
+
+  /// Helper under the phone field.
+  ///
+  /// In en, this message translates to:
+  /// **'A phone number or an email is needed to sign in.'**
+  String get userContactHelp;
+
+  /// Title of the user editor when adding.
+  ///
+  /// In en, this message translates to:
+  /// **'Add person'**
+  String get userCreateTitle;
+
+  /// Snackbar after deactivating a person. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{Person deactivated. They had no open tasks.} =1{Person deactivated. 1 open task was flagged for reassignment.} other{Person deactivated. {count} open tasks were flagged for reassignment.}}'**
+  String userDeactivatedMessage(int count);
 
   /// User editor section.
   ///
@@ -1304,6 +1886,12 @@ abstract class AppLocalizations {
   /// **'Department'**
   String get userFieldDepartment;
 
+  /// User field (D-05), e.g. Finance Officer.
+  ///
+  /// In en, this message translates to:
+  /// **'Job title'**
+  String get userFieldJobRole;
+
   /// User field.
   ///
   /// In en, this message translates to:
@@ -1321,6 +1909,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Supervisor'**
   String get userFieldSupervisor;
+
+  /// Note under Save when adding a person.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving needs an internet connection. People with a phone number get an SMS invitation.'**
+  String get userInviteNote;
+
+  /// Helper for job title. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Used by workflow steps assigned to a job title, e.g. Finance Officer.'**
+  String get userJobRoleHelp;
+
+  /// User editor language label.
+  ///
+  /// In en, this message translates to:
+  /// **'Language for SMS and the app'**
+  String get userLanguageLabel;
+
+  /// Supervisor picker when empty. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'None (top of organisation)'**
+  String get userNoSupervisor;
+
+  /// Person without a supervisor. SW_REVIEW: Kiswahili needs native-speaker check.
+  ///
+  /// In en, this message translates to:
+  /// **'Top of organisation'**
+  String get userTopOfOrganisation;
 
   /// Users empty message.
   ///
@@ -1358,17 +1976,35 @@ abstract class AppLocalizations {
   /// **'Choose a deadline'**
   String get validationDeadlineRequired;
 
+  /// Validation.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a department'**
+  String get validationDepartmentRequired;
+
   /// Required email.
   ///
   /// In en, this message translates to:
   /// **'Enter your email'**
   String get validationEmailRequired;
 
+  /// Validation: name required.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a name'**
+  String get validationNameRequired;
+
   /// Required password.
   ///
   /// In en, this message translates to:
   /// **'Enter your password'**
   String get validationPasswordRequired;
+
+  /// Validation: at least one contact.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a phone number or an email'**
+  String get validationPhoneOrEmail;
 
   /// Required phone.
   ///
@@ -1382,11 +2018,35 @@ abstract class AppLocalizations {
   /// **'Choose a priority'**
   String get validationPriorityRequired;
 
+  /// Validation for reminder hours.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter whole numbers of hours from 1 to {max}, separated by commas'**
+  String validationReminderHours(int max);
+
   /// Required title.
   ///
   /// In en, this message translates to:
   /// **'Enter a title'**
   String get validationTitleRequired;
+
+  /// Validation for number fields.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a whole number from {min} to {max}'**
+  String validationWholeNumberRange(int min, int max);
+
+  /// Validation.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose at least one working day'**
+  String get validationWorkingDaysRequired;
+
+  /// Placeholder for an empty picker.
+  ///
+  /// In en, this message translates to:
+  /// **'Not chosen'**
+  String get valueNotChosen;
 
   /// Value placeholder while data source is not built.
   ///

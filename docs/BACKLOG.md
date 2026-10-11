@@ -35,7 +35,7 @@ Key points:
   and choosing participants.
 - Counters for dashboards (M10) hook into every task change, so they come after M3 to M6 are stable.
 
-## Sprint 0: foundation (current)
+## Sprint 0: foundation (done)
 
 | Item | Status |
 | --- | --- |
@@ -46,12 +46,12 @@ Key points:
 | Functions project: TypeScript, Jest, model types, error codes, session checks, log redaction, SMS interface with emulator-only mock | Done |
 | Firestore and Storage rules with emulator tests | Done (85 of 87 pass here; 2 need CI, see KNOWN_ISSUES) |
 | Indexes, emulator config | Done |
-| CI build (GitHub Actions) | Written; needs the GitHub repository |
-| Firebase project (staging, production) | Blocked: Robert's Google account, region decision D-03 |
+| CI build (GitHub Actions) | Running on robert-kamunde/atms |
+| Firebase project (staging, production) | Created by Robert on the Blaze plan (8 Oct 2026); configuration needed in Sprint 1 |
 | Clickable prototype reviewed with 3 to 5 future users | Prototype exists; review is Robert's |
 | Testing strategy | Done (TESTING.md) |
 
-## Sprint 1: sign-in, onboarding, organisation (M1, M2)
+## Sprint 1: sign-in, onboarding, organisation (M1, M2) (built 8 Oct 2026; see PROJECT_STATUS)
 
 1. `adminUpsertUser` callable: create Auth user with phone, set `orgId` claim, write user and
    contact docs, validate department and supervisor, reject reporting loops, compute
@@ -59,15 +59,15 @@ Key points:
    recompute).
 2. Deactivate user: `active = false`, revoke refresh tokens, flag open tasks for the supervisor
    (`reassignmentNeeded`), audit "user deactivated".
-3. Unknown-number handling: blocking function (D-02) or rules-only fallback, plus the
+3. Unknown-number handling: blocking function on Identity Platform (D-02), plus the
    `/not-invited` screen.
 4. Admin second factor (D-01): `sendAdminCode` and `verifyAdminCode` callables, rate-limited,
    codes hashed in `secure/`, sets `adminVerifiedUntil`.
-5. Invitation SMS through the SMS interface (provider from D-09 or the emulator mock).
+5. Invitation SMS through the SMS interface (the emulator mock until the D-09 provider is contracted).
 6. App: phone sign-in, code entry, email fallback, language choice, consent screen, notification
    permission, session expiry handling (30/7 days).
 7. Admin screens: departments, users, reporting tree view, organisation settings.
-8. App Check registration (D-04).
+8. App Check registration in monitor-only mode for the pilot (D-04).
 9. Rules tests for every new path; widget tests EN/SW.
 Demo: an admin sets up an organisation; staff sign in by phone.
 

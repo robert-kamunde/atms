@@ -10,7 +10,9 @@
     "lint": "tsc --noEmit -p tsconfig.json",
     "test:unit": "jest --selectProjects unit",
     "test:rules": "firebase emulators:exec --only firestore,storage --project demo-atms \"jest --selectProjects rules --runInBand\"",
-    "test": "npm run test:unit && npm run test:rules"
+    "test:integration": "firebase emulators:exec --only auth,firestore --project demo-atms \"jest --selectProjects integration --runInBand\"",
+    "bootstrap-org": "npm run build && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/bootstrap-org.ts",
+    "test": "npm run test:unit && npm run test:rules && npm run test:integration"
   },
   "dependencies": {
     "firebase-admin": "^14.5.0",

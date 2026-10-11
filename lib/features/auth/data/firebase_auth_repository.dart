@@ -2,15 +2,13 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../core/errors/app_failure.dart';
 import '../../../core/errors/failure_mapper.dart';
 import '../../../core/utils/logger.dart';
 import '../domain/auth_repository.dart';
+import '../domain/token_claims.dart';
 
 /// [AuthRepository] backed by Firebase Authentication.
-///
-/// Skeleton for Sprint 0: the calls are real Firebase calls, but the
-/// invitation check, user-profile lookup, session policy enforcement and
-/// FCM token registration are Sprint 1 (see `AuthController`).
 class FirebaseAuthRepository implements AuthRepository {
   FirebaseAuthRepository(this._auth);
 
@@ -23,12 +21,15 @@ class FirebaseAuthRepository implements AuthRepository {
       _auth.authStateChanges().map((user) => user?.uid);
 
   @override
-  Future<DateTime?> currentAuthTime() async {
+  Future<TokenClaims?> currentClaims({bool forceRefresh = false}) async {
     final user = _auth.currentUser;
     if (user == null) return null;
     try {
-      final token = await user.getIdTokenResult();
-      return token.authTime;
+      final token = await user.getIdTokenResult(forceRefresh);
+      return TokenClaims.fromClaims(
+        token.claims,
+        authTimeFallback: token.authTime,
+      );
     } catch (error, stackTrace) {
       throw mapError(error, stackTrace);
     }
@@ -38,31 +39,41 @@ class FirebaseAuthRepository implements AuthRepository {
   Future<PhoneVerificationResult> startPhoneVerification(
     String phoneNumber, {
     int? resendToken,
+    void Function(AppFailure failure)? onAutoSignInFailed,
   }) {
     final completer = Completer<PhoneVerificationResult>();
+
+    void fail(Object error, StackTrace stackTrace) {
+      final failure = mapError(error, stackTrace);
+      if (!completer.isCompleted) {
+        completer.completeError(failure);
+      } else {
+        AppLogger.warning(
+          'Automatic phone sign-in failed after the code was sent',
+          context: {'errorCode': failure.code},
+        );
+        onAutoSignInFailed?.call(failure);
+      }
+    }
+
     _auth
         .verifyPhoneNumber(
           phoneNumber: phoneNumber,
           timeout: _smsTimeout,
           forceResendingToken: resendToken,
           verificationCompleted: (credential) async {
-            // Android auto-retrieval: sign in straight away.
+            // Android auto-retrieval or instant verification: sign in
+            // straight away, even if the code screen is already open.
             try {
               await _auth.signInWithCredential(credential);
               if (!completer.isCompleted) {
                 completer.complete(const PhoneAutoVerified());
               }
             } catch (error, stackTrace) {
-              if (!completer.isCompleted) {
-                completer.completeError(mapError(error, stackTrace));
-              }
+              fail(error, stackTrace);
             }
           },
-          verificationFailed: (error) {
-            if (!completer.isCompleted) {
-              completer.completeError(mapFirebaseAuthException(error));
-            }
-          },
+          verificationFailed: (error) => fail(error, StackTrace.current),
           codeSent: (verificationId, token) {
             if (!completer.isCompleted) {
               completer.complete(
@@ -77,17 +88,7 @@ class FirebaseAuthRepository implements AuthRepository {
             // Nothing to do: the user types the code manually.
           },
         )
-        .catchError((Object error, StackTrace stackTrace) {
-          if (!completer.isCompleted) {
-            completer.completeError(mapError(error, stackTrace));
-          } else {
-            AppLogger.warning(
-              'Phone verification error after completion',
-              error: error,
-              stackTrace: stackTrace,
-            );
-          }
-        });
+        .catchError(fail);
     return completer.future;
   }
 
@@ -114,6 +115,23 @@ class FirebaseAuthRepository implements AuthRepository {
   }) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
+    } catch (error, stackTrace) {
+      throw mapError(error, stackTrace);
+    }
+  }
+
+  @override
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (error) {
+      if (error.code == 'user-not-found') {
+        // Deliberately reported as sent: the screen must not reveal which
+        // emails have accounts. Logged without the address.
+        AppLogger.info('Password reset requested for an unknown email');
+        return;
+      }
+      throw mapFirebaseAuthException(error);
     } catch (error, stackTrace) {
       throw mapError(error, stackTrace);
     }

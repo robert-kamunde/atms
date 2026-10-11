@@ -4,17 +4,39 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/localization/l10n.dart';
 import '../auth_providers.dart';
 
-/// Explains why notifications matter, then asks for permission
-/// (spec 4.1 step 4).
-class OnboardingNotificationsScreen extends ConsumerWidget {
+/// Explains why notifications matter, then asks the phone for permission
+/// (spec 4.1 step 4). Shown only while the phone has never been asked.
+///
+/// NOT IMPLEMENTED (Sprint 4): registering the push token for this device.
+class OnboardingNotificationsScreen extends ConsumerStatefulWidget {
   const OnboardingNotificationsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<OnboardingNotificationsScreen> createState() =>
+      _OnboardingNotificationsScreenState();
+}
+
+class _OnboardingNotificationsScreenState
+    extends ConsumerState<OnboardingNotificationsScreen> {
+  bool _busy = false;
+
+  Future<void> _finish({required bool allow}) async {
+    setState(() => _busy = true);
+    try {
+      // Never throws: a refused or failed permission request must not
+      // keep the user out of the app.
+      await ref
+          .read(authControllerProvider.notifier)
+          .completeNotificationStep(allow: allow);
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
-    void finish() =>
-        ref.read(authControllerProvider.notifier).completeNotificationStep();
     return Scaffold(
       appBar: AppBar(title: Text(l10n.onboardingNotificationsTitle)),
       body: SafeArea(
@@ -33,13 +55,16 @@ class OnboardingNotificationsScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 24),
             FilledButton(
-              // NOT IMPLEMENTED (Sprint 4): request permission with
-              // firebase_messaging and register the FCM token.
-              onPressed: finish,
+              key: const Key('allowNotificationsButton'),
+              onPressed: _busy ? null : () => _finish(allow: true),
               child: Text(l10n.actionAllowNotifications),
             ),
             const SizedBox(height: 8),
-            TextButton(onPressed: finish, child: Text(l10n.actionNotNow)),
+            TextButton(
+              key: const Key('notNowButton'),
+              onPressed: _busy ? null : () => _finish(allow: false),
+              child: Text(l10n.actionNotNow),
+            ),
           ],
         ),
       ),
