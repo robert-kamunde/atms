@@ -9,7 +9,11 @@ Status: not yet released. Filled in fully in Sprint 7; Sprint 0 records what is 
 - Android app registered in each project; App Check with Play Integrity (D-04).
 - A release signing key kept outside the repository (Play App Signing recommended).
 - Google Play developer account (USD 25 once); iOS later needs an Apple developer account and a Mac.
-- SMS provider account and TCRA-registered sender ID (D-09).
+- SMS provider account and TCRA-registered sender ID (D-09). ATMS uses Beem: put
+  `SMS_SENDER_ID` (the sender name Beem approved, or `INFO` until then) in
+  `functions/.env.<projectId>`, and the keys in Secret Manager:
+  `firebase functions:secrets:set BEEM_API_KEY` and `... BEEM_SECRET_KEY` (`--project prod`).
+  Both secrets must exist before `adminUpsertUser` can be deployed.
 - Crashlytics and Analytics enabled; daily Firestore export with 30-day retention.
 
 ## Build
